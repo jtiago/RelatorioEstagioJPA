@@ -11,6 +11,7 @@
 	<class>br.com.clogos.estagio.model.ImagemAssinatura</class>
 	<class>br.com.clogos.estagio.model.Aluno</class>
 	<class>br.com.clogos.estagio.model.Relatorio</class>
+	<class>br.com.clogos.estagio.model.LiberarRelatorio</class>
 	
 	<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	<properties>

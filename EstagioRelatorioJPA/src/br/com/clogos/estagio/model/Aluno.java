@@ -49,6 +49,9 @@ public class Aluno implements Serializable {
 	
 	@OneToMany(mappedBy = "aluno")
 	private List<Relatorio> relatorios;
+	
+	@OneToMany(mappedBy = "turma")
+	private List<LiberarRelatorio> liberarRelatorios;
 
 	public Long getId() {
 		return id;
