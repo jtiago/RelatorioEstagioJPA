@@ -16,7 +16,7 @@
 	<properties>
 		<property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://localhost/relestagio"></property>
 	   	<property name="javax.persistence.jdbc.user" value="uniweb"></property>
-	   	<property name="javax.persistence.jdbc.password" value="#uniweb!"></property>
+	   	<property name="javax.persistence.jdbc.password" value="#uniweb!"></property> 
 	   	<property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"></property>
 	   	<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"></property>
 	   	<property name="hibernate.hbm2ddl.auto" value="update"></property>
