@@ -32,7 +32,7 @@ public class Aluno implements Serializable {
 	@Column(name="sexoaluno", length=1, nullable=true)
 	private String sexo;
 	
-	@Column(name="turmaaluno", length=15, nullable=false)
+	@Column(name="turmaaluno", length=15, nullable=false, unique = false)
 	private String turma;
 	
 	@Column(name="cursoaluno", length=30, nullable=true)
