@@ -29,6 +29,9 @@ public class Supervisor implements Serializable {
 	@OneToMany(mappedBy = "supervisor")
 	private List<CampoEstagio> campoEstagio;
 	
+	@OneToMany(mappedBy = "supervisor")
+	private List<Relatorio> relatorios;
+	
 	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true)
 	@JoinColumn(name="fkimagem")
 	private ImagemAssinatura imagem;
@@ -64,4 +67,14 @@ public class Supervisor implements Serializable {
 	public void setImagem(ImagemAssinatura imagem) {
 		this.imagem = imagem;
 	}
+
+	public List<Relatorio> getRelatorios() {
+		return relatorios;
+	}
+
+	public void setRelatorios(List<Relatorio> relatorios) {
+		this.relatorios = relatorios;
+	}
+	
+	
 }

@@ -1,12 +1,14 @@
 package br.com.clogos.estagio.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -44,6 +46,9 @@ public class Aluno implements Serializable {
 	
 	@Column(name="emailaluno", length=50, nullable=false)
 	private String email;
+	
+	@OneToMany(mappedBy = "aluno")
+	private List<Relatorio> relatorios;
 
 	public Long getId() {
 		return id;
@@ -123,5 +128,13 @@ public class Aluno implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Relatorio> getRelatorios() {
+		return relatorios;
+	}
+
+	public void setRelatorios(List<Relatorio> relatorios) {
+		this.relatorios = relatorios;
 	}
 }
