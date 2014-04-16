@@ -3,11 +3,14 @@ package br.com.clogos.estagio.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,34 +26,29 @@ public class Aluno implements Serializable {
 	@Column(name="nomealuno", length=100, nullable=false)
 	private String nome;
 	
-	@Column(name="cpfaluno", length=11, nullable=false)
+	@Column(length=11, nullable=false)
 	private String cpf;
 	
-	@Column(name="matriculaaluno", length=20, nullable=false)
+	@Column(length=20, nullable=false)
 	private String matricula;
 	
-	@Column(name="sexoaluno", length=1, nullable=true)
+	@Column(length=1, nullable=true)
 	private String sexo;
 	
-	@Column(name="turmaaluno", length=15, nullable=false, unique = false)
-	private String turma;
-	
-	@Column(name="cursoaluno", length=30, nullable=true)
-	private String nomeCurso;
-	
-	@Column(name="turnoaluno", length=15, nullable=true)
-	private String turno;
-	
-	@Column(name="statusaluno", length=15, nullable=true)
+	@Column(length=15, nullable=true)
 	private String status;
 	
-	@Column(name="emailaluno", length=50, nullable=false)
+	@Column(length=50, nullable=false)
 	private String email;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "fkturma")
+	private Turma turma;
 	
 	@OneToMany(mappedBy = "aluno")
 	private List<Relatorio> relatorios;
 	
-	@OneToMany(mappedBy = "turma")
+	@OneToMany(mappedBy = "turmaLiberarRelatorio")
 	private List<LiberarRelatorio> liberarRelatorios;
 
 	public Long getId() {
@@ -91,30 +89,6 @@ public class Aluno implements Serializable {
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-
-	public String getTurma() {
-		return turma;
-	}
-
-	public void setTurma(String turma) {
-		this.turma = turma;
-	}
-
-	public String getNomeCurso() {
-		return nomeCurso;
-	}
-
-	public void setNomeCurso(String nomeCurso) {
-		this.nomeCurso = nomeCurso;
-	}
-
-	public String getTurno() {
-		return turno;
-	}
-
-	public void setTurno(String turno) {
-		this.turno = turno;
 	}
 
 	public String getStatus() {

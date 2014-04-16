@@ -26,8 +26,8 @@ public class LiberarRelatorio implements Serializable {
 	private Long id;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "fkturma",  referencedColumnName = "idaluno")
-	private Aluno turma;
+	@JoinColumn(name = "fkturma")
+	private Turma turmaLiberarRelatorio;
 	
 	@Enumerated(EnumType.STRING)
 	private ModuloEnum modulo;
@@ -40,19 +40,19 @@ public class LiberarRelatorio implements Serializable {
 		this.id = id;
 	}
 
-	public Aluno getTurma() {
-		return turma;
-	}
-
-	public void setTurma(Aluno turma) {
-		this.turma = turma;
-	}
-
 	public ModuloEnum getModulo() {
 		return modulo;
 	}
 
 	public void setModulo(ModuloEnum modulo) {
 		this.modulo = modulo;
+	}
+
+	public Turma getTurmaLiberarRelatorio() {
+		return turmaLiberarRelatorio;
+	}
+
+	public void setTurmaLiberarRelatorio(Turma turmaLiberarRelatorio) {
+		this.turmaLiberarRelatorio = turmaLiberarRelatorio;
 	}
 }

@@ -13,7 +13,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		entityManager.getTransaction().begin();
+		/*entityManager.getTransaction().begin();
 		
 		Aluno aluno = new Aluno();
 		aluno.setCpf("12345678978");
@@ -30,7 +30,7 @@ public class Main {
 		entityManager.persist(liberarRelatorio);
 		
 		entityManager.getTransaction().commit();
-		entityManager.close();
+		entityManager.close()*/;
 		
 	}
 
