@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templateLogin.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+	<ui:define name="login">
+		<h:form id="formMensage">
+			<p:growl id="mensage" rendered="#{utilBean.mensage}"/>
+		</h:form>
+		
+		<h:form id="formAutenticar">
+			<p:focus for="idLogin"/>
+			<h:panelGrid columns="1" style="background-color: #F9F9F9; margin: 0 auto;" width="400" title="oioioio">
+				<h:panelGrid columns="1">
+					<p:graphicImage url="/images/logoemailmarketing.png" width="390"/>
+				</h:panelGrid>
+			
+				<h:panelGrid style="margin-top:10px;" width="395">
+					<h:panelGrid columns="2" style="margin:0 auto;">
+						<p:outputLabel for="idLogin" value="CPF:"/>
+						<p:inputMask mask="999.999.999-99" id="idLogin" value="#{autenticarBean.facade.usuario.cpf}" 
+							required="true"/>
+						
+						<p:outputLabel for="idSenha" value="Senha:"/>
+						<p:password id="idSenha" value="#{autenticarBean.facade.usuario.senha}" required="true"/>
+					</h:panelGrid>
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" style="margin:0 auto; margin-top:10px;">
+					<p:commandButton value="Logar" icon="ui-icon-locked" actionListener="#{autenticarBean.login}" update="@form :formMensage">
+						<f:setPropertyActionListener target="#{utilBean.mensage}" value="#{true}" />
+					</p:commandButton>
+					<!-- <p:commandLink value="&raquo; Esqueci minha senha." style="margin-left:30px;font-style: italic;"/>-->
+				</h:panelGrid>
+				
+			</h:panelGrid>
+		</h:form>
+		
+		<h:form id="formSetMensage">
+			<p:remoteCommand name="remoteMensage">
+				<f:setPropertyActionListener target="#{utilBean.mensage}" value="{false}"/>
+			</p:remoteCommand>
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

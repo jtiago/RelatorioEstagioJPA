@@ -29,6 +29,9 @@ public class Aluno implements Serializable {
 	@Column(length=11, nullable=false)
 	private String cpf;
 	
+	@Column(length=100, nullable=false)
+	private String senha;
+	
 	@Column(length=20, nullable=false)
 	private String matricula;
 	
@@ -73,6 +76,30 @@ public class Aluno implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+
+	public List<LiberarRelatorio> getLiberarRelatorios() {
+		return liberarRelatorios;
+	}
+
+	public void setLiberarRelatorios(List<LiberarRelatorio> liberarRelatorios) {
+		this.liberarRelatorios = liberarRelatorios;
 	}
 
 	public String getMatricula() {
