@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>..::Colégio Logos - Estágio::..</title>
+<h:outputStylesheet name="style.css" library="css" />
+</h:head>
+<h:body>
+
+	<div id="template_pages">
+		
+		<div id="#template_pages_top">
+			<p:graphicImage url="/images/bannerestagio.png" width="940"/>
+		</div>
+		
+		<div id="template_pages_menu">
+			<h:form>
+				<p:menubar>
+					<p:submenu label="Logos">
+						<p:menuitem value="Home" icon="ui-icon-home" url="/pages/home.jsf"/>
+						<p:menuitem value="Sobre" icon="ui-icon-comment" onclick="sobreNos.show();"/>
+						<p:menuitem value="Sair" icon="ui-icon-power" actionListener="#{autenticarBean.logout}" />
+					</p:submenu>
+				
+					<!-- <p:submenu label="Cadastro" icon="ui-icon-disk">
+						<p:menuitem value="Usuário" icon="ui-icon-person" url="/pages/cadastro/cadastroUsuario.jsf" />
+						<p:menuitem value="E-mail Marketing" icon="ui-icon-suitcase" url="/pages/cadastro/cadastroEmailMarkenting.jsf" />
+						<p:menuitem value="E-mail" icon="ui-icon-mail-closed" url="/pages/cadastro/cadastroEmail.jsf" />						
+					</p:submenu> -->
+					
+					<!-- <p:menuitem value="Agendar E-mail" icon="ui-icon-calendar" url="/pages/agendaemail/agendaemail.jsf"/>
+					<p:menuitem value="Configuração" icon="ui-icon-gear" url="/pages/configuracao/configuracao.jsf"/>
+					<p:menuitem value="Mensage" icon="ui-icon-comment" url="/pages/mensage/mensage.jsf"/>
+					<p:menuitem value="Sair" icon="ui-icon-power" actionListener="#{autenticarBean.facade.logout}"/> -->
+					
+					<f:facet name="options">  
+			            <p:inputText style="margin-right:10px"/>  
+			            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />  
+			        </f:facet> 
+
+				</p:menubar>
+			</h:form>
+		</div>
+		
+		<div id="template_pages_conteudo">
+			<ui:insert name="conteudo">
+			
+			</ui:insert>
+		</div>
+		
+		<p:dialog styleClass="sobreNos" widgetVar="sobreNos" modal="true" width="520" height="330" 
+			 header="Sobre o Colégio Logos" resizable="false">
+			<!-- <p:graphicImage url="/images/logo.png" width="200"/><br/><br/> -->
+			<p align="justify">
+			&nbsp;&nbsp;&nbsp;O Colégio Logos atua na qualificação do aluno, preparando-o para um futuro
+			promissor. Portanto, formar um TÉCNICO EM ENFERMAGEM, é oferecer uma dádiva à comunidade,
+			inserindo-o na sociedade, como um ser capacitado que optou pelo cuidado com a vida humana,
+			exercendo sua função, que norteia a prevenção e o tratamento de doenças.<br/><br/>
+			</p>
+	
+			&nbsp;&nbsp;&nbsp;Formar um TÉCNICO EM RADIOLOGIA é atingir mais um grau voltado para a 
+			saúde, à prevenção e ao diagnóstico. É inserir um profissional na sociedade, que com 
+			adequada habilitação, contribuirá para a vida dos que estarão em suas mãos.<br/><br/>
+			
+			&nbsp;&nbsp;&nbsp;Formar um TÉCNICO EM BIODIAGNÓSTICO é o alcance de mais uma realização, onde este 
+			profissional atuará de forma precisa para análises, diagnósticos, realização de exames 
+			e outros. Entretanto, formar não é apenas um dever a ser cumprido pelos educadores e 
+			pela instituição, mas uma meta que visa o sucesso profissional e a promoção à saúde. 
+			Hoje, a palavra mais adequada para definir a Instituição Logos é QUALIDADE, pois é o que 
+			temos buscado e alcançado a cada dia.<br/><br/>
+			
+			Endereço: Conjunto 1HI Rua 01 Lotes 1 à 8<br/>
+			CEP 72860-151 – Novo Gama/GO<br/><br/>
+			
+			Contato(s)<br/>
+			Fone: +55(61)3628-0555 / Fax: +55(61)3628-0555<br/>
+			E-Mail: contato@clogos.com.br<br/>
+			Projeto: Relatório Estágio -
+			<b>Versão 1.0.0</b><br/>
+		</p:dialog>
+		
+	</div>
+
+</h:body>
+</html>
