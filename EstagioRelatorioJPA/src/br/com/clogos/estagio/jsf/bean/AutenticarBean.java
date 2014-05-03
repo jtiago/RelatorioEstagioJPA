@@ -21,5 +21,9 @@ public class AutenticarBean implements Serializable {
 	public void login(ActionEvent event){
 		getFacade().login();
 	}
+	
+	public void logout(ActionEvent event) {
+		getFacade().logout();
+	}
 
 }
