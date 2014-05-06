@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templatePages.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+	<ui:define name="conteudo">
+		<p:panel  header="..:: Cadastro de Supervisor">
+			<h:form id="formNovo">
+				<p:commandButton value="Novo Supervisor" icon="ui-icon-disk" oncomplete="dialogCadSupervisor.show()"/>
+			</h:form><br/>
+			
+			<h:form id="formTabelaSupervisor">
+				<p:dataTable id="tabelaSupervisor" emptyMessage="Sem Registros...">
+					<f:facet name="header">
+						Supervisores Cadastrados
+					</f:facet>
+				
+				</p:dataTable>
+			</h:form>
+		</p:panel>
+		
+		<h:form id="formCadastro" enctype="multipart/form-data">
+				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+					header="..::: Novo Supervisor - [ * Campo Obrigatório ]" widgetVar="dialogCadSupervisor">
+					<h:panelGrid id="grade" columns="1">
+						<p:fieldset>
+							<h:panelGrid columns="4">
+
+								<h:outputLabel value="Nome:"/><h:outputLabel value="*" style="color:red"/>
+								<p:inputText id="idNome"  required="true" value="#{supervisorBean.supervisor.nome}"
+									requiredMessage="Campo Obrigatório" />
+								<p:message for="idNome"/>
+								
+								<h:outputLabel value="Assinatura:"/><h:outputLabel value="*" style="color:red"/>
+								<p:fileUpload mode="simple" id="idAss" value="#{supervisorBean.uploadedFile}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
+									required="true" requiredMessage="Campo Obrigatório"/>
+								<p:message for="idAss"/>
+							</h:panelGrid>
+						</p:fieldset>
+					</h:panelGrid>
+					<p:commandButton ajax="false" value="Salvar" icon="ui-icon-disk" actionListener="#{supervisorBean.save}"
+						update=":formCadastro:grade :formTabelaSupervisor:tabelaSupervisor :formMensage" />
+					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadContrato.hide()"/>
+				</p:dialog>
+			</h:form>
+	</ui:define>
+	
+</ui:composition>
