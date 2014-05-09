@@ -31,19 +31,19 @@
 							<h:panelGrid columns="4">
 
 								<h:outputLabel value="Nome:"/><h:outputLabel value="*" style="color:red"/>
-								<p:inputText id="idNome"  required="true" value="#{supervisorBean.supervisor.nome}"
-									requiredMessage="Campo Obrigatório" />
+								<p:inputText id="idNome" required="true" value="#{supervisorBean.facade.supervisor.nome}"
+									requiredMessage="Campo Obrigatorio" />
 								<p:message for="idNome"/>
 								
 								<h:outputLabel value="Assinatura:"/><h:outputLabel value="*" style="color:red"/>
 								<p:fileUpload mode="simple" id="idAss" value="#{supervisorBean.uploadedFile}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
-									required="true" requiredMessage="Campo Obrigatório"/>
+									required="true" requiredMessage="Campo Obrigatorio"/>
 								<p:message for="idAss"/>
 							</h:panelGrid>
 						</p:fieldset>
 					</h:panelGrid>
 					<p:commandButton ajax="false" value="Salvar" icon="ui-icon-disk" actionListener="#{supervisorBean.save}"
-						update=":formCadastro:grade :formTabelaSupervisor:tabelaSupervisor :formMensage" />
+						update=":formCadastro:grade :formTabelaSupervisor:tabelaSupervisor :formMensage" process="idNome" />
 					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadContrato.hide()"/>
 				</p:dialog>
 			</h:form>

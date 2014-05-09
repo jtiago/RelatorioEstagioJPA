@@ -9,22 +9,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.apache.commons.io.IOUtils;
 import org.primefaces.model.UploadedFile;
 
 import br.com.clogos.estagio.jsf.facade.SupervisorFacade;
-import br.com.clogos.estagio.model.Supervisor;
+import br.com.clogos.estagio.model.ImagemAssinatura;
 
 @ManagedBean
-@ViewScoped
 public class SupervisorBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private SupervisorFacade facade;
 	private UploadedFile uploadedFile;
-	private Supervisor supervisor;
 	private static final String DIRETORIO = "C:/";
 	
 	public SupervisorFacade getFacade() {
@@ -39,26 +36,20 @@ public class SupervisorBean implements Serializable {
 		this.uploadedFile = uploadedFile;
 	}
 	
-	public Supervisor getSupervisor() {
-		return supervisor == null ? new Supervisor() : supervisor;
-	}
-	
-	public void setSupervisor(Supervisor supervisor) {
-		this.supervisor = supervisor;
-	}
-	
 	public void save(ActionEvent event) {
 		try {
-			String nomeArquivo = new SimpleDateFormat("ddMMyyyyHHmmssSSS").format(new Date())+getSupervisor().getNome();
+			String nomeArquivo = new SimpleDateFormat("ddMMyyyyHHmmssSSS").format(new Date());
 			File file = new File(DIRETORIO+nomeArquivo+".png");
 			IOUtils.copyLarge(getUploadedFile().getInputstream(), new FileOutputStream(file));
 			
-			System.out.println(file.getName());
-		
-//			getArquivo().setCaminho(DIRETORIO);
-//			getArquivo().setTamanho((int) getUpload().getSize());
-//			getArquivo().setNome(file.getName());
-//			getFacade().save(getArquivo());
+			Object obj = event.getComponent().getAttributes().get("idNome"); 
+			System.out.println(obj);
+			
+			ImagemAssinatura assinatura = new ImagemAssinatura();
+			assinatura.setNome(nomeArquivo);
+			assinatura.setCaminho(DIRETORIO);
+			getFacade().save(assinatura);
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
