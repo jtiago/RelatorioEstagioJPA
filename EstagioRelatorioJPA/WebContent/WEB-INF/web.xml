@@ -7,7 +7,7 @@
   <welcome-file-list>
     <welcome-file>start.jsp</welcome-file>
   </welcome-file-list>
-  
+  <!-- JSF -->
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -17,22 +17,8 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.jsf</url-pattern>
   </servlet-mapping>
-  <context-param>
-    <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
-    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-    <param-value>client</param-value>
-  </context-param>
-  <context-param>
-    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-    <param-value>resources.application</param-value>
-  </context-param>
-  <listener>
-    <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-  </listener>
-  <context-param>
-    <param-name>primefaces.THEME</param-name>
-    <param-value>sam</param-value>
-  </context-param>
+
+  <!-- Filter UploadFile -->
   <filter>
     <filter-name>PrimeFaces FileUpload Filter</filter-name>
     <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
@@ -41,6 +27,21 @@
     <filter-name>PrimeFaces FileUpload Filter</filter-name>
     <servlet-name>Faces Servlet</servlet-name>
   </filter-mapping>
+  
+  <!-- Spring -->
+	<listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationcontext.xml</param-value>
+    </context-param>
+  
+  <context-param>
+    <param-name>primefaces.THEME</param-name>
+    <param-value>sam</param-value>
+  </context-param>
+  
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>

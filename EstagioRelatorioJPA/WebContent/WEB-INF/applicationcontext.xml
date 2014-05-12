@@ -8,12 +8,12 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	
 	<context:annotation-config/>
-	<context:component-scan base-package="br.com.clogos.estagio.persistence" />
+	<context:component-scan base-package="br.com.clogos.estagio" />
 	
 	<!-- Datasource -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://hostname:3306/estagio" />
+        <property name="url" value="jdbc:mysql://localhost:3306/estagio" />
         <property name="username" value="root" />
         <property name="password" value="root" />
 	</bean>

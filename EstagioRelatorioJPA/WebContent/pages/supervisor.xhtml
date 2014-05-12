@@ -25,28 +25,18 @@
 		
 		<h:form id="formCadastro" enctype="multipart/form-data">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-					header="..::: Novo Supervisor - [ * Campo Obrigatório ]" widgetVar="dialogCadSupervisor">
-					<h:panelGrid id="grade" columns="1">
-						<p:fieldset>
-							<h:panelGrid columns="4">
-
-								<h:outputLabel value="Nome:"/><h:outputLabel value="*" style="color:red"/>
-								<p:inputText id="idNome" required="true" value="#{supervisorBean.facade.supervisor.nome}"
-									requiredMessage="Campo Obrigatorio" />
-								<p:message for="idNome"/>
-								
-								<h:outputLabel value="Assinatura:"/><h:outputLabel value="*" style="color:red"/>
-								<p:fileUpload mode="simple" id="idAss" value="#{supervisorBean.uploadedFile}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
-									required="true" requiredMessage="Campo Obrigatorio"/>
-								<p:message for="idAss"/>
-							</h:panelGrid>
-						</p:fieldset>
+					header="..::: Novo Supervisor - [ * Campo Obrigatorio ]" widgetVar="dialogCadSupervisor">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Nome:" />
+						<p:inputText value="#{supervisorBean.nome}"/>
+						
+						<h:outputLabel value="Assinatura:" />
+						<p:fileUpload value="#{supervisorBean.file}" mode="simple"/>
+						
 					</h:panelGrid>
-					<p:commandButton ajax="false" value="Salvar" icon="ui-icon-disk" actionListener="#{supervisorBean.save}"
-						update=":formCadastro:grade :formTabelaSupervisor:tabelaSupervisor :formMensage" process="idNome" />
+					<p:commandButton ajax="false" value="Salvar" actionListener="#{supervisorBean.save}"/>
 					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadContrato.hide()"/>
 				</p:dialog>
 			</h:form>
 	</ui:define>
-	
 </ui:composition>

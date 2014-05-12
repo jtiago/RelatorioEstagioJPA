@@ -1,3 +1,3 @@
 <script type="text/javascript">
-	window.location.href="./login.jsf";
+	window.location.href="./pages/supervisor.jsf";
 </script>
