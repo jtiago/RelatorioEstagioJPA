@@ -1,4 +1,4 @@
-package br.com.clogos.estagio.dao;
+package br.com.clogos.estagio.jpa.dao;
 
 import br.com.clogos.estagio.model.Supervisor;
 

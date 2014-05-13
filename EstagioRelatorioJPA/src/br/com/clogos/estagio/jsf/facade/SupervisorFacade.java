@@ -2,7 +2,7 @@ package br.com.clogos.estagio.jsf.facade;
 
 import java.io.Serializable;
 
-import br.com.clogos.estagio.controller.SupervisorController;
+import br.com.clogos.estagio.jpa.controller.SupervisorController;
 import br.com.clogos.estagio.model.ImagemAssinatura;
 import br.com.clogos.estagio.model.Supervisor;
 
@@ -32,6 +32,9 @@ public class SupervisorFacade implements Serializable {
 		this.supervisor = supervisor;
 	}
 	public SupervisorController getSupervisorController() {
+		if(supervisorController == null) {
+			supervisorController = new SupervisorController();
+		}
 		return supervisorController;
 	}
 }

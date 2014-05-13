@@ -1,8 +1,8 @@
-package br.com.clogos.estagio.controller;
+package br.com.clogos.estagio.jpa.controller;
 
 import java.io.Serializable;
 
-import br.com.clogos.estagio.dao.SupervisorDAO;
+import br.com.clogos.estagio.jpa.dao.SupervisorDAO;
 import br.com.clogos.estagio.model.Supervisor;
 
 
