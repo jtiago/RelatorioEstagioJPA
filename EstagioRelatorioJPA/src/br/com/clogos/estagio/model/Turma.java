@@ -1,6 +1,5 @@
 package br.com.clogos.estagio.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.clogos.estagio.jpa.dao.ObjectModel;
+
 @Entity
 @Table(name = "TURMA")
-public class Turma implements Serializable {
+public class Turma implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)

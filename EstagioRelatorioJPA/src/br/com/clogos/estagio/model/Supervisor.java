@@ -1,6 +1,5 @@
 package br.com.clogos.estagio.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,9 +13,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.clogos.estagio.jpa.dao.ObjectModel;
+
 @Entity
 @Table(name="SUPERVISOR")
-public class Supervisor implements Serializable {
+public class Supervisor implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)

@@ -3,7 +3,7 @@ package br.com.clogos.estagio.jpa.controller;
 import java.io.Serializable;
 
 import br.com.clogos.estagio.jpa.dao.SupervisorDAO;
-import br.com.clogos.estagio.model.Supervisor;
+import br.com.clogos.estagio.jpa.dao.impl.SupervisorDAOImpl;
 
 
 public class SupervisorController implements Serializable {
@@ -11,8 +11,11 @@ public class SupervisorController implements Serializable {
 	
 	private SupervisorDAO supervisorDAO;
 	
-	public void save(Supervisor supervisor) {
-		supervisorDAO.save(supervisor);
+	public SupervisorDAO getSupervisorDAO() {
+		if(supervisorDAO == null) {
+			supervisorDAO = new SupervisorDAOImpl();
+		}
+		return supervisorDAO;
 	}
 
 }

@@ -1,7 +1,5 @@
 package br.com.clogos.estagio.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,9 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.clogos.estagio.jpa.dao.ObjectModel;
+
 @Entity
 @Table(name="IMAGEMASSINATURA")
-public class ImagemAssinatura implements Serializable {
+public class ImagemAssinatura implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)

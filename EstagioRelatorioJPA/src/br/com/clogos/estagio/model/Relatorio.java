@@ -1,6 +1,5 @@
 package br.com.clogos.estagio.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -15,9 +14,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.clogos.estagio.jpa.dao.ObjectModel;
+
 @Entity
 @Table(name = "RELATORIO")
-public class Relatorio implements Serializable {
+public class Relatorio implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
