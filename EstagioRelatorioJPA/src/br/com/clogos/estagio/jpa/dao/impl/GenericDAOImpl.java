@@ -1,8 +1,5 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
-import java.lang.reflect.ParameterizedType;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 
 import br.com.clogos.estagio.jpa.JpaUtil;
@@ -65,15 +62,29 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
 		
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Object> findAll() {
-        return entityManager.createQuery(("FROM " + getTypeClass().getName()))
-                .getResultList();
-    }
+	/*@SuppressWarnings("unchecked")
+	public List<Object> findAll(Object oT) {
+		entityManager = JpaUtil.getEntityManager();
+		List<Object> lista = new ArrayList<Object>();
+		try {
+			entityManager.getTransaction().begin();
+			System.out.println(oT.getClass().getSimpleName()+" <<<<<");
+			lista = entityManager.createQuery(("FROM " + oT.getClass().getSimpleName())).getResultList();
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			entityManager.getTransaction().rollback();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+        return lista;
+    }*/
  
-    private Class<?> getTypeClass() {
+    /*private Class<?> getTypeClass() {
         Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[1];
         return clazz;
-    }
+    }*/
 }

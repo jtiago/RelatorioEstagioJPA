@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,8 +34,8 @@ public class Supervisor implements ObjectModel {
 	@OneToMany(mappedBy = "supervisor")
 	private List<Relatorio> relatorios;
 	
-	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true)
-	@JoinColumn(name="fkimagem")
+	@OneToOne(cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JoinColumn(name="fkimagem", referencedColumnName="idimagem")
 	private ImagemAssinatura imagem;
 
 	public Long getId() {

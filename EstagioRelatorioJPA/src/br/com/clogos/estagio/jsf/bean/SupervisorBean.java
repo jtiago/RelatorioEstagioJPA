@@ -8,6 +8,7 @@ import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.apache.commons.io.IOUtils;
 import org.primefaces.model.UploadedFile;
@@ -43,6 +44,10 @@ public class SupervisorBean implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}                    
+	}
+	
+	public void remove(ActionEvent event) {
+		getFacade().remover();
 	}
 	
 	public UploadedFile getFile() {

@@ -14,6 +14,10 @@ public class GenericController<T extends ObjectModel> implements Serializable {
 		getGenericDAO().save(oT);
 	}
 	
+	public void remove(Object oT) {
+		getGenericDAO().delete(oT);
+	}
+	
 	@SuppressWarnings("rawtypes")
 	public GenericDAO getGenericDAO() {
 		if(genericDAO == null) {

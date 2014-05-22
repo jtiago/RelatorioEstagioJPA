@@ -14,14 +14,31 @@
 			</h:form><br/>
 			
 			<h:form id="formTabelaSupervisor">
-				<p:dataTable id="tabelaSupervisor" emptyMessage="Sem Registros...">
+				<p:dataTable id="tabelaSupervisor" var="item" value="#{supervisorBean.facade.listaSupervisores}" emptyMessage="Sem Registros...">
 					<f:facet name="header">
 						Supervisores Cadastrados
 					</f:facet>
+					
+					<p:column headerText="Nome">
+						<h:outputLabel value="#{item.nome}"/>
+					</p:column>
+					
+					<p:column>
+						<p:commandButton icon="ui-icon-trash" oncomplete="removeSupervisor.show()"/>
+					</p:column>
+					
+					
 				
 				</p:dataTable>
 			</h:form>
 		</p:panel>
+		
+		<h:form id="formDelete">
+			<p:confirmDialog message="Deseja realmente remover este Supervisor ?" header="..:: Remover Supervisor" widgetVar="removeSupervisor">
+				<p:commandButton value="Sim" actionListener="#{supervisorBean.remove}" update=":formTabelaSupervisor" oncomplete="removeSupervisor.hide()"/>
+				<p:commandButton value="Nao" oncomplete="removeSupervisor.hide()"/>
+			</p:confirmDialog>
+		</h:form>
 		
 		<h:form id="formCadastro" enctype="multipart/form-data">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
