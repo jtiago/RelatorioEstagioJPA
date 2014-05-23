@@ -16,7 +16,7 @@ import org.primefaces.model.UploadedFile;
 import br.com.clogos.estagio.jsf.facade.SupervisorFacade;
 import br.com.clogos.estagio.model.ImagemAssinatura;
 
-@ManagedBean
+@ManagedBean(name="supervisorBean")
 @ViewScoped
 public class SupervisorBean implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -26,7 +26,10 @@ public class SupervisorBean implements Serializable {
 	private static final String DIRETORIO = "C:/";
 	
 	public SupervisorFacade getFacade() {
-		return facade == null ? new SupervisorFacade() : facade;
+		if(facade == null) {
+			facade = new SupervisorFacade();
+		}
+		return facade;
 	}
 	
 	public void save() {

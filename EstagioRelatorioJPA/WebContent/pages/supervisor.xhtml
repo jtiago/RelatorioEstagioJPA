@@ -9,6 +9,10 @@
 	  
 	<ui:define name="conteudo">
 		<p:panel  header="..:: Cadastro de Supervisor">
+			<h:form id="formMessage">
+				<p:growl autoUpdate="true"/>
+			</h:form>
+			
 			<h:form id="formNovo">
 				<p:commandButton value="Novo Supervisor" icon="ui-icon-disk" oncomplete="dialogCadSupervisor.show()"/>
 			</h:form><br/>
@@ -24,18 +28,18 @@
 					</p:column>
 					
 					<p:column>
-						<p:commandButton icon="ui-icon-trash" oncomplete="removeSupervisor.show()"/>
+						<p:commandButton icon="ui-icon-trash" oncomplete="removeSupervisor.show()">
+							<f:setPropertyActionListener target="#{supervisorBean.facade.supervisor}" value="#{item}" />
+						</p:commandButton>
 					</p:column>
-					
-					
-				
+
 				</p:dataTable>
 			</h:form>
 		</p:panel>
 		
 		<h:form id="formDelete">
 			<p:confirmDialog message="Deseja realmente remover este Supervisor ?" header="..:: Remover Supervisor" widgetVar="removeSupervisor">
-				<p:commandButton value="Sim" actionListener="#{supervisorBean.remove}" update=":formTabelaSupervisor" oncomplete="removeSupervisor.hide()"/>
+				<p:commandButton value="Sim" actionListener="#{supervisorBean.remove}" update=":formMessage :formDelete" />
 				<p:commandButton value="Nao" oncomplete="removeSupervisor.hide()"/>
 			</p:confirmDialog>
 		</h:form>
