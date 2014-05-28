@@ -27,19 +27,22 @@
 						<h:outputLabel value="#{item.nome}"/>
 					</p:column>
 					
-					<p:column>
+					<p:column style="text-align:right; width: 100px;">
 						<p:commandButton icon="ui-icon-trash" oncomplete="removeSupervisor.show()">
 							<f:setPropertyActionListener target="#{supervisorBean.facade.supervisor}" value="#{item}" />
 						</p:commandButton>
-					</p:column>
 
+						<p:commandButton icon="ui-icon-pencil" oncomplete="dialogAltSupervisor.show()" update=":formAlterar">
+							<f:setPropertyActionListener target="#{supervisorBean.facade.supervisorAltera}" value="#{item}" />
+						</p:commandButton>
+					</p:column>
 				</p:dataTable>
 			</h:form>
 		</p:panel>
 		
 		<h:form id="formDelete">
 			<p:confirmDialog message="Deseja realmente remover este Supervisor ?" header="..:: Remover Supervisor" widgetVar="removeSupervisor">
-				<p:commandButton value="Sim" actionListener="#{supervisorBean.remove}" update=":formMessage :formDelete" />
+				<p:commandButton value="Sim" actionListener="#{supervisorBean.remove}" update=":formMessage :formDelete :formTabelaSupervisor" />
 				<p:commandButton value="Nao" oncomplete="removeSupervisor.hide()"/>
 			</p:confirmDialog>
 		</h:form>
@@ -55,9 +58,23 @@
 						<p:fileUpload value="#{supervisorBean.file}" mode="simple"/>
 						
 					</h:panelGrid>
-					<p:commandButton ajax="false" value="Salvar" actionListener="#{supervisorBean.save}"/>
+					<p:commandButton ajax="false" value="Salvar" icon="ui-icon-disk" actionListener="#{supervisorBean.save}"/>
 					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadContrato.hide()"/>
 				</p:dialog>
 			</h:form>
+			
+		<h:form id="formAlterar">
+			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+				header="..::: Novo Supervisor - [ * Campo Obrigatorio ]" widgetVar="dialogAltSupervisor">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Nome:" />
+					<p:inputText value="#{supervisorBean.facade.supervisorAltera.nome}"/>
+					
+				</h:panelGrid>
+				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{supervisorBean.update}"
+					update=":formTabelaSupervisor"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltSupervisor.hide()"/>
+			</p:dialog>
+		</h:form>
 	</ui:define>
 </ui:composition>

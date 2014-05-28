@@ -34,7 +34,7 @@ public class Supervisor implements ObjectModel {
 	@OneToMany(mappedBy = "supervisor")
 	private List<Relatorio> relatorios;
 	
-	@OneToOne(cascade=CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name="fkimagem", referencedColumnName="idimagem")
 	private ImagemAssinatura imagem;
 

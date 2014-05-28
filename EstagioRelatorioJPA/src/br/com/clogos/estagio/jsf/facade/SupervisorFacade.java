@@ -16,6 +16,7 @@ import br.com.clogos.estagio.model.Supervisor;
 public class SupervisorFacade implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Supervisor supervisor;
+	private Supervisor supervisorAltera;
 	private SupervisorController supervisorController;
 	@SuppressWarnings("rawtypes")
 	private GenericController genericControl;
@@ -55,6 +56,19 @@ public class SupervisorFacade implements Serializable {
 		}
 	}
 	
+	public void update() {
+		try {
+			if(supervisorAltera != null) {
+				getGenericControl().update(getSupervisorAltera());
+				supervisorAltera = null; genericControl = null; listaSupervisores = null;
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Supervisor alterado com suceso.", ""));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problemas ao alterar Supervisor.", ""));
+		}
+	}
+	
 	public Supervisor getSupervisor() {
 		return supervisor == null ? supervisor = new Supervisor() : supervisor;
 	}
@@ -63,6 +77,14 @@ public class SupervisorFacade implements Serializable {
 		this.supervisor = supervisor;
 	}
 	
+	public Supervisor getSupervisorAltera() {
+		return supervisorAltera == null ? supervisorAltera = new Supervisor() : supervisorAltera;
+	}
+
+	public void setSupervisorAltera(Supervisor supervisorAltera) {
+		this.supervisorAltera = supervisorAltera;
+	}
+
 	public SupervisorController getSupervisorController() {
 		return supervisorController == null ? supervisorController = new SupervisorController() : supervisorController;
 	}

@@ -1,5 +1,6 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,8 @@ import br.com.clogos.estagio.jpa.dao.SupervisorDAO;
 import br.com.clogos.estagio.model.Supervisor;
 
 
-public class SupervisorDAOImpl implements SupervisorDAO {
-	
+public class SupervisorDAOImpl implements SupervisorDAO, Serializable {
+	private static final long serialVersionUID = 1L;
 	private EntityManager entityManager;
 
 	@Override

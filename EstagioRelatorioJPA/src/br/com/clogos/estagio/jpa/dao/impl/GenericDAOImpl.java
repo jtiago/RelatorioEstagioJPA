@@ -49,7 +49,7 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
 		entityManager = JpaUtil.getEntityManager();
 		try {
 			entityManager.getTransaction().begin();
-			entityManager.remove(oT);
+			entityManager.remove(entityManager.merge(oT));
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
