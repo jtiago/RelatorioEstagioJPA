@@ -45,7 +45,7 @@ public class CampoEstagio implements ObjectModel {
 	}
 
 	public Supervisor getSupervisor() {
-		return supervisor;
+		return supervisor == null ? supervisor = new Supervisor() : supervisor;
 	}
 
 	public void setSupervisor(Supervisor supervisor) {

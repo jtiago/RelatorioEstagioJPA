@@ -4,14 +4,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.clogos.estagio.enums.ModuloEnum;
-import br.com.clogos.estagio.model.Aluno;
-import br.com.clogos.estagio.model.LiberarRelatorio;
-
 public class Main {
 	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
 	
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		/*entityManager.getTransaction().begin();
 		

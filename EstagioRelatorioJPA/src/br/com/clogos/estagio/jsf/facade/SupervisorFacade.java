@@ -8,8 +8,6 @@ import javax.faces.context.FacesContext;
 
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.SupervisorController;
-import br.com.clogos.estagio.jpa.dao.SupervisorDAO;
-import br.com.clogos.estagio.jpa.dao.impl.SupervisorDAOImpl;
 import br.com.clogos.estagio.model.ImagemAssinatura;
 import br.com.clogos.estagio.model.Supervisor;
 
@@ -18,14 +16,12 @@ public class SupervisorFacade implements Serializable {
 	private Supervisor supervisor;
 	private Supervisor supervisorAltera;
 	private SupervisorController supervisorController;
-	@SuppressWarnings("rawtypes")
-	private GenericController genericControl;
-	private SupervisorDAO supervisorDAO;
+	private GenericController<Supervisor> genericControl;
 	private List<Supervisor> listaSupervisores;
 	
 	public List<Supervisor> getListaSupervisores() {
 		if(listaSupervisores == null) {
-			listaSupervisores = getSupervisorDAO().findAll();
+			listaSupervisores = getSupervisorController().findAll();
 		}
 		return listaSupervisores;
 	}
@@ -89,12 +85,7 @@ public class SupervisorFacade implements Serializable {
 		return supervisorController == null ? supervisorController = new SupervisorController() : supervisorController;
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public GenericController getGenericControl() {
-		return genericControl == null ? genericControl = new GenericController() : genericControl;
-	}
-	
-	public SupervisorDAO getSupervisorDAO() {
-		return supervisorDAO == null ? supervisorDAO = new SupervisorDAOImpl() : supervisorDAO;
+	public GenericController<Supervisor> getGenericControl() {
+		return genericControl == null ? genericControl = new GenericController<Supervisor>() : genericControl;
 	}
 }

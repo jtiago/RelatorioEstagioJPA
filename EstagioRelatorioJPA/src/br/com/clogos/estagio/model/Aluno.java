@@ -27,7 +27,7 @@ public class Aluno implements ObjectModel {
 	@Column(name="nomealuno", length=100, nullable=false)
 	private String nome;
 	
-	@Column(length=11, nullable=false)
+	@Column(length=14, nullable=false)
 	private String cpf;
 	
 	@Column(length=100, nullable=false)

@@ -1,6 +1,7 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.GenericDAO;
@@ -16,7 +17,7 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
 			entityManager.getTransaction().begin();
 			entityManager.persist(oT);
 			entityManager.getTransaction().commit();
-		} catch (Exception e) {
+		} catch (PersistenceException e) {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
@@ -34,7 +35,7 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
 			entityManager.getTransaction().begin();
 			entityManager.merge(oT);
 			entityManager.getTransaction().commit();
-		} catch (Exception e) {
+		} catch (PersistenceException e) {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
@@ -51,7 +52,7 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
 			entityManager.getTransaction().begin();
 			entityManager.remove(entityManager.merge(oT));
 			entityManager.getTransaction().commit();
-		} catch (Exception e) {
+		} catch (PersistenceException e) {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
