@@ -19,7 +19,6 @@
 					<p:fileUpload fileUploadListener="#{alunoBean.fileUpload}" mode="advanced"
 	                     update="messages" auto="true" allowTypes="/(\.|\/)(txt)$/" label="Importar" />
 	    			<p:growl id="messages" showDetail="true" />
-				
 				</h:panelGrid>
 			</h:form><br/>
 			
@@ -69,8 +68,16 @@
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 					header="..::: Novo Aluno - [ * Campo Obrigatorio ]" widgetVar="dialogCadAluno">
 					<h:panelGrid id="grid" columns="2">
+						<p:outputLabel for="turma" value="Turma:" />
+						<p:selectOneMenu id="turma" value="#{alunoBean.facade.aluno.turma.id}" required="true"
+							style="width:300px;">
+				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+				            <f:selectItems value="#{turmaBean.facade.listaTurma}" var="tur" itemLabel="#{tur.nome}"
+				            	itemValue="#{tur.id}"/>
+				        </p:selectOneMenu>
+					
 						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" value="#{alunoBean.facade.aluno.nome}" required="true"/>
+						<p:inputText id="nome" value="#{alunoBean.facade.aluno.nome}" required="true" style="width:290px;"/>
 						
 						<p:outputLabel for="cpf" value="CPF:" />
 						<p:inputMask mask="999.999.999-99" id="cpf" value="#{alunoBean.facade.aluno.cpf}" required="true"/>
@@ -105,26 +112,34 @@
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 				header="..::: Novo Aluno - [ * Campo Obrigatorio ]" widgetVar="dialogAltAluno">
 				<h:panelGrid id="grid" columns="2">
+					<p:outputLabel for="turma" value="Turma:" />
+					<p:selectOneMenu id="turma" value="#{alunoBean.facade.alunoAltera.turma.id}" required="true"
+						style="width:300px;">
+			            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+			            <f:selectItems value="#{turmaBean.facade.listaTurma}" var="tur" itemLabel="#{tur.nome}"
+			            	itemValue="#{tur.id}"/>
+			        </p:selectOneMenu>
+				
 					<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" value="#{alunoBean.facade.alunoAltera.nome}" required="true"/>
-						
-						<p:outputLabel for="cpf" value="CPF:" />
-						<p:inputMask mask="999.999.999.99" id="cpf" value="#{alunoBean.facade.alunoAltera.cpf}" required="true"/>
-						
-						<p:outputLabel for="matricula" value="Matricula:" />
-						<p:inputText id="matricula" value="#{alunoBean.facade.alunoAltera.matricula}" required="true"/>
-						
-						<p:outputLabel for="sexo" value="Sexo:" />
-						<p:selectOneRadio id="sexo" value="#{alunoBean.facade.alunoAltera.sexo}">
-				            <f:selectItem itemLabel="Masculino" itemValue="M" />
-				            <f:selectItem itemLabel="Feminio" itemValue="F" />
-				        </p:selectOneRadio>
-				        
-				        <p:outputLabel for="status" value="Status:" />
-						<p:inputText id="status" value="#{alunoBean.facade.alunoAltera.status}"/>
-						
-						<p:outputLabel for="email" value="E-mail:" />
-						<p:inputText id="email" value="#{alunoBean.facade.alunoAltera.email}" required="true"/>
+					<p:inputText id="nome" value="#{alunoBean.facade.alunoAltera.nome}" required="true" style="width: 290px;"/>
+					
+					<p:outputLabel for="cpf" value="CPF:" />
+					<p:inputMask mask="999.999.999.99" id="cpf" value="#{alunoBean.facade.alunoAltera.cpf}" required="true"/>
+					
+					<p:outputLabel for="matricula" value="Matricula:" />
+					<p:inputText id="matricula" value="#{alunoBean.facade.alunoAltera.matricula}" required="true"/>
+					
+					<p:outputLabel for="sexo" value="Sexo:" />
+					<p:selectOneRadio id="sexo" value="#{alunoBean.facade.alunoAltera.sexo}">
+			            <f:selectItem itemLabel="Masculino" itemValue="M" />
+			            <f:selectItem itemLabel="Feminio" itemValue="F" />
+			        </p:selectOneRadio>
+			        
+			        <p:outputLabel for="status" value="Status:" />
+					<p:inputText id="status" value="#{alunoBean.facade.alunoAltera.status}"/>
+					
+					<p:outputLabel for="email" value="E-mail:" />
+					<p:inputText id="email" value="#{alunoBean.facade.alunoAltera.email}" required="true"/>
 					
 				</h:panelGrid>
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{alunoBean.update}"

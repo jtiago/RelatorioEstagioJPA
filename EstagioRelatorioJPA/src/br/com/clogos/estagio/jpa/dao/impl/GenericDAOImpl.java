@@ -1,5 +1,7 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
@@ -60,8 +62,23 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
 				entityManager.close();
 			}
 		}
-		
 	}
+	
+	 public Boolean saveList(List<?> list) {
+	        entityManager = JpaUtil.getEntityManager();
+	        try {
+		        entityManager.getTransaction().begin();
+		        for(Object oT : list) {
+		        	entityManager.persist(oT);
+		        }
+		        entityManager.getTransaction().commit();
+		        return Boolean.valueOf(true);
+	        } catch (Exception e) {
+		        entityManager.getTransaction().rollback();
+		        e.printStackTrace();
+		        return Boolean.valueOf(false);
+	        }
+	    }
 	
 	/*@SuppressWarnings("unchecked")
 	public List<Object> findAll(Object oT) {

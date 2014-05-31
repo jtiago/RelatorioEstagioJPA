@@ -25,7 +25,7 @@ public class LiberarRelatorio implements ObjectModel {
 	private Long id;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "fkturma")
+	@JoinColumn(name = "fkturma", referencedColumnName="pk.id")
 	private Turma turmaLiberarRelatorio;
 	
 	@Enumerated(EnumType.STRING)

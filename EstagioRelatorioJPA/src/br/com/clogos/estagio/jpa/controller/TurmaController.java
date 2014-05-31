@@ -21,4 +21,8 @@ public class TurmaController implements Serializable {
 	public List<Turma> findAll() {
 		return getTurmaDAO().findAll();
 	}
+	
+	public Boolean verificaDuplicidade(String nomeTurma) {
+		return getTurmaDAO().verificaDuplicidade(nomeTurma);
+	}
 }

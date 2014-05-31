@@ -41,6 +41,10 @@ public class AlunoFacade implements Serializable {
 		}
 	}
 	
+	public void saveList() {
+		
+	}
+	
 	public void remover() {
 		try {
 			if(aluno != null) {

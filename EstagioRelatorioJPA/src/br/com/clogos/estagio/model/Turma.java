@@ -3,6 +3,7 @@ package br.com.clogos.estagio.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,9 +18,11 @@ import br.com.clogos.estagio.jpa.dao.ObjectModel;
 public class Turma implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	/*@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idturma")
-	private Long id;
+	private Long id;*/
+	@EmbeddedId
+	private TurmaPK pk;
 	
 	@Column(name="nometurma", length=15, nullable=false)
 	private String nome;
@@ -36,16 +39,24 @@ public class Turma implements ObjectModel {
 	@OneToMany(mappedBy = "turmaLiberarRelatorio")
 	private List<LiberarRelatorio> liberarRelatorios;
 
-	public Long getId() {
+	/*public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
+	}*/
+	
 	public String getNome() {
 		return nome;
+	}
+
+	public TurmaPK getPk() {
+		return pk;
+	}
+
+	public void setPk(TurmaPK pk) {
+		this.pk = pk;
 	}
 
 	public void setNome(String nome) {

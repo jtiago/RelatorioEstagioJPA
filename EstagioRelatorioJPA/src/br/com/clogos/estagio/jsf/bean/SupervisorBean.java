@@ -23,7 +23,7 @@ public class SupervisorBean implements Serializable {
 	private SupervisorFacade facade;
 	private UploadedFile file;
 	private String nome;
-	private static final String DIRETORIO = "C:/Developer/teste/";
+	private static final String DIRETORIO = "C:/"; //Developer/teste/";
 	
 	public SupervisorFacade getFacade() {
 		if(facade == null) {

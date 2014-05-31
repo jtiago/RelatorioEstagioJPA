@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.clogos.estagio.jpa.JpaUtil;
@@ -32,6 +33,25 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 			}
 		}
 		return lista;
+	}
+
+	@Override
+	public Boolean verificaDuplicidade(String nomeTurma) {
+		entityManager = JpaUtil.getEntityManager();
+		String hql = "SELECT t FROM Turma t WHERE t.nome = :param";
+		try {
+			TypedQuery<Turma> query = entityManager.createQuery(hql, Turma.class)
+					.setParameter("param", nomeTurma);
+			return query.getResultList().size() == 0;
+		} catch (PersistenceException e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return false;
 	}
 
 }

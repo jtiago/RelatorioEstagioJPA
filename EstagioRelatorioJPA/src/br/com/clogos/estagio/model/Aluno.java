@@ -42,11 +42,11 @@ public class Aluno implements ObjectModel {
 	@Column(length=15, nullable=true)
 	private String status;
 	
-	@Column(length=50, nullable=false)
+	@Column(length=50, nullable=true)
 	private String email;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "fkturma")
+	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "fkturma", referencedColumnName="pk.nomeTurma")
 	private Turma turma;
 	
 	@OneToMany(mappedBy = "aluno")
@@ -88,7 +88,7 @@ public class Aluno implements ObjectModel {
 	}
 
 	public Turma getTurma() {
-		return turma;
+		return turma == null ? turma = new Turma() : turma;
 	}
 
 	public void setTurma(Turma turma) {

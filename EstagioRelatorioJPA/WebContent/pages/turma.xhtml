@@ -59,19 +59,23 @@
 		
 		<h:form id="formCadastro">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-					header="..::: Novo Turma - [ * Turma Obrigatorio ]" widgetVar="dialogCadTurma">
+					header="..::: Nova Turma - [ * Campo Obrigatorio ]" widgetVar="dialogCadTurma">
 					<h:panelGrid id="grid" columns="2">
-						<p:outputLabel for="supervisor" value="Supervisor:" />
-						<p:selectOneMenu id="supervisor" value="#{TurmaBean.facade.TurmaEstagio.supervisor.id}" required="true">
-				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
-				            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
-				            	itemValue="#{sup.id}"/>
-				        </p:selectOneMenu>
-						
 						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" value="#{TurmaBean.facade.TurmaEstagio.nome}" required="true"/>
+						<p:inputText id="nome" value="#{turmaBean.facade.turma.nome}" required="true"/>
+						
+						<p:outputLabel for="nomeCurso" value="Nome do Curso:" />
+						<p:inputText id="nomeCurso" value="#{turmaBean.facade.turma.nomeCurso}" required="true"/>
+						
+						<p:outputLabel for="turno" value="Turno:" />
+						<p:selectOneMenu id="turno" value="#{turmaBean.facade.turma.turno}" required="true">
+				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+				            <f:selectItem itemLabel="Matutino" itemValue="Matutino" />
+				            <f:selectItem itemLabel="Noturno" itemValue="Noturno" />
+				            <f:selectItem itemLabel="Final de Senama" itemValue="Final de Semana" />
+				        </p:selectOneMenu>
 					</h:panelGrid>
-					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{TurmaBean.save}" onclick="lazyload()"
+					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{turmaBean.save}" onclick="lazyload()"
 						update=":formCadastro:grid :formTabelaTurma :formMessage"/>
 					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadTurma.hide()" onclick="lazyload()"/>
 				</p:dialog>
@@ -81,18 +85,22 @@
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 				header="..::: Novo Turma - [ * Turma Obrigatorio ]" widgetVar="dialogAltTurma">
 				<h:panelGrid id="grid" columns="2">
-					<p:outputLabel for="supervisor" value="Supervisor:" />
-						<p:selectOneMenu id="supervisor" value="#{TurmaBean.facade.TurmaEstagioAltera.supervisor.id}" required="true">
-				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
-				            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
-				            	itemValue="#{sup.id}"/>
-				        </p:selectOneMenu>
-					
 					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText id="nome" value="#{TurmaBean.facade.TurmaEstagioAltera.nome}" required="true"/>
+					<p:inputText id="nome" value="#{turmaBean.facade.turmaAltera.nome}" required="true"/>
+					
+					<p:outputLabel for="nomeCurso" value="Nome do Curso:" />
+					<p:inputText id="nomeCurso" value="#{turmaBean.facade.turmaAltera.nomeCurso}" required="true"/>
+					
+					<p:outputLabel for="turno" value="Turno:" />
+					<p:selectOneMenu id="turno" value="#{turmaBean.facade.turmaAltera.turno}" required="true">
+			            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+			            <f:selectItem itemLabel="Matutino" itemValue="Matutino" />
+			            <f:selectItem itemLabel="Noturno" itemValue="Noturno" />
+			            <f:selectItem itemLabel="Final de Senama" itemValue="Final de Semana" />
+			        </p:selectOneMenu>
 				</h:panelGrid>
-				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{TurmaBean.update}"
-					update=":formTabelaTurma :formAlterar:grid" onclick="lazyload()"/>
+				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{turmaBean.update}"
+					update=":formTabelaTurma :formAlterar:grid :formMessage" onclick="lazyload()"/>
 				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltTurma.hide()" onclick="lazyload()"/>
 			</p:dialog>
 		</h:form>

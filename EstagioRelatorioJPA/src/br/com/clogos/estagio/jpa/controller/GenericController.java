@@ -1,6 +1,7 @@
 package br.com.clogos.estagio.jpa.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import br.com.clogos.estagio.jpa.dao.GenericDAO;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
@@ -20,6 +21,10 @@ public class GenericController<T extends ObjectModel> implements Serializable {
 	
 	public void update(Object oT) {
 		getGenericDAO().update(oT);
+	}
+	
+	public Boolean saveList(List<?> list) {
+		return getGenericDAO().saveList(list);
 	}
 	
 	@SuppressWarnings("rawtypes")
