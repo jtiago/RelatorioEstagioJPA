@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templatePages.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+	<ui:define name="conteudo">
+		<p:panel  header="..:: Cadastro de Turma">
+			<h:form id="formMessage">
+				<p:growl autoUpdate="true" rendered="#{turmaBean.mensagem}"/>
+			</h:form>
+			
+			<h:form id="formNovo">
+				<h:panelGrid columns="2">
+					<p:commandButton value="Nova Turma" icon="ui-icon-disk" oncomplete="dialogCadTurma.show()"/>
+				</h:panelGrid>
+			</h:form><br/>
+			
+			<h:form id="formTabelaTurma">
+				<p:dataTable id="tabelaTurma" var="item" value="#{turmaBean.facade.listaTurma}" emptyMessage="Sem Registros...">
+					<f:facet name="header">
+						Turmas Cadastrados
+					</f:facet>
+					
+					<p:column headerText="Nome">
+						<h:outputLabel value="#{item.nome}"/>
+					</p:column>
+					
+					<p:column headerText="Nome do Curso">
+						<h:outputLabel value="#{item.nomeCurso}"/>
+					</p:column>
+					
+					<p:column headerText="Turno">
+						<h:outputLabel value="#{item.turno}"/>
+					</p:column>
+					
+					<p:column style="text-align:right; width: 100px;">
+						<p:commandButton icon="ui-icon-trash" oncomplete="removeTurma.show()">
+							<f:setPropertyActionListener target="#{turmaBean.facade.turma}" value="#{item}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-pencil" oncomplete="dialogAltTurma.show()" update=":formAlterar">
+							<f:setPropertyActionListener target="#{turmaBean.facade.turmaAltera}" value="#{item}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:panel>
+		
+		<h:form id="formDelete">
+			<p:confirmDialog message="Deseja realmente remover este Turma ?" header="..:: Remover Turma" widgetVar="removeTurma">
+				<p:commandButton value="Sim" actionListener="#{turmaBean.remove}" update=":formMessage :formDelete :formTabelaTurma" />
+				<p:commandButton value="Nao" oncomplete="removeTurma.hide()"/>
+			</p:confirmDialog>
+		</h:form>
+		
+		<h:form id="formCadastro">
+				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+					header="..::: Novo Turma - [ * Turma Obrigatorio ]" widgetVar="dialogCadTurma">
+					<h:panelGrid id="grid" columns="2">
+						<p:outputLabel for="supervisor" value="Supervisor:" />
+						<p:selectOneMenu id="supervisor" value="#{TurmaBean.facade.TurmaEstagio.supervisor.id}" required="true">
+				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+				            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
+				            	itemValue="#{sup.id}"/>
+				        </p:selectOneMenu>
+						
+						<p:outputLabel for="nome" value="Nome:" />
+						<p:inputText id="nome" value="#{TurmaBean.facade.TurmaEstagio.nome}" required="true"/>
+					</h:panelGrid>
+					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{TurmaBean.save}" onclick="lazyload()"
+						update=":formCadastro:grid :formTabelaTurma :formMessage"/>
+					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadTurma.hide()" onclick="lazyload()"/>
+				</p:dialog>
+			</h:form>
+			
+		<h:form id="formAlterar">
+			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+				header="..::: Novo Turma - [ * Turma Obrigatorio ]" widgetVar="dialogAltTurma">
+				<h:panelGrid id="grid" columns="2">
+					<p:outputLabel for="supervisor" value="Supervisor:" />
+						<p:selectOneMenu id="supervisor" value="#{TurmaBean.facade.TurmaEstagioAltera.supervisor.id}" required="true">
+				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+				            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
+				            	itemValue="#{sup.id}"/>
+				        </p:selectOneMenu>
+					
+					<p:outputLabel for="nome" value="Nome:" />
+					<p:inputText id="nome" value="#{TurmaBean.facade.TurmaEstagioAltera.nome}" required="true"/>
+				</h:panelGrid>
+				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{TurmaBean.update}"
+					update=":formTabelaTurma :formAlterar:grid" onclick="lazyload()"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltTurma.hide()" onclick="lazyload()"/>
+			</p:dialog>
+		</h:form>
+		
+		<h:form>
+			<p:remoteCommand name="lazyload">  
+		        <f:setPropertyActionListener value="#{false}" target="#{turmaBean.mensagem}" />  
+		    </p:remoteCommand> 
+		</h:form>
+	</ui:define>
+</ui:composition>

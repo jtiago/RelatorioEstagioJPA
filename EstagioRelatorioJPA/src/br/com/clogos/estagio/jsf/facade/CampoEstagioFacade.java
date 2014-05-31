@@ -9,7 +9,7 @@ import javax.persistence.PersistenceException;
 
 import br.com.clogos.estagio.jpa.controller.CampoEstagioController;
 import br.com.clogos.estagio.jpa.controller.GenericController;
-import br.com.clogos.estagio.model.CampoEstagio;
+import br.com.clogos.estagio.model.CampoEstagio; 
 
 public class CampoEstagioFacade implements Serializable {
 	private static final long serialVersionUID = 1L;

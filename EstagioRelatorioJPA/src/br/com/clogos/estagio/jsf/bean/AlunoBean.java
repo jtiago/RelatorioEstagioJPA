@@ -15,6 +15,11 @@ import br.com.clogos.estagio.jsf.facade.AlunoFacade;
 public class AlunoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private AlunoFacade facade;
+	private boolean mensagem;
+	
+	public AlunoBean() {
+		mensagem = false;
+	}
 	
 	public AlunoFacade getFacade() {
 		return facade == null ? facade = new AlunoFacade() : facade;
@@ -22,19 +27,32 @@ public class AlunoBean implements Serializable {
 	
 	public void save(ActionEvent event) {
 		getFacade().save();
+		mensagem = true;
 	}
 	
 	public void remove(ActionEvent event) {
 		getFacade().remover();
+		mensagem = true;
 	}
 	
 	public void update(ActionEvent event) {
 		getFacade().update();
+		mensagem = true;
 	}
 	
 	public void fileUpload(FileUploadEvent event) {
 		System.out.println(event.getFile().getFileName());
         
     }
+
+	public boolean isMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(boolean mensagem) {
+		this.mensagem = mensagem;
+	}
+	
+	
 
 }

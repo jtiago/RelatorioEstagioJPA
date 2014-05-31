@@ -10,7 +10,7 @@
 	<ui:define name="conteudo">
 		<p:panel  header="..:: Cadastro de Aluno">
 			<h:form id="formMessage">
-				<p:growl autoUpdate="true"/>
+				<p:growl autoUpdate="true" rendered="#{alunoBean.mensagem}"/>
 			</h:form>
 			
 			<h:form id="formNovo">
@@ -68,7 +68,7 @@
 		<h:form id="formCadastro">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 					header="..::: Novo Aluno - [ * Campo Obrigatorio ]" widgetVar="dialogCadAluno">
-					<h:panelGrid columns="2">
+					<h:panelGrid id="grid" columns="2">
 						<p:outputLabel for="nome" value="Nome:" />
 						<p:inputText id="nome" value="#{alunoBean.facade.aluno.nome}" required="true"/>
 						
@@ -94,15 +94,17 @@
 						<p:inputText id="email" value="#{alunoBean.facade.aluno.email}" required="false"/>
 						
 					</h:panelGrid>
-					<p:commandButton ajax="false" value="Salvar" icon="ui-icon-disk" actionListener="#{alunoBean.save}"/>
-					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadAluno.hide()"/>
+					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{alunoBean.save}"
+						update=":formCadastro:grid :formTabelaAluno :formMessage" onclick="lazyload()"/>
+					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadAluno.hide()"
+						onclick="lazyload()"/>
 				</p:dialog>
 			</h:form>
 			
 		<h:form id="formAlterar">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 				header="..::: Novo Aluno - [ * Campo Obrigatorio ]" widgetVar="dialogAltAluno">
-				<h:panelGrid columns="2">
+				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel for="nome" value="Nome:" />
 						<p:inputText id="nome" value="#{alunoBean.facade.alunoAltera.nome}" required="true"/>
 						
@@ -126,9 +128,16 @@
 					
 				</h:panelGrid>
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{alunoBean.update}"
-					update=":formTabelaAluno"/>
-				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltAluno.hide()"/>
+					update=":formTabelaAluno :formAlterar:grid :formMessage" onclick="lazyload()"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltAluno.hide()"
+					onclick="lazyload()"/>
 			</p:dialog>
+		</h:form>
+		
+		<h:form>
+			<p:remoteCommand name="lazyload">  
+		        <f:setPropertyActionListener value="#{false}" target="#{alunoBean.mensagem}" />  
+		    </p:remoteCommand> 
 		</h:form>
 	</ui:define>
 </ui:composition>

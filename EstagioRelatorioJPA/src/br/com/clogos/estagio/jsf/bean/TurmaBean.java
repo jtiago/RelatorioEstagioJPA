@@ -6,20 +6,16 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
-import br.com.clogos.estagio.jsf.facade.CampoEstagioFacade;
+import br.com.clogos.estagio.jsf.facade.TurmaFacade;
 
-@ManagedBean(name="campoBean")
+@ManagedBean(name="turmaBean")
 @ViewScoped
-public class CampoEstagioBean implements Serializable {
-	private static final long serialVersionUID = 1L;
-	private CampoEstagioFacade facade;
+public class TurmaBean implements Serializable {
+	private static final long serialVersionUID = 7722041858940329653L;
+	private TurmaFacade facade;
 	private boolean mensagem;
 	
-	public CampoEstagioFacade getFacade() {
-		return facade == null ? facade = new CampoEstagioFacade() : facade;
-	}
-	
-	public CampoEstagioBean() {
+	public TurmaBean() {
 		mensagem = false;
 	}
 	
@@ -37,6 +33,10 @@ public class CampoEstagioBean implements Serializable {
 		getFacade().update();
 		mensagem = true;
 	}
+	
+	public TurmaFacade getFacade() {
+		return facade == null ? facade = new TurmaFacade() : facade;
+	}
 
 	public boolean isMensagem() {
 		return mensagem;
@@ -45,4 +45,5 @@ public class CampoEstagioBean implements Serializable {
 	public void setMensagem(boolean mensagem) {
 		this.mensagem = mensagem;
 	}
+
 }

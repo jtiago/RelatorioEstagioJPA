@@ -24,8 +24,8 @@ public class CampoEstagio implements ObjectModel {
 	@Column(name="nomecampoestagio", length=100, nullable=false)
 	private String nome;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
-	@JoinColumn(name = "fksupervisor")
+	@ManyToOne(cascade=CascadeType.DETACH)
+	@JoinColumn(name = "fksupervisor", referencedColumnName="idsupervisor" )
 	private Supervisor supervisor;
 
 	public Long getId() {

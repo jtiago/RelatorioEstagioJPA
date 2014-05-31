@@ -10,7 +10,7 @@
 	<ui:define name="conteudo">
 		<p:panel  header="..:: Cadastro de Campo">
 			<h:form id="formMessage">
-				<p:growl autoUpdate="true"/>
+				<p:growl autoUpdate="true" rendered="#{campoBean.mensagem}"/>
 			</h:form>
 			
 			<h:form id="formNovo">
@@ -56,7 +56,7 @@
 		<h:form id="formCadastro">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 					header="..::: Novo Campo - [ * Campo Obrigatorio ]" widgetVar="dialogCadCampo">
-					<h:panelGrid columns="2">
+					<h:panelGrid id="grid" columns="2">
 						<p:outputLabel for="supervisor" value="Supervisor:" />
 						<p:selectOneMenu id="supervisor" value="#{campoBean.facade.campoEstagio.supervisor.id}" required="true">
 				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
@@ -67,25 +67,36 @@
 						<p:outputLabel for="nome" value="Nome:" />
 						<p:inputText id="nome" value="#{campoBean.facade.campoEstagio.nome}" required="true"/>
 					</h:panelGrid>
-					<p:commandButton ajax="false" value="Salvar" icon="ui-icon-disk" actionListener="#{campoBean.save}"/>
-					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadCampo.hide()"/>
+					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{campoBean.save}" onclick="lazyload()"
+						update=":formCadastro:grid :formTabelaCampo :formMessage"/>
+					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadCampo.hide()" onclick="lazyload()"/>
 				</p:dialog>
 			</h:form>
 			
 		<h:form id="formAlterar">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 				header="..::: Novo Campo - [ * Campo Obrigatorio ]" widgetVar="dialogAltCampo">
-				<h:panelGrid columns="2">
+				<h:panelGrid id="grid" columns="2">
+					<p:outputLabel for="supervisor" value="Supervisor:" />
+						<p:selectOneMenu id="supervisor" value="#{campoBean.facade.campoEstagioAltera.supervisor.id}" required="true">
+				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
+				            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
+				            	itemValue="#{sup.id}"/>
+				        </p:selectOneMenu>
+					
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{campoBean.facade.campoEstagioAltera.nome}" required="true"/>
-						
-						
-					
 				</h:panelGrid>
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{campoBean.update}"
-					update=":formTabelaCampo"/>
-				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltCampo.hide()"/>
+					update=":formTabelaCampo :formAlterar:grid" onclick="lazyload()"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltCampo.hide()" onclick="lazyload()"/>
 			</p:dialog>
+		</h:form>
+		
+		<h:form>
+			<p:remoteCommand name="lazyload">  
+		        <f:setPropertyActionListener value="#{false}" target="#{campoBean.mensagem}" />  
+		    </p:remoteCommand> 
 		</h:form>
 	</ui:define>
 </ui:composition>

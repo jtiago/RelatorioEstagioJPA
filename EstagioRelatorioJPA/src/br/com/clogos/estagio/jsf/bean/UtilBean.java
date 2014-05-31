@@ -10,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 public class UtilBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Boolean mensage;
+    private Boolean mensage = true;
 
     public Boolean getMensage() {
         return mensage;
