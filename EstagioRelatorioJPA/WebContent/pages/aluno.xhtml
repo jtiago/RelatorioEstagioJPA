@@ -68,14 +68,6 @@
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 					header="..::: Novo Aluno - [ * Campo Obrigatorio ]" widgetVar="dialogCadAluno">
 					<h:panelGrid id="grid" columns="2">
-						<p:outputLabel for="turma" value="Turma:" />
-						<p:selectOneMenu id="turma" value="#{alunoBean.facade.aluno.turma.id}" required="true"
-							style="width:300px;">
-				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
-				            <f:selectItems value="#{turmaBean.facade.listaTurma}" var="tur" itemLabel="#{tur.nome}"
-				            	itemValue="#{tur.id}"/>
-				        </p:selectOneMenu>
-					
 						<p:outputLabel for="nome" value="Nome:" />
 						<p:inputText id="nome" value="#{alunoBean.facade.aluno.nome}" required="true" style="width:290px;"/>
 						
@@ -112,14 +104,6 @@
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 				header="..::: Novo Aluno - [ * Campo Obrigatorio ]" widgetVar="dialogAltAluno">
 				<h:panelGrid id="grid" columns="2">
-					<p:outputLabel for="turma" value="Turma:" />
-					<p:selectOneMenu id="turma" value="#{alunoBean.facade.alunoAltera.turma.id}" required="true"
-						style="width:300px;">
-			            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
-			            <f:selectItems value="#{turmaBean.facade.listaTurma}" var="tur" itemLabel="#{tur.nome}"
-			            	itemValue="#{tur.id}"/>
-			        </p:selectOneMenu>
-				
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{alunoBean.facade.alunoAltera.nome}" required="true" style="width: 290px;"/>
 					

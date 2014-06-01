@@ -13,7 +13,6 @@
 	<class>br.com.clogos.estagio.model.Aluno</class>
 	<class>br.com.clogos.estagio.model.Relatorio</class>
 	<class>br.com.clogos.estagio.model.LiberarRelatorio</class>
-	<class>br.com.clogos.estagio.model.TurmaPK</class>
 	<class>br.com.clogos.estagio.model.Turma</class>
 	
 	
@@ -27,7 +26,7 @@
 	   	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 		<property name="hibernate.show_sql" value="true" />
 	  	<property name="hibernate.format_sql" value="true" />
-	  	<property name="hibernate.hbm2ddl.auto" value="create" />
+	  	<property name="hibernate.hbm2ddl.auto" value="update" />
 	</properties>
 		
 	</persistence-unit>

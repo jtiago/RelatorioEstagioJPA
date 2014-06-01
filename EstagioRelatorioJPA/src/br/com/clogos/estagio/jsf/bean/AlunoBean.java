@@ -86,7 +86,6 @@ public class AlunoBean implements Serializable {
 		aluno.setSenha("12345678");
 		aluno.setSexo(token[7]);
 		aluno.setStatus(token[5]);
-		aluno.setTurma(turma);
 		getFacade().setAluno(aluno);
 		getFacade().save();
 	}
@@ -98,7 +97,4 @@ public class AlunoBean implements Serializable {
 	public void setMensagem(boolean mensagem) {
 		this.mensagem = mensagem;
 	}
-	
-	
-
 }

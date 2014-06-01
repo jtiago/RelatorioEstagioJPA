@@ -2,18 +2,12 @@ package br.com.clogos.estagio.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-
-@Embeddable
-public class TurmaPK implements Serializable {
+public class TurmaId implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Column
 	private Long id;
-	@Column
 	private String nomeTurma;
 	
-	public TurmaPK() {
+	public TurmaId() {
 		
 	}
 
@@ -51,7 +45,7 @@ public class TurmaPK implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TurmaPK other = (TurmaPK) obj;
+		TurmaId other = (TurmaId) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

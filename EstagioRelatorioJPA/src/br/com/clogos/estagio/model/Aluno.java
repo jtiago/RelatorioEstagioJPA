@@ -2,14 +2,11 @@ package br.com.clogos.estagio.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -44,10 +41,6 @@ public class Aluno implements ObjectModel {
 	
 	@Column(length=50, nullable=true)
 	private String email;
-	
-	@ManyToOne(cascade = CascadeType.DETACH)
-	@JoinColumn(name = "fkturma", referencedColumnName="pk.nomeTurma")
-	private Turma turma;
 	
 	@OneToMany(mappedBy = "aluno")
 	private List<Relatorio> relatorios;
@@ -85,14 +78,6 @@ public class Aluno implements ObjectModel {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public Turma getTurma() {
-		return turma == null ? turma = new Turma() : turma;
-	}
-
-	public void setTurma(Turma turma) {
-		this.turma = turma;
 	}
 
 	public List<LiberarRelatorio> getLiberarRelatorios() {

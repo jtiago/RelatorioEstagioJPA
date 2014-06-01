@@ -19,7 +19,7 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 	public List<Aluno> findAll() {
 		entityManager = JpaUtil.getEntityManager();
 		List<Aluno> lista = new ArrayList<Aluno>();
-		String hql = "SELECT a FROM Aluno a LEFT JOIN a.turma t ORDER BY a.nome";
+		String hql = "SELECT a FROM Aluno a ORDER BY a.nome";
 		try {
 			TypedQuery<Aluno> query = entityManager.createQuery(hql, Aluno.class);
 			lista = query.getResultList();

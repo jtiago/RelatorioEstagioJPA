@@ -3,8 +3,10 @@ package br.com.clogos.estagio.model;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,11 +17,9 @@ import br.com.clogos.estagio.jpa.dao.ObjectModel;
 public class Turma implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	
-	/*@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idturma")
-	private Long id;*/
-	@EmbeddedId
-	private TurmaPK pk;
+	private Long id;
 	
 	@Column(name="nometurma", length=15, nullable=false)
 	private String nome;
@@ -30,35 +30,8 @@ public class Turma implements ObjectModel {
 	@Column(length=15, nullable=true)
 	private String turno;
 	
-	@OneToMany(mappedBy = "turma")
-	private List<Aluno> alunos;
-	
 	@OneToMany(mappedBy = "turmaLiberarRelatorio")
 	private List<LiberarRelatorio> liberarRelatorios;
-
-	/*public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}*/
-	
-	public String getNome() {
-		return nome;
-	}
-
-	public TurmaPK getPk() {
-		return pk;
-	}
-
-	public void setPk(TurmaPK pk) {
-		this.pk = pk;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 	public String getNomeCurso() {
 		return nomeCurso;
@@ -76,11 +49,19 @@ public class Turma implements ObjectModel {
 		this.turno = turno;
 	}
 
-	public List<Aluno> getAlunos() {
-		return alunos;
+	public Long getId() {
+		return id;
 	}
 
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 }
