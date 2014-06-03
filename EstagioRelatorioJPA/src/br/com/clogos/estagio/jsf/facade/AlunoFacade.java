@@ -17,7 +17,7 @@ public class AlunoFacade implements Serializable {
 	private Aluno aluno;
 	private Aluno alunoAltera;
 	private List<Aluno> listaAlunos;
-	private GenericController<Aluno> genericController;
+	private GenericController genericController;
 	private AlunoController alunoController;
 	
 	public List<Aluno> getListaAlunos() {
@@ -91,8 +91,8 @@ public class AlunoFacade implements Serializable {
 		this.alunoAltera = alunoAltera;
 	}
 
-	public GenericController<Aluno> getGenericController() {
-		return genericController == null ? genericController = new GenericController<Aluno>() : genericController;
+	public GenericController getGenericController() {
+		return genericController == null ? genericController = new GenericController() : genericController;
 	}
 	public AlunoController getAlunoController() {
 		return alunoController == null ? alunoController = new AlunoController() : alunoController;

@@ -6,5 +6,6 @@ public interface GenericDAO {
 	void save(Object oT);
 	void update(Object oT);
 	void delete(Object oT);
-	public Boolean saveList(List<?> list);
+	Boolean saveList(List<?> list);
+	List<?> findAll(Class<?> clazz, String coluna, String order);
 }

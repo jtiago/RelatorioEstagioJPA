@@ -13,6 +13,7 @@ import org.primefaces.event.FileUploadEvent;
 import br.com.clogos.estagio.jsf.facade.AlunoFacade;
 import br.com.clogos.estagio.jsf.facade.TurmaFacade;
 import br.com.clogos.estagio.model.Aluno;
+import br.com.clogos.estagio.model.Perfil;
 import br.com.clogos.estagio.model.Turma;
 
 @ManagedBean(name="alunoBean")
@@ -21,6 +22,7 @@ public class AlunoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private AlunoFacade facade;
 	private TurmaFacade facadeTurma;
+	private Perfil perfil;
 	private boolean mensagem;
 	
 	public AlunoBean() {
@@ -58,7 +60,8 @@ public class AlunoBean implements Serializable {
 				String str = scanner.nextLine();
 				if(!str.contains("nu_matricula")) {
 					String[] token = str.split(";");
-					saveAluno(token, saveTurma(token));
+					saveTurma(token);
+					saveAluno(token);
 				}
 			}
 		} catch (IOException e) {
@@ -78,7 +81,7 @@ public class AlunoBean implements Serializable {
 		return turma;
 	}
 	
-	private void saveAluno(String[] token, Turma turma) {
+	private void saveAluno(String[] token) {
 		Aluno aluno = new Aluno();
 		aluno.setCpf(token[6]);
 		aluno.setMatricula(token[0]);
@@ -86,6 +89,7 @@ public class AlunoBean implements Serializable {
 		aluno.setSenha("12345678");
 		aluno.setSexo(token[7]);
 		aluno.setStatus(token[5]);
+		aluno.setPerfil(getPerfil());
 		getFacade().setAluno(aluno);
 		getFacade().save();
 	}
@@ -96,5 +100,13 @@ public class AlunoBean implements Serializable {
 
 	public void setMensagem(boolean mensagem) {
 		this.mensagem = mensagem;
+	}
+	
+	public Perfil getPerfil() {
+		if(perfil == null) {
+			perfil = new Perfil();
+			perfil.setId(2L);
+		}
+		return perfil;
 	}
 }

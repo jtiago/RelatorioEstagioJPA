@@ -3,40 +3,27 @@ package br.com.clogos.estagio.jsf.facade;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Enumeration;
-import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import br.com.clogos.estagio.jpa.controller.AutenticarController;
-import br.com.clogos.estagio.jpa.controller.GenericController;
-import br.com.clogos.estagio.model.Aluno;
-import br.com.clogos.estagio.model.Perfil;
+import br.com.clogos.estagio.jpa.controller.UsuarioController;
+import br.com.clogos.estagio.model.Usuario;
 
-public class AutenticarFacade implements Serializable {
+public class UsuarioFacade implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private AutenticarController autenticarController;
-	private List<Perfil> listaPerfil;
+	private UsuarioController usuarioController;
 	
-	@SuppressWarnings("unchecked")
-	public List<Perfil> getListaPerfil() {
-		if(listaPerfil == null) {
-			GenericController genericController = new GenericController();
-			listaPerfil = (List<Perfil>) genericController.findAll(Perfil.class, "nome", "desc");
-		}
-		return listaPerfil;
-	}
-	
-	public void login(Aluno usuario) {
+	public void login(Usuario usuario) {
 		usuario.setCpf(usuario.getCpf().replace(".", "").replace("-", ""));
-		Aluno alunoLogado = getAutenticarController().validarAutenticacao(usuario);
+		Usuario usuarioLogado = getUsuarioController().validarAutenticacao(usuario);
 		
 		try {
-			if(alunoLogado != null) { 
+			if(usuarioLogado != null) { 
 				HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
 						.getExternalContext().getRequest();
-				request.getSession().setAttribute("usuarioLogado", alunoLogado);
+				request.getSession().setAttribute("usuarioLogado", usuarioLogado);
 				FacesContext.getCurrentInstance().getExternalContext().redirect((
 						new StringBuilder(String.valueOf(request.getContextPath()))).append("/pages/home.jsf").toString());
 			} else {
@@ -65,9 +52,7 @@ public class AutenticarFacade implements Serializable {
 		}
 	}
 	
-	public AutenticarController getAutenticarController() {
-		return autenticarController == null ? autenticarController = new AutenticarController() : autenticarController;
+	public UsuarioController getUsuarioController() {
+		return usuarioController == null ? usuarioController = new UsuarioController() : usuarioController;
 	}
-	
-
 }

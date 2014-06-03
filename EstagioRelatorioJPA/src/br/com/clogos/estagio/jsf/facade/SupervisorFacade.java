@@ -16,7 +16,7 @@ public class SupervisorFacade implements Serializable {
 	private Supervisor supervisor;
 	private Supervisor supervisorAltera;
 	private SupervisorController supervisorController;
-	private GenericController<Supervisor> genericControl;
+	private GenericController genericControl;
 	private List<Supervisor> listaSupervisores;
 	
 	public List<Supervisor> getListaSupervisores() {
@@ -85,7 +85,7 @@ public class SupervisorFacade implements Serializable {
 		return supervisorController == null ? supervisorController = new SupervisorController() : supervisorController;
 	}
 	
-	public GenericController<Supervisor> getGenericControl() {
-		return genericControl == null ? genericControl = new GenericController<Supervisor>() : genericControl;
+	public GenericController getGenericControl() {
+		return genericControl == null ? genericControl = new GenericController() : genericControl;
 	}
 }

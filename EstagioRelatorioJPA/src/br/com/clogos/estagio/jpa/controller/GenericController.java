@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.com.clogos.estagio.jpa.dao.GenericDAO;
-import br.com.clogos.estagio.jpa.dao.ObjectModel;
 import br.com.clogos.estagio.jpa.dao.impl.GenericDAOImpl;
 
-public class GenericController<T extends ObjectModel> implements Serializable {
+public class GenericController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private GenericDAO genericDAO;
 	
@@ -25,6 +24,10 @@ public class GenericController<T extends ObjectModel> implements Serializable {
 	
 	public Boolean saveList(List<?> list) {
 		return getGenericDAO().saveList(list);
+	}
+	
+	public List<?> findAll(Class<?> clazz, String coluna, String order) {
+		return getGenericDAO().findAll(clazz, coluna, order);
 	}
 	
 	@SuppressWarnings("rawtypes")

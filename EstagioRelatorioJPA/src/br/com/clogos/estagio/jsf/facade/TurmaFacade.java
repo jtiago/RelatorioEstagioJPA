@@ -16,7 +16,7 @@ public class TurmaFacade implements Serializable {
 	private Turma turma;
 	private Turma turmaAltera;
 	private List<Turma> listaTurma;
-	private GenericController<Turma> genericController;
+	private GenericController genericController;
 	private TurmaController turmaController;
 	
 	public List<Turma> getListaTurma() {
@@ -87,8 +87,8 @@ public class TurmaFacade implements Serializable {
 		this.turmaAltera = turmaAltera;
 	}
 	
-	public GenericController<Turma> getGenericController() {
-		return genericController == null ? genericController = new GenericController<Turma>() : genericController;
+	public GenericController getGenericController() {
+		return genericController == null ? genericController = new GenericController() : genericController;
 	}
 	public TurmaController getTurmaController() {
 		return turmaController == null ? turmaController = new TurmaController() : turmaController;

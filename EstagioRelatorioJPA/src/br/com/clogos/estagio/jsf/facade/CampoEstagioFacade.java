@@ -16,7 +16,7 @@ public class CampoEstagioFacade implements Serializable {
 	private CampoEstagio campoEstagio;
 	private CampoEstagio campoEstagioAltera;
 	private List<CampoEstagio> listaCampoEstagio;
-	private GenericController<CampoEstagio> genericController;
+	private GenericController genericController;
 	private CampoEstagioController campoEstagioController;
 	
 	public List<CampoEstagio> getListaCampoEstagio() {
@@ -81,8 +81,8 @@ public class CampoEstagioFacade implements Serializable {
 	public void setCampoEstagioAltera(CampoEstagio campoEstagioAltera) {
 		this.campoEstagioAltera = campoEstagioAltera;
 	}
-	public GenericController<CampoEstagio> getGenericController() {
-		return genericController == null ? genericController = new GenericController<CampoEstagio>() : genericController;
+	public GenericController getGenericController() {
+		return genericController == null ? genericController = new GenericController() : genericController;
 	}
 	public CampoEstagioController getCampoEstagioController() {
 		return campoEstagioController == null ? campoEstagioController = new CampoEstagioController() : campoEstagioController;

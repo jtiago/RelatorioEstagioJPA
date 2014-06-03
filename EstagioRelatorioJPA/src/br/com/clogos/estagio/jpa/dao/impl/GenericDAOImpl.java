@@ -1,5 +1,6 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -64,30 +65,33 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
 		}
 	}
 	
-	 public Boolean saveList(List<?> list) {
-	        entityManager = JpaUtil.getEntityManager();
-	        try {
-		        entityManager.getTransaction().begin();
-		        for(Object oT : list) {
-		        	entityManager.persist(oT);
-		        }
-		        entityManager.getTransaction().commit();
-		        return Boolean.valueOf(true);
-	        } catch (Exception e) {
-		        entityManager.getTransaction().rollback();
-		        e.printStackTrace();
-		        return Boolean.valueOf(false);
-	        }
-	    }
+	@Override
+	public Boolean saveList(List<?> list) {
+		entityManager = JpaUtil.getEntityManager();
+		try {
+		    entityManager.getTransaction().begin();
+		    for(Object oT : list) {
+		    	entityManager.persist(oT);
+		    }
+		    entityManager.getTransaction().commit();
+		    return Boolean.valueOf(true);
+		} catch (Exception e) {
+		    entityManager.getTransaction().rollback();
+		    e.printStackTrace();
+		    return Boolean.valueOf(false);
+		}
+	}
 	
-	/*@SuppressWarnings("unchecked")
-	public List<Object> findAll(Object oT) {
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findAll(Class<?> clazz, String coluna, String order) {
 		entityManager = JpaUtil.getEntityManager();
 		List<Object> lista = new ArrayList<Object>();
 		try {
 			entityManager.getTransaction().begin();
-			System.out.println(oT.getClass().getSimpleName()+" <<<<<");
-			lista = entityManager.createQuery(("FROM " + oT.getClass().getSimpleName())).getResultList();
+			String nameClass = clazz.getSimpleName();
+			lista = entityManager.createQuery("SELECT c FROM " + nameClass+ " c ORDER BY c."+coluna+" "+order)
+					.getResultList();
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,11 +102,5 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
 			}
 		}
         return lista;
-    }*/
- 
-    /*private Class<?> getTypeClass() {
-        Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[1];
-        return clazz;
-    }*/
+    }
 }
