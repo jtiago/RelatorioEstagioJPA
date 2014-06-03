@@ -13,10 +13,14 @@ public class AlunoController implements Serializable {
 	private AlunoDAO alunoDAO;
 	
 	public List<Aluno> findAll() {
-		return getSupervisorDAO().findAll();
+		return getAlunoDAO().findAll();
 	}
 	
-	public AlunoDAO getSupervisorDAO() {
+	public Aluno validarAutenticacao(Aluno param) {
+		return getAlunoDAO().validarAutenticacao(param);
+	}
+	
+	public AlunoDAO getAlunoDAO() {
 		if(alunoDAO == null) {
 			alunoDAO = new AlunoDAOImpl();
 		}

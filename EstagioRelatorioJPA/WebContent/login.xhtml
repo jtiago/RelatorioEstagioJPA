@@ -23,7 +23,7 @@
 					<h:panelGrid columns="2" style="margin:0 auto;">
 						<p:outputLabel for="perfil" value="Perfil:" />
 						<p:selectOneMenu id="perfil" value="#{autenticarBean.perfil.id}" required="true">
-				            <f:selectItems value="#{autenticarBean.facadeAutenticar.listaPerfil}" var="per" itemLabel="#{per.nome}"
+				            <f:selectItems value="#{perfilBean.facade.listaPerfil}" var="per" itemLabel="#{per.nome}"
 				            	itemValue="#{per.id}"/>
 				        </p:selectOneMenu>
 					

@@ -6,7 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
-import br.com.clogos.estagio.jsf.facade.AutenticarFacade;
+import br.com.clogos.estagio.jsf.facade.AlunoFacade;
 import br.com.clogos.estagio.jsf.facade.UsuarioFacade;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Perfil;
@@ -16,7 +16,7 @@ import br.com.clogos.estagio.model.Usuario;
 @SessionScoped
 public class AutenticarBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private AutenticarFacade facadeAutenticar;
+	private AlunoFacade alunoFacade;
 	private UsuarioFacade facadeUsuario; 
 	private Aluno aluno;
 	private Perfil perfil;
@@ -25,16 +25,19 @@ public class AutenticarBean implements Serializable {
 		return facadeUsuario == null ? new UsuarioFacade() : facadeUsuario;
 	}
 	
-	public AutenticarFacade getFacadeAutenticar() {
-		return facadeAutenticar == null ? new AutenticarFacade() : facadeAutenticar;
+	public AlunoFacade getAlunoFacade() {
+		return alunoFacade == null ? alunoFacade = new AlunoFacade() : alunoFacade;
 	}
 	
 	public void login(ActionEvent event){
-		if(getPerfil().getId().equals(1)) {
+		if(getPerfil().getId() == 1) {
+			System.out.println(getAluno().getCpf()+" - "+getAluno().getSenha());
 			Usuario usuario = new Usuario();
-			getFacadeUsuario().login(usuario);
+			usuario.setCpf(getAluno().getCpf());
+			usuario.setSenha(getAluno().getSenha());
+			getFacadeUsuario().login(usuario); 
 		} else {
-			getFacadeAutenticar().login(getAluno());
+			getAlunoFacade().login(getAluno());
 		}
 	}
 	

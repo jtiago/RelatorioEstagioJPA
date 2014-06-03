@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.AlunoDAO;
 import br.com.clogos.estagio.model.Aluno;
+import br.com.clogos.estagio.util.CriptografiaBase64;
 
 public class AlunoDAOImpl implements Serializable, AlunoDAO {
 	private static final long serialVersionUID = 1L;
@@ -32,6 +34,26 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 			}
 		}
 		return lista;
+	}
+	
+	@Override
+	public Aluno validarAutenticacao(Aluno param) {
+		entityManager = JpaUtil.getEntityManager();
+		String hql = "SELECT a FROM Aluno a WHERE a.cpf = :numCpf AND a.senha = :senha";
+		Aluno aluno = null;
+		try {
+			TypedQuery<Aluno> query = entityManager.createQuery(hql, Aluno.class)
+					.setParameter("numCpf", param.getCpf())
+					.setParameter("senha", CriptografiaBase64.encrypt(param.getSenha()));
+			if(query.getResultList().size() != 0) {
+				aluno = query.getSingleResult();
+			}
+			
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+			entityManager.getTransaction().rollback();
+		}
+		return aluno;
 	}
 
 }
