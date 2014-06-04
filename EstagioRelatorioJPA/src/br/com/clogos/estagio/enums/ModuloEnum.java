@@ -1,5 +1,18 @@
 package br.com.clogos.estagio.enums;
 
 public enum ModuloEnum {
-	I, II, III, II_III;
+	Modulo_I("I Módulo"), 
+	Modulo_II("II Módulo"), 
+	Modulo_III_1("III Módulo 1ª Fase"), 
+	Modulo_III_2("III Módulo 2ª Fase");
+	
+	private String label;
+	
+	ModuloEnum(String label) {
+		this.label=label;
+	}
+	
+	public String getLabel() {
+		return label;
+	}
 }

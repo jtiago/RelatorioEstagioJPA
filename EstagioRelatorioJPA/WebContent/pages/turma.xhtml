@@ -37,13 +37,17 @@
 						<h:outputLabel value="#{item.turno}"/>
 					</p:column>
 					
-					<p:column style="text-align:right; width: 100px;">
+					<p:column style="text-align:right; width: 150px;">
 						<p:commandButton icon="ui-icon-trash" oncomplete="removeTurma.show()">
 							<f:setPropertyActionListener target="#{turmaBean.facade.turma}" value="#{item}" />
 						</p:commandButton>
 
 						<p:commandButton icon="ui-icon-pencil" oncomplete="dialogAltTurma.show()" update=":formAlterar">
 							<f:setPropertyActionListener target="#{turmaBean.facade.turmaAltera}" value="#{item}" />
+						</p:commandButton>
+						
+						<p:commandButton  icon="ui-icon-check" title="Liberar Relatorio" oncomplete="dialogCadLiberar.show()" update=":formLiberar">
+							<f:setPropertyActionListener target="#{liberarBean.facade.turma}" value="#{item}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
@@ -102,6 +106,26 @@
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{turmaBean.update}"
 					update=":formTabelaTurma :formAlterar:grid :formMessage" onclick="lazyload()"/>
 				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltTurma.hide()" onclick="lazyload()"/>
+			</p:dialog>
+		</h:form>
+		
+		<h:form id="formLiberar">
+			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+				header="..::: Liberar Relatorio por Turma - [ * Campo Obrigatorio ]" widgetVar="dialogCadLiberar">
+				<h:panelGrid id="grid" columns="2">
+					<p:outputLabel for="turma" value="Turma:" />
+					<p:inputText id="turma" value="#{liberarBean.facade.turma.nome}" required="true" disabled="true"/>
+					
+					<p:outputLabel for="modulo" value="Modulo:" />
+					 <p:selectOneMenu id="modulo" value="#{liberarBean.facade.liberarRelatorio.modulo}" required="true">  
+                        <f:selectItem itemLabel="Selecione" itemValue="#{null}" />  
+                        <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
+                    </p:selectOneMenu> 
+					
+				</h:panelGrid>
+				<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{liberarBean.save}" onclick="lazyload()"
+					update=":formLiberar:grid :formMessage"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadLiberar.hide()" onclick="lazyload()"/>
 			</p:dialog>
 		</h:form>
 		

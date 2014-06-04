@@ -24,12 +24,15 @@ public class LiberarRelatorio implements ObjectModel {
 	@Column(name = "idliberar")
 	private Long id;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "fkturma")
 	private Turma turmaLiberarRelatorio;
 	
 	@Enumerated(EnumType.STRING)
 	private ModuloEnum modulo;
+	
+	@Column(name="liberar", length=1, nullable=false)
+	private Boolean liberar = true;
 
 	public Long getId() {
 		return id;
@@ -53,5 +56,13 @@ public class LiberarRelatorio implements ObjectModel {
 
 	public void setTurmaLiberarRelatorio(Turma turmaLiberarRelatorio) {
 		this.turmaLiberarRelatorio = turmaLiberarRelatorio;
+	}
+
+	public Boolean getLiberar() {
+		return liberar;
+	}
+
+	public void setLiberar(Boolean liberar) {
+		this.liberar = liberar;
 	}
 }
