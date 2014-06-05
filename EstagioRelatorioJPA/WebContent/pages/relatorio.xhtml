@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templatePages.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+	<ui:define name="conteudo">
+		<p:panel  header="..:: Relatorio de Estagio">
+			<h:panelGrid columns="3" width="920">
+				<p:graphicImage url="/images/logo.png" width="150"/>
+				<h:outputLabel value="ESTAGIO SUPERVISIONADO I MODULO" style="font-size: 25px; font-weight: bold;"/>
+				<p:graphicImage url="/images/logo.png" width="150"/>
+			</h:panelGrid>
+			<h:outputLabel value="#{turmaBean.facade.getCurso(sessionScope.usuarioLogado.turma)}" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

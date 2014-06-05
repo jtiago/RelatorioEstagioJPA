@@ -4,12 +4,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import br.com.clogos.estagio.util.CriptografiaBase64;
+
 public class Main {
 	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
 	
 	public static void main(String[] args) {
-		@SuppressWarnings("unused")
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		System.out.println(CriptografiaBase64.encrypt("123"));
+		
+		//EntityManager entityManager = entityManagerFactory.createEntityManager();
 		/*entityManager.getTransaction().begin();
 		
 		Aluno aluno = new Aluno();

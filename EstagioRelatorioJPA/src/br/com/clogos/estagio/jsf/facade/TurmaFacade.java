@@ -16,6 +16,7 @@ public class TurmaFacade implements Serializable {
 	private Turma turma;
 	private Turma turmaAltera;
 	private List<Turma> listaTurma;
+	private List<Turma> listaTurmaFilter;
 	private GenericController genericController;
 	private TurmaController turmaController;
 	
@@ -74,6 +75,10 @@ public class TurmaFacade implements Serializable {
 		}
 	}
 	
+	public String getCurso(String nomeTurma) {
+		return getTurmaController().obterCurso(nomeTurma).getNomeCurso();
+	}
+	
 	public Turma getTurma() {
 		return turma == null ? turma = new Turma() : turma;
 	}
@@ -94,4 +99,11 @@ public class TurmaFacade implements Serializable {
 		return turmaController == null ? turmaController = new TurmaController() : turmaController;
 	}
 
+	public List<Turma> getListaTurmaFilter() {
+		return listaTurmaFilter;
+	}
+
+	public void setListaTurmaFilter(List<Turma> listaTurmaFilter) {
+		this.listaTurmaFilter = listaTurmaFilter;
+	}
 }

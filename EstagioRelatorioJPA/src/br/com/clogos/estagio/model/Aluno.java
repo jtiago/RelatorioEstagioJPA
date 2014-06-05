@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
@@ -45,6 +46,9 @@ public class Aluno implements ObjectModel {
 	@Column(length=50, nullable=true)
 	private String email;
 	
+	@Column(length=15, nullable=true)
+	private String turma;
+	
 	@ManyToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="fkperfil")
 	private Perfil perfil;
@@ -52,8 +56,8 @@ public class Aluno implements ObjectModel {
 	@OneToMany(mappedBy = "aluno")
 	private List<Relatorio> relatorios;
 	
-	@OneToMany(mappedBy = "turmaLiberarRelatorio")
-	private List<LiberarRelatorio> liberarRelatorios;
+	@Transient
+	private Turma turma2;
 	
 	public Perfil getPerfil() {
 		return perfil == null ? perfil = new Perfil() : perfil;
@@ -95,14 +99,6 @@ public class Aluno implements ObjectModel {
 		this.senha = senha;
 	}
 
-	public List<LiberarRelatorio> getLiberarRelatorios() {
-		return liberarRelatorios;
-	}
-
-	public void setLiberarRelatorios(List<LiberarRelatorio> liberarRelatorios) {
-		this.liberarRelatorios = liberarRelatorios;
-	}
-
 	public String getMatricula() {
 		return matricula;
 	}
@@ -127,6 +123,14 @@ public class Aluno implements ObjectModel {
 		this.status = status;
 	}
 
+	public String getTurma() {
+		return turma;
+	}
+
+	public void setTurma(String turma) {
+		this.turma = turma;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -141,5 +145,13 @@ public class Aluno implements ObjectModel {
 
 	public void setRelatorios(List<Relatorio> relatorios) {
 		this.relatorios = relatorios;
+	}
+
+	public Turma getTurma2() {
+		return turma2;
+	}
+
+	public void setTurma2(Turma turma2) {
+		this.turma2 = turma2;
 	}
 }

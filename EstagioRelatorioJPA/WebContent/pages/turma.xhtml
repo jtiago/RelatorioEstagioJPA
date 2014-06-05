@@ -20,12 +20,13 @@
 			</h:form><br/>
 			
 			<h:form id="formTabelaTurma">
-				<p:dataTable id="tabelaTurma" var="item" value="#{turmaBean.facade.listaTurma}" emptyMessage="Sem Registros...">
+				<p:dataTable id="tabelaTurma" var="item" value="#{turmaBean.facade.listaTurma}" emptyMessage="Sem Registros..."
+					filteredValue="#{turmaBean.facade.listaTurmaFilter}">
 					<f:facet name="header">
 						Turmas Cadastrados
 					</f:facet>
 					
-					<p:column headerText="Nome">
+					<p:column headerText="Nome" filterBy="#{item.nome}" filterMatchMode="contains">
 						<h:outputLabel value="#{item.nome}"/>
 					</p:column>
 					
@@ -47,7 +48,7 @@
 						</p:commandButton>
 						
 						<p:commandButton  icon="ui-icon-check" title="Liberar Relatorio" oncomplete="dialogCadLiberar.show()" update=":formLiberar">
-							<f:setPropertyActionListener target="#{liberarBean.facade.turma}" value="#{item}" />
+							<f:setPropertyActionListener target="#{turmaBean.facadeLiberarRelatorio.liberarRelatorio.turmaLiberarRelatorio}" value="#{item}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
@@ -114,17 +115,17 @@
 				header="..::: Liberar Relatorio por Turma - [ * Campo Obrigatorio ]" widgetVar="dialogCadLiberar">
 				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel for="turma" value="Turma:" />
-					<p:inputText id="turma" value="#{liberarBean.facade.turma.nome}" required="true" disabled="true"/>
+					<p:inputText id="turma" value="#{turmaBean.facadeLiberarRelatorio.liberarRelatorio.turmaLiberarRelatorio.nome}" required="true" disabled="true"/>
 					
 					<p:outputLabel for="modulo" value="Modulo:" />
-					 <p:selectOneMenu id="modulo" value="#{liberarBean.facade.liberarRelatorio.modulo}" required="true">  
+					 <p:selectOneMenu id="modulo" value="#{turmaBean.facadeLiberarRelatorio.liberarRelatorio.modulo}" required="true">  
                         <f:selectItem itemLabel="Selecione" itemValue="#{null}" />  
                         <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
                     </p:selectOneMenu> 
 					
 				</h:panelGrid>
-				<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{liberarBean.save}" onclick="lazyload()"
-					update=":formLiberar:grid :formMessage"/>
+				<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{turmaBean.saveLiberarRelatorio}"
+					update=":formLiberar:grid :formMessage" onclick="lazyload()"/>
 				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadLiberar.hide()" onclick="lazyload()"/>
 			</p:dialog>
 		</h:form>

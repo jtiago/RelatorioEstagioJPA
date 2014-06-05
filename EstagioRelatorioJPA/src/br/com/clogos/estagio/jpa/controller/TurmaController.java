@@ -25,4 +25,8 @@ public class TurmaController implements Serializable {
 	public Boolean verificaDuplicidade(String nomeTurma) {
 		return getTurmaDAO().verificaDuplicidade(nomeTurma);
 	}
+	
+	public Turma obterCurso(String nomeTurma) {
+		return getTurmaDAO().obterCurso(nomeTurma);
+	}
 }

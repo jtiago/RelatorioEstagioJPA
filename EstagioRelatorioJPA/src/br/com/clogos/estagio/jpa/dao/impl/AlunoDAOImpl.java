@@ -39,9 +39,11 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 	@Override
 	public Aluno validarAutenticacao(Aluno param) {
 		entityManager = JpaUtil.getEntityManager();
-		String hql = "SELECT a FROM Aluno a WHERE a.cpf = :numCpf AND a.senha = :senha";
+		String hql = "SELECT a FROM Aluno a  WHERE a.cpf = :numCpf AND a.senha = :senha";
+		//String sql = "SELECT a.nome,a.cpf,a.turma,t.nomeCurso FROM Aluno a INNER JOIN Turma t ON a.turma = t.nometurma";
 		Aluno aluno = null;
-		try {
+		try {;
+			
 			TypedQuery<Aluno> query = entityManager.createQuery(hql, Aluno.class)
 					.setParameter("numCpf", param.getCpf())
 					.setParameter("senha", CriptografiaBase64.encrypt(param.getSenha()));

@@ -13,8 +13,8 @@
 <h:body>
 
 	<div id="template_pages">
-		<div id="#template_pages_top">
-			#{sessionScope.usuarioLogado.nome} - #{sessionScope.usuarioLogado.cpf}
+		<div id="template_pages_top">
+			<p:commandButton value="#{sessionScope.usuarioLogado.nome},  #{sessionScope.usuarioLogado.cpf}"/>
 		</div>
 		
 		<div id="template_pages_menu">
@@ -30,6 +30,7 @@
 					<p:menuitem value="Campo" icon="ui-icon-signal" url="/pages/campoEstagio.jsf" />
 					<p:menuitem value="Aluno" icon="ui-icon-signal" url="/pages/aluno.jsf" />
 					<p:menuitem value="Turma" icon="ui-icon-signal" url="/pages/turma.jsf" />
+					<p:menuitem value="Relatorio" icon="ui-icon-clipboard" url="/pages/relatorio.jsf" />
 				
 					<!-- <p:submenu label="Cadastro" icon="ui-icon-disk">
 						<p:menuitem value="Usuário" icon="ui-icon-person" url="/pages/cadastro/cadastroUsuario.jsf" />

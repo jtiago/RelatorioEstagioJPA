@@ -8,22 +8,26 @@ import javax.persistence.PersistenceException;
 
 import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.controller.GenericController;
+import br.com.clogos.estagio.jpa.controller.LiberarRelatorioController;
 import br.com.clogos.estagio.model.LiberarRelatorio;
-import br.com.clogos.estagio.model.Turma;
 
 public class LiberarRelatorioFacade implements Serializable {
 	private static final long serialVersionUID = -1656621873140148824L;
 	private LiberarRelatorio liberarRelatorio;
-	private Turma turma;
 	private GenericController genericController;
+	private LiberarRelatorioController liberarRelatorioController;
 	
 	public void save() {
 		try {
-			getLiberarRelatorio().setTurmaLiberarRelatorio(getTurma());
-			getGenericController().save(getLiberarRelatorio());
-			liberarRelatorio=null; genericController = null;
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_INFO, "Liberação de Relatório salvo com suceso.", ""));
+			if(!getLiberarRelatorioController().existeModuloLiberado(getLiberarRelatorio())) {
+				getGenericController().save(getLiberarRelatorio());
+				liberarRelatorio=null; genericController = null;
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_INFO, "Relatorio Liberado para este Modulo com sucesso.", ""));
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_WARN, " Este Modulo já foi liberado para esta turma", ""));
+			}
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
@@ -41,13 +45,10 @@ public class LiberarRelatorioFacade implements Serializable {
 	public void setLiberarRelatorio(LiberarRelatorio liberarRelatorio) {
 		this.liberarRelatorio = liberarRelatorio;
 	}
-	public Turma getTurma() {
-		return turma == null ? turma = new Turma() : turma;
-	}
-	public void setTurma(Turma turma) {
-		this.turma = turma;
-	}
 	public GenericController getGenericController() {
 		return genericController == null ? genericController = new GenericController() : genericController;
+	}
+	public LiberarRelatorioController getLiberarRelatorioController() {
+		return liberarRelatorioController == null ? liberarRelatorioController = new LiberarRelatorioController() : liberarRelatorioController;
 	}
 }
