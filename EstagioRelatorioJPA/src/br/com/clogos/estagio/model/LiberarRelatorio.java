@@ -31,8 +31,8 @@ public class LiberarRelatorio implements ObjectModel {
 	@Enumerated(EnumType.STRING)
 	private ModuloEnum modulo;
 	
-	@Column(name="liberar", length=1, nullable=false)
-	private Boolean liberar = true;
+	@Column(name="aberto", length=1, nullable=false)
+	private Boolean aberto = true;
 
 	public Long getId() {
 		return id;
@@ -58,11 +58,11 @@ public class LiberarRelatorio implements ObjectModel {
 		this.turmaLiberarRelatorio = turmaLiberarRelatorio;
 	}
 
-	public Boolean getLiberar() {
-		return liberar;
+	public Boolean getAberto() {
+		return aberto;
 	}
 
-	public void setLiberar(Boolean liberar) {
-		this.liberar = liberar;
+	public void setAberto(Boolean aberto) {
+		this.aberto = aberto;
 	}
 }

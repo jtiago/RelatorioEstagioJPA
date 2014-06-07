@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
@@ -32,6 +33,9 @@ public class Turma implements ObjectModel {
 	
 	@OneToMany(mappedBy = "turmaLiberarRelatorio")
 	private List<LiberarRelatorio> liberarRelatorios;
+	
+	@Transient
+	private String modulo;
 
 	public String getNomeCurso() {
 		return nomeCurso;
@@ -63,5 +67,13 @@ public class Turma implements ObjectModel {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getModulo() {
+		return modulo;
+	}
+
+	public void setModulo(String modulo) {
+		this.modulo = modulo;
 	}
 }

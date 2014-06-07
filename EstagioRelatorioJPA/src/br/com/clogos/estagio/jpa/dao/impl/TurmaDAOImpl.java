@@ -2,12 +2,15 @@ package br.com.clogos.estagio.jpa.dao.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.TurmaDAO;
 import br.com.clogos.estagio.model.Turma;
@@ -16,16 +19,30 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 	private static final long serialVersionUID = 5289808278891409564L;
 	private EntityManager entityManager;
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public List<Turma> findAll() {
 		entityManager = JpaUtil.getEntityManager();
 		List<Turma> lista = new ArrayList<Turma>();
-		String hql = "SELECT t FROM Turma t ORDER BY t.nome";
+		StringBuilder sql = new StringBuilder();
+		Turma turma = null;
+		sql.append("SELECT idturma,nometurma,nomecurso,turno,modulo FROM Turma t ");
+		sql.append("LEFT JOIN LiberarRelatorio l ON l.fkturma = t.idturma ");
+		sql.append("WHERE l.aberto = true or modulo is null ORDER BY nomecurso");
 		try {
-			TypedQuery<Turma> query = entityManager.createQuery(hql, Turma.class);
-			lista = query.getResultList();
-		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
+			Query query = entityManager.createNativeQuery(sql.toString());
+			Iterator i = query.getResultList().iterator();
+			while(i.hasNext()) {
+				Object[] objs = (Object[]) i.next();
+				turma = new Turma();
+				turma.setId(Long.valueOf(objs[0].toString()));
+				turma.setNome(objs[1].toString());
+				turma.setNomeCurso(objs[2].toString());
+				turma.setTurno(objs[3].toString());
+				turma.setModulo(getModulo(objs[4]));
+				lista.add(turma);
+			}
+		} catch (PersistenceException e) {
 			e.printStackTrace();
 		} finally {
 			if(entityManager.isOpen()) {
@@ -71,5 +88,12 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 		}
 		return null;
 	}
-
+	
+	private String getModulo(Object obj) {
+		if(obj == null) {
+			return "";
+		} else {
+			return ModuloEnum.valueOf(ModuloEnum.class, obj.toString()).getLabel().toUpperCase();
+		}
+	}
 }

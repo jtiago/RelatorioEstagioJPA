@@ -1,6 +1,7 @@
 package br.com.clogos.estagio.jsf.facade;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -16,17 +17,30 @@ public class LiberarRelatorioFacade implements Serializable {
 	private LiberarRelatorio liberarRelatorio;
 	private GenericController genericController;
 	private LiberarRelatorioController liberarRelatorioController;
+	private List<LiberarRelatorio> listaLiberados;
+	
+	public List<LiberarRelatorio> getListaLiberados() {
+		if(listaLiberados == null) {
+			
+		}
+		return listaLiberados;
+	}
 	
 	public void save() {
 		try {
 			if(!getLiberarRelatorioController().existeModuloLiberado(getLiberarRelatorio())) {
-				getGenericController().save(getLiberarRelatorio());
-				liberarRelatorio=null; genericController = null;
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-						FacesMessage.SEVERITY_INFO, "Relatorio Liberado para este Modulo com sucesso.", ""));
+				if(!getLiberarRelatorioController().existeModuloAberto(getLiberarRelatorio())) {
+					getGenericController().save(getLiberarRelatorio());
+					liberarRelatorio=null; genericController = null;
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+							FacesMessage.SEVERITY_INFO, "Relatorio Liberado para este Modulo com sucesso.", ""));
+				} else {
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+							FacesMessage.SEVERITY_WARN, " Existe Modulo aberto para esta turma.", ""));
+				}
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-						FacesMessage.SEVERITY_WARN, " Este Modulo já foi liberado para esta turma", ""));
+						FacesMessage.SEVERITY_WARN, " Este Modulo já foi liberado para esta turma.", ""));
 			}
 		} catch (PersistenceException e) {
 			e.printStackTrace();

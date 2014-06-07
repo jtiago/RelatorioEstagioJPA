@@ -17,4 +17,8 @@ public class LiberarRelatorioController implements Serializable {
 	public Boolean existeModuloLiberado(LiberarRelatorio oT) {
 		return getLiberarRelatorioDAO().existeModuloLiberado(oT);
 	}
+	
+	public Boolean existeModuloAberto(LiberarRelatorio oT) {
+		return getLiberarRelatorioDAO().existeModuloAberto(oT);
+	}
 }

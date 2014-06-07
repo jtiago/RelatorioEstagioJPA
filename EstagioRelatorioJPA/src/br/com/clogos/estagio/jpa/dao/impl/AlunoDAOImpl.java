@@ -2,12 +2,15 @@ package br.com.clogos.estagio.jpa.dao.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.AlunoDAO;
 import br.com.clogos.estagio.model.Aluno;
@@ -36,21 +39,34 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		return lista;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Aluno validarAutenticacao(Aluno param) {
 		entityManager = JpaUtil.getEntityManager();
-		String hql = "SELECT a FROM Aluno a  WHERE a.cpf = :numCpf AND a.senha = :senha";
-		//String sql = "SELECT a.nome,a.cpf,a.turma,t.nomeCurso FROM Aluno a INNER JOIN Turma t ON a.turma = t.nometurma";
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT a.nomealuno,a.cpf,a.nometurma,t.nomeCurso,p.nomeperfil,p.idperfil,l.modulo FROM Aluno a ");
+		sql.append("INNER JOIN Turma t ON a.nometurma = t.nometurma ");
+		sql.append("INNER JOIN Perfil p ON p.idperfil = a.fkperfil ");
+		sql.append("INNER JOIN LiberarRelatorio l ON l.fkturma = t.idturma ");
+		sql.append("WHERE a.cpf = ? AND a.senha = ? ");
+		
 		Aluno aluno = null;
-		try {;
-			
-			TypedQuery<Aluno> query = entityManager.createQuery(hql, Aluno.class)
-					.setParameter("numCpf", param.getCpf())
-					.setParameter("senha", CriptografiaBase64.encrypt(param.getSenha()));
-			if(query.getResultList().size() != 0) {
-				aluno = query.getSingleResult();
+		try {
+			Query query = entityManager.createNativeQuery(sql.toString())
+					.setParameter(1, param.getCpf())
+					.setParameter(2, CriptografiaBase64.encrypt(param.getSenha()));
+			Iterator i = query.getResultList().iterator();
+			if(i.hasNext()) {
+				Object[] objs = (Object[]) i.next();
+				aluno = new Aluno();
+				aluno.setNome(objs[0].toString());
+				aluno.setCpf(objs[1].toString());
+				aluno.setNomeTurma(objs[2].toString());
+				aluno.getTurmaT().setNomeCurso(objs[3].toString());
+				aluno.getPerfil().setNome(objs[4].toString());
+				aluno.getPerfil().setId(Long.valueOf(objs[5].toString()));
+				aluno.setModulo(ModuloEnum.valueOf(ModuloEnum.class, objs[6].toString()).getLabel().toUpperCase());
 			}
-			
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			entityManager.getTransaction().rollback();

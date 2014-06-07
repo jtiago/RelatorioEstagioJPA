@@ -15,4 +15,5 @@ public enum ModuloEnum {
 	public String getLabel() {
 		return label;
 	}
+
 }

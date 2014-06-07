@@ -46,8 +46,8 @@ public class Aluno implements ObjectModel {
 	@Column(length=50, nullable=true)
 	private String email;
 	
-	@Column(length=15, nullable=true)
-	private String turma;
+	@Column(name="nometurma", length=15, nullable=true)
+	private String nomeTurma;
 	
 	@ManyToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="fkperfil")
@@ -57,16 +57,10 @@ public class Aluno implements ObjectModel {
 	private List<Relatorio> relatorios;
 	
 	@Transient
-	private Turma turma2;
+	private Turma turmaT;
+	@Transient
+	private String modulo;
 	
-	public Perfil getPerfil() {
-		return perfil == null ? perfil = new Perfil() : perfil;
-	}
-
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -123,12 +117,12 @@ public class Aluno implements ObjectModel {
 		this.status = status;
 	}
 
-	public String getTurma() {
-		return turma;
+	public String getNomeTurma() {
+		return nomeTurma;
 	}
 
-	public void setTurma(String turma) {
-		this.turma = turma;
+	public void setNomeTurma(String nomeTurma) {
+		this.nomeTurma = nomeTurma;
 	}
 
 	public String getEmail() {
@@ -147,11 +141,27 @@ public class Aluno implements ObjectModel {
 		this.relatorios = relatorios;
 	}
 
-	public Turma getTurma2() {
-		return turma2;
+	public Turma getTurmaT() {
+		return turmaT == null ? turmaT = new Turma() : turmaT;
 	}
 
-	public void setTurma2(Turma turma2) {
-		this.turma2 = turma2;
+	public void setTurmaT(Turma turmaT) {
+		this.turmaT = turmaT;
+	}
+	
+	public Perfil getPerfil() {
+		return perfil == null ? perfil = new Perfil() : perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+
+	public String getModulo() {
+		return modulo;
+	}
+
+	public void setModulo(String modulo) {
+		this.modulo = modulo;
 	}
 }

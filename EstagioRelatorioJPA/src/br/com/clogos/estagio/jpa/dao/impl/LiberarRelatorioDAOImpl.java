@@ -40,4 +40,25 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 		}
 		return false;
 	}
+
+	@Override
+	public Boolean existeModuloAberto(LiberarRelatorio oT) {
+		entityManager = JpaUtil.getEntityManager();
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECT l FROM LiberarRelatorio l JOIN l.turmaLiberarRelatorio lt ");
+		hql.append("WHERE lt.nome = :turma AND l.aberto = :aberto" );
+		try {
+			TypedQuery<LiberarRelatorio> query = entityManager.createQuery(hql.toString(), LiberarRelatorio.class)
+					.setParameter("turma", oT.getTurmaLiberarRelatorio().getNome())
+					.setParameter("aberto", true);
+			return query.getResultList().size() != 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return false;
+	}
 }
