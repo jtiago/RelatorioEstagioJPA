@@ -23,7 +23,6 @@
 					<p:submenu label="Logos">
 						<p:menuitem value="Home" icon="ui-icon-home" url="/pages/home.jsf"/>
 						<p:menuitem value="Sobre" icon="ui-icon-comment" onclick="sobreNos.show();"/>
-						<p:menuitem value="Sair" icon="ui-icon-power" actionListener="#{autenticarBean.logout}" />
 					</p:submenu>
 					
 					<p:menuitem value="Supervisor" icon="ui-icon-person" url="/pages/supervisor.jsf" />
@@ -31,17 +30,8 @@
 					<p:menuitem value="Aluno" icon="ui-icon-signal" url="/pages/aluno.jsf" />
 					<p:menuitem value="Turma" icon="ui-icon-signal" url="/pages/turma.jsf" />
 					<p:menuitem value="Relatorio" icon="ui-icon-clipboard" url="/pages/relatorio.jsf" />
+					<p:menuitem value="Sair" icon="ui-icon-power" actionListener="#{autenticarBean.logout}" />
 				
-					<!-- <p:submenu label="Cadastro" icon="ui-icon-disk">
-						<p:menuitem value="Usuário" icon="ui-icon-person" url="/pages/cadastro/cadastroUsuario.jsf" />
-						<p:menuitem value="E-mail Marketing" icon="ui-icon-suitcase" url="/pages/cadastro/cadastroEmailMarkenting.jsf" />
-						<p:menuitem value="E-mail" icon="ui-icon-mail-closed" url="/pages/cadastro/cadastroEmail.jsf" />						
-					</p:submenu> -->
-					
-					<!-- <p:menuitem value="Agendar E-mail" icon="ui-icon-calendar" url="/pages/agendaemail/agendaemail.jsf"/>
-					<p:menuitem value="Configuração" icon="ui-icon-gear" url="/pages/configuracao/configuracao.jsf"/>
-					<p:menuitem value="Mensage" icon="ui-icon-comment" url="/pages/mensage/mensage.jsf"/>
-					<p:menuitem value="Sair" icon="ui-icon-power" actionListener="#{autenticarBean.facade.logout}"/> -->
 					
 					<f:facet name="options">  
 			            <p:inputText style="margin-right:10px"/>  

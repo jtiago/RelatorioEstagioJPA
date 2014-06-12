@@ -5,4 +5,5 @@ import br.com.clogos.estagio.model.LiberarRelatorio;
 public interface LiberarRelatorioDAO {
 	Boolean existeModuloLiberado(LiberarRelatorio oT);
 	Boolean existeModuloAberto(LiberarRelatorio oT);
+	Boolean fecharModuloLiberado(Long idTurma, String modulo);
 }

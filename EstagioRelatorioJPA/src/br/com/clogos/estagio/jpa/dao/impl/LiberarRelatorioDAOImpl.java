@@ -3,8 +3,10 @@ package br.com.clogos.estagio.jpa.dao.impl;
 import java.io.Serializable;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.LiberarRelatorioDAO;
 import br.com.clogos.estagio.model.LiberarRelatorio;
@@ -60,5 +62,29 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public Boolean fecharModuloLiberado(Long idTurma, String modulo) {
+		entityManager = JpaUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE LiberarRelatorio SET aberto = 0 WHERE fkturma = ? AND modulo = ?");
+		try {
+			Query query = entityManager.createNativeQuery(sql.toString())
+					.setParameter(1, idTurma)
+					.setParameter(2, ModuloEnum.getModulo(modulo));
+			query.executeUpdate();
+			entityManager.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 }

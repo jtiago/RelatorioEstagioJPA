@@ -52,7 +52,7 @@
 						</p:commandButton>
 						
 						<p:commandButton  icon="ui-icon-cancel" title="Fechar de Modulo Liberado" oncomplete="dialogCadFechamento.show()" update=":formFechamento">
-							<f:setPropertyActionListener target="" value="" />
+							<f:setPropertyActionListener target="#{turmaBean.facadeLiberarRelatorio.liberarRelatorio.turmaLiberarRelatorio}" value="#{item}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
@@ -138,19 +138,16 @@
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 				header="..::: Fchamento de Modulo para Relatorio - [ * Campo Obrigatorio ]" widgetVar="dialogCadFechamento">
 				<h:panelGrid id="grid" columns="2">
-					<p:outputLabel for="turma" value="Turma:" />
-					<p:inputText id="turma" value="#{turmaBean.facadeLiberarRelatorio.liberarRelatorio.turmaLiberarRelatorio.nome}" required="true" disabled="true"/>
+					<h:outputLabel value="Turma:" />
+					<h:outputLabel value="#{turmaBean.facadeLiberarRelatorio.liberarRelatorio.turmaLiberarRelatorio.nome}" style="font-weight: bold;" />
 					
-					<p:outputLabel for="modulo" value="Modulo:" />
-					 <p:selectOneMenu id="modulo" value="#{turmaBean.facadeLiberarRelatorio.liberarRelatorio.modulo}" required="true">  
-                        <f:selectItem itemLabel="Selecione" itemValue="#{null}" />  
-                        <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
-                    </p:selectOneMenu> 
+					<h:outputLabel value="Modulo em Aberto:" />
+					<h:outputLabel value="#{turmaBean.facadeLiberarRelatorio.liberarRelatorio.turmaLiberarRelatorio.modulo}" style="font-weight: bold;"/>
 					
 				</h:panelGrid>
-				<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{turmaBean.saveLiberarRelatorio}"
-					update=":formLiberar:grid :formMessage" onclick="lazyload()"/>
-				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadLiberar.hide()" onclick="lazyload()"/>
+				<p:commandButton value="Fechar" icon="ui-icon-circle-close" actionListener="#{turmaBean.fecharModuloLiberado}"
+					update=":formMessage" onclick="lazyload()"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadFechamento.hide()" onclick="lazyload()"/>
 			</p:dialog>
 		</h:form>
 		

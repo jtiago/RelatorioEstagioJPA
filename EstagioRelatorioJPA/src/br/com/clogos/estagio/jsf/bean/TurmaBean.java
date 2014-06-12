@@ -41,6 +41,11 @@ public class TurmaBean implements Serializable {
 		mensagem = true;
 	}
 	
+	public void fecharModuloLiberado() {
+		getFacadeLiberarRelatorio().fecharModuloLiberado();
+		mensagem = true;
+	}
+	
 	public TurmaFacade getFacade() {
 		return facade == null ? facade = new TurmaFacade() : facade;
 	}

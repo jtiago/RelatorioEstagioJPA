@@ -42,7 +42,7 @@ public class AutenticarBean implements Serializable {
 	}
 	
 	public void logout(ActionEvent event) {
-		//getFacade().logout();
+		getFacadeUsuario().logout();
 	}
 
 	public Aluno getAluno() {

@@ -49,6 +49,18 @@ public class LiberarRelatorioFacade implements Serializable {
 		}
 	}
 	
+	public void fecharModuloLiberado() {
+		if(getLiberarRelatorioController().fecharModuloLiberado(getLiberarRelatorio().getTurmaLiberarRelatorio().getId(), 
+				getLiberarRelatorio().getTurmaLiberarRelatorio().getModulo())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Fechamento do Modulo feito com sucesso.", ""));
+			liberarRelatorio = null;
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Problemas ao fechar modulo.", ""));
+		}
+	}
+	
 	public ModuloEnum[] getModulo() {
 		return ModuloEnum.values();
 	}
