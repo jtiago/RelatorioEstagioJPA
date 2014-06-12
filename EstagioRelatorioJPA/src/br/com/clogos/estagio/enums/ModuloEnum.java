@@ -17,12 +17,16 @@ public enum ModuloEnum {
 	}
 	
 	public static ModuloEnum getModulo(String str) {
-		switch (str) {
-		case "I Módulo": return Modulo_I; 
-		case "II Módulo": return Modulo_II;
-		case "III Módulo 1ª Fase": return Modulo_III_1;
-		case "III Módulo 2ª Fase": return Modulo_III_2;
-		default: return null;
+		if(str.equalsIgnoreCase("I Módulo"))  {
+			return Modulo_I;
+		} else if (str.equalsIgnoreCase("II Módulo")) {
+			return Modulo_II;
+		} else if(str.equalsIgnoreCase("III Módulo 1ª Fase")) {
+			return Modulo_III_1;
+		} else if(str.equalsIgnoreCase("III Módulo 2ª Fase")) {
+			return Modulo_III_2;
+		} else {
+			return null;
 		}
 	}
 }

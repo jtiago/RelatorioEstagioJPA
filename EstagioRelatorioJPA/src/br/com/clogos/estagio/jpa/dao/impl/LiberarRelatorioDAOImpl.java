@@ -69,11 +69,12 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 		entityManager = JpaUtil.getEntityManager();
 		entityManager.getTransaction().begin();
 		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE LiberarRelatorio SET aberto = 0 WHERE fkturma = ? AND modulo = ?");
+		sql.append("UPDATE LiberarRelatorio SET aberto = ? WHERE fkturma = ? AND modulo = ?");
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString())
-					.setParameter(1, idTurma)
-					.setParameter(2, ModuloEnum.getModulo(modulo));
+					.setParameter(1, 0)
+					.setParameter(2, idTurma)
+					.setParameter(3, "Modulo_I");
 			query.executeUpdate();
 			entityManager.getTransaction().commit();
 			return true;

@@ -10,4 +10,8 @@ public class CriptografiaBase64 {
 	public static final String decrypt(final String text) {
 		return new String(Base64.decodeBase64(text.getBytes()));
 	}
+	
+	 public static void main(String[] args) {
+		System.out.println(CriptografiaBase64.encrypt("22"));
+	}
 }
