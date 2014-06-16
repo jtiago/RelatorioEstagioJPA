@@ -35,7 +35,7 @@ public class Turma implements ObjectModel {
 	private List<LiberarRelatorio> liberarRelatorios;
 	
 	@Transient
-	private String modulo;
+	private LiberarRelatorio liberar;
 
 	public String getNomeCurso() {
 		return nomeCurso;
@@ -69,11 +69,11 @@ public class Turma implements ObjectModel {
 		this.nome = nome;
 	}
 
-	public String getModulo() {
-		return modulo;
+	public LiberarRelatorio getLiberar() {
+		return liberar == null ? liberar = new LiberarRelatorio() : liberar;
 	}
 
-	public void setModulo(String modulo) {
-		this.modulo = modulo;
+	public void setLiberar(LiberarRelatorio liberar) {
+		this.liberar = liberar;
 	}
 }

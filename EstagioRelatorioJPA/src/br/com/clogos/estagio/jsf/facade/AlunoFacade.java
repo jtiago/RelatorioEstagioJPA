@@ -32,6 +32,8 @@ public class AlunoFacade implements Serializable {
 	
 	public void save() {
 		try {
+			getAluno().setCpf(getAluno().getCpf().replace(".", "").replace("-", ""));
+			getAluno().getPerfil().setId(2L);
 			getAluno().setSenha(CriptografiaBase64.encrypt(getAluno().getSenha()));
 			getGenericController().save(getAluno());
 			aluno=null; genericController = null; listaAlunos = null;

@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class LiberarRelatorio implements ObjectModel {
 	@Column(name = "idliberar")
 	private Long id;
 	
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "fkturma")
 	private Turma turmaLiberarRelatorio;
 	
@@ -34,7 +35,7 @@ public class LiberarRelatorio implements ObjectModel {
 	@Column(name="aberto", length=1, nullable=false)
 	private Boolean aberto = true;
 
-	public Long getId() {
+	public Long getId() {	
 		return id;
 	}
 
@@ -51,7 +52,7 @@ public class LiberarRelatorio implements ObjectModel {
 	}
 
 	public Turma getTurmaLiberarRelatorio() {
-		return turmaLiberarRelatorio;
+		return turmaLiberarRelatorio == null ? turmaLiberarRelatorio = new Turma() : turmaLiberarRelatorio;
 	}
 
 	public void setTurmaLiberarRelatorio(Turma turmaLiberarRelatorio) {

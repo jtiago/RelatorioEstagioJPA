@@ -25,11 +25,12 @@
 						<p:menuitem value="Sobre" icon="ui-icon-comment" onclick="sobreNos.show();"/>
 					</p:submenu>
 					
-					<p:menuitem value="Supervisor" icon="ui-icon-person" url="/pages/supervisor.jsf" />
-					<p:menuitem value="Campo" icon="ui-icon-signal" url="/pages/campoEstagio.jsf" />
-					<p:menuitem value="Aluno" icon="ui-icon-signal" url="/pages/aluno.jsf" />
-					<p:menuitem value="Turma" icon="ui-icon-signal" url="/pages/turma.jsf" />
-					<p:menuitem value="Relatorio" icon="ui-icon-clipboard" url="/pages/relatorio.jsf" />
+					<p:menuitem value="Supervisor" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroSupervisor}" url="/pages/supervisor.jsf" />
+					<p:menuitem value="Campo" icon="ui-icon-signal" rendered="#{sessionScope.usuarioLogado.perfil.cadastroCampo}" url="/pages/campoEstagio.jsf" />
+					<p:menuitem value="Aluno" icon="ui-icon-signal" rendered="#{sessionScope.usuarioLogado.perfil.cadastroAluno}" url="/pages/aluno.jsf" />
+					<p:menuitem value="Turma" icon="ui-icon-signal" rendered="#{sessionScope.usuarioLogado.perfil.cadastroTurma}" url="/pages/turma.jsf" />
+					<p:menuitem value="Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAluno}" url="/pages/relatorioAluno.jsf" />
+					<p:menuitem value="Liberar Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.liberarRelatorio}" url="/pages/liberarRelatorio.jsf" />
 					<p:menuitem value="Sair" icon="ui-icon-power" actionListener="#{autenticarBean.logout}" />
 				
 					

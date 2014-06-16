@@ -21,7 +21,7 @@ public class LiberarRelatorioFacade implements Serializable {
 	
 	public List<LiberarRelatorio> getListaLiberados() {
 		if(listaLiberados == null) {
-			
+			listaLiberados = getLiberarRelatorioController().findoAll();
 		}
 		return listaLiberados;
 	}
@@ -31,7 +31,7 @@ public class LiberarRelatorioFacade implements Serializable {
 			if(!getLiberarRelatorioController().existeModuloLiberado(getLiberarRelatorio())) {
 				if(!getLiberarRelatorioController().existeModuloAberto(getLiberarRelatorio())) {
 					getGenericController().save(getLiberarRelatorio());
-					liberarRelatorio=null; genericController = null;
+					liberarRelatorio=null; genericController = null; listaLiberados = null;
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 							FacesMessage.SEVERITY_INFO, "Relatorio Liberado para este Modulo com sucesso.", ""));
 				} else {
@@ -50,11 +50,11 @@ public class LiberarRelatorioFacade implements Serializable {
 	}
 	
 	public void fecharModuloLiberado() {
-		if(getLiberarRelatorioController().fecharModuloLiberado(getLiberarRelatorio().getTurmaLiberarRelatorio().getId(), 
-				getLiberarRelatorio().getTurmaLiberarRelatorio().getModulo())) {
+		getLiberarRelatorio().setAberto(false);
+		if(getGenericController().update(getLiberarRelatorio())) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Fechamento do Modulo feito com sucesso.", ""));
-			liberarRelatorio = null;
+			liberarRelatorio = null; listaLiberados = null;
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, "Problemas ao fechar modulo.", ""));

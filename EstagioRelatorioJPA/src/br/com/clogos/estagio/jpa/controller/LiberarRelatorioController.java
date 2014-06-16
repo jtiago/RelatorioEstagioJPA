@@ -1,6 +1,7 @@
 package br.com.clogos.estagio.jpa.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import br.com.clogos.estagio.jpa.dao.LiberarRelatorioDAO;
 import br.com.clogos.estagio.jpa.dao.impl.LiberarRelatorioDAOImpl;
@@ -24,5 +25,9 @@ public class LiberarRelatorioController implements Serializable {
 	
 	public Boolean fecharModuloLiberado(Long idTurma, String modulo) {
 		return getLiberarRelatorioDAO().fecharModuloLiberado(idTurma, modulo);
+	}
+	
+	public List<LiberarRelatorio> findoAll() {
+		return getLiberarRelatorioDAO().findoAll();
 	}
 }

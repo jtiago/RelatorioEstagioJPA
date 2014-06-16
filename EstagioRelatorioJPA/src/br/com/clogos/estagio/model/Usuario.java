@@ -3,6 +3,7 @@ package br.com.clogos.estagio.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,7 @@ public class Usuario implements ObjectModel {
 	@Column(name="senhausuario", length=100)
 	private String senha;
 	
-	@ManyToOne(cascade=CascadeType.DETACH)
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="fkperfil")
 	private Perfil perfil;
 

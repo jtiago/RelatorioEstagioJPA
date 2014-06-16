@@ -26,9 +26,10 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 		List<Turma> lista = new ArrayList<Turma>();
 		StringBuilder sql = new StringBuilder();
 		Turma turma = null;
-		sql.append("SELECT idturma,nometurma,nomecurso,turno,modulo FROM Turma t ");
-		sql.append("LEFT JOIN LiberarRelatorio l ON l.fkturma = t.idturma ");
-		sql.append("WHERE l.aberto = true or modulo is null ORDER BY nomecurso");
+		sql.append("SELECT idturma,nometurma,nomecurso,turno " ); //(CASE WHEN l.aberto = 1 THEN modulo ELSE '-' END), idliberar");
+		sql.append("FROM Turma t ");
+		//sql.append("LEFT JOIN LiberarRelatorio l ON l.fkturma = t.idturma ");
+		sql.append("ORDER BY nomecurso");
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString());
 			Iterator i = query.getResultList().iterator();
@@ -39,7 +40,8 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 				turma.setNome(objs[1].toString());
 				turma.setNomeCurso(objs[2].toString());
 				turma.setTurno(objs[3].toString());
-				turma.setModulo(getModulo(objs[4]));
+				//turma.getLiberar().setModulo(ModuloEnum.getModulo(objs[4].toString()));
+				//turma.getLiberar().setId(Long.valueOf(objs[5].toString()));
 				lista.add(turma);
 			}
 		} catch (PersistenceException e) {
@@ -89,7 +91,7 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 		return null;
 	}
 	
-	private String getModulo(Object obj) {
+	public String getModulo(Object obj) {
 		if(obj == null) {
 			return "";
 		} else {

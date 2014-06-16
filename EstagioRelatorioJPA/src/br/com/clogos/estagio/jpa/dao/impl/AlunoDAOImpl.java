@@ -44,7 +44,9 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 	public Aluno validarAutenticacao(Aluno param) {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT a.nomealuno,a.cpf,a.nometurma,t.nomeCurso,p.nomeperfil,p.idperfil,l.modulo FROM Aluno a ");
+		sql.append("SELECT a.nomealuno,a.cpf,a.nometurma,t.nomeCurso,p.nomeperfil,p.idperfil,l.modulo,  ");
+		sql.append("cadastroAluno,cadastroCampo,cadastroSupervisor,cadastroTurma,liberarRelatorio,relatorioAluno,relatorioAdmin ");
+		sql.append("FROM Aluno a ");
 		sql.append("INNER JOIN Turma t ON a.nometurma = t.nometurma ");
 		sql.append("INNER JOIN Perfil p ON p.idperfil = a.fkperfil ");
 		sql.append("INNER JOIN LiberarRelatorio l ON l.fkturma = t.idturma ");
@@ -66,6 +68,13 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 				aluno.getPerfil().setNome(objs[4].toString());
 				aluno.getPerfil().setId(Long.valueOf(objs[5].toString()));
 				aluno.setModulo(ModuloEnum.valueOf(ModuloEnum.class, objs[6].toString()).getLabel().toUpperCase());
+				aluno.getPerfil().setCadastroAluno(Boolean.valueOf(objs[7].toString()));
+				aluno.getPerfil().setCadastroCampo(Boolean.valueOf(objs[8].toString()));
+				aluno.getPerfil().setCadastroSupervisor(Boolean.valueOf(objs[9].toString()));
+				aluno.getPerfil().setCadastroTurma(Boolean.valueOf(objs[10].toString()));
+				aluno.getPerfil().setLiberarRelatorio(Boolean.valueOf(objs[11].toString()));
+				aluno.getPerfil().setRelatorioAluno(Boolean.valueOf(objs[12].toString()));
+				aluno.getPerfil().setRelatorioAdmin(Boolean.valueOf(objs[13].toString()));
 			}
 		} catch (PersistenceException e) {
 			e.printStackTrace();

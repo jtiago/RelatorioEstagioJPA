@@ -10,16 +10,16 @@ public class GenericController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private GenericDAO genericDAO;
 	
-	public void save(Object oT) {
-		getGenericDAO().save(oT);
+	public Boolean save(Object oT) {
+		return getGenericDAO().save(oT);
 	}
 	
-	public void remove(Object oT) {
-		getGenericDAO().delete(oT);
+	public Boolean remove(Object oT) {
+		return getGenericDAO().delete(oT);
 	}
 	
-	public void update(Object oT) {
-		getGenericDAO().update(oT);
+	public Boolean update(Object oT) {
+		return getGenericDAO().update(oT);
 	}
 	
 	public Boolean saveList(List<?> list) {

@@ -1,12 +1,12 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.LiberarRelatorioDAO;
 import br.com.clogos.estagio.model.LiberarRelatorio;
@@ -28,10 +28,11 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
 		hql.append("SELECT l FROM LiberarRelatorio l JOIN l.turmaLiberarRelatorio lt ");
-		hql.append("WHERE l.modulo = :modulo AND lt.nome = :turma");
+		hql.append("WHERE l.modulo = :modulo AND lt.id = :idturma");
 		try {
 			TypedQuery<LiberarRelatorio> query = entityManager.createQuery(hql.toString(), LiberarRelatorio.class)
-					.setParameter("modulo", oT.getModulo()).setParameter("turma", oT.getTurmaLiberarRelatorio().getNome());
+					.setParameter("modulo", oT.getModulo())
+					.setParameter("idturma", oT.getTurmaLiberarRelatorio().getId());
 			return query.getResultList().size() != 0;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,10 +49,10 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
 		hql.append("SELECT l FROM LiberarRelatorio l JOIN l.turmaLiberarRelatorio lt ");
-		hql.append("WHERE lt.nome = :turma AND l.aberto = :aberto" );
+		hql.append("WHERE lt.id = :idturma AND l.aberto = :aberto" );
 		try {
 			TypedQuery<LiberarRelatorio> query = entityManager.createQuery(hql.toString(), LiberarRelatorio.class)
-					.setParameter("turma", oT.getTurmaLiberarRelatorio().getNome())
+					.setParameter("idturma", oT.getTurmaLiberarRelatorio().getId())
 					.setParameter("aberto", true);
 			return query.getResultList().size() != 0;
 		} catch (Exception e) {
@@ -87,5 +88,22 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 				entityManager.close();
 			}
 		}
+	}
+
+	@Override
+	public List<LiberarRelatorio> findoAll() {
+		entityManager = JpaUtil.getEntityManager();
+		String hql = "SELECT l FROM LiberarRelatorio l JOIN l.turmaLiberarRelatorio";
+		try {
+			TypedQuery<LiberarRelatorio> query = entityManager.createQuery(hql, LiberarRelatorio.class);
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return null;
 	}
 }

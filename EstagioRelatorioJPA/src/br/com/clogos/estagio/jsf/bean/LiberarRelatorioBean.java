@@ -13,6 +13,11 @@ import br.com.clogos.estagio.jsf.facade.LiberarRelatorioFacade;
 public class LiberarRelatorioBean implements Serializable {
 	private static final long serialVersionUID = 8407938873639812800L;
 	private LiberarRelatorioFacade facade;
+	private Boolean mensagem;
+	
+	public LiberarRelatorioBean() {
+		this.mensagem = false;
+	}
 	
 	public LiberarRelatorioFacade getFacade() {
 		return facade == null ? facade = new LiberarRelatorioFacade() : facade;
@@ -20,5 +25,19 @@ public class LiberarRelatorioBean implements Serializable {
 	
 	public void save(ActionEvent event) {
 		getFacade().save();
+		mensagem = true;
+	}
+	
+	public void fecharModuloLiberado() {
+		getFacade().fecharModuloLiberado();
+		mensagem = true;
+	}
+
+	public Boolean getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(Boolean mensagem) {
+		this.mensagem = mensagem;
 	}
 }

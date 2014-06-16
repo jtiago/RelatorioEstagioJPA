@@ -14,15 +14,17 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
 	private EntityManager entityManager;
 	
 	@Override
-	public void save(Object oT) {
+	public Boolean save(Object oT) {
 		entityManager = JpaUtil.getEntityManager();
 		try {
 			entityManager.getTransaction().begin();
 			entityManager.persist(oT);
 			entityManager.getTransaction().commit();
+			return true;
 		} catch (PersistenceException e) {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
+			return false;
 		} finally {
 			if(entityManager.isOpen()) {
 				entityManager.close();
@@ -32,15 +34,17 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
 	}
 
 	@Override
-	public void update(Object oT) {
+	public Boolean update(Object oT) {
 		entityManager = JpaUtil.getEntityManager();
 		try {
 			entityManager.getTransaction().begin();
 			entityManager.merge(oT);
 			entityManager.getTransaction().commit();
+			return true;
 		} catch (PersistenceException e) {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
+			return false;
 		} finally {
 			if(entityManager.isOpen()) {
 				entityManager.close();
@@ -49,15 +53,17 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
 	}
 
 	@Override
-	public void delete(Object oT) {
+	public Boolean delete(Object oT) {
 		entityManager = JpaUtil.getEntityManager();
 		try {
 			entityManager.getTransaction().begin();
 			entityManager.remove(entityManager.merge(oT));
 			entityManager.getTransaction().commit();
+			return true;
 		} catch (PersistenceException e) {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
+			return false;
 		} finally {
 			if(entityManager.isOpen()) {
 				entityManager.close();
