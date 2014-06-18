@@ -44,7 +44,7 @@
 						<h:outputLabel value="#{item.email}"/>
 					</p:column>
 					
-					<p:column style="text-align:right; width: 100px;">
+					<p:column style="text-align:right; width: 150px;">
 						<p:commandButton icon="ui-icon-trash" oncomplete="removeAluno.show()">
 							<f:setPropertyActionListener target="#{alunoBean.facade.aluno}" value="#{item}" />
 						</p:commandButton>
@@ -52,10 +52,21 @@
 						<p:commandButton icon="ui-icon-pencil" oncomplete="dialogAltAluno.show()" update=":formAlterar">
 							<f:setPropertyActionListener target="#{alunoBean.facade.alunoAltera}" value="#{item}" />
 						</p:commandButton>
+						
+						<p:commandButton icon="ui-icon-arrowrefresh-1-w" title="Resetar Senha" oncomplete="resetSenha.show()">
+							<f:setPropertyActionListener target="#{alunoBean.aluno}" value="#{item}" />
+						</p:commandButton>
 					</p:column>
 				</p:dataTable>
 			</h:form>
 		</p:panel>
+		
+		<h:form id="formReset">
+			<p:confirmDialog message="Deseja realmente resetar a senha ?" header="..:: Resetar Senha" widgetVar="resetSenha">
+				<p:commandButton value="Sim" actionListener="#{alunoBean.resetSenha}" update=":formMessage :formReset" />
+				<p:commandButton value="Nao" oncomplete="resetSenha.hide()"/>
+			</p:confirmDialog>
+		</h:form>
 		
 		<h:form id="formDelete">
 			<p:confirmDialog message="Deseja realmente remover este Aluno ?" header="..:: Remover Aluno" widgetVar="removeAluno">

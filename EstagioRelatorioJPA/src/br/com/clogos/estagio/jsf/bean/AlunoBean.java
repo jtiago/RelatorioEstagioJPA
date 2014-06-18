@@ -20,9 +20,11 @@ import br.com.clogos.estagio.model.Turma;
 @ViewScoped
 public class AlunoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final String SENHA_PADRA = "12345678";
 	private AlunoFacade facade;
 	private TurmaFacade facadeTurma;
 	private Perfil perfil;
+	private Aluno aluno;
 	private boolean mensagem;
 	
 	public AlunoBean() {
@@ -94,6 +96,11 @@ public class AlunoBean implements Serializable {
 		getFacade().setAluno(aluno);
 		getFacade().save();
 	}
+	
+	public void resetSenha(ActionEvent event) {
+		getFacade().updateSenha(getAluno().getCpf(), SENHA_PADRA);
+		mensagem = true;
+	}
 
 	public boolean isMensagem() {
 		return mensagem;
@@ -109,5 +116,13 @@ public class AlunoBean implements Serializable {
 			perfil.setId(2L);
 		}
 		return perfil;
+	}
+
+	public Aluno getAluno() {
+		return aluno == null ? aluno = new Aluno() : aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
 	}
 }

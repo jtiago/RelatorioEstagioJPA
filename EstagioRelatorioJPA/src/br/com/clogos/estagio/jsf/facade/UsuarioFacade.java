@@ -15,6 +15,16 @@ public class UsuarioFacade implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private UsuarioController usuarioController;
 	
+	public void updateSenha(String cpf, String senha) {
+		if(getUsuarioController().updateSenha(cpf, senha)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Senha alterado com suceso.", ""));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Problemas ao alterar Senha.", ""));
+		}
+	}
+	
 	public void login(Usuario usuario) {
 		usuario.setCpf(usuario.getCpf().replace(".", "").replace("-", ""));
 		Usuario usuarioLogado = getUsuarioController().validarAutenticacao(usuario);

@@ -20,6 +20,10 @@ public class AlunoController implements Serializable {
 		return getAlunoDAO().validarAutenticacao(param);
 	}
 	
+	public Boolean updateSenha(String cpf, String senha) {
+		return getAlunoDAO().updateSenha(cpf, senha);
+	}
+	
 	public AlunoDAO getAlunoDAO() {
 		if(alunoDAO == null) {
 			alunoDAO = new AlunoDAOImpl();

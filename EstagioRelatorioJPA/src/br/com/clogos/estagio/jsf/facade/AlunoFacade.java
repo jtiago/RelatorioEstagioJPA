@@ -80,6 +80,16 @@ public class AlunoFacade implements Serializable {
 		}
 	}
 	
+	public void updateSenha(String cpf, String senha) {
+		if(getAlunoController().updateSenha(cpf, senha)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Senha alterado com suceso.", ""));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Problemas ao alterar Senha.", ""));
+		}
+	}
+	
 	public void login(Aluno usuario) {
 		usuario.setCpf(usuario.getCpf().replace(".", "").replace("-", ""));
 		Aluno alunoLogado = getAlunoController().validarAutenticacao(usuario);

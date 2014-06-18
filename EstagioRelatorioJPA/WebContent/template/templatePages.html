@@ -31,8 +31,8 @@
 					<p:menuitem value="Turma" icon="ui-icon-signal" rendered="#{sessionScope.usuarioLogado.perfil.cadastroTurma}" url="/pages/turma.jsf" />
 					<p:menuitem value="Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAluno}" url="/pages/relatorioAluno.jsf" />
 					<p:menuitem value="Liberar Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.liberarRelatorio}" url="/pages/liberarRelatorio.jsf" />
+					<p:menuitem value="Mudar Senha" icon="ui-icon-locked" onclick="mudarSenha.show();"/>
 					<p:menuitem value="Sair" icon="ui-icon-power" actionListener="#{autenticarBean.logout}" />
-				
 					
 					<f:facet name="options">  
 			            <p:inputText style="margin-right:10px"/>  
@@ -80,6 +80,30 @@
 			<b>Versão 1.0.0</b><br/>
 		</p:dialog>
 		
+		<h:form id="formSenha">
+			<p:dialog header="..:: Mudar Senha de Usuário" closable="true" widgetVar="mudarSenha" resizable="false">
+				<h:panelGrid id="grid" columns="2" width="400">
+					<p:outputLabel for="perfil" value="Perfil:"/>
+					<p:selectOneMenu id="perfil" value="#{autenticarBean.perfil.id}" style="width: 200px;">
+						<f:selectItem itemValue="#{sessionScope.usuarioLogado.perfil.id}" itemLabel="#{sessionScope.usuarioLogado.perfil.nome}"/>
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="cpf" value="CPF:"/>
+					<p:selectOneMenu id="cpf" value="#{autenticarBean.cpf}" style="width: 200px;">
+						<f:selectItem itemValue="#{sessionScope.usuarioLogado.cpf}" itemLabel="#{sessionScope.usuarioLogado.cpf}"/>
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="senha" value="Nova Senha:"/>
+					<p:password id="senha" value="#{autenticarBean.senha}" required="true" match="senha2"/>
+					
+					<p:outputLabel for="senha2" value="Confirme Nova Senha:"/>
+					<p:password id="senha2" value="#{autenticarBean.senha}" required="true"  />
+				</h:panelGrid>
+				
+				<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{autenticarBean.mudarSenha}" 
+					update=":formSenha:grid"/>
+			</p:dialog>
+		</h:form>
 	</div>
 
 </h:body>

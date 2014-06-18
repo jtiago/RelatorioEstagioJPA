@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import br.com.clogos.estagio.jpa.JpaUtil;
@@ -33,5 +34,28 @@ public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
 			entityManager.getTransaction().rollback();
 		}
 		return usuario;
+	}
+
+	@Override
+	public Boolean updateSenha(String cpf, String senha) {
+		entityManager = JpaUtil.getEntityManager();
+		String hql = "UPDATE Usuario SET senha = :senha WHERE cpf = :cpf";
+		try {
+			Query query = entityManager.createQuery(hql)
+					.setParameter("senha", CriptografiaBase64.encrypt(senha))
+					.setParameter("cpf", cpf);
+			entityManager.getTransaction().begin();
+			query.executeUpdate();
+			entityManager.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 }

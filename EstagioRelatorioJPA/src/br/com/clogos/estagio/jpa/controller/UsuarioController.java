@@ -17,4 +17,8 @@ public class UsuarioController implements Serializable {
 	public Usuario validarAutenticacao(Usuario usuario) {
 		return getUsuarioDAO().validarAutenticacao(usuario);
 	}
+	
+	public Boolean updateSenha(String cpf, String senha) {
+		return getUsuarioDAO().updateSenha(cpf, senha);
+	}
 }

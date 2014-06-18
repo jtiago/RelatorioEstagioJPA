@@ -83,4 +83,27 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		return aluno;
 	}
 
+	@Override
+	public Boolean updateSenha(String cpf, String senha) {
+		entityManager = JpaUtil.getEntityManager();
+		String hql = "UPDATE Aluno SET senha = :senha WHERE cpf = :cpf";
+		try {
+			Query query = entityManager.createQuery(hql)
+					.setParameter("senha", CriptografiaBase64.encrypt(senha))
+					.setParameter("cpf", cpf);
+			entityManager.getTransaction().begin();
+			query.executeUpdate();
+			entityManager.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+	}
+
 }
