@@ -101,8 +101,12 @@
 				</h:panelGrid>
 				
 				<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{autenticarBean.mudarSenha}" 
-					update=":formSenha:grid"/>
-			</p:dialog>
+					update=":formSenha:grid :formMessageSenha"/>
+			</p:dialog> 
+		</h:form>
+		
+		<h:form id="formMessageSenha">
+			<p:growl autoUpdate="true" rendered="#{autenticarBean.mensagem}" />
 		</h:form>
 	</div>
 
