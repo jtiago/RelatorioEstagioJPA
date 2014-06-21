@@ -8,18 +8,64 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
 	  
 	<ui:define name="conteudo">
-		<p:panel  header="..:: Relatorio de Estagio">
+		<p:panel  header="..:: Relatorio de Estagio" rendered="#{sessionScope.usuarioLogado.moduloLiberado}">
 			<h:panelGrid columns="3" width="920">
-				<p:graphicImage url="/images/logo.png" width="150"/>
-				<h:outputLabel value="ESTAGIO SUPERVISIONADO #{sessionScope.usuarioLogado.modulo}" style="font-size: 25px; font-weight: bold;"/>
-				<p:graphicImage url="/images/logo.png" width="150"/>
+				<p:graphicImage url="/images/logo.png" width="120"/>
+				<h:outputLabel value="ESTAGIO SUPERVISIONADO #{sessionScope.usuarioLogado.modulo}" 
+					style="font-size: 25px; font-weight: bold;"/>
+				<p:graphicImage url="/images/logo.png" width="120"/>
 			</h:panelGrid>
 			
 			<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
-				<h:outputLabel value="#{sessionScope.usuarioLogado.turmaT.nomeCurso}" />
+				<h:outputLabel value="CURSO #{sessionScope.usuarioLogado.turmaT.nomeCurso}" />
 			</h:panelGrid>
 			
-			
+			<h:form id="formRelatorio">
+				<h:inputHidden value="#{sessionScope.usuarioLogado.id}" />
+				<p:panel>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Aluno(a):"/>
+						<h:outputLabel value="#{sessionScope.usuarioLogado.nome}" style="font-weight: bold;"/>
+					
+						<h:outputLabel value="Turma:"/>
+						<h:outputLabel value="#{sessionScope.usuarioLogado.nomeTurma}" style="font-weight: bold;"/>
+						
+						<p:outputLabel for="campo" value="Campo:"/>
+						<p:selectOneMenu id="campo" value="#{relatorioAlunoBean.facade.relatorioAluno.campoEstagio.id}"
+							required="true" style="width: 585px;">
+							<f:selectItem itemLabel="Selecione Campo" itemValue="#{null}"/>
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
+								itemValue="#{cam.id}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel for="dataInicial" value="Data de Início:"/>
+						<h:panelGrid columns="4">
+							<p:calendar id="dataInicial" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}" effect="fold" 
+								readonlyInput="true" required="true" locale="pt_BR"/>
+							
+							<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
+							<p:outputLabel for="dataTermino" value="Data de Término:"/>
+							<p:calendar id="dataTermino" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataTerminio}" effect="fold" 
+								readonlyInput="true" required="true" locale="pt_BR"/>
+						</h:panelGrid>
+					</h:panelGrid>
+				</p:panel>
+				<br/>
+				<p:panel>
+					<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
+						<h:outputLabel value="#{sessionScope.usuarioLogado.fichaRelatorio}" />
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
 		</p:panel>
+		
+		<p:panel header="..:: Relatorio de Estagio" rendered="#{!sessionScope.usuarioLogado.moduloLiberado}" style="margin:0 auto;">
+			<br/><br/><br/><br/><br/><br/>
+			<h:panelGrid columns="1" style="margin:0 auto;">
+				<h:outputLabel value="NÃO EXISTE RELATÓRIO LIBERADO PARA VOCÊ!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+			</h:panelGrid>			
+			<br/><br/><br/><br/><br/><br/>
+		</p:panel>
+		
 	</ui:define>
 </ui:composition>

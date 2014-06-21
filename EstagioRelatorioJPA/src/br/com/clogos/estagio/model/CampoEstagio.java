@@ -1,5 +1,7 @@
 package br.com.clogos.estagio.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
@@ -27,6 +30,9 @@ public class CampoEstagio implements ObjectModel {
 	@ManyToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name = "fksupervisor", referencedColumnName="idsupervisor" )
 	private Supervisor supervisor;
+	
+	@OneToMany(mappedBy = "campoEstagio")
+	private List<Relatorio> relatorios;
 
 	public Long getId() {
 		return id;

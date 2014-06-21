@@ -60,6 +60,10 @@ public class Aluno implements ObjectModel {
 	private Turma turmaT;
 	@Transient
 	private String modulo;
+	@Transient
+	private Boolean moduloLiberado;
+	@Transient
+	private String fichaRelatorio;
 	
 	public Long getId() {
 		return id;
@@ -163,5 +167,21 @@ public class Aluno implements ObjectModel {
 
 	public void setModulo(String modulo) {
 		this.modulo = modulo;
+	}
+
+	public Boolean getModuloLiberado() {
+		return moduloLiberado;
+	}
+
+	public void setModuloLiberado(Boolean moduloLiberado) {
+		this.moduloLiberado = moduloLiberado;
+	}
+
+	public String getFichaRelatorio() {
+		return fichaRelatorio;
+	}
+
+	public void setFichaRelatorio(String fichaRelatorio) {
+		this.fichaRelatorio = fichaRelatorio;
 	}
 }

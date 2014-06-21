@@ -10,13 +10,16 @@ import javax.persistence.PersistenceException;
 import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.LiberarRelatorioController;
+import br.com.clogos.estagio.jpa.controller.TurmaController;
 import br.com.clogos.estagio.model.LiberarRelatorio;
+import br.com.clogos.estagio.model.Turma;
 
 public class LiberarRelatorioFacade implements Serializable {
 	private static final long serialVersionUID = -1656621873140148824L;
 	private LiberarRelatorio liberarRelatorio;
 	private GenericController genericController;
 	private LiberarRelatorioController liberarRelatorioController;
+	private TurmaController turmaController;
 	private List<LiberarRelatorio> listaLiberados;
 	
 	public List<LiberarRelatorio> getListaLiberados() {
@@ -28,15 +31,21 @@ public class LiberarRelatorioFacade implements Serializable {
 	
 	public void save() {
 		try {
+			if(!validaCastroModulo()) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_ERROR, "Não pode ser liberado este modulo para a turma selecionada.", ""));
+				return;
+			}
+		
 			if(!getLiberarRelatorioController().existeModuloLiberado(getLiberarRelatorio())) {
 				if(!getLiberarRelatorioController().existeModuloAberto(getLiberarRelatorio())) {
 					getGenericController().save(getLiberarRelatorio());
 					liberarRelatorio=null; genericController = null; listaLiberados = null;
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-							FacesMessage.SEVERITY_INFO, "Relatorio Liberado para este Modulo com sucesso.", ""));
+							FacesMessage.SEVERITY_INFO, "Relatorio Liberado para esta Turma com sucesso.", ""));
 				} else {
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-							FacesMessage.SEVERITY_WARN, " Existe Modulo aberto para esta turma.", ""));
+							FacesMessage.SEVERITY_WARN, " Existe Relatório em aberto para esta turma.", ""));
 				}
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
@@ -65,6 +74,17 @@ public class LiberarRelatorioFacade implements Serializable {
 		return ModuloEnum.values();
 	}
 	
+	private Boolean validaCastroModulo() {
+		Turma turma = getTurmaController().obterTurma(getLiberarRelatorio().getTurmaLiberarRelatorio().getId());
+		if((turma.getNome().contains("RAD") || turma.getNome().contains("LAB")) &&
+				(getLiberarRelatorio().getModulo().equals(ModuloEnum.Modulo_II) 
+			     || getLiberarRelatorio().getModulo().equals(ModuloEnum.Modulo_III))) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	public LiberarRelatorio getLiberarRelatorio() {
 		return liberarRelatorio == null ? liberarRelatorio = new LiberarRelatorio() : liberarRelatorio;
 	}
@@ -76,5 +96,8 @@ public class LiberarRelatorioFacade implements Serializable {
 	}
 	public LiberarRelatorioController getLiberarRelatorioController() {
 		return liberarRelatorioController == null ? liberarRelatorioController = new LiberarRelatorioController() : liberarRelatorioController;
+	}
+	public TurmaController getTurmaController() {
+		return turmaController == null ? turmaController = new TurmaController() : turmaController;
 	}
 }

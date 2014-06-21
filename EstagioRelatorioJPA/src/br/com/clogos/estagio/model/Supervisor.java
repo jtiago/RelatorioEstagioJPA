@@ -31,9 +31,6 @@ public class Supervisor implements ObjectModel {
 	@OneToMany(mappedBy = "supervisor")
 	private List<CampoEstagio> campoEstagio;
 	
-	@OneToMany(mappedBy = "supervisor")
-	private List<Relatorio> relatorios;
-	
 	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name="fkimagem", referencedColumnName="idimagem")
 	private ImagemAssinatura imagem;
@@ -69,14 +66,4 @@ public class Supervisor implements ObjectModel {
 	public void setImagem(ImagemAssinatura imagem) {
 		this.imagem = imagem;
 	}
-
-	public List<Relatorio> getRelatorios() {
-		return relatorios;
-	}
-
-	public void setRelatorios(List<Relatorio> relatorios) {
-		this.relatorios = relatorios;
-	}
-	
-	
 }

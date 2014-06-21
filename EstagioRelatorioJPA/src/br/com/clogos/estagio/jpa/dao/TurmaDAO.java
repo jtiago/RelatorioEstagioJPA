@@ -8,4 +8,5 @@ public interface TurmaDAO {
 	List<Turma> findAll();
 	Boolean verificaDuplicidade(String nomeTurma);
 	Turma obterCurso(String nomeTurma);
+	Turma obterTurma(Long id);
 }

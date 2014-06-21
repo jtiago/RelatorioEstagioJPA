@@ -50,13 +50,15 @@
 				header="..::: Liberar Relatorio por Turma - [ * Campo Obrigatorio ]" widgetVar="dialogCadLiberar">
 				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel for="turma" value="Turma:" />
-					<p:selectOneMenu id="turma" value="#{liberarBean.facade.liberarRelatorio.turmaLiberarRelatorio.id}" required="true">
+					<p:selectOneMenu id="turma" value="#{liberarBean.facade.liberarRelatorio.turmaLiberarRelatorio.id}" 
+						required="true" style="width:300px;">
 			            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
 						<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.id}" itemLabel="#{tu.nome}"/>
 			        </p:selectOneMenu>
 					
 					<p:outputLabel for="modulo" value="Modulo:" />
-					 <p:selectOneMenu id="modulo" value="#{liberarBean.facade.liberarRelatorio.modulo}" required="true">  
+					 <p:selectOneMenu id="modulo" value="#{liberarBean.facade.liberarRelatorio.modulo}" 
+					 	required="true" style="width:300px;">  
                         <f:selectItem itemLabel="Selecione" itemValue="#{null}" />  
                         <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
                     </p:selectOneMenu> 

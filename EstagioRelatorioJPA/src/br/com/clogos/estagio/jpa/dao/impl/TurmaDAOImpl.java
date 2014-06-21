@@ -91,6 +91,25 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 		return null;
 	}
 	
+	@Override
+	public Turma obterTurma(Long id) {
+		entityManager = JpaUtil.getEntityManager();
+		String hql = "SELECT t FROM Turma t WHERE t.id = :id";
+		try {
+			TypedQuery<Turma> query = entityManager.createQuery(hql, Turma.class)
+					.setParameter("id", id);
+			return query.getSingleResult();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return null;
+	}
+	
 	public String getModulo(Object obj) {
 		if(obj == null) {
 			return "";

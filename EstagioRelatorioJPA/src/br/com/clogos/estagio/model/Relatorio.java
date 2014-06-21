@@ -38,8 +38,8 @@ public class Relatorio implements ObjectModel {
 	private Boolean revisao;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "fksupervisor")
-	private Supervisor supervisor;
+	@JoinColumn(name = "fkcampoestagio")
+	private CampoEstagio campoEstagio;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "fkaluno")
@@ -93,11 +93,11 @@ public class Relatorio implements ObjectModel {
 		this.revisao = revisao;
 	}
 
-	public Supervisor getSupervisor() {
-		return supervisor;
+	public CampoEstagio getCampoEstagio() {
+		return campoEstagio == null ? campoEstagio = new CampoEstagio() : campoEstagio;
 	}
 
-	public void setSupervisor(Supervisor supervisor) {
-		this.supervisor = supervisor;
+	public void setCampoEstagio(CampoEstagio campoEstagio) {
+		this.campoEstagio = campoEstagio;
 	}
 }
