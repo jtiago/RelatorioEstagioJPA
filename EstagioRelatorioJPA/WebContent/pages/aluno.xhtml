@@ -23,25 +23,26 @@
 			</h:form><br/>
 			
 			<h:form id="formTabelaAluno">
-				<p:dataTable id="tabelaAluno" var="item" value="#{alunoBean.facade.listaAlunos}" emptyMessage="Sem Registros...">
+				<p:dataTable id="tabelaAluno" var="item" value="#{alunoBean.facade.listaAlunos}" emptyMessage="Sem Registros..." 
+					filteredValue="#{alunoBean.facade.listaAlunosFilter}">
 					<f:facet name="header">
 						Alunos Cadastrados
 					</f:facet>
 					
-					<p:column headerText="Nome">
+					<p:column headerText="Nome" filterBy="#{item.nome}" filterMatchMode="contains">
 						<h:outputLabel value="#{item.nome}"/>
 					</p:column>
 					
-					<p:column headerText="CPF">
+					<p:column headerText="CPF" filterBy="#{item.cpf}" filterMatchMode="contains">
 						<h:outputLabel value="#{item.cpf}"/>
 					</p:column>
 					
-					<p:column headerText="Matricula">
+					<p:column headerText="Matricula" filterBy="#{item.matricula}" filterMatchMode="contains">
 						<h:outputLabel value="#{item.matricula}"/>
 					</p:column>
 					
-					<p:column headerText="E-mail">
-						<h:outputLabel value="#{item.email}"/>
+					<p:column headerText="Turma" filterBy="#{item.nomeTurma}" filterMatchMode="contains">
+						<h:outputLabel value="#{item.nomeTurma}"/>
 					</p:column>
 					
 					<p:column style="text-align:right; width: 150px;">
@@ -121,6 +122,12 @@
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 				header="..::: Novo Aluno - [ * Campo Obrigatorio ]" widgetVar="dialogAltAluno">
 				<h:panelGrid id="grid" columns="2">
+					<p:outputLabel for="turma" value="Turma:" />
+					<p:selectOneMenu id="turma" value="#{alunoBean.facade.alunoAltera.nomeTurma}" required="true">
+			            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
+						<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.nome}" itemLabel="#{tu.nome}"/>
+			        </p:selectOneMenu>
+				
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{alunoBean.facade.alunoAltera.nome}" required="true" style="width: 290px;"/>
 					

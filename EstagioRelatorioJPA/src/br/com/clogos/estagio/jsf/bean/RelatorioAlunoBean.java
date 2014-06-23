@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import br.com.clogos.estagio.jsf.facade.RelatorioAlunoFacade;
 
@@ -16,5 +17,12 @@ public class RelatorioAlunoBean implements Serializable {
 	public RelatorioAlunoFacade getFacade() {
 		return facade == null ? facade = new RelatorioAlunoFacade() : facade;
 	}
-
+	
+	public void save(ActionEvent event) {
+		getFacade().save();
+	}
+	
+	public void limpar(ActionEvent event) {
+		getFacade().limpar();
+	}
 }

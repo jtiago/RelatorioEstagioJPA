@@ -19,9 +19,7 @@
 			
 			<h:form id="formTabelaLiberar">
 				<p:dataTable id="tabelaLiberar" var="item" value="#{liberarBean.facade.listaLiberados}" emptyMessage="Sem Registros...">
-					<f:facet name="header">
-						Relatorios Liberados
-					</f:facet>
+					<f:facet name="header">Relatorios Liberados</f:facet>
 					
 					<p:column headerText="Nome Turma">
 						<h:outputLabel value="#{item.turmaLiberarRelatorio.nome}"/>
@@ -43,7 +41,6 @@
 				</p:dataTable>
 			</h:form>
 		</p:panel>
-		
 		
 		<h:form id="formLiberar">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 

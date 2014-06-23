@@ -8,6 +8,10 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
 	  
 	<ui:define name="conteudo">
+		<h:form id="formMensagem">
+			<p:growl autoUpdate="true"/>
+		</h:form>
+		
 		<p:panel  header="..:: Relatorio de Estagio" rendered="#{sessionScope.usuarioLogado.moduloLiberado}">
 			<h:panelGrid columns="3" width="920">
 				<p:graphicImage url="/images/logo.png" width="120"/>
@@ -54,6 +58,13 @@
 				<p:panel>
 					<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
 						<h:outputLabel value="#{sessionScope.usuarioLogado.fichaRelatorio}" />
+					</h:panelGrid><br/>
+					
+					<p:editor id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" width="865" height="600"  /><br/>
+					
+					<h:panelGrid columns="2">
+						<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{relatorioAlunoBean.save}" update=":formRelatorio :formMensagem" />
+						<p:commandButton value="Limpar" icon="ui-icon-minus" actionListener="#{relatorioAlunoBean.limpar}" />
 					</h:panelGrid>
 				</p:panel>
 			</h:form>

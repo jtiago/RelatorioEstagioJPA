@@ -20,6 +20,7 @@ public class AlunoFacade implements Serializable {
 	private Aluno aluno;
 	private Aluno alunoAltera;
 	private List<Aluno> listaAlunos;
+	private List<Aluno> listaAlunosFilter;
 	private GenericController genericController;
 	private AlunoController alunoController;
 	
@@ -149,5 +150,12 @@ public class AlunoFacade implements Serializable {
 	public AlunoController getAlunoController() {
 		return alunoController == null ? alunoController = new AlunoController() : alunoController;
 	}
-	
+
+	public List<Aluno> getListaAlunosFilter() {
+		return listaAlunosFilter;
+	}
+
+	public void setListaAlunosFilter(List<Aluno> listaAlunosFilter) {
+		this.listaAlunosFilter = listaAlunosFilter;
+	}
 }

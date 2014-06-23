@@ -31,17 +31,20 @@ public class Relatorio implements ObjectModel {
 	@Temporal(TemporalType.DATE)
 	private Date dataTerminio;
 	
+	@Column(length=4000, nullable=false)
+	private String texto;
+	
 	private Boolean validado;
 	
 	private Boolean confirmado;
 	
 	private Boolean revisao;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "fkcampoestagio")
 	private CampoEstagio campoEstagio;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "fkaluno")
 	private Aluno aluno;
 
@@ -67,6 +70,14 @@ public class Relatorio implements ObjectModel {
 
 	public void setDataTerminio(Date dataTerminio) {
 		this.dataTerminio = dataTerminio;
+	}
+
+	public String getTexto() {
+		return texto;
+	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
 
 	public Boolean getValidado() {

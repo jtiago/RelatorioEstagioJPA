@@ -49,7 +49,7 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		sql.append("relatorioAdmin,aberto FROM Aluno a ");
 		sql.append("INNER JOIN Turma t ON a.nometurma = t.nometurma ");
 		sql.append("INNER JOIN Perfil p ON p.idperfil = a.fkperfil ");
-		sql.append("INNER JOIN LiberarRelatorio l ON l.fkturma = t.idturma ");
+		sql.append("LEFT JOIN LiberarRelatorio l ON l.fkturma = t.idturma ");
 		sql.append("WHERE a.cpf = ? AND a.senha = ? ORDER BY idliberar DESC ");
 		
 		Aluno aluno = null;
@@ -68,8 +68,8 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 				aluno.getTurmaT().setNomeCurso(objs[4].toString());
 				aluno.getPerfil().setNome(objs[5].toString());
 				aluno.getPerfil().setId(Long.valueOf(objs[6].toString()));
-				aluno.setModulo(ModuloEnum.valueOf(ModuloEnum.class, objs[7].toString()).getLabel().toUpperCase());
-				aluno.setFichaRelatorio(ModuloEnum.valueOf(ModuloEnum.class, objs[7].toString()).getFicha());
+				aluno.setModulo(objs[7] == null ? null : ModuloEnum.valueOf(ModuloEnum.class, objs[7].toString()).getLabel().toUpperCase());
+				aluno.setFichaRelatorio(objs[7] == null ? null : ModuloEnum.valueOf(ModuloEnum.class, objs[7].toString()).getFicha());
 				aluno.getPerfil().setCadastroAluno(Boolean.valueOf(objs[8].toString()));
 				aluno.getPerfil().setCadastroCampo(Boolean.valueOf(objs[9].toString()));
 				aluno.getPerfil().setCadastroSupervisor(Boolean.valueOf(objs[10].toString()));
@@ -77,7 +77,7 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 				aluno.getPerfil().setLiberarRelatorio(Boolean.valueOf(objs[12].toString()));
 				aluno.getPerfil().setRelatorioAluno(Boolean.valueOf(objs[13].toString()));
 				aluno.getPerfil().setRelatorioAdmin(Boolean.valueOf(objs[14].toString()));
-				aluno.setModuloLiberado(Boolean.valueOf(objs[15].toString()));
+				aluno.setModuloLiberado(objs[15] == null ? false : Boolean.valueOf(objs[15].toString()));
 			}
 		} catch (PersistenceException e) {
 			e.printStackTrace();
