@@ -60,6 +60,23 @@
 						<h:outputLabel value="#{sessionScope.usuarioLogado.fichaRelatorio}" />
 					</h:panelGrid><br/>
 					
+					<h:panelGrid columns="1" rendered="${relatorioAlunoBean.getMensagemEnf(sessionScope.usuarioLogado.modulo)}">
+						<h:outputText>
+							Dentre as patologia escontradas no campo de estágio escola uma e desenvolva:<br/>
+							Conceito (O que é a doença), Manifestações Clinicas (sinais e sintomas), Fatores desencadeantes (causas da doença),
+							Diagnóstico (exames laboratoriais e exame clinico etc.), Tratamento (reabilitação, drogas etc.) e Cuidados de Enfermagem.
+						</h:outputText>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1" rendered="${relatorioAlunoBean.getMensagemRad(sessionScope.usuarioLogado.modulo, sessionScope.usuarioLogado.turmaT.nomeCurso)}">
+						<h:outputText>
+							Escolha o exame que mais gostou e descreva os seguintes dados: patologia, definição clinica, CID, posicionamento, regime
+							aplicado (Kv, mA, tempo), raio central, tamanho de filme, estrutura demonstrada, estado do paciente, local do exame (UTI, 
+							Centro Cirúrgia, Sala de Raio X ou outro), paciente colaborou ou não, colimação e comentários gerais. Não registrar o 
+							nome do paciente.
+						</h:outputText>
+					</h:panelGrid>
+					
 					<p:editor id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" width="865" height="600"  /><br/>
 					
 					<h:panelGrid columns="2">
@@ -73,7 +90,7 @@
 		<p:panel header="..:: Relatorio de Estagio" rendered="#{!sessionScope.usuarioLogado.moduloLiberado}" style="margin:0 auto;">
 			<br/><br/><br/><br/><br/><br/>
 			<h:panelGrid columns="1" style="margin:0 auto;">
-				<h:outputLabel value="NÃO EXISTE RELATÓRIO LIBERADO PARA VOCÊ!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+				<h:outputLabel value="NÃO EXISTE RELATÁRIO LIBERADO PARA VOCÊ!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
 			</h:panelGrid>			
 			<br/><br/><br/><br/><br/><br/>
 		</p:panel>

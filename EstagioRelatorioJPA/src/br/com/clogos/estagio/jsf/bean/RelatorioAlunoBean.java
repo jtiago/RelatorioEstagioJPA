@@ -25,4 +25,20 @@ public class RelatorioAlunoBean implements Serializable {
 	public void limpar(ActionEvent event) {
 		getFacade().limpar();
 	}
+	
+	public Boolean getMensagemEnf(String modulo) {
+		if(modulo.contains("II M") || modulo.contains("III M")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean getMensagemRad(String modulo, String curso) {
+		if(modulo.contains("II e III") && (curso.contains("radiologia")) || curso.contains("RADIOLOGIA")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
