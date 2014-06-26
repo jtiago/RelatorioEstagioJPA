@@ -17,8 +17,8 @@ import br.com.clogos.estagio.model.Aluno;
 public class RelatorioAlunoBean implements Serializable {
 	private static final long serialVersionUID = 6378902231545732309L;
 	private RelatorioAlunoFacade facade;
-	private Boolean renderedEnfermagem;
-	private Boolean renderedRadiologia;
+	private Boolean renderedEnfermagem = false;
+	private Boolean renderedRadiologia = false;
 	
 	public RelatorioAlunoFacade getFacade() {
 		return facade == null ? facade = new RelatorioAlunoFacade() : facade;
@@ -37,16 +37,14 @@ public class RelatorioAlunoBean implements Serializable {
 		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
 		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
 		
-		if(aluno.getModulo().contains("II M") || aluno.getModulo().contains("III M")) {
-			renderedEnfermagem = true;
-		} else {
-			renderedEnfermagem = false;
-		}
-		
-		if((aluno.getModulo().contains("II E III")) && (aluno.getTurmaT().getNomeCurso().contains("radiologia") || aluno.getTurmaT().getNomeCurso().contains("RADIOLOGIA"))) {
-			renderedRadiologia =  true;
-		} else {
-			renderedRadiologia =  false;
+		if(aluno.getModulo() != null) {
+			if(aluno.getModulo().contains("II M") || aluno.getModulo().contains("III M")) {
+				renderedEnfermagem = true;
+			} 
+			
+			if((aluno.getModulo().contains("II E III")) && (aluno.getTurmaT().getNomeCurso().contains("radiologia") || aluno.getTurmaT().getNomeCurso().contains("RADIOLOGIA"))) {
+				renderedRadiologia =  true;
+			}
 		}
 	}
 	

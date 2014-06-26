@@ -64,6 +64,8 @@ public class Aluno implements ObjectModel {
 	private Boolean moduloLiberado;
 	@Transient
 	private String fichaRelatorio;
+	@Transient
+	private Relatorio relatorioR;
 	
 	public Long getId() {
 		return id;
@@ -183,5 +185,13 @@ public class Aluno implements ObjectModel {
 
 	public void setFichaRelatorio(String fichaRelatorio) {
 		this.fichaRelatorio = fichaRelatorio;
+	}
+
+	public Relatorio getRelatorioR() {
+		return relatorioR == null ? relatorioR = new Relatorio() : relatorioR;
+	}
+
+	public void setRelatorioR(Relatorio relatorioR) {
+		this.relatorioR = relatorioR;
 	}
 }

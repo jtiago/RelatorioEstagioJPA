@@ -30,6 +30,10 @@ public class RelatorioAlunoFacade implements Serializable {
 		relatorioAluno = null;
 	}
 	
+	public void ajustarDataIntervalo() {
+		
+	}
+	
 	public Relatorio getRelatorioAluno() {
 		return relatorioAluno == null ? relatorioAluno = new Relatorio() : relatorioAluno;
 	}

@@ -16,7 +16,7 @@
 			<p:growl autoUpdate="true"/>
 		</h:form>
 		
-		<p:panel  header="..:: Relatorio de Estágio" rendered="#{sessionScope.usuarioLogado.moduloLiberado}">
+		<p:panel  header="..:: Relatorio de Estágio" rendered="#{sessionScope.usuarioLogado.moduloLiberado and !sessionScope.usuarioLogado.relatorioR.revisao}">
 			<h:panelGrid columns="3" width="920">
 				<p:graphicImage url="/images/logo.png" width="120"/>
 				<h:outputLabel value="ESTÁGIO SUPERVISIONADO #{sessionScope.usuarioLogado.modulo}" 
@@ -49,12 +49,14 @@
 						<p:outputLabel for="dataInicial" value="Data de InÍcio:"/>
 						<h:panelGrid columns="4">
 							<p:calendar id="dataInicial" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}" effect="fold" 
-								readonlyInput="true" required="true" locale="pt_BR"/>
+								readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014">
+								<p:ajax event="dateSelect" update="dataTermino" listener="#{relatorioAlunoBean.facade.ajustarDataIntervalo()}"/>
+							</p:calendar>
 							
 							<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
 							<p:outputLabel for="dataTermino" value="Data de Término:"/>
 							<p:calendar id="dataTermino" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataTerminio}" effect="fold" 
-								readonlyInput="true" required="true" locale="pt_BR"/>
+								readonlyInput="true" required="true" locale="pt_BR" mindate="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}"/>
 						</h:panelGrid>
 					</h:panelGrid>
 				</p:panel>
@@ -94,7 +96,7 @@
 		<p:panel header="..:: Relatorio de Estagio" rendered="#{!sessionScope.usuarioLogado.moduloLiberado}" style="margin:0 auto;">
 			<br/><br/><br/><br/><br/><br/>
 			<h:panelGrid columns="1" style="margin:0 auto;">
-				<h:outputLabel value="NÃO EXISTE RELATÓRIO LIBERADO PARA VOCÃŠ!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+				<h:outputLabel value="NÃO EXISTE RELATÓRIO LIBERADO PARA VOCÊ!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
 			</h:panelGrid>			
 			<br/><br/><br/><br/><br/><br/>
 		</p:panel>
