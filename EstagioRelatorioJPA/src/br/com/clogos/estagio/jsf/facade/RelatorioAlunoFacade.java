@@ -6,6 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import br.com.clogos.estagio.jpa.controller.GenericController;
+import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Relatorio;
 
 public class RelatorioAlunoFacade implements Serializable {
@@ -13,9 +14,10 @@ public class RelatorioAlunoFacade implements Serializable {
 	private Relatorio relatorioAluno;
 	private GenericController genericController;
 	
-	public void save() {
+	public void save(Aluno aluno) {
 		getRelatorioAluno().setRevisao(false);
 		getRelatorioAluno().setValidado(false);
+		getRelatorioAluno().getAluno().setId(aluno.getId());
 		if(getGenericController().save(getRelatorioAluno())) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Relatório salvo e encaminhado para avaliação.", ""));

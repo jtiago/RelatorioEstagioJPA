@@ -111,4 +111,12 @@ public class Relatorio implements ObjectModel {
 	public void setCampoEstagio(CampoEstagio campoEstagio) {
 		this.campoEstagio = campoEstagio;
 	}
+
+	public Aluno getAluno() {
+		return aluno == null ? aluno = new Aluno() : aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
 }

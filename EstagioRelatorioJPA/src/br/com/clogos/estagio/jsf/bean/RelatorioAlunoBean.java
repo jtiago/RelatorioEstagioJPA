@@ -25,7 +25,10 @@ public class RelatorioAlunoBean implements Serializable {
 	}
 	
 	public void save(ActionEvent event) {
-		getFacade().save();
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
+		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
+		getFacade().save(aluno);
 	}
 	
 	public void limpar(ActionEvent event) {
