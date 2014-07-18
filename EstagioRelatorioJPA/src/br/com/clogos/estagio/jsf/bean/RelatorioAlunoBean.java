@@ -19,6 +19,7 @@ public class RelatorioAlunoBean implements Serializable {
 	private RelatorioAlunoFacade facade;
 	private Boolean renderedEnfermagem = false;
 	private Boolean renderedRadiologia = false;
+	private Boolean relatorioAvaliando;
 	
 	public RelatorioAlunoFacade getFacade() {
 		return facade == null ? facade = new RelatorioAlunoFacade() : facade;
@@ -65,5 +66,13 @@ public class RelatorioAlunoBean implements Serializable {
 
 	public void setRenderedRadiologia(Boolean renderedRadiologia) {
 		this.renderedRadiologia = renderedRadiologia;
+	}
+
+	public Boolean getRelatorioAvaliando() {
+		return relatorioAvaliando;
+	}
+
+	public void setRelatorioAvaliando(Boolean relatorioAvaliando) {
+		this.relatorioAvaliando = relatorioAvaliando;
 	}
 }

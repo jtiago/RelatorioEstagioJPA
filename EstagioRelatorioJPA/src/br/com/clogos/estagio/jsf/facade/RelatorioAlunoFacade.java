@@ -6,6 +6,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import br.com.clogos.estagio.jpa.controller.GenericController;
+import br.com.clogos.estagio.jpa.controller.LiberarRelatorioController;
+import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Relatorio;
 
@@ -13,6 +15,8 @@ public class RelatorioAlunoFacade implements Serializable {
 	private static final long serialVersionUID = 3016523488152504622L;
 	private Relatorio relatorioAluno;
 	private GenericController genericController;
+	private LiberarRelatorioController liberarRelatorioController;
+	private RelatorioController relatorioController;
 	
 	public void save(Aluno aluno) {
 		getRelatorioAluno().setRevisao(false);
@@ -32,6 +36,10 @@ public class RelatorioAlunoFacade implements Serializable {
 		relatorioAluno = null;
 	}
 	
+	public Boolean existeRelatorioPreenchido(Aluno aluno) {
+		return getRelatorioController().existeRelatorioPreenchido(aluno);
+	}
+	
 	public void ajustarDataIntervalo() {
 		
 	}
@@ -45,5 +53,13 @@ public class RelatorioAlunoFacade implements Serializable {
 	
 	public GenericController getGenericController() {
 		return genericController == null ? genericController = new GenericController() : genericController;
+	}
+	
+	public LiberarRelatorioController getLiberarRelatorioController() {
+		return liberarRelatorioController == null ? liberarRelatorioController = new LiberarRelatorioController() : liberarRelatorioController;
+	}
+	
+	public RelatorioController getRelatorioController() {
+		return relatorioController == null ? relatorioController = new RelatorioController() : relatorioController;
 	}
 }
