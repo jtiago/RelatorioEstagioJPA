@@ -16,90 +16,90 @@
 			<p:growl autoUpdate="true"/>
 		</h:form>
 		
-		<p:panel  header="..:: Relatorio de Estágio" rendered="#{sessionScope.usuarioLogado.moduloLiberado and !sessionScope.usuarioLogado.relatorioR.revisao}">
-			<h:panelGrid columns="3" width="920">
-				<p:graphicImage url="/images/logo.png" width="120"/>
-				<h:outputLabel value="ESTÁGIO SUPERVISIONADO #{sessionScope.usuarioLogado.modulo}" 
-					style="font-size: 25px; font-weight: bold;"/>
-				<p:graphicImage url="/images/logo.png" width="120"/>
-			</h:panelGrid>
-			
-			<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
-				<h:outputLabel value="CURSO #{sessionScope.usuarioLogado.turmaT.nomeCurso}" />
-			</h:panelGrid>
-			
-			<h:form id="formRelatorio">
-				<h:inputHidden value="#{sessionScope.usuarioLogado.id}" />
-				<p:panel>
-					<h:panelGrid columns="2">
-						<h:outputLabel value="Aluno(a):"/>
-						<h:outputLabel value="#{sessionScope.usuarioLogado.nome}" style="font-weight: bold;"/>
-					
-						<h:outputLabel value="Turma:"/>
-						<h:outputLabel value="#{sessionScope.usuarioLogado.nomeTurma}" style="font-weight: bold;"/>
+		<h:form id="formRelatorio">
+			<p:panel  header="..:: Relatorio de Estágio" rendered="#{sessionScope.usuarioLogado.moduloLiberado and !relatorioAlunoBean.relatorioAvaliando}">
+				<h:panelGrid columns="3" width="920">
+					<p:graphicImage url="/images/logo.png" width="120"/>
+					<h:outputLabel value="ESTÁGIO SUPERVISIONADO #{sessionScope.usuarioLogado.modulo}" 
+						style="font-size: 25px; font-weight: bold;"/>
+					<p:graphicImage url="/images/logo.png" width="120"/>
+				</h:panelGrid>
+				
+				<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
+					<h:outputLabel value="CURSO #{sessionScope.usuarioLogado.turmaT.nomeCurso}" />
+				</h:panelGrid>
+				
+				
+					<h:inputHidden value="#{sessionScope.usuarioLogado.id}" />
+					<p:panel>
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Aluno(a):"/>
+							<h:outputLabel value="#{sessionScope.usuarioLogado.nome}" style="font-weight: bold;"/>
 						
-						<p:outputLabel for="campo" value="Campo:"/>
-						<p:selectOneMenu id="campo" value="#{relatorioAlunoBean.facade.relatorioAluno.campoEstagio.id}"
-							required="true" style="width: 585px;">
-							<f:selectItem itemLabel="Selecione Campo" itemValue="#{null}"/>
-							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
-								itemValue="#{cam.id}"/>
-						</p:selectOneMenu>
-						
-						<p:outputLabel for="dataInicial" value="Data de InÍcio:"/>
-						<h:panelGrid columns="4">
-							<p:calendar id="dataInicial" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}" effect="fold" 
-								readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014">
-								<p:ajax event="dateSelect" update="dataTermino" listener="#{relatorioAlunoBean.facade.ajustarDataIntervalo()}"/>
-							</p:calendar>
+							<h:outputLabel value="Turma:"/>
+							<h:outputLabel value="#{sessionScope.usuarioLogado.nomeTurma}" style="font-weight: bold;"/>
 							
-							<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
-							<p:outputLabel for="dataTermino" value="Data de Término:"/>
-							<p:calendar id="dataTermino" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataTerminio}" effect="fold" 
-								readonlyInput="true" required="true" locale="pt_BR" mindate="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}"/>
+							<p:outputLabel for="campo" value="Campo:"/>
+							<p:selectOneMenu id="campo" value="#{relatorioAlunoBean.facade.relatorioAluno.campoEstagio.id}"
+								required="true" style="width: 585px;">
+								<f:selectItem itemLabel="Selecione Campo" itemValue="#{null}"/>
+								<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
+									itemValue="#{cam.id}"/>
+							</p:selectOneMenu>
+							
+							<p:outputLabel for="dataInicial" value="Data de InÍcio:"/>
+							<h:panelGrid columns="4">
+								<p:calendar id="dataInicial" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}" effect="fold" 
+									readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014">
+									<p:ajax event="dateSelect" update="dataTermino" listener="#{relatorioAlunoBean.facade.ajustarDataIntervalo()}"/>
+								</p:calendar>
+								
+								<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
+								<p:outputLabel for="dataTermino" value="Data de Término:"/>
+								<p:calendar id="dataTermino" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataTerminio}" effect="fold" 
+									readonlyInput="true" required="true" locale="pt_BR" mindate="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}"/>
+							</h:panelGrid>
 						</h:panelGrid>
-					</h:panelGrid>
-				</p:panel>
-				<br/>
-				<p:panel>
-					<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
-						<h:outputLabel value="#{sessionScope.usuarioLogado.fichaRelatorio}" />
-					</h:panelGrid><br/>
-					
-					<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.renderedEnfermagem}">
-						<p align="center">
-							Dentre as patologia escontradas no campo de estágio escola uma e desenvolva:<br/>
-							Conceito (O que é a doença), Manifestações Clinicas (sinais e sintomas), Fatores desencadeantes (causas da doença),
-							Diagnóstico (exames laboratoriais e exame clinico etc.), Tratamento (reabilitação, drogas etc.) e Cuidados de Enfermagem.
-						</p>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.renderedRadiologia}">
-						<p align="center">
-							Escolha o exame que mais gostou e descreva os seguintes dados: patologia, definição clinica, CID, posicionamento, regime
-							aplicado (Kv, mA, tempo), raio central, tamanho de filme, estrutura demonstrada, estado do paciente, local do exame (UTI, 
-							Centro Cirúrgia, Sala de Raio X ou outro), paciente colaborou ou não, colimaÃ§Ã£o e comentários gerais. Não registrar o 
-							nome do paciente.
-						</p>
-					</h:panelGrid>
-					
-					<p:editor id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" width="865" height="600"  /><br/>
-					
-					<h:panelGrid columns="2">
-						<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{relatorioAlunoBean.save}" update=":formRelatorio :formMensagem" />
-						<p:commandButton value="Limpar" icon="ui-icon-minus" actionListener="#{relatorioAlunoBean.limpar}" />
-					</h:panelGrid>
-				</p:panel>
-			</h:form>
-		</p:panel>
-		
-		<p:panel header="..:: Relatorio de Estagio" rendered="#{!sessionScope.usuarioLogado.moduloLiberado}" style="margin:0 auto;">
-			<br/><br/><br/><br/><br/><br/>
-			<h:panelGrid columns="1" style="margin:0 auto;">
-				<h:outputLabel value="NÃO EXISTE RELATÓRIO LIBERADO PARA VOCÊ!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
-			</h:panelGrid>			
-			<br/><br/><br/><br/><br/><br/>
-		</p:panel>
-		
+					</p:panel>
+					<br/>
+					<p:panel>
+						<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
+							<h:outputLabel value="#{sessionScope.usuarioLogado.fichaRelatorio}" />
+						</h:panelGrid><br/>
+						
+						<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.renderedEnfermagem}">
+							<p align="center">
+								Dentre as patologia escontradas no campo de estágio escola uma e desenvolva:<br/>
+								Conceito (O que é a doença), Manifestações Clinicas (sinais e sintomas), Fatores desencadeantes (causas da doença),
+								Diagnóstico (exames laboratoriais e exame clinico etc.), Tratamento (reabilitação, drogas etc.) e Cuidados de Enfermagem.
+							</p>
+						</h:panelGrid>
+						
+						<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.renderedRadiologia}">
+							<p align="center">
+								Escolha o exame que mais gostou e descreva os seguintes dados: patologia, definição clinica, CID, posicionamento, regime
+								aplicado (Kv, mA, tempo), raio central, tamanho de filme, estrutura demonstrada, estado do paciente, local do exame (UTI, 
+								Centro Cirúrgia, Sala de Raio X ou outro), paciente colaborou ou não, colimaÃ§Ã£o e comentários gerais. Não registrar o 
+								nome do paciente.
+							</p>
+						</h:panelGrid>
+						
+						<p:editor id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" width="865" height="600"  /><br/>
+						
+						<h:panelGrid columns="2">
+							<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{relatorioAlunoBean.save}" update=":formRelatorio :formMensagem" />
+							<p:commandButton value="Limpar" icon="ui-icon-minus" actionListener="#{relatorioAlunoBean.limpar}" />
+						</h:panelGrid>
+					</p:panel>
+			</p:panel>
+			
+			<p:panel header="..:: Relatorio de Estagio" rendered="#{relatorioAlunoBean.relatorioAvaliando}" style="margin:0 auto;">
+				<br/><br/><br/><br/><br/><br/>
+				<h:panelGrid columns="1" style="margin:0 auto;">
+					<h:outputLabel value="NÃO EXISTE RELATÓRIO LIBERADO PARA VOCÊ!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+				</h:panelGrid>			
+				<br/><br/><br/><br/><br/><br/>
+			</p:panel>
+		</h:form>
 	</ui:define>
 </ui:composition>

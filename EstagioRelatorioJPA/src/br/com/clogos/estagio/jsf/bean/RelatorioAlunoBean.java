@@ -40,6 +40,7 @@ public class RelatorioAlunoBean implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
 		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
+		relatorioAvaliando = getFacade().existeRelatorioPreenchido(aluno);
 		
 		if(aluno.getModulo() != null) {
 			if(aluno.getModulo().contains("II M") || aluno.getModulo().contains("III M")) {

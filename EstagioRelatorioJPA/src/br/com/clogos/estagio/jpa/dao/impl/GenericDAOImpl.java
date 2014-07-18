@@ -1,5 +1,6 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,11 @@ import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.GenericDAO;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
-public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO {
+public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EntityManager entityManager;
 	
 	@Override
