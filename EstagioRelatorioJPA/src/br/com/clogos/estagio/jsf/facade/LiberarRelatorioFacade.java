@@ -21,6 +21,7 @@ public class LiberarRelatorioFacade implements Serializable {
 	private LiberarRelatorioController liberarRelatorioController;
 	private TurmaController turmaController;
 	private List<LiberarRelatorio> listaLiberados;
+	private List<LiberarRelatorio> listaLiberadosFilter;
 	
 	public List<LiberarRelatorio> getListaLiberados() {
 		if(listaLiberados == null) {
@@ -100,4 +101,13 @@ public class LiberarRelatorioFacade implements Serializable {
 	public TurmaController getTurmaController() {
 		return turmaController == null ? turmaController = new TurmaController() : turmaController;
 	}
+
+	public List<LiberarRelatorio> getListaLiberadosFilter() {
+		return listaLiberadosFilter;
+	}
+
+	public void setListaLiberadosFilter(List<LiberarRelatorio> listaLiberadosFilter) {
+		this.listaLiberadosFilter = listaLiberadosFilter;
+	}
+	
 }

@@ -18,23 +18,24 @@
 			</h:form><br/>
 			
 			<h:form id="formTabelaLiberar">
-				<p:dataTable id="tabelaLiberar" var="item" value="#{liberarBean.facade.listaLiberados}" emptyMessage="Sem Registros...">
+				<p:dataTable id="tabelaLiberar" var="item" value="#{liberarBean.facade.listaLiberados}" emptyMessage="Sem Registros..."
+					filteredValue="#{liberarBean.facade.listaLiberadosFilter}">
 					<f:facet name="header">Relatorios Liberados</f:facet>
 					
-					<p:column headerText="Nome Turma">
+					<p:column headerText="Nome Turma" filterBy="#{item.turmaLiberarRelatorio.nome}" filterMatchMode="contains">
 						<h:outputLabel value="#{item.turmaLiberarRelatorio.nome}"/>
 					</p:column>
 					
-					<p:column headerText="Modulo">
+					<p:column headerText="Modulo" filterBy="#{item.modulo.label}" filterMatchMode="contains">
 						<h:outputLabel value="#{item.modulo.label}"/>
 					</p:column>
 					
-					<p:column headerText="Status">
+					<p:column headerText="Status" filterBy="#{item.aberto eq 'true' ? 'Em Aberto' : 'Fechado'}"  filterMatchMode="contains">
 						<h:outputLabel value="#{item.aberto eq 'true' ? 'Em Aberto' : 'Fechado'}"/>
 					</p:column>
 					
 					<p:column>
-						<p:commandButton  icon="ui-icon-cancel" title="Fechar de Modulo Liberado" oncomplete="dialogCadFechamento.show()" update=":formFechamento">
+						<p:commandButton disabled="#{item.aberto eq 'false'}"  icon="ui-icon-cancel" title="Fechar de Modulo Liberado" oncomplete="dialogCadFechamento.show()" update=":formFechamento">
 							<f:setPropertyActionListener target="#{liberarBean.facade.liberarRelatorio}" value="#{item}" />
 						</p:commandButton>
 					</p:column>

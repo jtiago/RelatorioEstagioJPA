@@ -87,19 +87,35 @@
 						<p:editor id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" width="865" height="600"  /><br/>
 						
 						<h:panelGrid columns="2">
-							<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{relatorioAlunoBean.save}" update=":formRelatorio :formMensagem" />
+							<p:commandButton value="Salvar e Enviar" icon="ui-icon-disk" oncomplete="salvarRelatorio.show()" />
 							<p:commandButton value="Limpar" icon="ui-icon-minus" actionListener="#{relatorioAlunoBean.limpar}" />
 						</h:panelGrid>
 					</p:panel>
 			</p:panel>
 			
-			<p:panel header="..:: Relatorio de Estagio" rendered="#{relatorioAlunoBean.relatorioAvaliando}" style="margin:0 auto;">
+			<p:panel header="..:: Relatorio de Estagio" rendered="#{!sessionScope.usuarioLogado.moduloLiberado}" style="margin:0 auto;">
 				<br/><br/><br/><br/><br/><br/>
 				<h:panelGrid columns="1" style="margin:0 auto;">
 					<h:outputLabel value="NÃO EXISTE RELATÓRIO LIBERADO PARA VOCÊ!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
 				</h:panelGrid>			
 				<br/><br/><br/><br/><br/><br/>
 			</p:panel>
+			
+			<p:panel header="..:: Relatorio de Estagio" rendered="#{relatorioAlunoBean.relatorioAvaliando}" style="margin:0 auto;">
+				<br/><br/><br/><br/><br/><br/>
+				<h:panelGrid columns="1" style="margin:0 auto;">
+					<h:outputLabel value="RELATÓRIO SENDO AVALIADO!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+				</h:panelGrid>			
+				<br/><br/><br/><br/><br/><br/>
+			</p:panel>
+		</h:form>
+		
+		<h:form id="formDelete">
+			<p:confirmDialog message="Deseja realmente Salvar e Enviar o Relatório, após escolher sim não será possível edita-ló sem a liberação da Coordenação ?" 
+				header="..:: Salvar e Enviar Relatório" widgetVar="salvarRelatorio">
+				<p:commandButton value="Sim" actionListener="#{relatorioAlunoBean.save}" update=":formMensagem :formDelete :formRelatorio" />
+				<p:commandButton value="Nao" oncomplete="salvarRelatorio.hide()"/>
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
