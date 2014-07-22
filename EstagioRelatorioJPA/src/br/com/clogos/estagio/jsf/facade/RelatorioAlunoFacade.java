@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.LiberarRelatorioController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
@@ -22,12 +23,13 @@ public class RelatorioAlunoFacade implements Serializable {
 		getRelatorioAluno().setRevisao(false);
 		getRelatorioAluno().setValidado(false);
 		getRelatorioAluno().getAluno().setId(aluno.getId());
+		getRelatorioAluno().setModulo(ModuloEnum.getModulo(aluno.getModulo()));
 		if(getGenericController().save(getRelatorioAluno())) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_INFO, "Relatório salvo e encaminhado para avaliação.", ""));
+					FacesMessage.SEVERITY_INFO, "RelatÃ³rio salvo e encaminhado para avaliaÃ§Ã£o.", ""));
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, "Problemas ao salvar relatório, por favor entre em contato com a coordenação Logos", ""));
+					FacesMessage.SEVERITY_ERROR, "Problemas ao salvar relatÃ³rio, por favor entre em contato com a coordenaÃ§Ã£o Logos", ""));
 		}
 		relatorioAluno = null;
 	}

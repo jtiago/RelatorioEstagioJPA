@@ -1,10 +1,12 @@
 package br.com.clogos.estagio.jpa.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import br.com.clogos.estagio.jpa.dao.RelatorioDAO;
 import br.com.clogos.estagio.jpa.dao.impl.RelatorioDAOImpl;
 import br.com.clogos.estagio.model.Aluno;
+import br.com.clogos.estagio.model.Relatorio;
 
 public class RelatorioController implements Serializable {
 
@@ -16,6 +18,14 @@ public class RelatorioController implements Serializable {
 	
 	public Boolean existeRelatorioPreenchido(Aluno aluno) {
 		return getRelatorioDAO().existeRelatorioPreenchido(aluno);
+	}
+	
+	public List<Relatorio> findRelatoriosAdmin(Relatorio relatorio) {
+		return getRelatorioDAO().findRelatoriosAdmin(relatorio);
+	}
+	
+	public Boolean updateValidarRelatorio(Long id, String observacao) {
+		return getRelatorioDAO().updateValidarRelatorio(id, observacao);
 	}
 	
 	public RelatorioDAO getRelatorioDAO() {

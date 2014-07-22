@@ -13,9 +13,113 @@
 		</h:form>
 		
 		<p:panel header="..:: Validar Relatorios">
-			<h:form id="formRelatorio">
+			<p:fieldset>
+				<h:form id="formPesquisaRelatorio">
+					<h:panelGrid id="grid" columns="5">
+						<p:outputLabel for="turma" value="Turma:"/>
+						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.aluno.nomeTurma}" required="true" style="width:295px;">
+				            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
+							<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.nome}" itemLabel="#{tu.nome}"/>
+				        </p:selectOneMenu>
+				        
+				        <p:outputLabel for="modulo" value="Modulo:" />
+						<p:selectOneMenu id="modulo" value="#{relatorioAdminBean.facade.relatorio.modulo}" 
+							required="true" style="width:295px;">  
+	                       <f:selectItem itemLabel="Selecione Modulo" itemValue="#{null}" />  
+	                       <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
+                    	</p:selectOneMenu>
+                    	
+                    	<p:commandButton value="Pesquisar" icon="ui-icon-search" actionListener="#{relatorioAdminBean.pesquisarRelatorio}" 
+                    		update=":tabelaRelatorio :formPesquisaRelatorio"/>
+					</h:panelGrid>
+				</h:form>
+			</p:fieldset>
+			<br/> 
 			
+			<h:form id="tabelaRelatorio">
+				<p:fieldset rendered="#{relatorioAdminBean.facade.listaRelatorios != null}">
+					<p:dataTable id="tabela" var="item" value="#{relatorioAdminBean.facade.listaRelatorios}" filteredValue="#{relatorioAdminBean.facade.listaRelatoriosFilter}"
+						emptyMessage="Sem Registro..." rendered="#{relatorioAdminBean.facade.listaRelatorios != null}">
+						<f:facet name="header">
+							Relatorios 
+						</f:facet>
+						
+						<p:column headerText="Matricula" filterBy="#{item.aluno.matricula}" filterMatchMode="contains">
+							<h:outputLabel value="#{item.aluno.matricula}"/>
+						</p:column>
+						
+						<p:column headerText="Nome Aluno" filterBy="#{item.aluno.nome}" filterMatchMode="contains">
+							<h:outputLabel value="#{item.aluno.nome}"/>
+						</p:column>
+						
+						<p:column headerText="Validado ?" filterBy="#{item.validado eq 'true' ? 'Sim' : 'Nao'}" filterMatchMode="contains">
+							<h:outputLabel value="#{item.validado eq 'true' ? 'Sim' : 'Nao'}"/>
+						</p:column>
+						
+						<p:column>
+							<p:commandButton icon="ui-icon-circle-check" oncomplete="dialogValidar.show()" update=":formAvaliacao">
+								<f:setPropertyActionListener target="#{relatorioAdminBean.facade.relatorioValidar}" value="#{item}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:fieldset>
 			</h:form>
 		</p:panel>
+		
+		<h:form id="formAvaliacao">
+			<p:dialog width="900" height="500" header="..::Validar Relatorio" widgetVar="dialogValidar" draggable="false" modal="true" resizable="false" position="top" >
+				<p:fieldset>
+					<h:panelGrid id="grid" columns="2">
+						<h:outputLabel value="Aluno:"/>
+						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.aluno.nome}" style="font-weight: bold;"/>
+						
+						<h:outputLabel value="Turma:"/>
+						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.aluno.nomeTurma}" style="font-weight: bold;"/>
+						
+						<h:outputLabel value="Modulo:"/>
+						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.modulo}" style="font-weight: bold;"/>
+						
+						<h:outputLabel value="Supervisor:"/>
+						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.campoEstagio.supervisor.nome}" style="font-weight: bold;"/>
+						
+						<h:outputLabel value="Campo de Estagio:"/>
+						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.campoEstagio.nome}" style="font-weight: bold;"/>
+					</h:panelGrid>
+				</p:fieldset>
+				<br/>
+				<p:fieldset>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.texto}" escape="false"/><br/>
+					</h:panelGrid>
+				</p:fieldset>
+				<br/>
+				<p:fieldset>
+					<h:panelGrid columns="2">
+						<p:outputLabel for="obs" value="Observacao:"/>
+						<p:inputTextarea id="obs" rows="6" cols="70" autoResize="true" value="#{relatorioAdminBean.facade.relatorioValidar.observacao}"/>
+					
+						<p:commandButton value="Validar" oncomplete="validarRelatorio.show()" 
+							disabled="#{relatorioAdminBean.facade.relatorioValidar.validado or relatorioAdminBean.facade.relatorioValidar.revisao}"/>
+						<p:commandButton value="Revisão" oncomplete="revisaoRelatorio.show()"
+							disabled="#{relatorioAdminBean.facade.relatorioValidar.validado or relatorioAdminBean.facade.relatorioValidar.revisao}"/>
+					</h:panelGrid>
+				</p:fieldset>
+			</p:dialog>
+		</h:form>
+		
+		<h:form id="formRevisao">
+			<p:confirmDialog message="Deseja realmente enviar o relatório para revisão ?" header="..:: Revisão Relatório" widgetVar="revisaoRelatorio">
+				<p:commandButton value="Sim" actionListener="#{turmaBean.remove}" update=":formMensagem :formRevisao :tabelaRelatorio" />
+				<p:commandButton value="Não" oncomplete="revisaoRelatorio.hide()"/>
+			</p:confirmDialog>
+		</h:form>
+		
+		<h:form id="formValidar">
+			<p:confirmDialog message="Deseja realmente validar este relatório ?" header="..:: Validar Relatório" widgetVar="validarRelatorio">
+				<p:commandButton value="Sim" actionListener="#{relatorioAdminBean.validarRelatorio}" oncomplete="dialogValidar.hide()"
+					update=":formMensagem :formValidar :tabelaRelatorio :formAvaliacao" />
+				<p:commandButton value="Não" oncomplete="validarRelatorio.hide()"/>
+			</p:confirmDialog>
+		</h:form>
 	</ui:define>
 </ui:composition>

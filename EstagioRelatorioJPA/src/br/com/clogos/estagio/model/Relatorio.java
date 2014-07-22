@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
 @Entity
@@ -39,6 +42,11 @@ public class Relatorio implements ObjectModel {
 	private Boolean confirmado;
 	
 	private Boolean revisao;
+	
+	@Enumerated(EnumType.STRING)
+	private ModuloEnum modulo;
+	
+	private String observacao;
 	
 	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "fkcampoestagio")
@@ -102,6 +110,22 @@ public class Relatorio implements ObjectModel {
 
 	public void setRevisao(Boolean revisao) {
 		this.revisao = revisao;
+	}
+
+	public ModuloEnum getModulo() {
+		return modulo;
+	}
+
+	public void setModulo(ModuloEnum modulo) {
+		this.modulo = modulo;
+	}
+	
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	public CampoEstagio getCampoEstagio() {

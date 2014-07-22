@@ -1,8 +1,11 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import br.com.clogos.estagio.jpa.JpaUtil;
@@ -37,6 +40,55 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public List<Relatorio> findRelatoriosAdmin(Relatorio relatorio) {
+		entityManager = JpaUtil.getEntityManager();
+		StringBuilder hql = new StringBuilder();
+		List<Relatorio> lista = new LinkedList<Relatorio>();
+		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH c.supervisor ");
+		hql.append("WHERE a.nomeTurma = :nomeTurma AND r.modulo = :modulo ");
+		hql.append("ORDER BY a.nome ");
+		
+		try {
+			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class)
+					.setParameter("nomeTurma", relatorio.getAluno().getNomeTurma())
+					.setParameter("modulo", relatorio.getModulo());
+			lista = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return lista;
+	}
+
+	@Override
+	public Boolean updateValidarRelatorio(Long id,  String observacao) {
+		entityManager = JpaUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE Relatorio SET validado = ?, observacao = ? WHERE idrelatorio = ?");
+		try {
+			Query query = entityManager.createNativeQuery(sql.toString())
+					.setParameter(1, 1)
+					.setParameter(2, observacao)
+					.setParameter(3, id);
+			query.executeUpdate();
+			entityManager.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 
 }
