@@ -25,4 +25,8 @@ public class RelatorioAdminBean implements Serializable {
 	public void validarRelatorio(ActionEvent event) {
 		getFacade().validarRelatorio();
 	}
+	
+	public void revisarRelatorio(ActionEvent event) {
+		getFacade().revisarRelatorio();
+	}
 }

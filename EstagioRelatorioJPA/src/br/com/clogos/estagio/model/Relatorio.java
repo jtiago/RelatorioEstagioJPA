@@ -34,6 +34,9 @@ public class Relatorio implements ObjectModel {
 	@Temporal(TemporalType.DATE)
 	private Date dataTerminio;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCadastro;
+	
 	@Column(length=4000, nullable=false)
 	private String texto;
 	
@@ -74,6 +77,14 @@ public class Relatorio implements ObjectModel {
 
 	public Date getDataTerminio() {
 		return dataTerminio;
+	}
+	
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	public void setDataTerminio(Date dataTerminio) {

@@ -40,6 +40,19 @@ public class RelatorioAdminFacade implements Serializable {
 		listaRelatorios=null;relatorioController=null;relatorioValidar=null;
 	}
 	
+	public void revisarRelatorio() {
+		if(getRelatorioValidar() != null) {
+			if(getRelatorioController().updateRevisaoRelatorio(getRelatorioValidar().getId(), getRelatorioValidar().getObservacao())) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_INFO, "Relatório enviado para Revisão com sucesso.", ""));
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_ERROR, "Problemas ao enviar relatório para revisão", ""));
+			}
+		}
+		relatorioValidar=null; listaRelatorios=null; relatorioController=null; 
+	}
+	
 	public Relatorio getRelatorio() {
 		return relatorio == null ? relatorio = new Relatorio() : relatorio;
 	}

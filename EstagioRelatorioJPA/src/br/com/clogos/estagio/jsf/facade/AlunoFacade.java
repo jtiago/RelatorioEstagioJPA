@@ -69,6 +69,7 @@ public class AlunoFacade implements Serializable {
 	public void update() {
 		try {
 			if(alunoAltera != null) {
+				getAlunoAltera().setCpf(getAlunoAltera().getCpf().replace(".", "").replace("-", ""));
 				getGenericController().update(getAlunoAltera());
 				alunoAltera = null; genericController = null; listaAlunos = null;
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(

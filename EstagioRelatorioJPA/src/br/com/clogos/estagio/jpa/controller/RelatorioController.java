@@ -28,6 +28,10 @@ public class RelatorioController implements Serializable {
 		return getRelatorioDAO().updateValidarRelatorio(id, observacao);
 	}
 	
+	public Boolean updateRevisaoRelatorio(Long id, String observacao) {
+		return getRelatorioDAO().updateRevisaoRelatorio(id, observacao);
+	}
+	
 	public RelatorioDAO getRelatorioDAO() {
 		return relatorioDAO == null ? relatorioDAO = new RelatorioDAOImpl() : relatorioDAO;
 	}

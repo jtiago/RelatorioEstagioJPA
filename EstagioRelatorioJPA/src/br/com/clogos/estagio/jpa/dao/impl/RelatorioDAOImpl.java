@@ -91,4 +91,29 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		}
 	}
 
+	@Override
+	public Boolean updateRevisaoRelatorio(Long id, String observacao) {
+		entityManager = JpaUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE Relatorio SET revisao = ?, observacao = ? WHERE idrelatorio = ?");
+		try {
+			Query query = entityManager.createNativeQuery(sql.toString())
+					.setParameter(1, 1)
+					.setParameter(2, observacao)
+					.setParameter(3, id);
+			query.executeUpdate();
+			entityManager.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+	}
+
 }

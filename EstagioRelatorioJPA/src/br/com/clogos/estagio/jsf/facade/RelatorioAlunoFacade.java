@@ -1,6 +1,7 @@
 package br.com.clogos.estagio.jsf.facade;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -23,6 +24,7 @@ public class RelatorioAlunoFacade implements Serializable {
 		getRelatorioAluno().setRevisao(false);
 		getRelatorioAluno().setValidado(false);
 		getRelatorioAluno().getAluno().setId(aluno.getId());
+		getRelatorioAluno().setDataCadastro(new Date());
 		getRelatorioAluno().setModulo(ModuloEnum.getModulo(aluno.getModulo()));
 		if(getGenericController().save(getRelatorioAluno())) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
