@@ -20,7 +20,7 @@
 			<h:form id="formTabelaLiberar">
 				<p:dataTable id="tabelaLiberar" var="item" value="#{liberarBean.facade.listaLiberados}" emptyMessage="Sem Registros..."
 					filteredValue="#{liberarBean.facade.listaLiberadosFilter}">
-					<f:facet name="header">Relatorios Liberados</f:facet>
+					<f:facet name="header">Relatórios Liberados</f:facet>
 					
 					<p:column headerText="Nome Turma" filterBy="#{item.turmaLiberarRelatorio.nome}" filterMatchMode="contains">
 						<h:outputLabel value="#{item.turmaLiberarRelatorio.nome}"/>

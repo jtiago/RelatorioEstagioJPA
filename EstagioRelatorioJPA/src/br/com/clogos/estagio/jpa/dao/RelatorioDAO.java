@@ -10,4 +10,5 @@ public interface RelatorioDAO {
 	List<Relatorio> findRelatoriosAdmin(Relatorio relatorio);
 	Boolean updateValidarRelatorio(Long id, String observacao);
 	Boolean updateRevisaoRelatorio(Long id, String observacao);
+	List<Relatorio> findRelatoriosRevisao(Aluno aluno);
 }

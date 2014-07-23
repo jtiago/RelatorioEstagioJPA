@@ -34,12 +34,14 @@ public class Perfil implements ObjectModel {
 	private Boolean relatorioAluno;
 	@Column(length=1)
 	private Boolean relatorioAdmin;
+	@Column(length=1)
+	private Boolean revisaoRelatorio;
 	
 //	update perfil set cadastroAluno = 1, cadastroCampo = 1, cadastroSupervisor = 1, cadastroTurma = 1, liberarrelatorio = 1, relatorioAdmin = 1,
-//			relatorioAluno = 0 where idperfil = 1;
+//			relatorioAluno = 0, revisaoRelatorio = 0 where idperfil = 1;
 	
 //	update perfil set cadastroAluno = 0, cadastroCampo = 0, cadastroSupervisor = 0, cadastroTurma = 0, liberarrelatorio = 0, relatorioAdmin = 0,
-//			relatorioAluno = 1 where idperfil = 2;
+//			relatorioAluno = 1, revisaoRelatorio = 1 where idperfil = 2;
 
 	public Long getId() {
 		return id;
@@ -111,5 +113,13 @@ public class Perfil implements ObjectModel {
 
 	public void setRelatorioAdmin(Boolean relatorioAdmin) {
 		this.relatorioAdmin = relatorioAdmin;
+	}
+
+	public Boolean getRevisaoRelatorio() {
+		return revisaoRelatorio;
+	}
+
+	public void setRevisaoRelatorio(Boolean revisaoRelatorio) {
+		this.revisaoRelatorio = revisaoRelatorio;
 	}
 }

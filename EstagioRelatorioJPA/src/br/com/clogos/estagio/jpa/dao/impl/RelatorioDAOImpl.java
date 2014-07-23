@@ -116,4 +116,27 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		}
 	}
 
+	@Override
+	public List<Relatorio> findRelatoriosRevisao(Aluno aluno) {
+		entityManager = JpaUtil.getEntityManager();
+		StringBuilder hql = new StringBuilder();
+		List<Relatorio> lista = new LinkedList<Relatorio>();
+		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH c.supervisor ");
+		hql.append("WHERE a.cpf = :cpf AND r.revisao = :revisao ");
+		
+		try {
+			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class)
+					.setParameter("cpf", aluno.getCpf())
+					.setParameter("revisao", true);
+			lista = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return lista;
+	}
+
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templatePages.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+	<f:metadata>
+		<f:event listener="#{revisaoRelatorioBean.buscarListaRevisao}" type="preRenderComponent" />  
+	</f:metadata>
+	
+	<ui:define name="conteudo">
+		<h:form id="formMensagem">
+			<p:growl autoUpdate="true"/>
+		</h:form>
+		
+		<p:panel header="..:: Revisar Relatório">
+			<h:form id="tabelaRelatorio">
+				<p:fieldset>
+					<p:dataTable id="tabela" var="item" value="#{revisaoRelatorioBean.facade.listaRevisao}" filteredValue="#{revisaoRelatorioBean.facade.listaRevisaoFilter}"
+						emptyMessage="Não existe relatórios para revisão...">
+						<f:facet name="header">
+							Revisão de Relatório
+						</f:facet>
+						
+						<p:column headerText="Data Cadastro">
+							<h:outputLabel value="#{item.dataCadastro}"/> 
+						</p:column>
+						
+						<p:column headerText="Módulo">
+							<h:outputLabel value="#{item.modulo}"/>
+						</p:column>
+						
+						<p:column headerText="Status">
+							<h:outputLabel value="#{item.revisao eq 'true' ? 'Revisão' : ''}"/>
+						</p:column>
+						
+						<p:column>
+							<p:commandButton icon="ui-icon-pencil" oncomplete="dialogValidar.show()">
+								<f:setPropertyActionListener target="#{relatorioAdminBean.facade.relatorioValidar}" value="#{item}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:fieldset>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
