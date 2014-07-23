@@ -54,13 +54,13 @@
 		<h:form id="formDelete">
 			<p:confirmDialog message="Deseja realmente remover este Turma ?" header="..:: Remover Turma" widgetVar="removeTurma">
 				<p:commandButton value="Sim" actionListener="#{turmaBean.remove}" update=":formMessage :formDelete :formTabelaTurma" />
-				<p:commandButton value="Nao" oncomplete="removeTurma.hide()"/>
+				<p:commandButton value="Não" oncomplete="removeTurma.hide()"/>
 			</p:confirmDialog>
 		</h:form>
 		
 		<h:form id="formCadastro">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-					header="..::: Nova Turma - [ * Campo Obrigatorio ]" widgetVar="dialogCadTurma">
+					header="..::: Nova Turma - [ * Campo Obrigatório ]" widgetVar="dialogCadTurma">
 					<h:panelGrid id="grid" columns="2">
 						<p:outputLabel for="nome" value="Nome:" />
 						<p:inputText id="nome" value="#{turmaBean.facade.turma.nome}" required="true"/>
@@ -84,7 +84,7 @@
 			
 		<h:form id="formAlterar">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Novo Turma - [ * Turma Obrigatorio ]" widgetVar="dialogAltTurma">
+				header="..::: Novo Turma - [ * Turma Obrigatório ]" widgetVar="dialogAltTurma">
 				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{turmaBean.facade.turmaAltera.nome}" required="true"/>

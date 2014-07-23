@@ -37,7 +37,7 @@
 						<h:outputLabel value="#{item.cpf}"/>
 					</p:column>
 					
-					<p:column headerText="Matricula" filterBy="#{item.matricula}" filterMatchMode="contains">
+					<p:column headerText="Matrícula" filterBy="#{item.matricula}" filterMatchMode="contains">
 						<h:outputLabel value="#{item.matricula}"/>
 					</p:column>
 					
@@ -72,7 +72,7 @@
 		<h:form id="formDelete">
 			<p:confirmDialog message="Deseja realmente remover este Aluno ?" header="..:: Remover Aluno" widgetVar="removeAluno">
 				<p:commandButton value="Sim" actionListener="#{alunoBean.remove}" update=":formMessage :formDelete :formTabelaAluno" />
-				<p:commandButton value="Nao" oncomplete="removeAluno.hide()"/>
+				<p:commandButton value="Não" oncomplete="removeAluno.hide()"/>
 			</p:confirmDialog>
 		</h:form>
 		
@@ -92,7 +92,7 @@
 						<p:outputLabel for="cpf" value="CPF:" />
 						<p:inputMask mask="999.999.999-99" id="cpf" value="#{alunoBean.facade.aluno.cpf}" required="true"/>
 						
-						<p:outputLabel for="matricula" value="Matricula:" />
+						<p:outputLabel for="matricula" value="Matrícula:" />
 						<p:inputText id="matricula" value="#{alunoBean.facade.aluno.matricula}" required="true"/>
 						
 						<p:outputLabel for="senha" value="Senha:" />
@@ -120,7 +120,7 @@
 			
 		<h:form id="formAlterar">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Novo Aluno - [ * Campo Obrigatorio ]" widgetVar="dialogAltAluno">
+				header="..::: Novo Aluno - [ * Campo Obrigatório ]" widgetVar="dialogAltAluno">
 				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel for="turma" value="Turma:" />
 					<p:selectOneMenu id="turma" value="#{alunoBean.facade.alunoAltera.nomeTurma}" required="true">
@@ -134,7 +134,7 @@
 					<p:outputLabel for="cpf" value="CPF:" />
 					<p:inputMask mask="999.999.999.99" id="cpf" value="#{alunoBean.facade.alunoAltera.cpf}" required="true"/>
 					
-					<p:outputLabel for="matricula" value="Matricula:" />
+					<p:outputLabel for="matricula" value="Matrícula:" />
 					<p:inputText id="matricula" value="#{alunoBean.facade.alunoAltera.matricula}" required="true"/>
 					
 					<p:outputLabel for="sexo" value="Sexo:" />

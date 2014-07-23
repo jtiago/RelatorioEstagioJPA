@@ -9,6 +9,7 @@ import br.com.clogos.estagio.model.Relatorio;
 
 public class RevisaoRelatorioFacade implements Serializable {
 	private static final long serialVersionUID = -1643920823073800053L;
+	private Relatorio relatorioRevisao;
 	private List<Relatorio> listaRevisao;
 	private List<Relatorio> listaRevisaoFilter;
 	private RelatorioController relatorioController;
@@ -33,5 +34,13 @@ public class RevisaoRelatorioFacade implements Serializable {
 	
 	public RelatorioController getRelatorioController() {
 		return relatorioController == null ? relatorioController = new RelatorioController() : relatorioController;
+	}
+
+	public Relatorio getRelatorioRevisao() {
+		return relatorioRevisao == null ? relatorioRevisao = new Relatorio() : relatorioRevisao;
+	}
+
+	public void setRelatorioRevisao(Relatorio relatorioRevisao) {
+		this.relatorioRevisao = relatorioRevisao;
 	}
 }

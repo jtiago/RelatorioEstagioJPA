@@ -43,13 +43,13 @@
 		<h:form id="formDelete">
 			<p:confirmDialog message="Deseja realmente remover este Supervisor ?" header="..:: Remover Supervisor" widgetVar="removeSupervisor">
 				<p:commandButton value="Sim" actionListener="#{supervisorBean.remove}" update=":formMessage :formDelete :formTabelaSupervisor" />
-				<p:commandButton value="Nao" oncomplete="removeSupervisor.hide()"/>
+				<p:commandButton value="Não" oncomplete="removeSupervisor.hide()"/>
 			</p:confirmDialog>
 		</h:form>
 		
 		<h:form id="formCadastro" enctype="multipart/form-data">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-					header="..::: Novo Supervisor - [ * Campo Obrigatorio ]" widgetVar="dialogCadSupervisor">
+					header="..::: Novo Supervisor - [ * Campo Obrigatório ]" widgetVar="dialogCadSupervisor">
 					<h:panelGrid columns="2">
 						<h:outputLabel value="Nome:" />
 						<p:inputText value="#{supervisorBean.nome}" style="width: 250px;"/>
@@ -65,7 +65,7 @@
 			
 		<h:form id="formAlterar">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Novo Supervisor - [ * Campo Obrigatorio ]" widgetVar="dialogAltSupervisor">
+				header="..::: Novo Supervisor - [ * Campo Obrigatório ]" widgetVar="dialogAltSupervisor">
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Nome:" />
 					<p:inputText value="#{supervisorBean.facade.supervisorAltera.nome}" style="width: 250px;"/>

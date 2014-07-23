@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.HttpSession;
 
@@ -26,5 +27,9 @@ public class RevisaoRelatorioBean implements Serializable {
 		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
 		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
 		getFacade().populaListaRevisao(aluno);
+	}
+	
+	public void saveRevisao(ActionEvent event) {
+		
 	}
 }

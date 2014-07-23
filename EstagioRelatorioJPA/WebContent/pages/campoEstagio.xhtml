@@ -49,13 +49,13 @@
 		<h:form id="formDelete">
 			<p:confirmDialog message="Deseja realmente remover este Campo ?" header="..:: Remover Campo" widgetVar="removeCampo">
 				<p:commandButton value="Sim" actionListener="#{campoBean.remove}" update=":formMessage :formDelete :formTabelaCampo" />
-				<p:commandButton value="Nao" oncomplete="removeCampo.hide()"/>
+				<p:commandButton value="Não" oncomplete="removeCampo.hide()"/>
 			</p:confirmDialog>
 		</h:form>
 		
 		<h:form id="formCadastro">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-					header="..::: Novo Campo - [ * Campo Obrigatorio ]" widgetVar="dialogCadCampo">
+					header="..::: Novo Campo - [ * Campo Obrigatório ]" widgetVar="dialogCadCampo">
 					<h:panelGrid id="grid" columns="2">
 						<p:outputLabel for="supervisor" value="Supervisor:" />
 						<p:selectOneMenu id="supervisor" value="#{campoBean.facade.campoEstagio.supervisor.id}" required="true">
@@ -75,7 +75,7 @@
 			
 		<h:form id="formAlterar">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Novo Campo - [ * Campo Obrigatorio ]" widgetVar="dialogAltCampo">
+				header="..::: Novo Campo - [ * Campo Obrigatório ]" widgetVar="dialogAltCampo">
 				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel for="supervisor" value="Supervisor:" />
 						<p:selectOneMenu id="supervisor" value="#{campoBean.facade.campoEstagioAltera.supervisor.id}" required="true">

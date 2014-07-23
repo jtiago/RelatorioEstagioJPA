@@ -37,14 +37,57 @@
 							<h:outputLabel value="#{item.revisao eq 'true' ? 'Revisão' : ''}"/>
 						</p:column>
 						
-						<p:column>
-							<p:commandButton icon="ui-icon-pencil" oncomplete="dialogValidar.show()">
-								<f:setPropertyActionListener target="#{relatorioAdminBean.facade.relatorioValidar}" value="#{item}" />
+						<p:column style="text-align:center;">
+							<p:commandButton icon="ui-icon-pencil">
+							
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
 				</p:fieldset>
 			</h:form>
 		</p:panel>
+		
+		<h:form id="formCorrecao">
+			<p:dialog width="900" height="500" header="..::Correção do Relatório" widgetVar="dialogRevisao" draggable="false" modal="true" resizable="false" position="top" >
+				<p:fieldset>
+					<h:panelGrid id="grid" columns="2">
+						<h:outputLabel value="Nome do Aluno:"/>
+						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.aluno.nome}" style="font-weight: bold;"/>
+						
+						<h:outputLabel value="Nome do Supervisor:"/>
+						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.campoEstagio.supervisor.nome}" style="font-weight: bold;"/>
+						
+						<h:outputLabel value="Campo de Estágio:"/>
+						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.campoEstagio.nome}" style="font-weight: bold;"/>
+						
+						<h:outputLabel value="Turma:"/>
+						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.aluno.nomeTurma}" style="font-weight: bold;"/>
+						
+						<h:outputLabel value="Módulo:"/>
+						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.modulo}" style="font-weight: bold;"/>
+						
+						<h:outputLabel value="Observação:"/>
+						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.observacao}" style="font-weight: bold;"/>
+					</h:panelGrid>
+				</p:fieldset>
+				<br/>
+				<p:fieldset>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="Conteúdo do Relatório:"/>
+						<p:editor id="editor" value="#{revisaoRelatorioBean.facade.relatorioRevisao.texto}" width="865" height="600"  /><br/>
+					</h:panelGrid>
+				</p:fieldset>
+				<br/>
+				<p:commandButton value="Enviar para Validação" icon="ui-icon-check" oncomplete="validarRelatorio.show()" />
+			</p:dialog>
+		</h:form>
+		
+		<h:form id="formEnviar">
+			<p:confirmDialog message="Deseja realmente Salvar e Enviar o Relatório, após escolher sim não será possível edita-ló sem a liberação da Coordenação ?" 
+				header="..:: Salvar e Enviar Relatório" widgetVar="salvarRelatorio">
+				<p:commandButton value="Sim" actionListener="#{revisaoRelatorioBean.saveRevisao}" update=":formMensagem :formEnviar :formRelatorio" />
+				<p:commandButton value="Não" oncomplete="salvarRelatorio.hide()"/>
+			</p:confirmDialog>
+		</h:form>
 	</ui:define>
 </ui:composition>

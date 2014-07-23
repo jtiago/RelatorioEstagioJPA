@@ -8,13 +8,13 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
 	  
 	<ui:define name="conteudo">
-		<p:panel  header="..:: Liberar Relatorio">
+		<p:panel  header="..:: Liberar Relatório">
 			<h:form id="formMessage">
 				<p:growl autoUpdate="true" rendered="#{liberarBean.mensagem}"/>
 			</h:form>
 			
 			<h:form id="formNovo">
-				<p:commandButton value="Libear Relatorio" oncomplete="dialogCadLiberar.show()"/>
+				<p:commandButton value="Liberar Relatório" oncomplete="dialogCadLiberar.show()"/>
 			</h:form><br/>
 			
 			<h:form id="formTabelaLiberar">
@@ -26,7 +26,7 @@
 						<h:outputLabel value="#{item.turmaLiberarRelatorio.nome}"/>
 					</p:column>
 					
-					<p:column headerText="Modulo" filterBy="#{item.modulo.label}" filterMatchMode="contains">
+					<p:column headerText="Módulo" filterBy="#{item.modulo.label}" filterMatchMode="contains">
 						<h:outputLabel value="#{item.modulo.label}"/>
 					</p:column>
 					
@@ -45,7 +45,7 @@
 		
 		<h:form id="formLiberar">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Liberar Relatorio por Turma - [ * Campo Obrigatorio ]" widgetVar="dialogCadLiberar">
+				header="..::: Liberar Relatório por Turma - [ * Campo Obrigatório ]" widgetVar="dialogCadLiberar">
 				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel for="turma" value="Turma:" />
 					<p:selectOneMenu id="turma" value="#{liberarBean.facade.liberarRelatorio.turmaLiberarRelatorio.id}" 
@@ -54,7 +54,7 @@
 						<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.id}" itemLabel="#{tu.nome}"/>
 			        </p:selectOneMenu>
 					
-					<p:outputLabel for="modulo" value="Modulo:" />
+					<p:outputLabel for="modulo" value="Módulo:" />
 					 <p:selectOneMenu id="modulo" value="#{liberarBean.facade.liberarRelatorio.modulo}" 
 					 	required="true" style="width:300px;">  
                         <f:selectItem itemLabel="Selecione" itemValue="#{null}" />  
@@ -70,12 +70,12 @@
 		
 		<h:form id="formFechamento">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Fchamento de Modulo para Relatorio - [ * Campo Obrigatorio ]" widgetVar="dialogCadFechamento">
+				header="..::: Fchamento de Módulo para Relatório - [ * Campo Obrigatório ]" widgetVar="dialogCadFechamento">
 				<h:panelGrid id="grid" columns="2">
 					<h:outputLabel value="Turma:" />
 					<h:outputLabel value="#{liberarBean.facade.liberarRelatorio.turmaLiberarRelatorio.nome}" style="font-weight: bold;" />
 					
-					<h:outputLabel value="Modulo em Aberto:" />
+					<h:outputLabel value="Módulo em Aberto:" />
 					<h:outputLabel value="#{liberarBean.facade.liberarRelatorio.modulo.label}" style="font-weight: bold;"/>
 				</h:panelGrid>
 				<p:commandButton value="Fechar" icon="ui-icon-circle-close" actionListener="#{liberarBean.fecharModuloLiberado}"
