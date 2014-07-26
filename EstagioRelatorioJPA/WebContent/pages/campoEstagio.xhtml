@@ -58,14 +58,14 @@
 					header="..::: Novo Campo - [ * Campo Obrigatório ]" widgetVar="dialogCadCampo">
 					<h:panelGrid id="grid" columns="2">
 						<p:outputLabel for="supervisor" value="Supervisor:" />
-						<p:selectOneMenu id="supervisor" value="#{campoBean.facade.campoEstagio.supervisor.id}" required="true">
+						<p:selectOneMenu id="supervisor" value="#{campoBean.facade.campoEstagio.supervisor.id}" required="true" style="width:305px;">
 				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
 				            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
 				            	itemValue="#{sup.id}"/>
 				        </p:selectOneMenu>
 						
 						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" value="#{campoBean.facade.campoEstagio.nome}" required="true"/>
+						<p:inputText id="nome" value="#{campoBean.facade.campoEstagio.nome}" required="true" style="width:300px;"/>
 					</h:panelGrid>
 					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{campoBean.save}" onclick="lazyload()"
 						update=":formCadastro:grid :formTabelaCampo :formMessage"/>

@@ -79,7 +79,7 @@
 							<p align="center">
 								Escolha o exame que mais gostou e descreva os seguintes dados: patologia, definição clinica, CID, posicionamento, regime
 								aplicado (Kv, mA, tempo), raio central, tamanho de filme, estrutura demonstrada, estado do paciente, local do exame (UTI, 
-								Centro Cirúrgia, Sala de Raio X ou outro), paciente colaborou ou não, colimaÃ§Ã£o e comentários gerais. Não registrar o 
+								Centro Cirúrgia, Sala de Raio X ou outro), paciente colaborou ou não, colimação e comentários gerais. Não registrar o 
 								nome do paciente.
 							</p>
 						</h:panelGrid>
@@ -93,7 +93,7 @@
 					</p:panel>
 			</p:panel>
 			
-			<p:panel header="..:: Relatorio de Estágio" rendered="#{!sessionScope.usuarioLogado.moduloLiberado}" style="margin:0 auto;">
+			<p:panel header="..:: Relatorio de Estágio" rendered="#{!sessionScope.usuarioLogado.moduloLiberado and !relatorioAlunoBean.relatorioAvaliando}" style="margin:0 auto;">
 				<br/><br/><br/><br/><br/><br/>
 				<h:panelGrid columns="1" style="margin:0 auto;">
 					<h:outputLabel value="NÃO EXISTE RELATÓRIO LIBERADO PARA VOCÊ!" style="font-size: 25px; font-weight:bold; text-align:center;"/>

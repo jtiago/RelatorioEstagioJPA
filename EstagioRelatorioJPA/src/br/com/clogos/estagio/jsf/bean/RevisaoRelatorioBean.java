@@ -30,6 +30,6 @@ public class RevisaoRelatorioBean implements Serializable {
 	}
 	
 	public void saveRevisao(ActionEvent event) {
-		
+		getFacade().saveRevisao();
 	}
 }

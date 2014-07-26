@@ -22,17 +22,17 @@
 			<h:form>
 				<p:menubar>
 					<p:submenu label="Logos">
-						<p:menuitem value="Home" icon="ui-icon-home" url="/pages/home.jsf"/>
+						<!-- <p:menuitem value="Home" icon="ui-icon-home" url="/pages/home.jsf"/>-->
 						<p:menuitem value="Sobre" icon="ui-icon-comment" onclick="sobreNos.show();"/>
 					</p:submenu>
 					
 					<p:menuitem value="Supervisor" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroSupervisor}" url="/pages/supervisor.jsf" />
-					<p:menuitem value="Campo" icon="ui-icon-signal" rendered="#{sessionScope.usuarioLogado.perfil.cadastroCampo}" url="/pages/campoEstagio.jsf" />
-					<p:menuitem value="Aluno" icon="ui-icon-signal" rendered="#{sessionScope.usuarioLogado.perfil.cadastroAluno}" url="/pages/aluno.jsf" />
-					<p:menuitem value="Turma" icon="ui-icon-signal" rendered="#{sessionScope.usuarioLogado.perfil.cadastroTurma}" url="/pages/turma.jsf" />
+					<p:menuitem value="Campo" icon="ui-icon-home" rendered="#{sessionScope.usuarioLogado.perfil.cadastroCampo}" url="/pages/campoEstagio.jsf" />
+					<p:menuitem value="Aluno" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroAluno}" url="/pages/aluno.jsf" />
+					<p:menuitem value="Turma" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroTurma}" url="/pages/turma.jsf" />
 					<p:menuitem value="Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAluno}" url="/pages/relatorioAluno.jsf" />
 					<p:menuitem value="Liberar Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.liberarRelatorio}" url="/pages/liberarRelatorio.jsf" />
-					<p:menuitem value="Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAdmin}" url="/pages/relatorioAdmin.jsf" />
+					<p:menuitem value="Validar" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAdmin}" url="/pages/relatorioAdmin.jsf" />
 					<p:menuitem value="Revisão" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.revisaoRelatorio}" url="/pages/revisaoRelatorio.jsf" />
 					<p:menuitem value="Mudar Senha" icon="ui-icon-locked" onclick="mudarSenha.show();"/>
 					<p:menuitem value="Sair" icon="ui-icon-power" actionListener="#{autenticarBean.logout}" />

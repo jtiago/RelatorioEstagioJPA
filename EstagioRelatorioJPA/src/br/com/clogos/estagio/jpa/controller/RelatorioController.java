@@ -36,6 +36,10 @@ public class RelatorioController implements Serializable {
 		return getRelatorioDAO().findRelatoriosRevisao(aluno);
 	}
 	
+	public Boolean saveRevisaoRelatorioAluno(Relatorio relatorio) {
+		return getRelatorioDAO().saveRevisaoRelatorioAluno(relatorio);
+	}
+	
 	public RelatorioDAO getRelatorioDAO() {
 		return relatorioDAO == null ? relatorioDAO = new RelatorioDAOImpl() : relatorioDAO;
 	}

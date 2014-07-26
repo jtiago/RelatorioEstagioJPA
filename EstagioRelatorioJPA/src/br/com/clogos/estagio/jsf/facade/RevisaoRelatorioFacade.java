@@ -3,6 +3,9 @@ package br.com.clogos.estagio.jsf.facade;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Relatorio;
@@ -17,6 +20,19 @@ public class RevisaoRelatorioFacade implements Serializable {
 	public void populaListaRevisao(Aluno aluno) {
 		if(aluno != null) {
 			listaRevisao = getRelatorioController().findRelatoriosRevisao(aluno);
+		}
+	}
+	
+	public void saveRevisao() {
+		if(relatorioRevisao != null) {
+			if(getRelatorioController().saveRevisaoRelatorioAluno(getRelatorioRevisao())) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_INFO, "Relatório salvo e enviando para validação com sucesso.", ""));
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_ERROR, "Problemas ao salvar e enviar relatório para validação.", ""));
+			}
+			relatorioRevisao=null; listaRevisao=null; relatorioController=null;
 		}
 	}
 	

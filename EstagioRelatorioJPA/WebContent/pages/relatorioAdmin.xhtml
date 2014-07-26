@@ -9,7 +9,7 @@
 	
 	<ui:define name="conteudo">
 		<h:form id="formMensagem">
-			<p:growl autoUpdate="true"/>
+			<p:growl id="mesg" autoUpdate="true"/>
 		</h:form>
 		
 		<p:panel header="..:: Validar Relatórios">
@@ -17,14 +17,15 @@
 				<h:form id="formPesquisaRelatorio">
 					<h:panelGrid id="grid" columns="5">
 						<p:outputLabel for="turma" value="Turma:"/>
-						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.aluno.nomeTurma}" required="true" style="width:295px;">
+						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.aluno.nomeTurma}" required="true" style="width:295px;"
+							effect="drop">
 				            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
 							<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.nome}" itemLabel="#{tu.nome}"/>
 				        </p:selectOneMenu>
 				        
 				        <p:outputLabel for="modulo" value="Módulo:" />
 						<p:selectOneMenu id="modulo" value="#{relatorioAdminBean.facade.relatorio.modulo}" 
-							required="true" style="width:295px;">  
+							required="true" style="width:295px;" effect="drop">  
 	                       <f:selectItem itemLabel="Selecione Modulo" itemValue="#{null}" />  
 	                       <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
                     	</p:selectOneMenu>
@@ -67,10 +68,11 @@
 		</p:panel>
 		
 		<h:form id="formAvaliacao">
-			<p:dialog width="900" height="500" header="..::Validar Relatório" widgetVar="dialogValidar" draggable="false" modal="true" resizable="false" position="top" >
+			<p:focus/>
+			<p:dialog width="900" height="500" header="..::Validar Relatório" widgetVar="dialogValidar" draggable="false" modal="true" resizable="false" position="top">
 				<p:fieldset>
 					<h:panelGrid id="grid" columns="2">
-						<h:outputLabel value="Nome do Aluno:"/>
+						<h:outputLabel id="nome" value="Nome do Aluno:"/>
 						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.aluno.nome}" style="font-weight: bold;"/>
 						
 						<h:outputLabel value="nome do Supervisor:"/>

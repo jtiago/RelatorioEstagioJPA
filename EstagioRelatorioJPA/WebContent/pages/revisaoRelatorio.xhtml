@@ -38,8 +38,8 @@
 						</p:column>
 						
 						<p:column style="text-align:center;">
-							<p:commandButton icon="ui-icon-pencil">
-							
+							<p:commandButton icon="ui-icon-pencil" oncomplete="dialogRevisao.show()" update=":formCorrecao">
+								<f:setPropertyActionListener target="#{revisaoRelatorioBean.facade.relatorioRevisao}" value="#{item}" />
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
@@ -48,7 +48,7 @@
 		</p:panel>
 		
 		<h:form id="formCorrecao">
-			<p:dialog width="900" height="500" header="..::Correção do Relatório" widgetVar="dialogRevisao" draggable="false" modal="true" resizable="false" position="top" >
+			<p:dialog width="950" height="500" header="..::Correção do Relatório" widgetVar="dialogRevisao" draggable="false" modal="true" resizable="false" position="top" >
 				<p:fieldset>
 					<h:panelGrid id="grid" columns="2">
 						<h:outputLabel value="Nome do Aluno:"/>
@@ -78,14 +78,15 @@
 					</h:panelGrid>
 				</p:fieldset>
 				<br/>
-				<p:commandButton value="Enviar para Validação" icon="ui-icon-check" oncomplete="validarRelatorio.show()" />
+				<p:commandButton value="Enviar para Validação" icon="ui-icon-check" oncomplete="salvarRelatorio.show()" />
 			</p:dialog>
 		</h:form>
 		
 		<h:form id="formEnviar">
 			<p:confirmDialog message="Deseja realmente Salvar e Enviar o Relatório, após escolher sim não será possível edita-ló sem a liberação da Coordenação ?" 
 				header="..:: Salvar e Enviar Relatório" widgetVar="salvarRelatorio">
-				<p:commandButton value="Sim" actionListener="#{revisaoRelatorioBean.saveRevisao}" update=":formMensagem :formEnviar :formRelatorio" />
+				<p:commandButton value="Sim" actionListener="#{revisaoRelatorioBean.saveRevisao}" update=":formMensagem :formEnviar :tabelaRelatorio :formCorrecao" 
+					oncomplete="salvarRelatorio.hide()"/>
 				<p:commandButton value="Não" oncomplete="salvarRelatorio.hide()"/>
 			</p:confirmDialog>
 		</h:form>
