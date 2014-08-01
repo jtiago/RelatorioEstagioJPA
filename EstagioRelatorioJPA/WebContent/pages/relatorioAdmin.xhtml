@@ -68,8 +68,8 @@
 							<p:commandButton icon="ui-icon-circle-zoomout" oncomplete="dialogValidar.show()" update=":formAvaliacao">
 								<f:setPropertyActionListener target="#{relatorioAdminBean.facade.relatorioValidar}" value="#{item}" />
 							</p:commandButton>
-							<p:commandButton icon="ui-icon-print" actionListener="#{relatorioAdminBean.gerarRelatorio}">
-                    			<f:setPropertyActionListener target="#{relatorioAdminBean.facade.relatorio}" value="#{item}" />
+							<p:commandButton icon="ui-icon-print" oncomplete="imprimirRelatorio.show()" update=":formImprimir">
+                    			<f:setPropertyActionListener target="#{relatorioAdminBean.facade.relatorioImprimir}" value="#{item}" />
                     		</p:commandButton>
 						</p:column>
 					</p:dataTable>
@@ -132,6 +132,14 @@
 				<p:commandButton value="Sim" actionListener="#{relatorioAdminBean.validarRelatorio}" oncomplete="dialogValidar.hide()"
 					update=":formMensagem :formValidar :tabelaRelatorio :formAvaliacao" />
 				<p:commandButton value="Não" oncomplete="validarRelatorio.hide()"/>
+			</p:confirmDialog>
+		</h:form>
+		
+		<h:form id="formImprimir">
+			<p:confirmDialog message="Deseja Imprimir este relatório ?" header="..:: Imprimir Relatório" widgetVar="imprimirRelatorio">
+				<p:commandButton value="Sim" actionListener="#{relatorioAdminBean.gerarRelatorio}" oncomplete="imprimirRelatorio.hide()" 
+					update=":formMensagem :formImprimir :tabelaRelatorio" />
+				<p:commandButton value="Não" oncomplete="imprimirRelatorio.hide()"/>
 			</p:confirmDialog>
 		</h:form>
 	</ui:define>
