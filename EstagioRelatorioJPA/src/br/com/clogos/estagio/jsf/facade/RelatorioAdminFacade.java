@@ -1,11 +1,22 @@
 package br.com.clogos.estagio.jsf.facade;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.model.Relatorio;
 
@@ -51,6 +62,28 @@ public class RelatorioAdminFacade implements Serializable {
 			}
 		}
 		relatorioValidar=null; listaRelatorios=null; relatorioController=null; 
+	}
+	
+	public void geraRelatorio() {
+		ServletContext context = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+		Map<String, Object> paramentros = new HashMap<String, Object>();
+		
+		try {
+			File fileJasper = new File(context.getRealPath("/relatorio/RelatorioEstagio.jasper"));
+			//InputStream relatorio = this.getClass().getClassLoader().getResourceAsStream("relatorios/RelatorioEstagio.jasper");
+			File fileLogo = new File(context.getRealPath("/images/logo.gif"));
+			BufferedImage logo = ImageIO.read(fileLogo);
+			paramentros.put("LOGO", logo);
+			paramentros.put("TITULO", "ESTÁGIO SUPERVISIONADO "+getRelatorio().getModulo());
+		
+		
+			JasperPrint jasperPrint = JasperFillManager.fillReport(fileJasper.getAbsolutePath(), paramentros);
+			JasperViewer.viewReport(jasperPrint,false);
+		} catch (JRException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Relatorio getRelatorio() {

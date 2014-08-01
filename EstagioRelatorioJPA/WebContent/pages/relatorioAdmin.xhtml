@@ -15,22 +15,29 @@
 		<p:panel header="..:: Validar Relatórios">
 			<p:fieldset>
 				<h:form id="formPesquisaRelatorio">
-					<h:panelGrid id="grid" columns="5">
+					<h:panelGrid id="grid" columns="7">
 						<p:outputLabel for="turma" value="Turma:"/>
-						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.aluno.nomeTurma}" required="true" style="width:295px;"
-							effect="drop">
+						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.aluno.nomeTurma}" required="true" style="width:170px;">
 				            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
 							<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.nome}" itemLabel="#{tu.nome}"/>
 				        </p:selectOneMenu>
 				        
 				        <p:outputLabel for="modulo" value="Módulo:" />
 						<p:selectOneMenu id="modulo" value="#{relatorioAdminBean.facade.relatorio.modulo}" 
-							required="true" style="width:295px;" effect="drop">  
+							required="true" style="width:170px;">  
 	                       <f:selectItem itemLabel="Selecione Modulo" itemValue="#{null}" />  
 	                       <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
                     	</p:selectOneMenu>
                     	
-                    	<p:commandButton value="Pesquisar" icon="ui-icon-search" actionListener="#{relatorioAdminBean.pesquisarRelatorio}" 
+                    	<p:outputLabel for="campo" value="Campo:" />
+                    	<p:selectOneMenu id="campo" value="#{relatorioAdminBean.facade.relatorio.campoEstagio.id}"
+							required="true" style="width: 250px;">
+							<f:selectItem itemLabel="Selecione Campo" itemValue="#{null}"/>
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
+								itemValue="#{cam.id}"/>
+						</p:selectOneMenu>
+                    	
+                    	<p:commandButton icon="ui-icon-search" actionListener="#{relatorioAdminBean.pesquisarRelatorio}" 
                     		update=":tabelaRelatorio :formPesquisaRelatorio"/>
 					</h:panelGrid>
 				</h:form>
@@ -61,6 +68,9 @@
 							<p:commandButton icon="ui-icon-circle-zoomout" oncomplete="dialogValidar.show()" update=":formAvaliacao">
 								<f:setPropertyActionListener target="#{relatorioAdminBean.facade.relatorioValidar}" value="#{item}" />
 							</p:commandButton>
+							<p:commandButton icon="ui-icon-print" actionListener="#{relatorioAdminBean.gerarRelatorio}">
+                    			<f:setPropertyActionListener target="#{relatorioAdminBean.facade.relatorio}" value="#{item}" />
+                    		</p:commandButton>
 						</p:column>
 					</p:dataTable>
 				</p:fieldset>
