@@ -12,6 +12,7 @@
 	<field name="SUPERVISOR" class="java.lang.String"/>
 	<field name="DATAINICIO" class="java.util.Date"/>
 	<field name="DATATERMINO" class="java.util.Date"/>
+	<field name="TEXTO" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -19,18 +20,18 @@
 		<band height="207" splitType="Stretch">
 			<image>
 				<reportElement x="7" y="12" width="100" height="50"/>
-				<imageExpression class="java.awt.Image"><![CDATA[$P{LOGO}]]></imageExpression>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="449" y="13" width="100" height="50"/>
-				<imageExpression class="java.awt.Image"><![CDATA[$P{LOGO}]]></imageExpression>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="119" y="13" width="320" height="49"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="14"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{TITULO}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{TITULO}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="8" y="91" width="63" height="20"/>
@@ -44,7 +45,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{NOMECURSO}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{NOMECURSO}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="8" y="111" width="63" height="20"/>
@@ -61,19 +62,19 @@
 				<text><![CDATA[CAMPO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="71" y="91" width="378" height="20"/>
+				<reportElement x="71" y="91" width="478" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMEALUNO}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{NOMEALUNO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="71" y="111" width="378" height="20"/>
+				<reportElement x="71" y="111" width="478" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMETURMA}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{NOMETURMA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="71" y="131" width="378" height="20"/>
+				<reportElement x="71" y="131" width="478" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{CAMPO}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{CAMPO}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="8" y="151" width="89" height="20"/>
@@ -83,9 +84,9 @@
 				<text><![CDATA[SUPERVISOR:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="97" y="151" width="352" height="20"/>
+				<reportElement x="97" y="151" width="452" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{SUPERVISOR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{SUPERVISOR}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="8" y="171" width="99" height="20"/>
@@ -99,7 +100,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DATAINICIO})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DATAINICIO})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="229" y="171" width="120" height="20"/>
@@ -113,12 +114,18 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DATATERMINO})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DATATERMINO})]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="8" y="10" width="541" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{TEXTO}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="61" splitType="Stretch"/>
