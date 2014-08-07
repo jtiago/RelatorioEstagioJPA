@@ -39,6 +39,9 @@ public class RelatorioJRDataSource implements JRDataSource {
 		if(nome.getName().equals("DATATERMINO")) {
 			return relatorio.getDataTerminio();
 		}
+		if(nome.getName().equals("TEXTO")) {
+			return relatorio.getTexto();
+		}
 		return null;
 	}
 

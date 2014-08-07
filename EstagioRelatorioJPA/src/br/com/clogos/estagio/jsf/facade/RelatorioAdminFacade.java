@@ -80,7 +80,7 @@ public class RelatorioAdminFacade implements Serializable {
 			File fileLogo = new File(context.getRealPath("/images/logo.gif"));
 			BufferedImage logo = ImageIO.read(fileLogo);
 			paramentros.put("LOGO", logo);
-			paramentros.put("NOMECURSO", getTurmaController().obterCurso(getRelatorioImprimir().getAluno().getNomeTurma()));
+			paramentros.put("NOMECURSO", getTurmaController().obterCurso(getRelatorioImprimir().getAluno().getNomeTurma()).getNomeCurso());
 			paramentros.put("TITULO", "ESTÁGIO SUPERVISIONADO "+getRelatorioImprimir().getModulo().getLabel().toUpperCase());
 		
 			JasperPrint jasperPrint = JasperFillManager.fillReport(fileJasper.getAbsolutePath(), paramentros, new RelatorioJRDataSource(lista));

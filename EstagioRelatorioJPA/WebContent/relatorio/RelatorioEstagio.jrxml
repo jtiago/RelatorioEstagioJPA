@@ -122,7 +122,9 @@
 		<band height="36" splitType="Stretch">
 			<textField>
 				<reportElement x="8" y="10" width="541" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{TEXTO}]]></textFieldExpression>
 			</textField>
 		</band>
