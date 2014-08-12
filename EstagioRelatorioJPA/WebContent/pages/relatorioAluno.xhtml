@@ -84,11 +84,14 @@
 							</p>
 						</h:panelGrid>
 						
-						<p:editor id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" width="865" height="600"  /><br/>
+						<h:panelGrid columns="1" style="font-family: arial, helvetica, serif; font-size: 12px;">
+							<p:editor id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" width="865" height="600" controls="" 
+								widgetVar="editorTexto"/><br/>
+						</h:panelGrid>
 						
 						<h:panelGrid columns="2">
 							<p:commandButton value="Salvar e Enviar" icon="ui-icon-disk" oncomplete="salvarRelatorio.show()" />
-							<p:commandButton value="Limpar" icon="ui-icon-minus" actionListener="#{relatorioAlunoBean.limpar}" />
+							<p:commandButton value="Limpar" type="button" icon="ui-icon-minus" onclick="PF('editorTexto').clear();" />
 						</h:panelGrid>
 					</p:panel>
 			</p:panel>
