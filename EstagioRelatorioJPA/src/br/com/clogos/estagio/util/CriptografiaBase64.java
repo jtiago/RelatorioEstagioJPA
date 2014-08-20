@@ -12,7 +12,7 @@ public class CriptografiaBase64 {
 	}
 	
 	 public static void main(String[] args) {
-		//System.out.println(CriptografiaBase64.encrypt("22"));
-		 System.out.println(CriptografiaBase64.decrypt("NTU="));
+		System.out.println(CriptografiaBase64.encrypt("22"));
+		 //System.out.println(CriptografiaBase64.decrypt("NTU="));
 	}
 }
