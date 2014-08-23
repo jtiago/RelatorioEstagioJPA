@@ -23,7 +23,7 @@ public class SupervisorBean implements Serializable {
 	private SupervisorFacade facade;
 	private UploadedFile file;
 	private String nome;
-	private static final String DIRETORIO = "C:/Developer/teste/";
+	private static final String DIRETORIO = "C:/IMGESTAGIO/";
 	
 	public SupervisorFacade getFacade() {
 		if(facade == null) {
@@ -35,7 +35,7 @@ public class SupervisorBean implements Serializable {
 	public void save() {
 		try {
 			String nomeArquivo = new SimpleDateFormat("ddMMyyyyHHmmssSSS").format(new Date());
-			File file = new File(DIRETORIO+nomeArquivo+".png");
+			File file = new File(DIRETORIO+nomeArquivo+".jpg");
 			IOUtils.copyLarge(getFile().getInputstream(), new FileOutputStream(file));
 			
 			ImagemAssinatura assinatura = new ImagemAssinatura();
