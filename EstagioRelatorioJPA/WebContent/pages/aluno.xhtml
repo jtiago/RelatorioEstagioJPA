@@ -24,7 +24,7 @@
 			
 			<h:form id="formTabelaAluno">
 				<p:dataTable id="tabelaAluno" var="item" value="#{alunoBean.facade.listaAlunos}" emptyMessage="Sem Registros..." 
-					filteredValue="#{alunoBean.facade.listaAlunosFilter}">
+					filteredValue="#{alunoBean.facade.listaAlunosFilter}" paginator="true" rowsPerPageTemplate="40,80,120" rows="40">
 					<f:facet name="header">
 						Alunos Cadastrados
 					</f:facet>

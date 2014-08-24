@@ -23,13 +23,13 @@ public enum ModuloEnum {
 	}
 	
 	public static ModuloEnum getModulo(String str) {
-		if(str.equalsIgnoreCase("I Módulo"))  {
+		if(str.equalsIgnoreCase("I MÃ³dulo"))  {
 			return Modulo_I;
-		} else if (str.equalsIgnoreCase("II Módulo")) {
+		} else if (str.equalsIgnoreCase("II MÃ³dulo")) {
 			return Modulo_II;
-		} else if(str.equalsIgnoreCase("III Módulo")) {
+		} else if(str.equalsIgnoreCase("III MÃ³dulo")) {
 			return Modulo_III;
-		} else if(str.equalsIgnoreCase("II e III Módulo")) {
+		} else if(str.equalsIgnoreCase("II e III MÃ³dulo")) {
 			return Modulo_II_III;
 		} else {
 			return null;
