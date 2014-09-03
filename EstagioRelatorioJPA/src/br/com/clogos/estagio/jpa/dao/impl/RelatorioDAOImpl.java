@@ -47,7 +47,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
 		List<Relatorio> lista = new LinkedList<Relatorio>();
-		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH c.supervisor ");
+		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH c.supervisor s JOIN FETCH s.imagem ");
 		hql.append("WHERE a.nomeTurma = :nomeTurma AND r.modulo = :modulo AND c.id = :idCampo ");
 		hql.append("ORDER BY a.nome ");
 		
