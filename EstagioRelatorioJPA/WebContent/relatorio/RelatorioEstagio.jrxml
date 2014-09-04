@@ -18,113 +18,124 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="207" splitType="Stretch">
+		<band height="194" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="71"/>
+			</rectangle>
 			<image>
-				<reportElement x="7" y="12" width="100" height="50"/>
-				<imageExpression class="java.awt.Image"><![CDATA[$P{LOGO}]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="449" y="13" width="100" height="50"/>
+				<reportElement x="449" y="11" width="100" height="50"/>
 				<imageExpression class="java.awt.Image"><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="119" y="13" width="320" height="49"/>
+				<reportElement x="119" y="13" width="320" height="25"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="14"/>
+					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{TITULO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="8" y="91" width="63" height="20"/>
+				<reportElement x="8" y="82" width="49" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[ALUNO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="119" y="67" width="320" height="20"/>
+				<reportElement x="119" y="39" width="320" height="20"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{NOMECURSO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="8" y="111" width="63" height="20"/>
+				<reportElement x="8" y="102" width="49" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[TURMA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="8" y="131" width="63" height="20"/>
+				<reportElement x="8" y="122" width="49" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Times New Roman" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[CAMPO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="71" y="91" width="478" height="20"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMEALUNO}]]></textFieldExpression>
+				<reportElement x="57" y="82" width="494" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMEALUNO}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="71" y="111" width="478" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="57" y="102" width="494" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMETURMA}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="71" y="131" width="478" height="20"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{CAMPO}]]></textFieldExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement x="57" y="122" width="494" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CAMPO}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="8" y="151" width="89" height="20"/>
+				<reportElement x="8" y="142" width="81" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[SUPERVISOR:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="97" y="151" width="452" height="20"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{SUPERVISOR}]]></textFieldExpression>
+				<reportElement x="89" y="142" width="464" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SUPERVISOR}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="8" y="171" width="99" height="20"/>
+				<reportElement x="8" y="162" width="99" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[DATA DE INÍCIO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="107" y="171" width="100" height="20"/>
+				<reportElement x="107" y="162" width="100" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Times New Roman" size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DATAINICIO})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="229" y="171" width="120" height="20"/>
+				<reportElement x="331" y="162" width="120" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[DATA DE TÉRMINO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="349" y="171" width="100" height="20"/>
+				<reportElement x="451" y="162" width="100" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DATATERMINO})]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="8" y="11" width="100" height="50"/>
+				<imageExpression class="java.awt.Image"><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="36" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="8" y="10" width="541" height="20"/>
+				<reportElement x="8" y="10" width="543" height="20"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{TEXTO}]]></textFieldExpression>
 			</textField>
@@ -133,9 +144,19 @@
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<image>
-				<reportElement x="33" y="2" width="138" height="50"/>
+				<reportElement x="46" y="2" width="138" height="50"/>
 				<imageExpression class="java.lang.String"><![CDATA[$P{IMGSUPERVISOR}]]></imageExpression>
 			</image>
+			<line>
+				<reportElement x="268" y="25" width="249" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="268" y="26" width="249" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMEALUNO}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>

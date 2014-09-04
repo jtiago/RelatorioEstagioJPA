@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,9 +17,9 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
 import br.com.clogos.estagio.jasper.RelatorioJRDataSource;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.jpa.controller.TurmaController;
@@ -86,7 +88,13 @@ public class RelatorioAdminFacade implements Serializable {
 					getRelatorioImprimir().getCampoEstagio().getSupervisor().getImagem().getNome()+".jpg");
 		
 			JasperPrint jasperPrint = JasperFillManager.fillReport(fileJasper.getAbsolutePath(), paramentros, new RelatorioJRDataSource(lista));
-			JasperViewer.viewReport(jasperPrint,false);
+			//JasperViewer.viewReport(jasperPrint,false);
+			String dataReport = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+getRelatorioImprimir().getAluno().getNome().replaceAll(" ", "")+".pdf";
+			JasperExportManager.exportReportToPdfFile(jasperPrint, "c:/"+dataReport);
+			Runtime.getRuntime().exec("cmd /c start c:/"+dataReport);
+			
+			File fileTemp = new File(dataReport);
+			fileTemp.deleteOnExit();
 		} catch (JRException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

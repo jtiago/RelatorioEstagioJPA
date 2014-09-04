@@ -6,7 +6,6 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
-	  
 	<f:metadata>
 	    <f:event listener="#{relatorioAlunoBean.defineRendered}" type="preRenderComponent" />  
 	</f:metadata>
@@ -85,8 +84,10 @@
 						</h:panelGrid>
 						
 						<h:panelGrid columns="1" style="font-family: arial, helvetica, serif; font-size: 12px;">
-							<p:editor id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" width="865" height="600" controls="" 
-								widgetVar="editorTexto"/><br/>
+							<!-- <p:editor id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" width="865" height="600" controls="size=16px" 
+								widgetVar="editorTexto" required="true"  /><br/> --> 
+							<p:inputTextarea id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" rows="70" cols="105"
+							onkeydown="if (event.keyCode == 13) { return false; }" style="font-size:14px; color:#000000;"/>
 						</h:panelGrid>
 						
 						<h:panelGrid columns="2">
@@ -120,5 +121,6 @@
 				<p:commandButton value="Não" oncomplete="salvarRelatorio.hide()"/>
 			</p:confirmDialog>
 		</h:form>
+		
 	</ui:define>
 </ui:composition>
