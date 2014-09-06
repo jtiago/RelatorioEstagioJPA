@@ -29,7 +29,7 @@ public class Supervisor implements ObjectModel {
 	private String nome;
 	
 	@OneToMany(mappedBy = "supervisor")
-	private List<CampoEstagio> campoEstagio;
+	private List<Relatorio> campoEstagio;
 	
 	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name="fkimagem", referencedColumnName="idimagem")
@@ -49,14 +49,6 @@ public class Supervisor implements ObjectModel {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public List<CampoEstagio> getCampoEstagio() {
-		return campoEstagio;
-	}
-
-	public void setCampoEstagio(List<CampoEstagio> campoEstagio) {
-		this.campoEstagio = campoEstagio;
 	}
 
 	public ImagemAssinatura getImagem() {

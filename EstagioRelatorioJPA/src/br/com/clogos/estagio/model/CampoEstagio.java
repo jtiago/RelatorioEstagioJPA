@@ -2,14 +2,11 @@ package br.com.clogos.estagio.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,10 +23,6 @@ public class CampoEstagio implements ObjectModel {
 	
 	@Column(name="nomecampoestagio", length=100, nullable=false)
 	private String nome;
-	
-	@ManyToOne(cascade=CascadeType.DETACH)
-	@JoinColumn(name = "fksupervisor", referencedColumnName="idsupervisor" )
-	private Supervisor supervisor;
 	
 	@OneToMany(mappedBy = "campoEstagio")
 	private List<Relatorio> relatorios;
@@ -48,13 +41,5 @@ public class CampoEstagio implements ObjectModel {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Supervisor getSupervisor() {
-		return supervisor == null ? supervisor = new Supervisor() : supervisor;
-	}
-
-	public void setSupervisor(Supervisor supervisor) {
-		this.supervisor = supervisor;
 	}
 }

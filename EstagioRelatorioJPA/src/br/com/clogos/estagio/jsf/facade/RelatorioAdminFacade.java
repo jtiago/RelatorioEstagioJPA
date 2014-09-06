@@ -84,14 +84,14 @@ public class RelatorioAdminFacade implements Serializable {
 			paramentros.put("LOGO", logo);
 			paramentros.put("NOMECURSO", getTurmaController().obterCurso(getRelatorioImprimir().getAluno().getNomeTurma()).getNomeCurso());
 			paramentros.put("TITULO", "ESTÁGIO SUPERVISIONADO "+getRelatorioImprimir().getModulo().getLabel().toUpperCase());
-			paramentros.put("IMGSUPERVISOR", getRelatorioImprimir().getCampoEstagio().getSupervisor(). getImagem().getCaminho()+
-					getRelatorioImprimir().getCampoEstagio().getSupervisor().getImagem().getNome()+".jpg");
+			paramentros.put("IMGSUPERVISOR", getRelatorioImprimir().getSupervisor(). getImagem().getCaminho()+
+					getRelatorioImprimir().getSupervisor().getImagem().getNome()+".jpg");
 		
 			JasperPrint jasperPrint = JasperFillManager.fillReport(fileJasper.getAbsolutePath(), paramentros, new RelatorioJRDataSource(lista));
 			//JasperViewer.viewReport(jasperPrint,false);
 			String dataReport = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+getRelatorioImprimir().getAluno().getNome().replaceAll(" ", "")+".pdf";
-			JasperExportManager.exportReportToPdfFile(jasperPrint, "c:/"+dataReport);
-			Runtime.getRuntime().exec("cmd /c start c:/"+dataReport);
+			JasperExportManager.exportReportToPdfFile(jasperPrint, "c:/IMGESTAGIO/"+dataReport);
+			Runtime.getRuntime().exec("cmd /c start c:/IMGESTAGIO/"+dataReport);
 			
 			File fileTemp = new File(dataReport);
 			fileTemp.deleteOnExit();

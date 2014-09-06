@@ -29,10 +29,6 @@
 						<h:outputLabel value="#{item.nome}"/>
 					</p:column>
 					
-					<p:column headerText="Supervisor">
-						<h:outputLabel value="#{item.supervisor.nome}"/>
-					</p:column>
-					
 					<p:column style="text-align:right; width: 100px;">
 						<p:commandButton icon="ui-icon-trash" oncomplete="removeCampo.show()">
 							<f:setPropertyActionListener target="#{campoBean.facade.campoEstagio}" value="#{item}" />
@@ -56,16 +52,9 @@
 		<h:form id="formCadastro">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 					header="..::: Novo Campo - [ * Campo Obrigatório ]" widgetVar="dialogCadCampo">
-					<h:panelGrid id="grid" columns="2">
-						<p:outputLabel for="supervisor" value="Supervisor:" />
-						<p:selectOneMenu id="supervisor" value="#{campoBean.facade.campoEstagio.supervisor.id}" required="true" style="width:305px;">
-				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
-				            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
-				            	itemValue="#{sup.id}"/>
-				        </p:selectOneMenu>
-						
+					<h:panelGrid id="grid" columns="2">	
 						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" value="#{campoBean.facade.campoEstagio.nome}" required="true" style="width:300px;"/>
+						<p:inputText id="nome" value="#{campoBean.facade.campoEstagio.nome}" required="true" style="width:400px;"/>
 					</h:panelGrid>
 					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{campoBean.save}" onclick="lazyload()"
 						update=":formCadastro:grid :formTabelaCampo :formMessage"/>
@@ -77,15 +66,8 @@
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 				header="..::: Novo Campo - [ * Campo Obrigatório ]" widgetVar="dialogAltCampo">
 				<h:panelGrid id="grid" columns="2">
-					<p:outputLabel for="supervisor" value="Supervisor:" />
-						<p:selectOneMenu id="supervisor" value="#{campoBean.facade.campoEstagioAltera.supervisor.id}" required="true">
-				            <f:selectItem itemLabel="Selecione" itemValue="#{null}" />
-				            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
-				            	itemValue="#{sup.id}"/>
-				        </p:selectOneMenu>
-					
 					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText id="nome" value="#{campoBean.facade.campoEstagioAltera.nome}" required="true"/>
+					<p:inputText id="nome" value="#{campoBean.facade.campoEstagioAltera.nome}" required="true" style="width:400px;"/>
 				</h:panelGrid>
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{campoBean.update}"
 					update=":formTabelaCampo :formAlterar:grid" onclick="lazyload()"/>

@@ -19,7 +19,7 @@ public class CampoEstagioDAOImpl implements Serializable, CampoEstagioDAO {
 	public List<CampoEstagio> findAll() {
 		entityManager = JpaUtil.getEntityManager();
 		List<CampoEstagio> lista = new ArrayList<CampoEstagio>();
-		String hql = "SELECT c FROM CampoEstagio c INNER JOIN c.supervisor s ORDER BY c.nome";
+		String hql = "SELECT c FROM CampoEstagio c ORDER BY c.nome";
 		try {
 			TypedQuery<CampoEstagio> query = entityManager.createQuery(hql, CampoEstagio.class);
 			lista = query.getResultList();

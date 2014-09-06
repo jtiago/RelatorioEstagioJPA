@@ -42,6 +42,9 @@ public class Perfil implements ObjectModel {
 	
 //	update perfil set cadastroAluno = 0, cadastroCampo = 0, cadastroSupervisor = 0, cadastroTurma = 0, liberarrelatorio = 0, relatorioAdmin = 0,
 //			relatorioAluno = 1, revisaoRelatorio = 1 where idperfil = 2;
+	
+//	insert into usuario (cpfusuario,nomeusuario,senhausuario,fkperfil)
+//	values ('22222222222', 'Arruda', 'MjI=', 1)
 
 	public Long getId() {
 		return id;

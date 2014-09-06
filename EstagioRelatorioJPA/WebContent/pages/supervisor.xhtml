@@ -52,7 +52,7 @@
 					header="..::: Novo Supervisor - [ * Campo Obrigatório ]" widgetVar="dialogCadSupervisor">
 					<h:panelGrid columns="2">
 						<h:outputLabel value="Nome:" />
-						<p:inputText value="#{supervisorBean.nome}" style="width: 250px;"/>
+						<p:inputText value="#{supervisorBean.nome}" style="width: 400px;"/>
 						
 						<h:outputLabel value="Assinatura:" />
 						<p:fileUpload value="#{supervisorBean.file}" mode="simple"/>
@@ -68,7 +68,7 @@
 				header="..::: Novo Supervisor - [ * Campo Obrigatório ]" widgetVar="dialogAltSupervisor">
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Nome:" />
-					<p:inputText value="#{supervisorBean.facade.supervisorAltera.nome}" style="width: 250px;"/>
+					<p:inputText value="#{supervisorBean.facade.supervisorAltera.nome}" style="width: 400px;"/>
 					
 				</h:panelGrid>
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{supervisorBean.update}"

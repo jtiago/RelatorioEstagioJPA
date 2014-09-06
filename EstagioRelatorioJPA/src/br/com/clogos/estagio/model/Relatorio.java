@@ -58,6 +58,10 @@ public class Relatorio implements ObjectModel {
 	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "fkaluno")
 	private Aluno aluno;
+	
+	@ManyToOne(cascade=CascadeType.DETACH)
+	@JoinColumn(name = "fksupervisor", referencedColumnName="idsupervisor" )
+	private Supervisor supervisor;
 
 	public Long getId() {
 		return id;
@@ -153,5 +157,13 @@ public class Relatorio implements ObjectModel {
 
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
+	}
+
+	public Supervisor getSupervisor() {
+		return supervisor == null ? supervisor = new Supervisor() : supervisor;
+	}
+
+	public void setSupervisor(Supervisor supervisor) {
+		this.supervisor = supervisor;
 	}
 }
