@@ -48,14 +48,20 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		StringBuilder hql = new StringBuilder();
 		List<Relatorio> lista = new LinkedList<Relatorio>();
 		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH r.supervisor s JOIN FETCH s.imagem ");
-		hql.append("WHERE a.nomeTurma = :nomeTurma AND r.modulo = :modulo AND c.id = :idCampo ");
+		hql.append("WHERE a.nomeTurma = :nomeTurma AND r.modulo = :modulo ");
+		if(relatorio.getCampoEstagio().getId() != null) {
+			hql.append("AND c.id = :idCampo ");
+		}
 		hql.append("ORDER BY a.nome ");
 		
 		try {
 			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class)
 					.setParameter("nomeTurma", relatorio.getAluno().getNomeTurma())
-					.setParameter("modulo", relatorio.getModulo())
-					.setParameter("idCampo", relatorio.getCampoEstagio().getId());
+					.setParameter("modulo", relatorio.getModulo());
+					if(relatorio.getCampoEstagio().getId() != null) {
+						query.setParameter("idCampo", relatorio.getCampoEstagio().getId());
+					}
+					
 			lista = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();

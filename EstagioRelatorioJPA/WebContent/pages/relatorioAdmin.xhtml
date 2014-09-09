@@ -17,7 +17,7 @@
 				<h:form id="formPesquisaRelatorio">
 					<h:panelGrid id="grid" columns="7">
 						<p:outputLabel for="turma" value="Turma:"/>
-						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.aluno.nomeTurma}" required="true" style="width:170px;">
+						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.aluno.nomeTurma}" required="false" style="width:170px;">
 				            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
 							<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.nome}" itemLabel="#{tu.nome}"/>
 				        </p:selectOneMenu>
@@ -31,7 +31,7 @@
                     	
                     	<p:outputLabel for="campo" value="Campo:" />
                     	<p:selectOneMenu id="campo" value="#{relatorioAdminBean.facade.relatorio.campoEstagio.id}"
-							required="true" style="width: 250px;">
+							required="false" style="width: 250px;">
 							<f:selectItem itemLabel="Selecione Campo" itemValue="#{null}"/>
 							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
 								itemValue="#{cam.id}"/>
