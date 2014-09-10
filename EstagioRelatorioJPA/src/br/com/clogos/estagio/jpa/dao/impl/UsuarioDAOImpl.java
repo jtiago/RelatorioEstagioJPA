@@ -1,6 +1,7 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
@@ -57,5 +58,11 @@ public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
 				entityManager.close();
 			}
 		}
+	}
+
+	@Override
+	public List<Usuario> findAll() {
+		entityManager = JpaUtil.getEntityManager();
+		return null;
 	}
 }

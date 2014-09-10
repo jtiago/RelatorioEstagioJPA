@@ -3,17 +3,29 @@ package br.com.clogos.estagio.jsf.facade;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.UsuarioController;
 import br.com.clogos.estagio.model.Usuario;
 
 public class UsuarioFacade implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private UsuarioController usuarioController;
+	private GenericController genericController;
+	private List<Usuario> listaUsuarios;
+	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> getListaUsuarios() {
+		if(listaUsuarios == null) {
+			listaUsuarios = (List<Usuario>) getGenericController().findAll(Usuario.class, "nome", "asc");
+		}
+		return listaUsuarios;
+	}
 	
 	public void updateSenha(String cpf, String senha) {
 		if(getUsuarioController().updateSenha(cpf, senha)) {
@@ -64,5 +76,9 @@ public class UsuarioFacade implements Serializable {
 	
 	public UsuarioController getUsuarioController() {
 		return usuarioController == null ? usuarioController = new UsuarioController() : usuarioController;
+	}
+	
+	public GenericController getGenericController() {
+		return genericController == null ? genericController = new GenericController() : genericController;
 	}
 }

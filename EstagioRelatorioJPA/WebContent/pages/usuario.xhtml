@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templatePages.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+	<ui:define name="conteudo">
+		<p:panel  header="..:: Cadastro de Campo">
+			<h:form id="formMessage">
+				<p:growl autoUpdate="true" rendered="#{campoBean.mensagem}"/>
+			</h:form>
+			
+			<h:form id="formNovo">
+				<h:panelGrid columns="2">
+					<p:commandButton value="Novo Usuário" icon="ui-icon-disk" oncomplete="dialogCadCampo.show()"/>
+				</h:panelGrid>
+			</h:form><br/>
+			
+			<h:form id="formTabelaCampo">
+				<p:dataTable id="tabelaCampo" var="item" value="#{usuarioBean.facade.listaUsuarios}" emptyMessage="Sem Registros...">
+					<f:facet name="header">
+						Usuários Cadastrados
+					</f:facet>
+					
+					<p:column headerText="Número CPF">
+						<h:outputLabel value="#{item.cpf}"/>
+					</p:column>
+					
+					<p:column headerText="Nome">
+						<h:outputLabel value="#{item.nome}"/>
+					</p:column>
+					
+					<p:column style="text-align:right; width: 100px;">
+						<p:commandButton icon="ui-icon-trash" oncomplete="removeCampo.show()">
+							<f:setPropertyActionListener target="#{campoBean.facade.campoEstagio}" value="#{item}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-pencil" oncomplete="dialogAltCampo.show()" update=":formAlterar">
+							<f:setPropertyActionListener target="#{campoBean.facade.campoEstagioAltera}" value="#{item}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:panel>
+		
+		<h:form id="formDelete">
+			<p:confirmDialog message="Deseja realmente remover este Campo ?" header="..:: Remover Campo" widgetVar="removeCampo">
+				<p:commandButton value="Sim" actionListener="#{campoBean.remove}" update=":formMessage :formDelete :formTabelaCampo" />
+				<p:commandButton value="Não" oncomplete="removeCampo.hide()"/>
+			</p:confirmDialog>
+		</h:form>
+		
+		<h:form id="formCadastro">
+				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+					header="..::: Novo Campo - [ * Campo Obrigatório ]" widgetVar="dialogCadCampo">
+					<h:panelGrid id="grid" columns="2">	
+						<p:outputLabel for="nome" value="Nome:" />
+						<p:inputText id="nome" value="#{campoBean.facade.campoEstagio.nome}" required="true" style="width:400px;"/>
+					</h:panelGrid>
+					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{campoBean.save}" onclick="lazyload()"
+						update=":formCadastro:grid :formTabelaCampo :formMessage"/>
+					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadCampo.hide()" onclick="lazyload()"/>
+				</p:dialog>
+			</h:form>
+			
+		<h:form id="formAlterar">
+			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+				header="..::: Novo Campo - [ * Campo Obrigatório ]" widgetVar="dialogAltCampo">
+				<h:panelGrid id="grid" columns="2">
+					<p:outputLabel for="nome" value="Nome:" />
+					<p:inputText id="nome" value="#{campoBean.facade.campoEstagioAltera.nome}" required="true" style="width:400px;"/>
+				</h:panelGrid>
+				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{campoBean.update}"
+					update=":formTabelaCampo :formAlterar:grid" onclick="lazyload()"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltCampo.hide()" onclick="lazyload()"/>
+			</p:dialog>
+		</h:form>
+		
+		<h:form>
+			<p:remoteCommand name="lazyload">  
+		        <f:setPropertyActionListener value="#{false}" target="#{campoBean.mensagem}" />  
+		    </p:remoteCommand> 
+		</h:form>
+	</ui:define>
+</ui:composition>
