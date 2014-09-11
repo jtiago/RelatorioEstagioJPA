@@ -56,6 +56,10 @@
 							<h:outputLabel value="#{item.aluno.matricula}"/>
 						</p:column>
 						
+						<p:column headerText="Turma" filterBy="#{item.aluno.nomeTurma}">
+							<h:outputLabel value="#{item.aluno.nomeTurma}"/>
+						</p:column>
+						
 						<p:column headerText="Nome Aluno" filterBy="#{item.aluno.nome}" filterMatchMode="contains">
 							<h:outputLabel value="#{item.aluno.nome}"/>
 						</p:column>
@@ -96,6 +100,9 @@
 						
 						<h:outputLabel value="Módulo:"/>
 						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.modulo}" style="font-weight: bold;"/>
+						
+						<h:outputLabel value="Data Cadastro:"/>
+						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.dataCadastro}" style="font-weight: bold;"/>
 					</h:panelGrid>
 				</p:fieldset>
 				<br/>
