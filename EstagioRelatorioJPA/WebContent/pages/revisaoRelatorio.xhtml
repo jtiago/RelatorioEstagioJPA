@@ -26,16 +26,22 @@
 						</f:facet>
 						
 						<p:column headerText="Data Cadastro">
-							<h:outputLabel value="#{item.dataCadastro}"/> 
+							<h:outputLabel value="#{item.dataCadastro}">
+								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy HH:mm" />
+							</h:outputLabel> 
+						</p:column>
+						
+						<p:column headerText="Campo">
+							<h:outputLabel value="#{item.campoEstagio.nome}"/>
 						</p:column>
 						
 						<p:column headerText="Módulo">
-							<h:outputLabel value="#{item.modulo}"/>
+							<h:outputLabel value="#{item.modulo.label}"/>
 						</p:column>
 						
-						<p:column headerText="Status">
+						<!-- <p:column headerText="Status">
 							<h:outputLabel value="#{item.revisao eq 'true' ? 'Revisão' : ''}"/>
-						</p:column>
+						</p:column>-->
 						
 						<p:column style="text-align:center;">
 							<p:commandButton icon="ui-icon-pencil" oncomplete="dialogRevisao.show()" update=":formCorrecao">
@@ -55,7 +61,7 @@
 						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.aluno.nome}" style="font-weight: bold;"/>
 						
 						<h:outputLabel value="Nome do Supervisor:"/>
-						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.campoEstagio.supervisor.nome}" style="font-weight: bold;"/>
+						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.supervisor.nome}" style="font-weight: bold;"/>
 						
 						<h:outputLabel value="Campo de Estágio:"/>
 						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.campoEstagio.nome}" style="font-weight: bold;"/>
@@ -64,7 +70,7 @@
 						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.aluno.nomeTurma}" style="font-weight: bold;"/>
 						
 						<h:outputLabel value="Módulo:"/>
-						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.modulo}" style="font-weight: bold;"/>
+						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.modulo.label}" style="font-weight: bold;"/>
 						
 						<h:outputLabel value="Observação:"/>
 						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.observacao}" style="font-weight: bold;"/>
@@ -74,11 +80,13 @@
 				<p:fieldset>
 					<h:panelGrid columns="1">
 						<h:outputLabel value="Conteúdo do Relatório:"/>
-						<p:editor id="editor" value="#{revisaoRelatorioBean.facade.relatorioRevisao.texto}" width="865" height="600"  /><br/>
+						<!-- <p:editor id="editor" value="#{revisaoRelatorioBean.facade.relatorioRevisao.texto}" width="865" height="600"  /><br/> -->
+						<p:inputTextarea id="editor" value="#{revisaoRelatorioBean.facade.relatorioRevisao.texto}" rows="30" cols="95"
+							onkeydown="if (event.keyCode == 13) { return false; }" style="font-size:16px; color:#000000;"/> <br/>
 					</h:panelGrid>
 				</p:fieldset>
 				<br/>
-				<p:commandButton value="Enviar para Validação" icon="ui-icon-check" oncomplete="salvarRelatorio.show()" />
+				<p:commandButton value="Enviar para Validação" icon="ui-icon-check" oncomplete="salvarRelatorio.show()" /><br/>
 			</p:dialog>
 		</h:form>
 		
