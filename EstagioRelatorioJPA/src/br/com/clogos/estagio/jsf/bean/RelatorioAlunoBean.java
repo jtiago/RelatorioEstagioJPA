@@ -43,7 +43,7 @@ public class RelatorioAlunoBean implements Serializable {
 		relatorioAvaliando = getFacade().existeRelatorioPreenchido(aluno);
 		
 		if(aluno.getModulo() != null) {
-			if(aluno.getModulo().contains("II M") || aluno.getModulo().contains("III M")) {
+			if((aluno.getModulo().contains("II M") || aluno.getModulo().contains("III M")) && (aluno.getTurmaT().getNomeCurso().contains("enfermagem") || aluno.getTurmaT().getNomeCurso().contains("ENFERMAGEM"))) {
 				renderedEnfermagem = true;
 			} 
 			
