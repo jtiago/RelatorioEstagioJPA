@@ -34,7 +34,7 @@
 					</p:column>
 					
 					<p:column style="text-align:right; width: 100px;">
-						<p:commandButton icon="ui-icon-trash" oncomplete="removeCampo.show()">
+						<p:commandButton icon="ui-icon-trash" oncomplete="removeUsuario.show()">
 							<f:setPropertyActionListener target="#{campoBean.facade.campoEstagio}" value="#{item}" />
 						</p:commandButton>
 
@@ -47,7 +47,7 @@
 		</p:panel>
 		
 		<h:form id="formDelete">
-			<p:confirmDialog message="Deseja realmente remover este Campo ?" header="..:: Remover Campo" widgetVar="removeCampo">
+			<p:confirmDialog message="Deseja realmente remover este Usuário ?" header="..:: Remover Usuário" widgetVar="removeUsuario">
 				<p:commandButton value="Sim" actionListener="#{campoBean.remove}" update=":formMessage :formDelete :formTabelaCampo" />
 				<p:commandButton value="Não" oncomplete="removeCampo.hide()"/>
 			</p:confirmDialog>

@@ -36,6 +36,8 @@ public class Perfil implements ObjectModel {
 	private Boolean relatorioAdmin;
 	@Column(length=1)
 	private Boolean revisaoRelatorio;
+	@Column(length=1)
+	private Boolean cadastroUsuario;
 	
 //	update perfil set cadastroAluno = 1, cadastroCampo = 1, cadastroSupervisor = 1, cadastroTurma = 1, liberarrelatorio = 1, relatorioAdmin = 1,
 //			relatorioAluno = 0, revisaoRelatorio = 0 where idperfil = 1;
@@ -45,6 +47,9 @@ public class Perfil implements ObjectModel {
 	
 //	insert into usuario (cpfusuario,nomeusuario,senhausuario,fkperfil)
 //	values ('22222222222', 'Arruda', 'MjI=', 1)
+	
+//	alter table perfil add cadastroUsuario tinyint(1)
+//	update perfil set cadastroUsuario = 0 where idperfil = 2
 
 	public Long getId() {
 		return id;
@@ -124,5 +129,13 @@ public class Perfil implements ObjectModel {
 
 	public void setRevisaoRelatorio(Boolean revisaoRelatorio) {
 		this.revisaoRelatorio = revisaoRelatorio;
+	}
+
+	public Boolean getCadastroUsuario() {
+		return cadastroUsuario;
+	}
+
+	public void setCadastroUsuario(Boolean cadastroUsuario) {
+		this.cadastroUsuario = cadastroUsuario;
 	}
 }

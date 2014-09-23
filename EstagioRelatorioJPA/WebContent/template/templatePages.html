@@ -28,6 +28,7 @@
 						<p:menuitem value="Sobre" icon="ui-icon-comment" onclick="sobreNos.show();"/>
 					</p:submenu>
 					
+					<p:menuitem value="Usuário" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroUsuario}" url="/pages/usuario.jsf" />
 					<p:menuitem value="Supervisor" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroSupervisor}" url="/pages/supervisor.jsf" />
 					<p:menuitem value="Campo" icon="ui-icon-home" rendered="#{sessionScope.usuarioLogado.perfil.cadastroCampo}" url="/pages/campoEstagio.jsf" />
 					<p:menuitem value="Aluno" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroAluno}" url="/pages/aluno.jsf" />
