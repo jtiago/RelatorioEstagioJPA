@@ -37,7 +37,7 @@ public class AutenticarBean implements Serializable {
 	}
 	
 	public void login(ActionEvent event) {
-		if(getPerfil().getId() == 1) {
+		if(getPerfil().getId() == 1 || getPerfil().getId() == 3) {
 			Usuario usuario = new Usuario();
 			usuario.setCpf(getAluno().getCpf());
 			usuario.setSenha(getAluno().getSenha());

@@ -28,15 +28,18 @@
 						<p:menuitem value="Sobre" icon="ui-icon-comment" onclick="sobreNos.show();"/>
 					</p:submenu>
 					
-					<p:menuitem value="Usuário" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroUsuario}" url="/pages/usuario.jsf" />
-					<p:menuitem value="Supervisor" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroSupervisor}" url="/pages/supervisor.jsf" />
-					<p:menuitem value="Campo" icon="ui-icon-home" rendered="#{sessionScope.usuarioLogado.perfil.cadastroCampo}" url="/pages/campoEstagio.jsf" />
-					<p:menuitem value="Aluno" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroAluno}" url="/pages/aluno.jsf" />
-					<p:menuitem value="Turma" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroTurma}" url="/pages/turma.jsf" />
-					<p:menuitem value="Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAluno}" url="/pages/relatorioAluno.jsf" />
+					<p:submenu label="Cadastro" rendered="#{sessionScope.usuarioLogado.perfil.cadastroUsuario}">
+						<p:menuitem value="Usuário" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroUsuario}" url="/pages/usuario.jsf" />
+						<p:menuitem value="Supervisor" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroSupervisor}" url="/pages/supervisor.jsf" />
+						<p:menuitem value="Campo" icon="ui-icon-home" rendered="#{sessionScope.usuarioLogado.perfil.cadastroCampo}" url="/pages/campoEstagio.jsf" />
+						<p:menuitem value="Aluno" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroAluno}" url="/pages/aluno.jsf" />
+						<p:menuitem value="Turma" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroTurma}" url="/pages/turma.jsf" />
+					</p:submenu>
+
+					<p:menuitem value="Preencher Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAluno}" url="/pages/relatorioAluno.jsf" />
 					<p:menuitem value="Liberar Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.liberarRelatorio}" url="/pages/liberarRelatorio.jsf" />
-					<p:menuitem value="Validar" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAdmin}" url="/pages/relatorioAdmin.jsf" />
-					<p:menuitem value="Revisão" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.revisaoRelatorio}" url="/pages/revisaoRelatorio.jsf" />
+					<p:menuitem value="Validar Relatório" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAdmin}" url="/pages/relatorioAdmin.jsf" />
+					<p:menuitem value="Revisar Relatório" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.revisaoRelatorio}" url="/pages/revisaoRelatorio.jsf" />
 					<p:menuitem value="Mudar Senha" icon="ui-icon-locked" onclick="mudarSenha.show();"/>
 					<p:menuitem value="Sair" icon="ui-icon-power" actionListener="#{autenticarBean.logout}" />
 					
@@ -83,7 +86,7 @@
 			Fone: +55(61)3628-0555 / Fax: +55(61)3628-0555<br/>
 			E-Mail: contato@clogos.com.br<br/>
 			Projeto: Relatório Estágio -
-			<b>Versão 1.0.0</b><br/>
+			<b>Versão 1.2.1</b><br/>
 		</p:dialog>
 		
 		<h:form id="formSenha">

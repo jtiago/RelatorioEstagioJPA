@@ -10,16 +10,16 @@
 	<ui:define name="conteudo">
 		<p:panel  header="..:: Cadastro de Campo">
 			<h:form id="formMessage">
-				<p:growl autoUpdate="true" rendered="#{campoBean.mensagem}"/>
+				<p:messages autoUpdate="true" rendered="#{usuarioBean.mensagem}"/>
 			</h:form>
 			
 			<h:form id="formNovo">
 				<h:panelGrid columns="2">
-					<p:commandButton value="Novo Usuário" icon="ui-icon-disk" oncomplete="dialogCadCampo.show()"/>
+					<p:commandButton value="Novo Usuário" icon="ui-icon-disk" oncomplete="dialogCadUsuario.show()"/>
 				</h:panelGrid>
 			</h:form><br/>
 			
-			<h:form id="formTabelaCampo">
+			<h:form id="formTabelaUsuario">
 				<p:dataTable id="tabelaCampo" var="item" value="#{usuarioBean.facade.listaUsuarios}" emptyMessage="Sem Registros...">
 					<f:facet name="header">
 						Usuários Cadastrados
@@ -33,13 +33,17 @@
 						<h:outputLabel value="#{item.nome}"/>
 					</p:column>
 					
-					<p:column style="text-align:right; width: 100px;">
+					<p:column style="text-align:right; width: 150px;">
 						<p:commandButton icon="ui-icon-trash" oncomplete="removeUsuario.show()">
-							<f:setPropertyActionListener target="#{campoBean.facade.campoEstagio}" value="#{item}" />
+							<f:setPropertyActionListener target="#{usuarioBean.facade.usuario}" value="#{item}" />
 						</p:commandButton>
 
-						<p:commandButton icon="ui-icon-pencil" oncomplete="dialogAltCampo.show()" update=":formAlterar">
-							<f:setPropertyActionListener target="#{campoBean.facade.campoEstagioAltera}" value="#{item}" />
+						<p:commandButton icon="ui-icon-pencil" oncomplete="dialogAltUsuario.show()" update=":formAlterar">
+							<f:setPropertyActionListener target="#{usuarioBean.facade.usuarioAltera}" value="#{item}" />
+						</p:commandButton>
+						
+						<p:commandButton icon="ui-icon-arrowrefresh-1-w" title="Resetar Senha" oncomplete="resetSenha.show()">
+							<f:setPropertyActionListener target="#{usuarioBean.usuario}" value="#{item}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
@@ -48,40 +52,62 @@
 		
 		<h:form id="formDelete">
 			<p:confirmDialog message="Deseja realmente remover este Usuário ?" header="..:: Remover Usuário" widgetVar="removeUsuario">
-				<p:commandButton value="Sim" actionListener="#{campoBean.remove}" update=":formMessage :formDelete :formTabelaCampo" />
-				<p:commandButton value="Não" oncomplete="removeCampo.hide()"/>
+				<p:commandButton value="Sim" actionListener="#{usuarioBean.remove}" update=":formMessage :formDelete :formTabelaUsuario" />
+				<p:commandButton value="Não" oncomplete="removeUsuario.hide()"/>
+			</p:confirmDialog>
+		</h:form>
+		
+		<h:form id="formReset">
+			<p:confirmDialog message="Deseja realmente resetar a senha ?" header="..:: Resetar Senha" widgetVar="resetSenha">
+				<p:commandButton value="Sim" actionListener="#{usuarioBean.resetSenha}" update=":formMessage :formReset" />
+				<p:commandButton value="Não" oncomplete="resetSenha.hide()"/>
 			</p:confirmDialog>
 		</h:form>
 		
 		<h:form id="formCadastro">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-					header="..::: Novo Campo - [ * Campo Obrigatório ]" widgetVar="dialogCadCampo">
+					header="..::: Novo Usuário - [ * Campo Obrigatório ]" widgetVar="dialogCadUsuario">
 					<h:panelGrid id="grid" columns="2">	
+						<p:outputLabel for="perfil" value="Perfil:"/>
+						<p:selectOneMenu id="perfil" value="#{usuarioBean.facade.usuario.perfil.id}" required="true" style="width:400px;">
+				            <f:selectItem itemLabel="Selecione Perfil" itemValue="#{null}" />
+							<f:selectItems value="#{perfilBean.facade.listaPerfil}" var="per" itemValue="#{per.id}" itemLabel="#{per.nome}"/>
+				        </p:selectOneMenu>
+						
 						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" value="#{campoBean.facade.campoEstagio.nome}" required="true" style="width:400px;"/>
+						<p:inputText id="nome" value="#{usuarioBean.facade.usuario.nome}" required="true" style="width:400px;"/>
+						
+						<p:outputLabel for="cpf" value="CPF:" />
+						<p:inputMask mask="999.999.999-99" id="cpf" value="#{usuarioBean.facade.usuario.cpf}" required="true"/>
 					</h:panelGrid>
-					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{campoBean.save}" onclick="lazyload()"
-						update=":formCadastro:grid :formTabelaCampo :formMessage"/>
-					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadCampo.hide()" onclick="lazyload()"/>
+					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{usuarioBean.save}" onclick="lazyload()"
+						update=":formCadastro:grid :formTabelaUsuario :formMessage"/>
+					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadUsuario.hide()" onclick="lazyload()"/>
 				</p:dialog>
 			</h:form>
 			
 		<h:form id="formAlterar">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Novo Campo - [ * Campo Obrigatório ]" widgetVar="dialogAltCampo">
+				header="..::: Alterar Usuário - [ * Campo Obrigatório ]" widgetVar="dialogAltUsuario">
 				<h:panelGrid id="grid" columns="2">
+					<p:outputLabel for="perfil" value="Perfil:"/>
+					<p:selectOneMenu id="perfil" value="#{usuarioBean.facade.usuarioAltera.perfil.id}" required="true" style="width:400px;">
+			            <f:selectItem itemLabel="Selecione Perfil" itemValue="#{null}" />
+						<f:selectItems value="#{perfilBean.facade.listaPerfil}" var="per" itemValue="#{per.id}" itemLabel="#{per.nome}"/>
+			        </p:selectOneMenu>
+				
 					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText id="nome" value="#{campoBean.facade.campoEstagioAltera.nome}" required="true" style="width:400px;"/>
+					<p:inputText id="nome" value="#{usuarioBean.facade.usuarioAltera.nome}" required="true" style="width:400px;"/>
 				</h:panelGrid>
-				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{campoBean.update}"
-					update=":formTabelaCampo :formAlterar:grid" onclick="lazyload()"/>
-				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltCampo.hide()" onclick="lazyload()"/>
+				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{usuarioBean.update}"
+					update=":formTabelaUsuario :formAlterar:grid" onclick="lazyload()"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltUsuario.hide()" onclick="lazyload()"/>
 			</p:dialog>
 		</h:form>
 		
 		<h:form>
 			<p:remoteCommand name="lazyload">  
-		        <f:setPropertyActionListener value="#{false}" target="#{campoBean.mensagem}" />  
+		        <f:setPropertyActionListener value="#{false}" target="#{usuarioBean.mensagem}" />  
 		    </p:remoteCommand> 
 		</h:form>
 	</ui:define>

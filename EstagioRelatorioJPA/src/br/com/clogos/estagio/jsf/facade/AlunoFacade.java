@@ -39,7 +39,7 @@ public class AlunoFacade implements Serializable {
 			getGenericController().save(getAluno());
 			aluno=null; genericController = null; listaAlunos = null;
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_INFO, "Aluno salvo com suceso.", ""));
+					FacesMessage.SEVERITY_INFO, "Aluno salvo com sucesso.", ""));
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(

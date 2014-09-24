@@ -50,6 +50,11 @@ public class Perfil implements ObjectModel {
 	
 //	alter table perfil add cadastroUsuario tinyint(1)
 //	update perfil set cadastroUsuario = 0 where idperfil = 2
+	
+	// INSERT INTO perfil (nomeperfil,cadastroAluno,cadastroCampo,cadastroSupervisor,cadastroTurma,liberarRelatorio,relatorioAluno,relatorioAdmin,revisaoRelatorio,cadastroUsuario)
+	//	VALUES ('SUPERVISOR',0,0,0,0,0,0,1,0,0);
+	
+	//update perfil set nomeperfil = 'COORDENAÇÃO' where idperfil = 1
 
 	public Long getId() {
 		return id;

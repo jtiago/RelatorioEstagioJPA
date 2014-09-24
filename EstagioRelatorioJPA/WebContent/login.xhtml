@@ -19,10 +19,10 @@
 					<p:graphicImage url="/images/loginestagio.png" width="390"/>
 				</h:panelGrid>
 			
-				<h:panelGrid style="margin-top:10px;" width="395">
+				<h:panelGrid style="margin-top:10px; font-size:16px; font-weight: bold;" width="395">
 					<h:panelGrid columns="2" style="margin:0 auto;">
 						<p:outputLabel for="perfil" value="Perfil:" />
-						<p:selectOneMenu id="perfil" value="#{autenticarBean.perfil.id}" required="true">
+						<p:selectOneMenu id="perfil" value="#{autenticarBean.perfil.id}" required="true" style="width:220px;">
 				            <f:selectItems value="#{perfilBean.facade.listaPerfil}" var="per" itemLabel="#{per.nome}"
 				            	itemValue="#{per.id}"/>
 				        </p:selectOneMenu>
