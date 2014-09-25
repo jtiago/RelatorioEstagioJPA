@@ -8,7 +8,7 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
 	  
 	<ui:define name="conteudo">
-		<p:panel  header="..:: Cadastro de Campo">
+		<p:panel  header="..:: Cadastro de Usuários">
 			<h:form id="formMessage">
 				<p:messages autoUpdate="true" rendered="#{usuarioBean.mensagem}"/>
 			</h:form>
@@ -67,6 +67,8 @@
 		<h:form id="formCadastro">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 					header="..::: Novo Usuário - [ * Campo Obrigatório ]" widgetVar="dialogCadUsuario">
+					<h:outputLabel style="color: red;" value="Ao cadastrar um novo usuário, será atribuída a senha padrão: 12345678" />
+					<br/><br/>
 					<h:panelGrid id="grid" columns="2">	
 						<p:outputLabel for="perfil" value="Perfil:"/>
 						<p:selectOneMenu id="perfil" value="#{usuarioBean.facade.usuario.perfil.id}" required="true" style="width:400px;">
@@ -81,7 +83,7 @@
 						<p:inputMask mask="999.999.999-99" id="cpf" value="#{usuarioBean.facade.usuario.cpf}" required="true"/>
 					</h:panelGrid>
 					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{usuarioBean.save}" onclick="lazyload()"
-						update=":formCadastro:grid :formTabelaUsuario :formMessage"/>
+						update=":formCadastro:grid :formTabelaUsuario :formMessage" oncomplete="dialogAltUsuario.hide()"/>
 					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadUsuario.hide()" onclick="lazyload()"/>
 				</p:dialog>
 			</h:form>
@@ -99,8 +101,8 @@
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{usuarioBean.facade.usuarioAltera.nome}" required="true" style="width:400px;"/>
 				</h:panelGrid>
-				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{usuarioBean.update}"
-					update=":formTabelaUsuario :formAlterar:grid" onclick="lazyload()"/>
+				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{usuarioBean.update}" oncomplete="dialogAltUsuario.hide()"
+					update=":formTabelaUsuario :formAlterar:grid :formMessage" onclick="lazyload()"/>
 				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltUsuario.hide()" onclick="lazyload()"/>
 			</p:dialog>
 		</h:form>

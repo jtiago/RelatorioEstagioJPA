@@ -85,7 +85,7 @@ public class UsuarioFacade implements Serializable {
 			getGenericController().save(getUsuario());
 			usuario=null; genericController = null; listaUsuarios = null;
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_INFO, "Usuário salvo com sucesso. Senha padrão para primeiro acesso", ""));
+					FacesMessage.SEVERITY_INFO, "Usuário salvo com sucesso. Lembre-se senha padrão para primeiro acesso", ""));
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(

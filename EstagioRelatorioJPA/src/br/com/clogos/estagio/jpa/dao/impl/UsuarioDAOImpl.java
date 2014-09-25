@@ -20,12 +20,16 @@ public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
 	@Override
 	public Usuario validarAutenticacao(Usuario param) {
 		entityManager = JpaUtil.getEntityManager();
-		String hql = "SELECT u FROM Usuario u WHERE u.cpf = :numCpf AND u.senha = :senha";
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECT u FROM Usuario u JOIN u.perfil p ");
+		hql.append("WHERE u.cpf = :numCpf AND u.senha = :senha AND p.id = :perfil");
+		
 		Usuario usuario = null;
 		try {
-			TypedQuery<Usuario> query = entityManager.createQuery(hql, Usuario.class)
+			TypedQuery<Usuario> query = entityManager.createQuery(hql.toString(), Usuario.class)
 					.setParameter("numCpf", param.getCpf())
-					.setParameter("senha", CriptografiaBase64.encrypt(param.getSenha()));
+					.setParameter("senha", CriptografiaBase64.encrypt(param.getSenha()))
+					.setParameter("perfil", param.getPerfil().getId());
 			if(query.getResultList().size() != 0) {
 				usuario = query.getSingleResult();
 			}
