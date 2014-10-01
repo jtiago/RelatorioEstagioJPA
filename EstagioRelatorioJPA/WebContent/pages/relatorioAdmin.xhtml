@@ -13,35 +13,35 @@
 		</h:form>
 		
 		<p:panel header="..:: Validar Relatórios">
-			<p:fieldset>
-				<h:form id="formPesquisaRelatorio">
+			<h:form id="formPesquisaRelatorio">
+				<p:fieldset>
 					<h:panelGrid id="grid" columns="7">
 						<p:outputLabel for="turma" value="Turma:"/>
-						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.aluno.nomeTurma}" required="false" style="width:170px;">
+						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.aluno.nomeTurma}" style="width:170px;">
 				            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
 							<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.nome}" itemLabel="#{tu.nome}"/>
-				        </p:selectOneMenu>
-				        
+				        </p:selectOneMenu>				        
+				         
 				        <p:outputLabel for="modulo" value="Módulo:" />
 						<p:selectOneMenu id="modulo" value="#{relatorioAdminBean.facade.relatorio.modulo}" 
-							required="true" style="width:170px;">  
+							style="width:170px;">  
 	                       <f:selectItem itemLabel="Selecione Modulo" itemValue="#{null}" />  
 	                       <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
                     	</p:selectOneMenu>
                     	
                     	<p:outputLabel for="campo" value="Campo:" />
                     	<p:selectOneMenu id="campo" value="#{relatorioAdminBean.facade.relatorio.campoEstagio.id}"
-							required="false" style="width: 250px;">
+							style="width: 250px;">
 							<f:selectItem itemLabel="Selecione Campo" itemValue="#{null}"/>
 							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
 								itemValue="#{cam.id}"/>
 						</p:selectOneMenu>
-                    	
+				                            	
                     	<p:commandButton icon="ui-icon-search" actionListener="#{relatorioAdminBean.pesquisarRelatorio}" 
-                    		update=":tabelaRelatorio :formPesquisaRelatorio"/>
+                    		update=":formPesquisaRelatorio :tabelaRelatorio"/>
 					</h:panelGrid>
-				</h:form>
-			</p:fieldset>
+				</p:fieldset>
+			</h:form>
 			<br/> 
 			
 			<h:form id="tabelaRelatorio">
@@ -52,16 +52,16 @@
 							Relatórios 
 						</f:facet>
 						
-						<p:column headerText="Matrícula" filterBy="#{item.aluno.matricula}" filterMatchMode="contains">
-							<h:outputLabel value="#{item.aluno.matricula}"/>
-						</p:column>
-						
 						<p:column headerText="Turma" filterBy="#{item.aluno.nomeTurma}">
 							<h:outputLabel value="#{item.aluno.nomeTurma}"/>
 						</p:column>
 						
 						<p:column headerText="Nome Aluno" filterBy="#{item.aluno.nome}" filterMatchMode="contains">
 							<h:outputLabel value="#{item.aluno.nome}"/>
+						</p:column>
+						
+						<p:column headerText="Módulo" filterBy="#{item.aluno.matricula}" filterMatchMode="contains">
+							<h:outputLabel value="#{item.modulo.label}"/>
 						</p:column>
 						
 						<p:column headerText="Status">

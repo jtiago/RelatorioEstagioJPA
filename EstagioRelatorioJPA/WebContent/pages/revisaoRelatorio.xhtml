@@ -60,12 +60,6 @@
 						<h:outputLabel value="Nome do Aluno:"/>
 						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.aluno.nome}" style="font-weight: bold;"/>
 						
-						<h:outputLabel value="Nome do Supervisor:"/>
-						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.supervisor.nome}" style="font-weight: bold;"/>
-						
-						<h:outputLabel value="Campo de Estágio:"/>
-						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.campoEstagio.nome}" style="font-weight: bold;"/>
-						
 						<h:outputLabel value="Turma:"/>
 						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.aluno.nomeTurma}" style="font-weight: bold;"/>
 						
@@ -73,14 +67,43 @@
 						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.modulo.label}" style="font-weight: bold;"/>
 						
 						<h:outputLabel value="Observação:"/>
-						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.observacao}" style="font-weight: bold;"/>
+						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.observacao}" style="font-weight: bold; color:red;"/>
 					</h:panelGrid>
 				</p:fieldset>
 				<br/>
 				<p:fieldset>
+					<h:panelGrid columns="2">
+						<p:outputLabel for="campo" value="Campo:"/>
+						<p:selectOneMenu id="campo" value="#{revisaoRelatorioBean.facade.relatorioRevisao.campoEstagio.id}"
+							required="true" style="width: 585px;">
+							<f:selectItem itemLabel="Selecione Campo de Estágio" itemValue="#{null}"/>
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
+								itemValue="#{cam.id}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel for="supervisor" value="Supervisor:" />
+						<p:selectOneMenu id="supervisor" value="#{revisaoRelatorioBean.facade.relatorioRevisao.supervisor.id}" required="true" style="width: 585px;">
+				            <f:selectItem itemLabel="Selecione Supervisor" itemValue="#{null}" />
+				            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
+				            	itemValue="#{sup.id}"/>
+				        </p:selectOneMenu>
+						
+						<p:outputLabel for="dataInicial" value="Data de InÍcio:"/>
+						<h:panelGrid columns="4">
+							<p:calendar id="dataInicial" pattern="dd/MM/yyyy" value="#{revisaoRelatorioBean.facade.relatorioRevisao.dataInicio}" effect="fold" 
+								readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014">
+								<p:ajax event="dateSelect" update="dataTermino" listener="#{relatorioAlunoBean.facade.ajustarDataIntervalo()}"/>
+							</p:calendar>
+							
+							<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
+							<p:outputLabel for="dataTermino" value="Data de Término:"/>
+							<p:calendar id="dataTermino" pattern="dd/MM/yyyy" value="#{revisaoRelatorioBean.facade.relatorioRevisao.dataTerminio}" effect="fold" 
+								readonlyInput="false" required="true" locale="pt_BR" mindate="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}"/>
+						</h:panelGrid>
+					</h:panelGrid>
+					
 					<h:panelGrid columns="1">
 						<h:outputLabel value="Conteúdo do Relatório:"/>
-						<!-- <p:editor id="editor" value="#{revisaoRelatorioBean.facade.relatorioRevisao.texto}" width="865" height="600"  /><br/> -->
 						<p:inputTextarea id="editor" value="#{revisaoRelatorioBean.facade.relatorioRevisao.texto}" rows="30" cols="95"
 							onkeydown="if (event.keyCode == 13) { return false; }" style="font-size:16px; color:#000000;"/> <br/>
 					</h:panelGrid>

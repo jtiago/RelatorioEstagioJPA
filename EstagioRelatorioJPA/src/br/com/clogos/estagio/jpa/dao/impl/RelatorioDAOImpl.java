@@ -47,8 +47,12 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
 		List<Relatorio> lista = new LinkedList<Relatorio>();
-		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH r.supervisor s JOIN FETCH s.imagem ");
-		hql.append("WHERE r.modulo = :modulo ");
+		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH r.supervisor s ");
+		hql.append("JOIN FETCH s.imagem i JOIN FETCH a.perfil p ");
+		hql.append("WHERE p.relatorioAluno = 1 ");
+		if(relatorio.getModulo() != null) {
+			hql.append("AND r.modulo = :modulo ");
+		}
 		if(relatorio.getAluno().getNomeTurma() != "") {
 			hql.append("AND a.nomeTurma = :nomeTurma ");
 		}
@@ -58,14 +62,16 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		hql.append("ORDER BY a.nome ");
 		
 		try {
-			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class)
-					.setParameter("modulo", relatorio.getModulo());
-					if(relatorio.getAluno().getNomeTurma() != "") {
-						query.setParameter("nomeTurma", relatorio.getAluno().getNomeTurma());
-					}
-					if(relatorio.getCampoEstagio().getId() != 0) {
-						query.setParameter("idCampo", relatorio.getCampoEstagio().getId());
-					}
+			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class);
+			if(relatorio.getModulo() != null) {
+				query.setParameter("modulo", relatorio.getModulo());
+			}
+			if(relatorio.getAluno().getNomeTurma() != "") {
+				query.setParameter("nomeTurma", relatorio.getAluno().getNomeTurma());
+			}
+			if(relatorio.getCampoEstagio().getId() != 0) {
+				query.setParameter("idCampo", relatorio.getCampoEstagio().getId());
+			}
 					
 			lista = query.getResultList();
 		} catch (Exception e) {

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Relatorio;
@@ -16,6 +17,7 @@ public class RevisaoRelatorioFacade implements Serializable {
 	private List<Relatorio> listaRevisao;
 	private List<Relatorio> listaRevisaoFilter;
 	private RelatorioController relatorioController;
+	private GenericController genericController;
 	
 	public void populaListaRevisao(Aluno aluno) {
 		if(aluno != null) {
@@ -25,7 +27,9 @@ public class RevisaoRelatorioFacade implements Serializable {
 	
 	public void saveRevisao() {
 		if(relatorioRevisao != null) {
-			if(getRelatorioController().saveRevisaoRelatorioAluno(getRelatorioRevisao())) {
+			//if(getRelatorioController().saveRevisaoRelatorioAluno(getRelatorioRevisao())) {
+			getRelatorioRevisao().setRevisao(false);
+			if(getGenericController().update(getRelatorioRevisao())) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 						FacesMessage.SEVERITY_INFO, "Relatório salvo e enviando para validação com sucesso.", ""));
 			} else {
@@ -58,5 +62,9 @@ public class RevisaoRelatorioFacade implements Serializable {
 
 	public void setRelatorioRevisao(Relatorio relatorioRevisao) {
 		this.relatorioRevisao = relatorioRevisao;
+	}
+	
+	public GenericController getGenericController() {
+		return genericController == null ? genericController = new GenericController() : genericController;
 	}
 }

@@ -40,9 +40,9 @@ public class RelatorioAdminFacade implements Serializable {
 	}
 	
 	public void pesquisaRelatorio() {
-		if(getRelatorio().getModulo() != null) {
+		//if(getRelatorio().getModulo() != null) {
 			listaRelatorios = getRelatorioController().findRelatoriosAdmin(getRelatorio());
-		}
+		//}
 	}
 	
 	public void validarRelatorio() {
