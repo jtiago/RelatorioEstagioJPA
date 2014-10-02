@@ -29,8 +29,12 @@
 						<h:outputLabel value="#{item.cpf}"/>
 					</p:column>
 					
-					<p:column headerText="Nome">
+					<p:column headerText="Nome" filterBy="#{item.nome}" filterMatchMode="contains">
 						<h:outputLabel value="#{item.nome}"/>
+					</p:column>
+					
+					<p:column headerText="Perfil">
+						<h:outputLabel value="#{item.perfil.nome}"/>
 					</p:column>
 					
 					<p:column style="text-align:right; width: 150px;">

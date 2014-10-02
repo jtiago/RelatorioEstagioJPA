@@ -26,7 +26,7 @@ public class UsuarioFacade implements Serializable {
 	@SuppressWarnings("unchecked")
 	public List<Usuario> getListaUsuarios() {
 		if(listaUsuarios == null) {
-			listaUsuarios = (List<Usuario>) getGenericController().findAll(Usuario.class, "nome", "asc");
+			listaUsuarios = (List<Usuario>) getGenericController().findAll(Usuario.class, "nome", "asc", "join fetch c.perfil");
 		}
 		return listaUsuarios;
 	}

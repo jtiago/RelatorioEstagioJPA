@@ -26,8 +26,8 @@ public class GenericController implements Serializable {
 		return getGenericDAO().saveList(list);
 	}
 	
-	public List<?> findAll(Class<?> clazz, String coluna, String order) {
-		return getGenericDAO().findAll(clazz, coluna, order);
+	public List<?> findAll(Class<?> clazz, String coluna, String order, String join) {
+		return getGenericDAO().findAll(clazz, coluna, order, join);
 	}
 	
 	@SuppressWarnings("rawtypes")

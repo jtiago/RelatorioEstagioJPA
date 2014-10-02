@@ -95,13 +95,13 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO, Serial
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<?> findAll(Class<?> clazz, String coluna, String order) {
+	public List<?> findAll(Class<?> clazz, String coluna, String order, String join) {
 		entityManager = JpaUtil.getEntityManager();
 		List<Object> lista = new ArrayList<Object>();
 		try {
 			entityManager.getTransaction().begin();
 			String nameClass = clazz.getSimpleName();
-			lista = entityManager.createQuery("SELECT c FROM " + nameClass+ " c ORDER BY c."+coluna+" "+order)
+			lista = entityManager.createQuery("SELECT c FROM " + nameClass+ " c "+join+" ORDER BY c."+coluna+" "+order)
 					.getResultList();
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {

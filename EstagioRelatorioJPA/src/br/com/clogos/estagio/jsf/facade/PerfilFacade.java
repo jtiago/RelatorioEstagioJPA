@@ -14,7 +14,7 @@ public class PerfilFacade implements Serializable {
 	public List<Perfil> getListaPerfil() {
 		if(listaPerfil == null) {
 			GenericController genericController = new GenericController();
-			listaPerfil = (List<Perfil>) genericController.findAll(Perfil.class, "nome", "asc");
+			listaPerfil = (List<Perfil>) genericController.findAll(Perfil.class, "nome", "asc", "");
 			genericController = null;
 		}
 		return listaPerfil;
