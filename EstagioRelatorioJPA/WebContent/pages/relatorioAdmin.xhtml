@@ -68,6 +68,16 @@
 							<h:outputLabel value="#{item.validado eq 'true' ? 'Validado' : item.revisao eq 'true' ? 'Revisão' : 'Em Aberto'}"/>
 						</p:column>
 						
+						<p:column headerText="Dt. Inic/Térm">
+							<h:outputLabel value="#{item.dataInicio}">
+								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
+							</h:outputLabel>
+							à<br/>
+							<h:outputLabel value="#{item.dataTerminio}">
+								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
+							</h:outputLabel>
+						</p:column> 
+						
 						<p:column>
 							<p:commandButton icon="ui-icon-circle-zoomout" oncomplete="dialogValidar.show()" update=":formAvaliacao">
 								<f:setPropertyActionListener target="#{relatorioAdminBean.facade.relatorioValidar}" value="#{item}" />
