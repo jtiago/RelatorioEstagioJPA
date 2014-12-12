@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templatePages.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+	<f:metadata>
+		<f:event listener="#{relatorioAlunoBean.buscarListaRelatorio}" type="preRenderComponent" />  
+	</f:metadata>
+	
+	<ui:define name="conteudo">
+		<p:panel header="..:: Relatório(s) Enviado(s)">
+			<h:form id="tabelaRelatorio">
+				<p:fieldset>
+					<p:dataTable id="tabela" var="item" value="#{relatorioAlunoBean.facade.listaRelatorioEnviado}" emptyMessage="Não existe relatórios Enviado...">
+						<f:facet name="header">
+							
+						</f:facet>
+						
+						<p:column headerText="Data Cadastro">
+							<h:outputLabel value="#{item.dataCadastro}">
+								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy HH:mm" />
+							</h:outputLabel> 
+						</p:column>
+						
+						<p:column headerText="Campo de Estágio">
+							<h:outputLabel value="#{item.campoEstagio.nome}"/>
+						</p:column>
+						
+						<p:column headerText="Módulo">
+							<h:outputLabel value="#{item.modulo.label}"/>
+						</p:column>
+						
+						<p:column headerText="Status">
+							<h:outputLabel value="#{item.validado eq 'true' ? 'Validado' : item.revisao eq 'true' ? 'Revisão' : 'Em Aberto'}"/>
+						</p:column>
+						
+						<p:column headerText="Dt. Inic/Térm">
+							<h:outputLabel value="#{item.dataInicio}">
+								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
+							</h:outputLabel>
+							à<br/>
+							<h:outputLabel value="#{item.dataTerminio}">
+								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
+							</h:outputLabel>
+						</p:column> 
+					</p:dataTable>
+				</p:fieldset>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>

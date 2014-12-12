@@ -53,6 +53,14 @@ public class RelatorioAlunoBean implements Serializable {
 		}
 	}
 	
+	public void buscarListaRelatorio(ComponentSystemEvent event) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
+		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
+		getFacade().populaListaRevisao(aluno);
+	}
+	
+	
 	public Boolean getRenderedEnfermagem() {
 		return renderedEnfermagem;
 	}

@@ -2,6 +2,7 @@ package br.com.clogos.estagio.jsf.facade;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -16,9 +17,16 @@ import br.com.clogos.estagio.model.Relatorio;
 public class RelatorioAlunoFacade implements Serializable {
 	private static final long serialVersionUID = 3016523488152504622L;
 	private Relatorio relatorioAluno;
+	private List<Relatorio> listaRelatorioEnviado;
 	private GenericController genericController;
 	private LiberarRelatorioController liberarRelatorioController;
-	private RelatorioController relatorioController;
+	private RelatorioController relatorioController;	
+	
+	public void populaListaRevisao(Aluno aluno) {
+		if(aluno != null) {
+			listaRelatorioEnviado = getRelatorioController().findRelatorioEnviado(aluno);
+		}
+	}
 	
 	public void save(Aluno aluno) {
 		getRelatorioAluno().setRevisao(false);
@@ -46,6 +54,10 @@ public class RelatorioAlunoFacade implements Serializable {
 	
 	public void ajustarDataIntervalo() {
 		
+	}
+	
+	public List<Relatorio> getListaRelatorioEnviado() {
+		return listaRelatorioEnviado;
 	}
 	
 	public Relatorio getRelatorioAluno() {
