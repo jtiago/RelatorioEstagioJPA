@@ -198,7 +198,9 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
-			
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
 		}
 		return lista;
 	}
