@@ -83,6 +83,7 @@ public class AlunoBean implements Serializable {
 		return turma;
 	}
 	
+	//Matricula - Nome Curso - Nome Turma - Turno - Nome Aluno - Status do Aluno - CPF - Sexo
 	private void saveAluno(String[] token) {
 		Aluno aluno = new Aluno();
 		aluno.setCpf(token[6]);
