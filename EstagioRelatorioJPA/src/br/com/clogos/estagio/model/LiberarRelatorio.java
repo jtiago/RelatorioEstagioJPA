@@ -25,15 +25,22 @@ public class LiberarRelatorio implements ObjectModel {
 	@Column(name = "idliberar")
 	private Long id;
 	
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "fkturma")
-	private Turma turmaLiberarRelatorio;
-	
 	@Enumerated(EnumType.STRING)
 	private ModuloEnum modulo;
 	
 	@Column(name="aberto", length=1, nullable=false)
 	private Boolean aberto = true;
+	
+	@Column(name="qtdRelatorio")
+	private Integer qtdRelatorio;
+	
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "fkturma")
+	private Turma turmaLiberarRelatorio;
+	
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "fksemestre")
+	private Semestre semestre;
 
 	public Long getId() {	
 		return id;
@@ -65,5 +72,21 @@ public class LiberarRelatorio implements ObjectModel {
 
 	public void setAberto(Boolean aberto) {
 		this.aberto = aberto;
+	}
+
+	public Integer getQtdRelatorio() {
+		return qtdRelatorio;
+	}
+
+	public void setQtdRelatorio(Integer qtdRelatorio) {
+		this.qtdRelatorio = qtdRelatorio;
+	}
+
+	public Semestre getSemestre() {
+		return semestre;
+	}
+
+	public void setSemestre(Semestre semestre) {
+		this.semestre = semestre;
 	}
 }
