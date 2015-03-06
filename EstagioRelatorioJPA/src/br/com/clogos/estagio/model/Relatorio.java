@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -62,6 +63,10 @@ public class Relatorio implements ObjectModel {
 	@ManyToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name = "fksupervisor", referencedColumnName="idsupervisor" )
 	private Supervisor supervisor;
+	
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="fksemestre")
+	private Semestre semestre;
 
 	public Long getId() {
 		return id;
@@ -165,5 +170,13 @@ public class Relatorio implements ObjectModel {
 
 	public void setSupervisor(Supervisor supervisor) {
 		this.supervisor = supervisor;
+	}
+
+	public Semestre getSemestre() {
+		return semestre == null ? semestre = new Semestre() : semestre;
+	}
+
+	public void setSemestre(Semestre semestre) {
+		this.semestre = semestre;
 	}
 }

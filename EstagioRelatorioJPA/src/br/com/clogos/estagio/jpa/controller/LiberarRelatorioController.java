@@ -28,6 +28,6 @@ public class LiberarRelatorioController implements Serializable {
 	}
 	
 	public List<LiberarRelatorio> findoAll() {
-		return getLiberarRelatorioDAO().findoAll();
+		return getLiberarRelatorioDAO().findAll();
 	}
 }

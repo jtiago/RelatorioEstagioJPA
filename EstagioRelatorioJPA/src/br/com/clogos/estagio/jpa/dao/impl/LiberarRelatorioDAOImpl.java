@@ -20,8 +20,8 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 	private EntityManager entityManager;
 	
 	/**
-	 * Quando a consulta retornar dados � porque existe modulo liberado para 
-	 * aquele turma passada como paramentro
+	 * Verifica se já existe relatório liberado para aquela turma e módulo
+	 * não depense se esta aberto ou não, não pode ter dois relatorio liberado para mesma turma e modulo.
 	 */
 	@Override
 	public Boolean existeModuloLiberado(LiberarRelatorio oT) {
@@ -43,17 +43,22 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Verifica se existe relatório em aberto para o mesmo semestre e turma e modulo
+	 */
 	@Override
 	public Boolean existeModuloAberto(LiberarRelatorio oT) {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
-		hql.append("SELECT l FROM LiberarRelatorio l JOIN l.turmaLiberarRelatorio lt ");
-		hql.append("WHERE lt.id = :idturma AND l.aberto = :aberto" );
+		hql.append("SELECT l FROM LiberarRelatorio l ");
+		hql.append("JOIN l.turmaLiberarRelatorio lt JOIN l.semestre ls ");
+		hql.append("WHERE lt.id = :idturma AND l.aberto = :aberto AND ls.nomeSemeste = :nomeSemestre " );
 		try {
 			TypedQuery<LiberarRelatorio> query = entityManager.createQuery(hql.toString(), LiberarRelatorio.class)
 					.setParameter("idturma", oT.getTurmaLiberarRelatorio().getId())
-					.setParameter("aberto", true);
+					.setParameter("aberto", true)
+					.setParameter("nomeSemestre", oT.getSemestre().getNomeSemeste());
 			return query.getResultList().size() != 0;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,7 +96,7 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 	}
 
 	@Override
-	public List<LiberarRelatorio> findoAll() {
+	public List<LiberarRelatorio> findAll() {
 		entityManager = JpaUtil.getEntityManager();
 		String hql = "SELECT l FROM LiberarRelatorio l JOIN l.turmaLiberarRelatorio";
 		try {

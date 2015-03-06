@@ -66,6 +66,9 @@ public class Aluno implements ObjectModel {
 	private String fichaRelatorio;
 	@Transient
 	private Relatorio relatorioR;
+	@Transient
+	private Semestre semestre;
+
 	
 	public Long getId() {
 		return id;
@@ -193,5 +196,13 @@ public class Aluno implements ObjectModel {
 
 	public void setRelatorioR(Relatorio relatorioR) {
 		this.relatorioR = relatorioR;
+	}
+
+	public Semestre getSemestre() {
+		return semestre == null ? semestre = new Semestre() : semestre;
+	}
+
+	public void setSemestre(Semestre semestre) {
+		this.semestre = semestre;
 	}
 }

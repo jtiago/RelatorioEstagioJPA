@@ -46,11 +46,12 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT idaluno,a.nomealuno,a.cpf,a.nometurma,t.nomeCurso,p.nomeperfil,p.idperfil,l.modulo,  ");
 		sql.append("cadastroAluno,cadastroCampo,cadastroSupervisor,cadastroTurma,liberarRelatorio,relatorioAluno, ");
-		sql.append("relatorioAdmin,l.aberto,validado,revisao,t.idturma,revisaoRelatorio,relatorioEnviado FROM Aluno a ");
+		sql.append("relatorioAdmin,l.aberto,validado,revisao,t.idturma,revisaoRelatorio,relatorioEnviado, s.nomeSemeste FROM Aluno a ");
 		sql.append("INNER JOIN Turma t ON a.nometurma = t.nometurma ");
 		sql.append("INNER JOIN Perfil p ON p.idperfil = a.fkperfil ");
 		sql.append("LEFT JOIN LiberarRelatorio l ON l.fkturma = t.idturma ");
 		sql.append("LEFT JOIN Relatorio r ON r.fkaluno = a.idaluno ");
+		sql.append("INNER JOIN Semestre s ON r.fksemestre = s.idsemestre ");
 		sql.append("WHERE a.cpf = ? AND a.senha = ? ORDER BY idliberar DESC ");
 		
 		Aluno aluno = null;
@@ -84,6 +85,7 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 				aluno.getTurmaT().setId(Long.valueOf(objs[18].toString()));
 				aluno.getPerfil().setRevisaoRelatorio(Boolean.valueOf(objs[19].toString()));
 				aluno.getPerfil().setRelatorioEnviado(Boolean.valueOf(objs[20].toString()));
+				aluno.getSemestre().setNomeSemeste(objs[21].toString());
 			}
 		} catch (PersistenceException e) {
 			e.printStackTrace();

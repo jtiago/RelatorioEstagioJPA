@@ -44,6 +44,7 @@ public class AutenticarBean implements Serializable {
 			usuario.getPerfil().setId(getPerfil().getId());
 			getFacadeUsuario().login(usuario); 
 		} else {
+			
 			getAlunoFacade().login(getAluno());
 		}
 	}
