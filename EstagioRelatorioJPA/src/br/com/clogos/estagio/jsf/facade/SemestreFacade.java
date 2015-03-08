@@ -12,15 +12,15 @@ public class SemestreFacade implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<Semestre> listaSemeste;
+	private List<Semestre> listaSemestre;
 	private GenericController genericController;
 	
 	@SuppressWarnings("unchecked")
-	public List<Semestre> getListaSemeste() {
-		if(listaSemeste == null) {
-			listaSemeste = (List<Semestre>) getGenericController().findAll(Semestre.class, "nomeSemeste", "desc", "");
+	public List<Semestre> getListaSemestre() {
+		if(listaSemestre == null) {
+			listaSemestre = (List<Semestre>) getGenericController().findAll(Semestre.class, "nomeSemestre", "desc", "");
 		}
-		return listaSemeste;
+		return listaSemestre;
 	}
 	
 	public GenericController getGenericController() {

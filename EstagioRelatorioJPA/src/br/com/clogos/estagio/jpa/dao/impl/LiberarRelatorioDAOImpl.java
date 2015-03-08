@@ -58,7 +58,7 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 			TypedQuery<LiberarRelatorio> query = entityManager.createQuery(hql.toString(), LiberarRelatorio.class)
 					.setParameter("idturma", oT.getTurmaLiberarRelatorio().getId())
 					.setParameter("aberto", true)
-					.setParameter("nomeSemestre", oT.getSemestre().getNomeSemeste());
+					.setParameter("nomeSemestre", oT.getSemestre().getNomeSemestre());
 			return query.getResultList().size() != 0;
 		} catch (Exception e) {
 			e.printStackTrace();

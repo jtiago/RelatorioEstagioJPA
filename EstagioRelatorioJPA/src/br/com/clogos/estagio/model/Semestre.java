@@ -18,8 +18,8 @@ public class Semestre implements ObjectModel {
 	@Column(name = "idsemestre")
 	private Long id;
 	
-	@Column(name="nomeSemeste", length=10)
-	private String nomeSemeste;
+	@Column(name="nomeSemestre", length=10)
+	private String nomeSemestre;
 
 	public Long getId() {
 		return id;
@@ -29,11 +29,11 @@ public class Semestre implements ObjectModel {
 		this.id = id;
 	}
 
-	public String getNomeSemeste() {
-		return nomeSemeste;
+	public String getNomeSemestre() {
+		return nomeSemestre;
 	}
 
-	public void setNomeSemeste(String nomeSemeste) {
-		this.nomeSemeste = nomeSemeste;
+	public void setNomeSemestre(String nomeSemestre) {
+		this.nomeSemestre = nomeSemestre;
 	}
 }

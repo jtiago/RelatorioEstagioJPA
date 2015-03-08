@@ -23,7 +23,7 @@
 					<h:panelGrid columns="2" style="margin:0 auto;">
 						<p:outputLabel for="semestre" value="Semestre:" />
 						<p:selectOneMenu id="semestre" value="#{autenticarBean.aluno.semestre.id}" required="true" style="width:220px;">
-				            <f:selectItems value="#{semestreBean.facade.listaSemeste}" var="sem" itemLabel="#{sem.nomeSemeste}"
+				            <f:selectItems value="#{semestreBean.facade.listaSemestre}" var="sem" itemLabel="#{sem.nomeSemestre}"
 				            	itemValue="#{sem.id}"/>
 				        </p:selectOneMenu>
 						
