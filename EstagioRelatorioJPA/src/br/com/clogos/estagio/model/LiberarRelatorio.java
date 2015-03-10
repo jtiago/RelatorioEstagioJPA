@@ -83,7 +83,7 @@ public class LiberarRelatorio implements ObjectModel {
 	}
 
 	public Semestre getSemestre() {
-		return semestre;
+		return semestre == null ? semestre = new Semestre() : semestre;
 	}
 
 	public void setSemestre(Semestre semestre) {

@@ -30,6 +30,10 @@
 						<h:outputLabel value="#{item.modulo.label}"/>
 					</p:column>
 					
+					<p:column headerText="Semestre" filterBy="#{item.semestre.nomeSemestre}" filterMatchMode="contains">
+						<h:outputLabel value="#{item.semestre.nomeSemestre}"/>
+					</p:column>
+					
 					<p:column headerText="Status" filterBy="#{item.aberto eq 'true' ? 'Em Aberto' : 'Fechado'}"  filterMatchMode="contains">
 						<h:outputLabel value="#{item.aberto eq 'true' ? 'Em Aberto' : 'Fechado'}"/>
 					</p:column>
@@ -59,7 +63,13 @@
 					 	required="true" style="width:300px;">  
                         <f:selectItem itemLabel="Selecione" itemValue="#{null}" />  
                         <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
-                    </p:selectOneMenu> 
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="semestre" value="Semestre:" />
+					<p:selectOneMenu id="semestre" value="#{liberarBean.facade.liberarRelatorio.semestre.id}" required="true" style="width:220px;">
+				    	<f:selectItems value="#{semestreBean.facade.listaSemestre}" var="sem" itemLabel="#{sem.nomeSemestre}"
+				            	itemValue="#{sem.id}"/>
+				    </p:selectOneMenu> 
 					
 				</h:panelGrid>
 				<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{liberarBean.save}"
