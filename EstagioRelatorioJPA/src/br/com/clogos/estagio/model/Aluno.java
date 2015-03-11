@@ -68,6 +68,8 @@ public class Aluno implements ObjectModel {
 	private Relatorio relatorioR;
 	@Transient
 	private Semestre semestre;
+	@Transient
+	private Boolean limiteRelatorio;
 
 	
 	public Long getId() {
@@ -204,5 +206,13 @@ public class Aluno implements ObjectModel {
 
 	public void setSemestre(Semestre semestre) {
 		this.semestre = semestre;
+	}
+
+	public Boolean getLimiteRelatorio() {
+		return limiteRelatorio;
+	}
+
+	public void setLimiteRelatorio(Boolean limiteRelatorio) {
+		this.limiteRelatorio = limiteRelatorio;
 	}
 }

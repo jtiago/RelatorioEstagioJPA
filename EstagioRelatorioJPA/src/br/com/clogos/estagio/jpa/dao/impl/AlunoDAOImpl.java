@@ -46,19 +46,21 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT idaluno,a.nomealuno,a.cpf,a.nometurma,t.nomeCurso,p.nomeperfil,p.idperfil,l.modulo,  ");
 		sql.append("cadastroAluno,cadastroCampo,cadastroSupervisor,cadastroTurma,liberarRelatorio,relatorioAluno, ");
-		sql.append("relatorioAdmin,l.aberto,validado,revisao,t.idturma,revisaoRelatorio,relatorioEnviado, s.nomeSemestre FROM Aluno a ");
+		sql.append("relatorioAdmin,l.aberto,validado,revisao,t.idturma,revisaoRelatorio,relatorioEnviado, s.nomeSemestre, ");
+		sql.append("(SELECT count(*) FROM relatorio WHERE fksemestre = 2) = qtdRelatorio as limiteRelatorio FROM Aluno a ");
 		sql.append("INNER JOIN Turma t ON a.nometurma = t.nometurma ");
 		sql.append("INNER JOIN Perfil p ON p.idperfil = a.fkperfil ");
-		sql.append("LEFT JOIN LiberarRelatorio l ON l.fkturma = t.idturma ");
+		sql.append("LEFT JOIN LiberarRelatorio l ON l.fkturma = t.idturma AND l.fksemestre = ? ");
 		sql.append("LEFT JOIN Relatorio r ON r.fkaluno = a.idaluno ");
-		sql.append("LEFT JOIN Semestre s ON r.fksemestre = s.idsemestre ");
-		sql.append("WHERE a.cpf = ? AND a.senha = ? ORDER BY idliberar DESC ");
+		sql.append("LEFT JOIN Semestre s ON l.fksemestre = s.idsemestre ");
+		sql.append("WHERE a.cpf = ? AND a.senha = ? ORDER BY idrelatorio DESC ");
 		
 		Aluno aluno = null;
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString())
-					.setParameter(1, param.getCpf())
-					.setParameter(2, CriptografiaBase64.encrypt(param.getSenha()));
+					.setParameter(1, param.getSemestre().getId())
+					.setParameter(2, param.getCpf())
+					.setParameter(3, CriptografiaBase64.encrypt(param.getSenha()));
 			Iterator i = query.getResultList().iterator();
 			if(i.hasNext()) {
 				Object[] objs = (Object[]) i.next();
@@ -86,6 +88,7 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 				aluno.getPerfil().setRevisaoRelatorio(Boolean.valueOf(objs[19].toString()));
 				aluno.getPerfil().setRelatorioEnviado(Boolean.valueOf(objs[20].toString()));
 				aluno.getSemestre().setNomeSemestre(objs[21] == null ? "" : objs[21].toString());
+				aluno.setLimiteRelatorio(Boolean.valueOf(objs[22].toString()));
 			}
 		} catch (PersistenceException e) {
 			e.printStackTrace();

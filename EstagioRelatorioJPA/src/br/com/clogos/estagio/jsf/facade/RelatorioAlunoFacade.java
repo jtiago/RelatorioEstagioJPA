@@ -29,6 +29,7 @@ public class RelatorioAlunoFacade implements Serializable {
 	}
 	
 	public void save(Aluno aluno) {
+		getRelatorioAluno().getSemestre().setId(aluno.getSemestre().getId());
 		getRelatorioAluno().setRevisao(false);
 		getRelatorioAluno().setValidado(false);
 		getRelatorioAluno().getAluno().setId(aluno.getId());

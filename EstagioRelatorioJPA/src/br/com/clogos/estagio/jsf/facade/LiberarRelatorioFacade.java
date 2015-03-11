@@ -32,9 +32,9 @@ public class LiberarRelatorioFacade implements Serializable {
 	
 	public void save() {
 		try {
-			if(!validaCastroModulo()) {
+			if(!validaCadastroModulo()) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-						FacesMessage.SEVERITY_ERROR, "Não pode ser liberado este modulo para a turma selecionada.", ""));
+						FacesMessage.SEVERITY_ERROR, "Nï¿½o pode ser liberado este modulo para a turma selecionada.", ""));
 				return;
 			}
 		
@@ -46,16 +46,16 @@ public class LiberarRelatorioFacade implements Serializable {
 							FacesMessage.SEVERITY_INFO, "Relatorio Liberado para esta Turma com sucesso.", ""));
 				} else {
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-							FacesMessage.SEVERITY_WARN, " Existe Relatório em aberto para esta turma.", ""));
+							FacesMessage.SEVERITY_WARN, " Existe Relatï¿½rio em aberto para esta turma.", ""));
 				}
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-						FacesMessage.SEVERITY_WARN, " Este Modulo já foi liberado para esta turma.", ""));
+						FacesMessage.SEVERITY_WARN, " Este Modulo jï¿½ foi liberado para esta turma.", ""));
 			}
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, "Problemas ao salvar Liberação de Relatório.", ""));
+					FacesMessage.SEVERITY_ERROR, "Problemas ao salvar Liberaï¿½ï¿½o de Relatï¿½rio.", ""));
 		}
 	}
 	
@@ -75,7 +75,10 @@ public class LiberarRelatorioFacade implements Serializable {
 		return ModuloEnum.values();
 	}
 	
-	private Boolean validaCastroModulo() {
+	/**
+	 * Para curso de Radiologia e LaboratÃ³rio nÃ£o pode ser liberado Modulo II ou Modulo III
+	 */
+	private Boolean validaCadastroModulo() {
 		Turma turma = getTurmaController().obterTurma(getLiberarRelatorio().getTurmaLiberarRelatorio().getId());
 		if((turma.getNome().contains("RAD") || turma.getNome().contains("LAB")) &&
 				(getLiberarRelatorio().getModulo().equals(ModuloEnum.Modulo_II) 

@@ -20,8 +20,8 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 	private EntityManager entityManager;
 	
 	/**
-	 * Verifica se já existe relatório liberado para aquela turma e módulo
-	 * não depense se esta aberto ou não, não pode ter dois relatorio liberado para mesma turma e modulo.
+	 * Verifica se já existe módulo liberado para aquela turma
+	 * não depense se esta aberto ou não, não pode ter dois módulo liberado para mesma turma.
 	 */
 	@Override
 	public Boolean existeModuloLiberado(LiberarRelatorio oT) {
@@ -45,7 +45,7 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 	}
 	
 	/**
-	 * Verifica se existe relatório em aberto para o mesmo semestre e turma e modulo
+	 * Verifica se existe módulo em aberto para o mesmo semestre e turma.
 	 */
 	@Override
 	public Boolean existeModuloAberto(LiberarRelatorio oT) {

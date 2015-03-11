@@ -16,7 +16,8 @@
 		</h:form>
 		
 		<h:form id="formRelatorio">
-			<p:panel  header="..:: Relatório de Estágio" rendered="#{sessionScope.usuarioLogado.moduloLiberado and !relatorioAlunoBean.relatorioAvaliando}">
+			<p:panel  header="..:: Relatório de Estágio" rendered="#{sessionScope.usuarioLogado.moduloLiberado and !relatorioAlunoBean.relatorioAvaliando
+							and !sessionScope.usuarioLogado.limiteRelatorio}">
 				<h:panelGrid columns="3" width="920">
 					<p:graphicImage url="/images/logo.png" width="120"/>
 					<h:outputLabel value="ESTÁGIO SUPERVISIONADO #{sessionScope.usuarioLogado.modulo}" 
@@ -116,6 +117,14 @@
 				<br/><br/><br/><br/><br/><br/>
 				<h:panelGrid columns="1" style="margin:0 auto;">
 					<h:outputLabel value="RELATÓRIO SENDO AVALIADO!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+				</h:panelGrid>			
+				<br/><br/><br/><br/><br/><br/>
+			</p:panel>
+			
+			<p:panel header="..:: Relatorio de Estagio" rendered="#{sessionScope.usuarioLogado.limiteRelatorio}" style="margin:0 auto;">
+				<br/><br/><br/><br/><br/><br/>
+				<h:panelGrid columns="1" style="margin:0 auto;">
+					<h:outputLabel value="TODOS OS RELATÓRIOS DESTE SEMESTRE JÁ FORAM ENVIANDOS!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
 				</h:panelGrid>			
 				<br/><br/><br/><br/><br/><br/>
 			</p:panel>

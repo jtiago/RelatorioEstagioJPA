@@ -61,7 +61,7 @@
 						</p:column>
 						
 						<p:column headerText="Módulo" filterBy="#{item.aluno.matricula}" filterMatchMode="contains">
-							<h:outputLabel value="#{item.modulo.label}"/>
+							<h:outputLabel value="#{item.modulo.label} - #{item.semestre.nomeSemestre}"/>
 						</p:column>
 						
 						<p:column headerText="Status">
