@@ -47,18 +47,10 @@ public class Perfil implements ObjectModel {
 //	update perfil set cadastroAluno = 0, cadastroCampo = 0, cadastroSupervisor = 0, cadastroTurma = 0, liberarrelatorio = 0, relatorioAdmin = 0,
 //			relatorioAluno = 1, revisaoRelatorio = 1 where idperfil = 2;
 	
-//	insert into usuario (cpfusuario,nomeusuario,senhausuario,fkperfil)
-//	values ('22222222222', 'Arruda', 'MjI=', 1)
-	
 //	alter table perfil add cadastroUsuario tinyint(1)
 //	alter table perfil add relatorioEnviado tinyint(1)
 //	update perfil set cadastroUsuario = 0 where idperfil = 2
 //	update perfil set relatorioEnviado = 0 where idperfil = 1
-	
-	// INSERT INTO perfil (nomeperfil,cadastroAluno,cadastroCampo,cadastroSupervisor,cadastroTurma,liberarRelatorio,relatorioAluno,relatorioAdmin,revisaoRelatorio,cadastroUsuario)
-	//	VALUES ('SUPERVISOR',0,0,0,0,0,0,1,0,0);
-	
-	//update perfil set nomeperfil = 'COORDENAÇÃO' where idperfil = 1
 
 	public Long getId() {
 		return id;

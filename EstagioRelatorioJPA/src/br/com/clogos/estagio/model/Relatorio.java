@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -64,8 +63,8 @@ public class Relatorio implements ObjectModel {
 	@JoinColumn(name = "fksupervisor", referencedColumnName="idsupervisor" )
 	private Supervisor supervisor;
 	
-	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="fksemestre")
+	@ManyToOne(cascade=CascadeType.DETACH)
+	@JoinColumn(name="fksemestre", referencedColumnName="idsemestre")
 	private Semestre semestre;
 
 	public Long getId() {
