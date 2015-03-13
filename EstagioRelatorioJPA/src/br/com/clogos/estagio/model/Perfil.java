@@ -16,7 +16,7 @@ public class Perfil implements ObjectModel {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idperfil")
-	private Long id;
+	private Long id = 2L;
 	@Column(name="nomeperfil", length=25)
 	private String nome;
 	

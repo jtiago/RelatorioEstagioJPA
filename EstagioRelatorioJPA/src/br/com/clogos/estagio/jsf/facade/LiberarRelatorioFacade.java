@@ -34,7 +34,7 @@ public class LiberarRelatorioFacade implements Serializable {
 		try {
 			if(!validaCadastroModulo()) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-						FacesMessage.SEVERITY_ERROR, "N�o pode ser liberado este modulo para a turma selecionada.", ""));
+						FacesMessage.SEVERITY_ERROR, "Não pode ser liberado este módulo para a turma selecionada.", ""));
 				return;
 			}
 		
@@ -46,11 +46,11 @@ public class LiberarRelatorioFacade implements Serializable {
 							FacesMessage.SEVERITY_INFO, "Relatorio Liberado para esta Turma com sucesso.", ""));
 				} else {
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-							FacesMessage.SEVERITY_WARN, " Existe Relat�rio em aberto para esta turma.", ""));
+							FacesMessage.SEVERITY_WARN, " Existe Relatório em aberto para esta turma.", ""));
 				}
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-						FacesMessage.SEVERITY_WARN, " Este Modulo j� foi liberado para esta turma.", ""));
+						FacesMessage.SEVERITY_WARN, " Este Modulo já foi liberado para esta turma.", ""));
 			}
 		} catch (PersistenceException e) {
 			e.printStackTrace();

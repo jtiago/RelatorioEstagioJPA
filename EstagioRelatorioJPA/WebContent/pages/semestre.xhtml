@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templatePages.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+	<ui:define name="conteudo">
+		<p:panel  header="..:: Cadastro de Semestre">
+			<h:form id="formMessage">
+				<p:growl autoUpdate="true" rendered="#{semestreBean.mensagem}"/>
+			</h:form>
+			
+			<h:form id="formNovo">
+				<h:panelGrid columns="2">
+					<p:commandButton value="Novo Semestre" icon="ui-icon-disk" oncomplete="dialogCadSemestre.show()"/>
+				</h:panelGrid>
+			</h:form><br/>
+			
+			<h:form id="formTabelaSemestre">
+				<p:dataTable id="tabelaSemestre" var="item" value="#{semestreBean.facade.listaSemestre}" emptyMessage="Sem Registros..."
+					filteredValue="#{SemestreBean.facade.listaSemestreFilter}">
+					<f:facet name="header">
+						Semestres Cadastrados
+					</f:facet>
+					
+					<p:column headerText="Semestre" filterBy="#{item.nomeSemestre}" filterMatchMode="contains">
+						<h:outputLabel value="#{item.nomeSemestre}"/>
+					</p:column>
+					
+					<p:column style="text-align:right; width: 185px;">
+						<p:commandButton icon="ui-icon-trash" title="Remover Semestre" oncomplete="removeSemestre.show()">
+							<f:setPropertyActionListener target="#{semestreBean.facade.semestre}" value="#{item}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-pencil" title="Alterar Semestre" oncomplete="dialogAltSemestre.show()" update=":formAlterar">
+							<f:setPropertyActionListener target="#{semestreBean.facade.semestreAltera}" value="#{item}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:panel>
+		
+		<h:form id="formDelete">
+			<p:confirmDialog message="Deseja realmente remover este Semestre ?" header="..:: Remover Semestre" widgetVar="removeSemestre">
+				<p:commandButton value="Sim" actionListener="#{semestreBean.remove}" update=":formMessage :formDelete :formTabelaSemestre" />
+				<p:commandButton value="Não" oncomplete="removeSemestre.hide()"/>
+			</p:confirmDialog>
+		</h:form>
+		
+		<h:form id="formCadastro">
+				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+					header="..::: Nova Semestre - [ * Campo Obrigatório ]" widgetVar="dialogCadSemestre">
+					<h:panelGrid id="grid" columns="2">
+						<p:outputLabel for="nome" value="Nome:" />
+						<p:inputText id="nome" value="#{semestreBean.facade.semestre.nomeSemestre}" required="true"/>
+					</h:panelGrid>
+					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{semestreBean.save}" onclick="lazyload()"
+						update=":formCadastro:grid :formTabelaSemestre :formMessage"/>
+					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogCadSemestre.hide()" onclick="lazyload()"/>
+				</p:dialog>
+			</h:form>
+			
+		<h:form id="formAlterar">
+			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+				header="..::: Novo Semestre - [ * Semestre Obrigatório ]" widgetVar="dialogAltSemestre">
+				<h:panelGrid id="grid" columns="2">
+					<p:outputLabel for="nome" value="Nome:" />
+					<p:inputText id="nome" value="#{semestreBean.facade.semestreAltera.nomeSemestre}" required="true"/>
+				</h:panelGrid>
+				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{semestreBean.update}"
+					update=":formTabelaSemestre :formAlterar:grid :formMessage" onclick="lazyload()"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltSemestre.hide()" onclick="lazyload()"/>
+			</p:dialog>
+		</h:form>
+		
+		<h:form>
+			<p:remoteCommand name="lazyload">  
+		        <f:setPropertyActionListener value="#{false}" target="#{semestreBean.mensagem}" />  
+		    </p:remoteCommand> 
+		</h:form>
+	</ui:define>
+</ui:composition>

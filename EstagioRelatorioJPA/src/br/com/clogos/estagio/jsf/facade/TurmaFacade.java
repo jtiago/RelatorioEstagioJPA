@@ -41,7 +41,7 @@ public class TurmaFacade implements Serializable {
 			}
 		} else {
 //			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-//					FacesMessage.SEVERITY_WARN, "Turma já existente.", ""));
+//					FacesMessage.SEVERITY_WARN, "Turma jï¿½ existente.", ""));
 		}
 	}
 	
@@ -56,7 +56,7 @@ public class TurmaFacade implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, "Problemas ao remover Aluno.", ""));
+					FacesMessage.SEVERITY_ERROR, "Problemas ao remover Turma.", ""));
 		}
 	}
 	

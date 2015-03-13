@@ -121,10 +121,10 @@
 				<br/><br/><br/><br/><br/><br/>
 			</p:panel>
 			
-			<p:panel header="..:: Relatorio de Estagio" rendered="#{sessionScope.usuarioLogado.limiteRelatorio}" style="margin:0 auto;">
+			<p:panel header="..:: Relatorio de Estagio" rendered="#{sessionScope.usuarioLogado.limiteRelatorio and !relatorioAlunoBean.relatorioAvaliando}" style="margin:0 auto;">
 				<br/><br/><br/><br/><br/><br/>
 				<h:panelGrid columns="1" style="margin:0 auto;">
-					<h:outputLabel value="TODOS OS RELATÓRIOS DESTE SEMESTRE JÁ FORAM ENVIANDOS!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+					<h:outputLabel value="TODOS OS RELATÓRIOS DO SEMESTRE #{sessionScope.usuarioLogado.semestre.nomeSemestre} JÁ FORAM ENVIANDOS!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
 				</h:panelGrid>			
 				<br/><br/><br/><br/><br/><br/>
 			</p:panel>
