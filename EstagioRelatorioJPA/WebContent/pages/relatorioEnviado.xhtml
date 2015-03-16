@@ -30,8 +30,8 @@
 							<h:outputLabel value="#{item.campoEstagio.nome}"/>
 						</p:column>
 						
-						<p:column headerText="Módulo">
-							<h:outputLabel value="#{item.modulo.label}"/>
+						<p:column headerText="Módulo/Semestre">
+							<h:outputLabel value="#{item.modulo.label} - #{item.semestre.nomeSemestre}"/>
 						</p:column>
 						
 						<p:column headerText="Status">
@@ -64,6 +64,8 @@
 				<p:fieldset>
 					<h:panelGrid columns="1" style="text-align: justify;">
 						<h:panelGrid columns="2">
+							<h:outputLabel value="Semestre: " />
+							<h:outputLabel value="#{relatorioAlunoBean.facade.relatorioAluno.semestre.nomeSemestre}" />
 							<h:outputLabel value="Data Início: " />
 							<h:outputLabel value="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />

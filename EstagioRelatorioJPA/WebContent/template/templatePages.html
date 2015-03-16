@@ -16,7 +16,7 @@
 	<div id="template_pages">
 		<div id="template_pages_top">
 			<p:graphicImage url="/images/bannerestagio.png"/>
-			<p:commandButton value="Usuário Logado: #{sessionScope.usuarioLogado.nome}"/>
+			<p:commandButton value="Usuário Logado: #{sessionScope.usuarioLogado.nome} #{sessionScope.usuarioLogado.perfil.id eq 2 ? -  sessionScope.usuarioLogado.semestre.nomeSemestre : ''}"/>
 		</div>
 		
 		<div id="template_pages_menu">
