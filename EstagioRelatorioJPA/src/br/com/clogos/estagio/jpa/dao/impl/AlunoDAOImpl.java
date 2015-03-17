@@ -47,7 +47,8 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		sql.append("SELECT idaluno,a.nomealuno,a.cpf,a.nometurma,t.nomeCurso,p.nomeperfil,p.idperfil,l.modulo,  ");
 		sql.append("cadastroAluno,cadastroCampo,cadastroSupervisor,cadastroTurma,liberarRelatorio,relatorioAluno, ");
 		sql.append("relatorioAdmin,l.aberto,validado,revisao,t.idturma,revisaoRelatorio,relatorioEnviado, s.idsemestre, nomeSemestre, ");
-		sql.append("(SELECT count(*) FROM relatorio WHERE fksemestre = :semestre) = qtdRelatorio as limiteRelatorio FROM Aluno a ");
+		sql.append("(SELECT count(*) FROM relatorio rs INNER JOIN Aluno ass ON ass.idaluno=rs.fkaluno WHERE rs.fksemestre = :semestre and ass.cpf = :cpf) as limiteRelatorio, ");
+		sql.append("qtdRelatorio FROM Aluno a ");
 		sql.append("INNER JOIN Turma t ON a.nometurma = t.nometurma ");
 		sql.append("INNER JOIN Perfil p ON p.idperfil = a.fkperfil ");
 		sql.append("LEFT JOIN LiberarRelatorio l ON l.fkturma = t.idturma AND l.fksemestre = :semestre ");
@@ -89,7 +90,7 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 				aluno.getPerfil().setRelatorioEnviado(Boolean.valueOf(objs[20].toString()));
 				aluno.getSemestre().setId(objs[21] == null ? null : Long.valueOf(objs[21].toString()));
 				aluno.getSemestre().setNomeSemestre(objs[22].toString());
-				aluno.setLimiteRelatorio(converteBoolean(objs[23].toString()));
+				aluno.setLimiteRelatorio(objs[23].toString().equals(objs[24].toString()));
 			}
 		} catch (PersistenceException e) {
 			e.printStackTrace();
@@ -121,11 +122,11 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		}
 	}
 	
-	private Boolean converteBoolean(String param) {
-		if(param.equals("1")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+//	private Boolean converteBoolean(String param) {
+//		if(param.equals("1")) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
 }
