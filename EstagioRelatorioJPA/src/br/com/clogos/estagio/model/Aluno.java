@@ -49,8 +49,8 @@ public class Aluno implements ObjectModel {
 	@Column(name="nometurma", length=15, nullable=true)
 	private String nomeTurma;
 	
-	@ManyToOne(cascade=CascadeType.DETACH)
-	@JoinColumn(name="fkperfil")
+	@ManyToOne(cascade=CascadeType.REFRESH)
+	@JoinColumn(name="fkperfil", referencedColumnName="idperfil")
 	private Perfil perfil;
 	
 	@OneToMany(mappedBy = "aluno")

@@ -1,10 +1,13 @@
 package br.com.clogos.estagio.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
@@ -16,9 +19,11 @@ public class Perfil implements ObjectModel {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idperfil")
-	private Long id = 2L;
+	private Long id;
 	@Column(name="nomeperfil", length=25)
 	private String nome;
+	@OneToMany(mappedBy = "perfil")
+	private List<Aluno> alunos;
 	
 	@Column(length=1)
 	private Boolean cadastroAluno;
@@ -146,5 +151,13 @@ public class Perfil implements ObjectModel {
 
 	public void setRelatorioEnviado(Boolean relatorioEnviado) {
 		this.relatorioEnviado = relatorioEnviado;
+	}
+
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
 	}
 }

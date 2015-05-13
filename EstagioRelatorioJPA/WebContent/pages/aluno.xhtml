@@ -80,8 +80,13 @@
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 					header="..::: Novo Aluno - [ * Campo Obrigatorio ]" widgetVar="dialogCadAluno">
 					<h:panelGrid id="grid" columns="2">
+						<p:outputLabel for="perfil" value="Perfil:" />
+						<p:selectOneMenu id="perfil" value="#{alunoBean.facade.aluno.perfil.id}" required="true" style="width:220px;">
+				            <f:selectItem itemLabel="Aluno" itemValue="2"/>
+				        </p:selectOneMenu>
+						
 						<p:outputLabel for="turma" value="Turma:" />
-						<p:selectOneMenu id="turma" value="#{alunoBean.facade.aluno.nomeTurma}" required="true">
+						<p:selectOneMenu id="turma" value="#{alunoBean.facade.aluno.nomeTurma}" required="true" style="width:220px;">
 				            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
 							<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.nome}" itemLabel="#{tu.nome}"/>
 				        </p:selectOneMenu>
