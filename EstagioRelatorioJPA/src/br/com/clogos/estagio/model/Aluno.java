@@ -5,10 +5,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -49,12 +52,19 @@ public class Aluno implements ObjectModel {
 	@Column(name="nometurma", length=15, nullable=true)
 	private String nomeTurma;
 	
-	@ManyToOne(cascade=CascadeType.REFRESH)
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
 	@JoinColumn(name="fkperfil", referencedColumnName="idperfil")
 	private Perfil perfil;
 	
 	@OneToMany(mappedBy = "aluno")
 	private List<Relatorio> relatorios;
+	
+	@ManyToMany
+	@JoinTable(name = "turma_aluno")
+	private List<Turma> turmas; 
+	
+	@ManyToMany(mappedBy="alunosGrupo")
+	private List<Grupo> grupos;
 	
 	@Transient
 	private Turma turmaT;
@@ -214,5 +224,21 @@ public class Aluno implements ObjectModel {
 
 	public void setLimiteRelatorio(Boolean limiteRelatorio) {
 		this.limiteRelatorio = limiteRelatorio;
+	}
+
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
+	}
+
+	public List<Grupo> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
 	}
 }

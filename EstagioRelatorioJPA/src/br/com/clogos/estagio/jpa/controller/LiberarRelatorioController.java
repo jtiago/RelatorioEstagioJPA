@@ -27,7 +27,7 @@ public class LiberarRelatorioController implements Serializable {
 		return getLiberarRelatorioDAO().fecharModuloLiberado(idTurma, modulo);
 	}
 	
-	public List<LiberarRelatorio> findoAll() {
-		return getLiberarRelatorioDAO().findAll();
+	public List<LiberarRelatorio> findoAll(Long idSemestre) {
+		return getLiberarRelatorioDAO().findAll(idSemestre);
 	}
 }

@@ -82,7 +82,7 @@ public class RelatorioAdminFacade implements Serializable {
 			File fileLogo = new File(context.getRealPath("/images/logo.gif"));
 			BufferedImage logo = ImageIO.read(fileLogo);
 			paramentros.put("LOGO", logo);
-			paramentros.put("NOMECURSO", getTurmaController().obterCurso(getRelatorioImprimir().getAluno().getNomeTurma()).getNomeCurso());
+			//paramentros.put("NOMECURSO", getTurmaController().obterCurso(getRelatorioImprimir().getAluno().getNomeTurma()).getNomeCurso());
 			paramentros.put("TITULO", "ESTÁGIO SUPERVISIONADO "+getRelatorioImprimir().getModulo().getLabel().toUpperCase());
 			paramentros.put("IMGSUPERVISOR", getRelatorioImprimir().getSupervisor(). getImagem().getCaminho()+
 					getRelatorioImprimir().getSupervisor().getImagem().getNome());

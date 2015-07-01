@@ -2,6 +2,8 @@ package br.com.clogos.estagio.jsf.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.faces.bean.ManagedBean;
@@ -9,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DualListModel;
 
 import br.com.clogos.estagio.jsf.facade.AlunoFacade;
 import br.com.clogos.estagio.jsf.facade.TurmaFacade;
@@ -25,10 +28,26 @@ public class AlunoBean implements Serializable {
 	private TurmaFacade facadeTurma;
 	private Perfil perfil;
 	private Aluno aluno;
+	private Turma turma;
 	private boolean mensagem;
+	
+	private DualListModel<Turma> dualListModel;
 	
 	public AlunoBean() {
 		mensagem = false;
+		
+		List<Turma> source = getFacadeTurma().getListaTurma();
+		List<Turma> target = new ArrayList<Turma>();
+		dualListModel = new DualListModel<Turma>(source, target);
+	}
+	
+	public DualListModel<Turma> getDualListModel() {
+		return dualListModel;
+	}
+	
+	public void setDualListModel(DualListModel<Turma> dualListModel) {
+		this.dualListModel.getSource().removeAll(dualListModel.getTarget());
+		this.dualListModel = dualListModel;
 	}
 	
 	public AlunoFacade getFacade() {
@@ -38,9 +57,9 @@ public class AlunoBean implements Serializable {
 	public TurmaFacade getFacadeTurma() {
 		return facadeTurma == null ? facadeTurma = new TurmaFacade() : facadeTurma;
 	}
-	
+
 	public void save(ActionEvent event) {
-		getFacade().save();
+		getFacade().save(getDualListModel().getTarget());
 		mensagem = true;
 	}
 	
@@ -92,10 +111,10 @@ public class AlunoBean implements Serializable {
 		aluno.setSenha("12345678");
 		aluno.setSexo(token[7]);
 		aluno.setStatus(token[5]);
-		aluno.setNomeTurma(token[2]);
+		//aluno.setNomeTurma(token[2]);
 		aluno.setPerfil(getPerfil());
 		getFacade().setAluno(aluno);
-		getFacade().save();
+		//getFacade().save();
 	}
 	
 	public void resetSenha(ActionEvent event) {
@@ -125,5 +144,13 @@ public class AlunoBean implements Serializable {
 
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
 	}
 }

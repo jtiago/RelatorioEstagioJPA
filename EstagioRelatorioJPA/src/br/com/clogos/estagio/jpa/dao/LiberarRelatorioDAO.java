@@ -8,5 +8,5 @@ public interface LiberarRelatorioDAO {
 	Boolean existeModuloLiberado(LiberarRelatorio oT);
 	Boolean existeModuloAberto(LiberarRelatorio oT);
 	Boolean fecharModuloLiberado(Long idTurma, String modulo);
-	List<LiberarRelatorio> findAll();
+	List<LiberarRelatorio> findAll(Long idSemestre);
 }

@@ -24,7 +24,7 @@
 			
 			<h:form id="formTabelaAluno">
 				<p:dataTable id="tabelaAluno" var="item" value="#{alunoBean.facade.listaAlunos}" emptyMessage="Sem Registros..." 
-					filteredValue="#{alunoBean.facade.listaAlunosFilter}" paginator="true" rowsPerPageTemplate="40,80,120" rows="40">
+					filteredValue="#{alunoBean.facade.listaAlunosFilter}" paginator="true" rowsPerPageTemplate="40,80,120" rows="20">
 					<f:facet name="header">
 						Alunos Cadastrados
 					</f:facet>
@@ -41,8 +41,8 @@
 						<h:outputLabel value="#{item.matricula}"/>
 					</p:column>
 					
-					<p:column headerText="Turma" filterBy="#{item.nomeTurma}" filterMatchMode="contains">
-						<h:outputLabel value="#{item.nomeTurma}"/>
+					<p:column headerText="Turma">
+						<p:dataList value="#{item.turmas}" var="tur" style="border:0px;">#{tur.nome}</p:dataList>
 					</p:column>
 					
 					<p:column style="text-align:right; width: 150px;">
@@ -80,17 +80,18 @@
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 					header="..::: Novo Aluno - [ * Campo Obrigatorio ]" widgetVar="dialogCadAluno">
 					<h:panelGrid id="grid" columns="2">
+						<p:outputLabel for="pickList" value="Turma(s) Vinculada(s)" />
+						<p:pickList id="pickList" value="#{alunoBean.dualListModel}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}" converter="TurmaConverter"
+								showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
+							<f:facet name="sourceCaption">Turma(s)</f:facet>
+        					<f:facet name="targetCaption">Turma(s) Vinculadas</f:facet>
+						</p:pickList>
+						
 						<p:outputLabel for="perfil" value="Perfil:" />
 						<p:selectOneMenu id="perfil" value="#{alunoBean.facade.aluno.perfil.id}" required="true" style="width:220px;">
 				            <f:selectItem itemLabel="Aluno" itemValue="2"/>
 				        </p:selectOneMenu>
-						
-						<p:outputLabel for="turma" value="Turma:" />
-						<p:selectOneMenu id="turma" value="#{alunoBean.facade.aluno.nomeTurma}" required="true" style="width:220px;">
-				            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
-							<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.nome}" itemLabel="#{tu.nome}"/>
-				        </p:selectOneMenu>
-				        
+
 						<p:outputLabel for="nome" value="Nome:" />
 						<p:inputText id="nome" value="#{alunoBean.facade.aluno.nome}" required="true" style="width:290px;"/>
 						
@@ -127,11 +128,6 @@
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 				header="..::: Novo Aluno - [ * Campo Obrigatório ]" widgetVar="dialogAltAluno">
 				<h:panelGrid id="grid" columns="2">
-					<p:outputLabel for="turma" value="Turma:" />
-					<p:selectOneMenu id="turma" value="#{alunoBean.facade.alunoAltera.nomeTurma}" required="true">
-			            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
-						<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.nome}" itemLabel="#{tu.nome}"/>
-			        </p:selectOneMenu>
 				
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{alunoBean.facade.alunoAltera.nome}" required="true" style="width: 290px;"/>
@@ -152,7 +148,7 @@
 					<p:inputText id="status" value="#{alunoBean.facade.alunoAltera.status}"/>
 					
 					<p:outputLabel for="email" value="E-mail:" />
-					<p:inputText id="email" value="#{alunoBean.facade.alunoAltera.email}" required="true"/>
+					<p:inputText id="email" value="#{alunoBean.facade.alunoAltera.email}"/>
 					
 				</h:panelGrid>
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{alunoBean.update}"

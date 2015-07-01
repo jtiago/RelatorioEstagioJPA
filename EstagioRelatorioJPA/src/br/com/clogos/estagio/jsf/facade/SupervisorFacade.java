@@ -28,6 +28,7 @@ public class SupervisorFacade implements Serializable {
 	
 	public void save(ImagemAssinatura assinatura, String nome) {
 		getSupervisor().setNome(nome);
+		getSupervisor().setCodigoSituacao(1);
 		getSupervisor().setImagem(assinatura);
 		try {
 			getGenericControl().save(getSupervisor());

@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.clogos.estagio.model.Aluno;
 
 public interface AlunoDAO {
-	List<Aluno> findAll();
+	List<Aluno> findAll(Long idSemestre);
 	Aluno validarAutenticacao(Aluno aluno);
 	Boolean updateSenha(String cpf, String senha);
 }

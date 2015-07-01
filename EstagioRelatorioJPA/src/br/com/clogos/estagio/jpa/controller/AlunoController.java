@@ -12,8 +12,8 @@ public class AlunoController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private AlunoDAO alunoDAO;
 	
-	public List<Aluno> findAll() {
-		return getAlunoDAO().findAll();
+	public List<Aluno> findAll(Long idSemestre) {
+		return getAlunoDAO().findAll(idSemestre);
 	}
 	
 	public Aluno validarAutenticacao(Aluno param) {

@@ -53,9 +53,9 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		if(relatorio.getModulo() != null) {
 			hql.append("AND r.modulo = :modulo ");
 		}
-		if(relatorio.getAluno().getNomeTurma() != "") {
-			hql.append("AND a.nomeTurma = :nomeTurma ");
-		}
+		//if(relatorio.getAluno().getNomeTurma() != "") {
+			//hql.append("AND a.nomeTurma = :nomeTurma ");
+		//}
 		if(relatorio.getCampoEstagio().getId() != 0) {
 			hql.append("AND c.id = :idCampo ");
 		}
@@ -66,9 +66,9 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 			if(relatorio.getModulo() != null) {
 				query.setParameter("modulo", relatorio.getModulo());
 			}
-			if(relatorio.getAluno().getNomeTurma() != "") {
-				query.setParameter("nomeTurma", relatorio.getAluno().getNomeTurma());
-			}
+			//if(relatorio.getAluno().getNomeTurma() != "") {
+				//query.setParameter("nomeTurma", relatorio.getAluno().getNomeTurma());
+			//}
 			if(relatorio.getCampoEstagio().getId() != 0) {
 				query.setParameter("idCampo", relatorio.getCampoEstagio().getId());
 			}

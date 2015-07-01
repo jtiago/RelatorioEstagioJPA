@@ -25,7 +25,7 @@ public class Semestre implements ObjectModel {
 	private String nomeSemestre;
 	
 	@OneToMany(mappedBy = "semestre")
-	private List<Relatorio> relatorios;
+	private List<Turma> turmas;
 
 	public Long getId() {
 		return id;

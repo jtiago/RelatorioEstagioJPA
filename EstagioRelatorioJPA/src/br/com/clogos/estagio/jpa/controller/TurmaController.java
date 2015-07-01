@@ -18,8 +18,8 @@ public class TurmaController implements Serializable {
 		return turmaDAO;
 	}
 	
-	public List<Turma> findAll() {
-		return getTurmaDAO().findAll();
+	public List<Turma> findAll(Long idSemestre) {
+		return getTurmaDAO().findAll(idSemestre);
 	}
 	
 	public Boolean verificaDuplicidade(String nomeTurma) {

@@ -22,8 +22,15 @@ public class Perfil implements ObjectModel {
 	private Long id;
 	@Column(name="nomeperfil", length=25)
 	private String nome;
+	
 	@OneToMany(mappedBy = "perfil")
 	private List<Aluno> alunos;
+	
+	@OneToMany(mappedBy = "perfil")
+	private List<Usuario> usuarios;
+	
+	@OneToMany(mappedBy = "perfil")
+	private List<Supervisor> supervisores;
 	
 	@Column(length=1)
 	private Boolean cadastroAluno;

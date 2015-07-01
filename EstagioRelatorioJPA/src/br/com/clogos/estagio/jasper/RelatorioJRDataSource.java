@@ -24,9 +24,9 @@ public class RelatorioJRDataSource implements JRDataSource {
 		if(nome.getName().equals("NOMEALUNO")) {
 			return relatorio.getAluno().getNome();
 		}
-		if(nome.getName().equals("NOMETURMA")) {
-			return relatorio.getAluno().getNomeTurma();
-		}
+		//if(nome.getName().equals("NOMETURMA")) {
+			//return relatorio.getAluno().getNomeTurma();
+		//}
 		if(nome.getName().equals("CAMPO")) {
 			return relatorio.getCampoEstagio().getNome();
 		}

@@ -13,6 +13,7 @@ import br.com.clogos.estagio.jpa.controller.LiberarRelatorioController;
 import br.com.clogos.estagio.jpa.controller.TurmaController;
 import br.com.clogos.estagio.model.LiberarRelatorio;
 import br.com.clogos.estagio.model.Turma;
+import br.com.clogos.estagio.util.Util;
 
 public class LiberarRelatorioFacade implements Serializable {
 	private static final long serialVersionUID = -1656621873140148824L;
@@ -25,13 +26,14 @@ public class LiberarRelatorioFacade implements Serializable {
 	
 	public List<LiberarRelatorio> getListaLiberados() {
 		if(listaLiberados == null) {
-			listaLiberados = getLiberarRelatorioController().findoAll();
+			listaLiberados = getLiberarRelatorioController().findoAll(Util.getUsuarioSessao().getIdSemestre());
 		}
 		return listaLiberados;
 	}
 	
 	public void save() {
 		try {
+			getLiberarRelatorio().getTurmaLiberarRelatorio().getSemestre().setId(Util.getUsuarioSessao().getId());
 			if(!validaCadastroModulo()) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 						FacesMessage.SEVERITY_ERROR, "Não pode ser liberado este módulo para a turma selecionada.", ""));

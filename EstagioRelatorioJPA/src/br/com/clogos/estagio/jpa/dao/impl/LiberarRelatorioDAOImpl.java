@@ -21,20 +21,22 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 	
 	/**
 	 * Verifica se já existe módulo liberado para aquela turma
-	 * não depense se esta aberto ou não, não pode ter dois módulo liberado para mesma turma.
+	 * não depende se esta aberto ou não, não pode ter dois módulo iguais liberado para mesma turma.
 	 */
 	@Override
 	public Boolean existeModuloLiberado(LiberarRelatorio oT) {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
-		hql.append("SELECT l FROM LiberarRelatorio l JOIN l.turmaLiberarRelatorio lt ");
-		hql.append("WHERE l.modulo = :modulo AND lt.id = :idturma");
+		hql.append("SELECT l FROM LiberarRelatorio l JOIN l.turmaLiberarRelatorio lt JOIN lt.semestre s ");
+		hql.append("WHERE (l.modulo = :modulo AND lt.id = :idturma) OR (s.id = :idSemestre AND lt.id = :idturma)");
 		try {
 			TypedQuery<LiberarRelatorio> query = entityManager.createQuery(hql.toString(), LiberarRelatorio.class)
 					.setParameter("modulo", oT.getModulo())
-					.setParameter("idturma", oT.getTurmaLiberarRelatorio().getId());
+					.setParameter("idturma", oT.getTurmaLiberarRelatorio().getId())
+					.setParameter("idSemestre", oT.getTurmaLiberarRelatorio().getSemestre().getId());
 			return query.getResultList().size() != 0;
 		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
 			if(entityManager.isOpen()) {
@@ -52,15 +54,16 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
 		hql.append("SELECT l FROM LiberarRelatorio l ");
-		hql.append("JOIN l.turmaLiberarRelatorio lt JOIN l.semestre ls ");
-		hql.append("WHERE lt.id = :idturma AND l.aberto = :aberto AND ls.nomeSemeste = :nomeSemestre " );
+		hql.append("JOIN l.turmaLiberarRelatorio lt JOIN lt.semestre ls ");
+		hql.append("WHERE lt.id = :idturma AND l.aberto = :aberto AND ls.id = :idSemestre " );
 		try {
 			TypedQuery<LiberarRelatorio> query = entityManager.createQuery(hql.toString(), LiberarRelatorio.class)
 					.setParameter("idturma", oT.getTurmaLiberarRelatorio().getId())
 					.setParameter("aberto", true)
-					.setParameter("nomeSemestre", oT.getSemestre().getNomeSemestre());
+					.setParameter("idSemestre", oT.getTurmaLiberarRelatorio().getSemestre().getId());
 			return query.getResultList().size() != 0;
 		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
 			if(entityManager.isOpen()) {
@@ -96,11 +99,12 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 	}
 
 	@Override
-	public List<LiberarRelatorio> findAll() {
+	public List<LiberarRelatorio> findAll(Long idSemestre) {
 		entityManager = JpaUtil.getEntityManager();
-		String hql = "SELECT l FROM LiberarRelatorio l JOIN l.turmaLiberarRelatorio";
+		String hql = "SELECT l FROM LiberarRelatorio l JOIN l.turmaLiberarRelatorio t WHERE t.semestre.id = :idSemestre";
 		try {
-			TypedQuery<LiberarRelatorio> query = entityManager.createQuery(hql, LiberarRelatorio.class);
+			TypedQuery<LiberarRelatorio> query = entityManager.createQuery(hql, LiberarRelatorio.class)
+					.setParameter("idSemestre", idSemestre);
 			return query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();

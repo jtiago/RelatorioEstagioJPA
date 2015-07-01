@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.clogos.estagio.model.Turma;
 
 public interface TurmaDAO {
-	List<Turma> findAll();
+	List<Turma> findAll(Long idSemestre);
 	Boolean verificaDuplicidade(String nomeTurma);
 	Turma obterCurso(String nomeTurma);
 	Turma obterTurma(Long id);

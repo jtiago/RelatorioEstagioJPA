@@ -60,12 +60,16 @@ public class Relatorio implements ObjectModel {
 	private Aluno aluno;
 	
 	@ManyToOne(cascade=CascadeType.DETACH)
-	@JoinColumn(name = "fksupervisor", referencedColumnName="idsupervisor" )
+	@JoinColumn(name = "fksupervisor")
 	private Supervisor supervisor;
 	
-	@ManyToOne(cascade=CascadeType.DETACH)
-	@JoinColumn(name="fksemestre", referencedColumnName="idsemestre")
-	private Semestre semestre;
+	@ManyToOne
+	@JoinColumn(name = "fkturma")
+	private Turma turmaRelatorio;
+	
+//	@ManyToOne(cascade=CascadeType.DETACH)
+//	@JoinColumn(name="fksemestre", referencedColumnName="idsemestre")
+//	private Semestre semestre;
 
 	public Long getId() {
 		return id;
@@ -169,13 +173,5 @@ public class Relatorio implements ObjectModel {
 
 	public void setSupervisor(Supervisor supervisor) {
 		this.supervisor = supervisor;
-	}
-
-	public Semestre getSemestre() {
-		return semestre == null ? semestre = new Semestre() : semestre;
-	}
-
-	public void setSemestre(Semestre semestre) {
-		this.semestre = semestre;
 	}
 }

@@ -1,15 +1,14 @@
 package br.com.clogos.estagio.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
@@ -31,9 +30,12 @@ public class Usuario implements ObjectModel {
 	@Column(name="senhausuario", length=100)
 	private String senha;
 	
-	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="fkperfil")
 	private Perfil perfil;
+	
+	@Transient
+	private Long idSemestre;
 
 	public Long getId() {
 		return id;
@@ -73,5 +75,13 @@ public class Usuario implements ObjectModel {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
+	}
+
+	public Long getIdSemestre() {
+		return idSemestre;
+	}
+
+	public void setIdSemestre(Long idSemestre) {
+		this.idSemestre = idSemestre;
 	}
 }

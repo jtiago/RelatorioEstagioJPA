@@ -4,9 +4,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -33,6 +37,19 @@ public class Turma implements ObjectModel {
 	
 	@OneToMany(mappedBy = "turmaLiberarRelatorio")
 	private List<LiberarRelatorio> liberarRelatorios;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "fksemestre", nullable=false)
+	private Semestre semestre;
+	
+	@OneToMany(mappedBy = "turmaRelatorio")
+	private List<Relatorio> Relatorios;
+	
+	@ManyToMany(mappedBy = "turmas")
+	private List<Aluno> alunos;
+	
+	@OneToMany(mappedBy="turmaGrupo")
+	private List<Grupo> listaGrupos;
 	
 	@Transient
 	private LiberarRelatorio liberar;
@@ -75,5 +92,45 @@ public class Turma implements ObjectModel {
 
 	public void setLiberar(LiberarRelatorio liberar) {
 		this.liberar = liberar;
+	}
+
+	public List<LiberarRelatorio> getLiberarRelatorios() {
+		return liberarRelatorios;
+	}
+
+	public void setLiberarRelatorios(List<LiberarRelatorio> liberarRelatorios) {
+		this.liberarRelatorios = liberarRelatorios;
+	}
+
+	public Semestre getSemestre() {
+		return semestre == null ? semestre = new Semestre() : semestre;
+	}
+
+	public void setSemestre(Semestre semestre) {
+		this.semestre = semestre;
+	}
+
+	public List<Relatorio> getRelatorios() {
+		return Relatorios;
+	}
+
+	public void setRelatorios(List<Relatorio> relatorios) {
+		Relatorios = relatorios;
+	}
+
+	public List<Aluno> getO() {
+		return alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+
+	public List<Grupo> getListaGrupos() {
+		return listaGrupos;
+	}
+
+	public void setListaGrupos(List<Grupo> listaGrupos) {
+		this.listaGrupos = listaGrupos;
 	}
 }

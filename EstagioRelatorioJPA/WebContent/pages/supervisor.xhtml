@@ -51,6 +51,13 @@
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 					header="..::: Novo Supervisor - [ * Campo Obrigatório ]" widgetVar="dialogCadSupervisor">
 					<h:panelGrid columns="2">
+						<p:outputLabel for="campo" value="Campo:" />
+                    	<p:selectOneMenu id="campo" value="#{supervisorBean.facade.supervisor.campoEstagio.id}" style="width: 250px;">
+							<f:selectItem itemLabel="Selecione Campo" itemValue="#{null}"/>
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
+								itemValue="#{cam.id}"/>
+						</p:selectOneMenu>
+					
 						<h:outputLabel value="Nome:" />
 						<p:inputText value="#{supervisorBean.nome}" style="width: 400px;"/>
 						

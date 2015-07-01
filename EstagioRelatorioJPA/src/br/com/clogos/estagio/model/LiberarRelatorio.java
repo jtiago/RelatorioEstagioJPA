@@ -1,6 +1,5 @@
 package br.com.clogos.estagio.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -34,14 +33,10 @@ public class LiberarRelatorio implements ObjectModel {
 	@Column(name="qtdRelatorio")
 	private Integer qtdRelatorio;
 	
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "fkturma")
 	private Turma turmaLiberarRelatorio;
 	
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "fksemestre")
-	private Semestre semestre;
-
 	public Long getId() {	
 		return id;
 	}
@@ -80,13 +75,5 @@ public class LiberarRelatorio implements ObjectModel {
 
 	public void setQtdRelatorio(Integer qtdRelatorio) {
 		this.qtdRelatorio = qtdRelatorio;
-	}
-
-	public Semestre getSemestre() {
-		return semestre == null ? semestre = new Semestre() : semestre;
-	}
-
-	public void setSemestre(Semestre semestre) {
-		this.semestre = semestre;
 	}
 }

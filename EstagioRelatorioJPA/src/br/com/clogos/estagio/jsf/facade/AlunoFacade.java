@@ -8,16 +8,20 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import br.com.clogos.estagio.jpa.controller.AlunoController;
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.model.Aluno;
+import br.com.clogos.estagio.model.Turma;
+import br.com.clogos.estagio.model.Usuario;
 import br.com.clogos.estagio.util.CriptografiaBase64;
 
 public class AlunoFacade implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Aluno aluno;
 	private Aluno alunoAltera;
+	private Turma turma;
 	private List<Aluno> listaAlunos;
 	private List<Aluno> listaAlunosFilter;
 	private GenericController genericController;
@@ -25,16 +29,20 @@ public class AlunoFacade implements Serializable {
 	
 	public List<Aluno> getListaAlunos() {
 		if(listaAlunos == null) {
-			listaAlunos = getAlunoController().findAll();
+			FacesContext context = FacesContext.getCurrentInstance();
+			HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
+			Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+			
+			listaAlunos = getAlunoController().findAll(usuario.getIdSemestre());
 		}
 		return listaAlunos;
 	}
 	
-	public void save() {
+	public void save(List<Turma> lista) {
 		try {
 			getAluno().setCpf(getAluno().getCpf().replace(".", "").replace("-", ""));
-			//getAluno().getPerfil().setId(2L);
 			getAluno().setSenha(CriptografiaBase64.encrypt(getAluno().getSenha()));
+			getAluno().setTurmas(lista);
 			getGenericController().save(getAluno());
 			aluno=null; genericController = null; listaAlunos = null;
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
@@ -157,5 +165,13 @@ public class AlunoFacade implements Serializable {
 
 	public void setListaAlunosFilter(List<Aluno> listaAlunosFilter) {
 		this.listaAlunosFilter = listaAlunosFilter;
+	}
+
+	public Turma getTurma() {
+		return turma == null ? turma = new Turma() : turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
 	}
 }

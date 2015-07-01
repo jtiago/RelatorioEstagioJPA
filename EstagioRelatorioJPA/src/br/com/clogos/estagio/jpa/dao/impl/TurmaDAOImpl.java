@@ -2,12 +2,10 @@ package br.com.clogos.estagio.jpa.dao.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import br.com.clogos.estagio.enums.ModuloEnum;
@@ -19,31 +17,16 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 	private static final long serialVersionUID = 5289808278891409564L;
 	private EntityManager entityManager;
 
-	@SuppressWarnings("rawtypes")
 	@Override
-	public List<Turma> findAll() {
+	public List<Turma> findAll(Long idSemestre) {
 		entityManager = JpaUtil.getEntityManager();
 		List<Turma> lista = new ArrayList<Turma>();
-		StringBuilder sql = new StringBuilder();
-		Turma turma = null;
-		sql.append("SELECT idturma,nometurma,nomecurso,turno " ); //(CASE WHEN l.aberto = 1 THEN modulo ELSE '-' END), idliberar");
-		sql.append("FROM Turma t ");
-		//sql.append("LEFT JOIN LiberarRelatorio l ON l.fkturma = t.idturma ");
-		sql.append("ORDER BY nomecurso");
+		String hql = "SELECT t  FROM Turma t WHERE t.semestre.id = :idSemestre";
 		try {
-			Query query = entityManager.createNativeQuery(sql.toString());
-			Iterator i = query.getResultList().iterator();
-			while(i.hasNext()) {
-				Object[] objs = (Object[]) i.next();
-				turma = new Turma();
-				turma.setId(Long.valueOf(objs[0].toString()));
-				turma.setNome(objs[1].toString());
-				turma.setNomeCurso(objs[2].toString());
-				turma.setTurno(objs[3].toString());
-				//turma.getLiberar().setModulo(ModuloEnum.getModulo(objs[4].toString()));
-				//turma.getLiberar().setId(Long.valueOf(objs[5].toString()));
-				lista.add(turma);
-			}
+		TypedQuery<Turma> query = entityManager.createQuery(hql, Turma.class)
+				.setParameter("idSemestre", idSemestre);
+		lista = query.getResultList();
+			
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 		} finally {

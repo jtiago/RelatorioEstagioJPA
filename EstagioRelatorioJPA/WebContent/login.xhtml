@@ -26,11 +26,10 @@
 						<f:selectItem itemLabel="Selecione Perfil" itemValue="#{null}"/>
 				            <f:selectItems value="#{perfilBean.facade.listaPerfil}" var="per" itemLabel="#{per.nome}"
 				            	itemValue="#{per.id}"/>
-				            <p:ajax update="grid"/>
 				        </p:selectOneMenu>
 						
-						<p:outputLabel for="semestre" value="Semestre:" rendered="#{autenticarBean.perfil.id == 2}" />
-						<p:selectOneMenu id="semestre" value="#{autenticarBean.aluno.semestre.id}" required="true" style="width:220px;" rendered="#{autenticarBean.perfil.id == 2}">
+						<p:outputLabel for="semestre" value="Semestre:" />
+						<p:selectOneMenu id="semestre" value="#{autenticarBean.aluno.semestre.id}" required="true" style="width:220px;">
 				            <f:selectItems value="#{semestreBean.facade.listaSemestre}" var="sem" itemLabel="#{sem.nomeSemestre}"
 				            	itemValue="#{sem.id}"/>
 				        </p:selectOneMenu>

@@ -2,7 +2,6 @@ package br.com.clogos.estagio.jpa.dao.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.AlunoDAO;
 import br.com.clogos.estagio.model.Aluno;
@@ -21,12 +19,13 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 	private EntityManager entityManager;
 
 	@Override
-	public List<Aluno> findAll() {
+	public List<Aluno> findAll(Long idSemestre) {
 		entityManager = JpaUtil.getEntityManager();
 		List<Aluno> lista = new ArrayList<Aluno>();
-		String hql = "SELECT a FROM Aluno a ORDER BY a.nome";
+		String hql = "SELECT distinct a FROM Aluno a JOIN FETCH a.turmas t WHERE t.semestre.id = :idSemestre ORDER BY a.nome";
 		try {
-			TypedQuery<Aluno> query = entityManager.createQuery(hql, Aluno.class);
+			TypedQuery<Aluno> query = entityManager.createQuery(hql, Aluno.class)
+					.setParameter("idSemestre", idSemestre);
 			lista = query.getResultList();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
@@ -39,12 +38,11 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		return lista;
 	}
 	
-	@SuppressWarnings("rawtypes")
 	@Override
 	public Aluno validarAutenticacao(Aluno param) {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT idaluno,a.nomealuno,a.cpf,a.nometurma,t.nomeCurso,p.nomeperfil,p.idperfil,l.modulo,  ");
+		/*sql.append("SELECT idaluno,a.nomealuno,a.cpf,a.nometurma,t.nomeCurso,p.nomeperfil,p.idperfil,l.modulo,  ");
 		sql.append("cadastroAluno,cadastroCampo,cadastroSupervisor,cadastroTurma,liberarRelatorio,relatorioAluno, ");
 		sql.append("relatorioAdmin,l.aberto,validado,revisao,t.idturma,revisaoRelatorio,relatorioEnviado, s.idsemestre, nomeSemestre, ");
 		sql.append("(SELECT count(*) FROM relatorio rs INNER JOIN Aluno ass ON ass.idaluno=rs.fkaluno WHERE rs.fksemestre = :semestre and ass.cpf = :cpf) as limiteRelatorio, ");
@@ -54,22 +52,26 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		sql.append("LEFT JOIN LiberarRelatorio l ON l.fkturma = t.idturma AND l.fksemestre = :semestre ");
 		sql.append("LEFT JOIN Relatorio r ON r.fkaluno = a.idaluno ");
 		sql.append("LEFT JOIN Semestre s ON l.fksemestre = s.idsemestre ");
-		sql.append("WHERE a.cpf = :cpf AND a.senha = :senha ORDER BY idrelatorio DESC ");
+		sql.append("WHERE a.cpf = :cpf AND a.senha = :senha ORDER BY idrelatorio DESC ");*/
+		
+		sql.append("SELECT a FROM Aluno a JOIN a.perfil p JOIN FETCH a.turmas t JOIN t.liberarRelatorios l ");
+		sql.append("WHERE t.semestre.id = :semestre AND a.cpf  = :cpf AND a.senha = :senha");
 		
 		Aluno aluno = null;
 		try {
-			Query query = entityManager.createNativeQuery(sql.toString())
+			TypedQuery<Aluno> query = entityManager.createQuery(sql.toString(), Aluno.class)
 					.setParameter("semestre", param.getSemestre().getId())
 					.setParameter("cpf", param.getCpf())
 					.setParameter("senha", CriptografiaBase64.encrypt(param.getSenha()));
-			Iterator i = query.getResultList().iterator();
+		aluno = query.getSingleResult();
+			/*Iterator i = query.getResultList().iterator();
 			if(i.hasNext()) {
 				Object[] objs = (Object[]) i.next();
 				aluno = new Aluno();
 				aluno.setId(Long.valueOf(objs[0].toString()));
 				aluno.setNome(objs[1].toString());
 				aluno.setCpf(objs[2].toString());
-				aluno.setNomeTurma(objs[3].toString());
+				//aluno.setNomeTurma(objs[3].toString());
 				aluno.getTurmaT().setNomeCurso(objs[4].toString());
 				aluno.getPerfil().setNome(objs[5].toString());
 				aluno.getPerfil().setId(Long.valueOf(objs[6].toString()));
@@ -91,7 +93,7 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 				aluno.getSemestre().setId(objs[21] == null ? null : Long.valueOf(objs[21].toString()));
 				aluno.getSemestre().setNomeSemestre(objs[22].toString());
 				aluno.setLimiteRelatorio(objs[23].toString().equals(objs[24].toString()));
-			}
+			}:*/
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			entityManager.getTransaction().rollback();

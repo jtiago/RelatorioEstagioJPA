@@ -47,6 +47,7 @@ public class UsuarioFacade implements Serializable {
 		
 		try {
 			if(usuarioLogado != null) { 
+				usuarioLogado.setIdSemestre(usuario.getIdSemestre());
 				HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
 						.getExternalContext().getRequest();
 				request.getSession().setAttribute("usuarioLogado", usuarioLogado);
