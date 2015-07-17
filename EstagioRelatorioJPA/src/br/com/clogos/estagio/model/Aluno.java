@@ -69,6 +69,9 @@ public class Aluno implements ObjectModel {
 	@Transient
 	private Turma turmaT;
 	@Transient
+	private Semestre semestre;
+	
+	@Transient
 	private String modulo;
 	@Transient
 	private Boolean moduloLiberado;
@@ -77,10 +80,7 @@ public class Aluno implements ObjectModel {
 	@Transient
 	private Relatorio relatorioR;
 	@Transient
-	private Semestre semestre;
-	@Transient
 	private Boolean limiteRelatorio;
-
 	
 	public Long getId() {
 		return id;

@@ -11,32 +11,41 @@ import javax.servlet.http.HttpSession;
 
 import br.com.clogos.estagio.jsf.facade.RelatorioAlunoFacade;
 import br.com.clogos.estagio.model.Aluno;
+import br.com.clogos.estagio.model.Turma;
 
 @ManagedBean(name="relatorioAlunoBean")
 @ViewScoped
 public class RelatorioAlunoBean implements Serializable {
 	private static final long serialVersionUID = 6378902231545732309L;
 	private RelatorioAlunoFacade facade;
-	private Boolean renderedEnfermagem = false;
+	/*private Boolean renderedEnfermagem = false;
 	private Boolean renderedRadiologia = false;
-	private Boolean relatorioAvaliando;
+	private Boolean relatorioAvaliando;*/
 	
 	public RelatorioAlunoFacade getFacade() {
 		return facade == null ? facade = new RelatorioAlunoFacade() : facade;
 	}
 	
 	public void save(ActionEvent event) {
+		/*FacesContext context = FacesContext.getCurrentInstance();
+		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
+		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");*/
+		getFacade().save();
+	}
+	
+	public void preencherRelatorio(ActionEvent event) {
+		Turma turma = (Turma) event.getComponent().getAttributes().get("actionTurma");
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
 		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
-		getFacade().save(aluno);
+		getFacade().atribuirDadosRelatorio(aluno, turma);
 	}
 	
 	public void limpar(ActionEvent event) {
 		getFacade().limpar();
 	}
 	
-	public void defineRendered(ComponentSystemEvent event) {
+	/*public void defineRendered(ComponentSystemEvent event) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
 		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
@@ -51,7 +60,7 @@ public class RelatorioAlunoBean implements Serializable {
 				renderedRadiologia =  true;
 			}
 		}
-	}
+	}*/
 	
 	public void buscarListaRelatorio(ComponentSystemEvent event) {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -61,7 +70,7 @@ public class RelatorioAlunoBean implements Serializable {
 	}
 	
 	
-	public Boolean getRenderedEnfermagem() {
+	/*public Boolean getRenderedEnfermagem() {
 		return renderedEnfermagem;
 	}
 
@@ -83,5 +92,5 @@ public class RelatorioAlunoBean implements Serializable {
 
 	public void setRelatorioAvaliando(Boolean relatorioAvaliando) {
 		this.relatorioAvaliando = relatorioAvaliando;
-	}
+	}*/
 }

@@ -6,7 +6,7 @@ body{margin:0 auto; padding: 0px; background: #F2F2F2}
 #template_login{width:400px;height:300px;margin: 0 auto;}
 
 #templatePage_top{height:150px; background:#FFF;}
-	#templatePage_top_logo{height:150px; background: url("../image/logo.png") no-repeat;}
+	#templatePage_top_logo{height:150px; background: url("../image/_logo.png") no-repeat;}
 #templatePage_menu{width: 100%; margin-top:2px; font-size: 14px;}
 #templatePage_body{}
 #templatePage_rodape{text-align:center; padding: 3px 0; border-top: 1px solid #003366; margin-top: 20px; clear: both;}

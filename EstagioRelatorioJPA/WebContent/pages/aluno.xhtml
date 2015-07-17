@@ -80,41 +80,41 @@
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
 					header="..::: Novo Aluno - [ * Campo Obrigatorio ]" widgetVar="dialogCadAluno">
 					<h:panelGrid id="grid" columns="2">
-						<p:outputLabel for="pickList" value="Turma(s) Vinculada(s)" />
-						<p:pickList id="pickList" value="#{alunoBean.dualListModel}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}" converter="TurmaConverter"
-								showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
-							<f:facet name="sourceCaption">Turma(s)</f:facet>
-        					<f:facet name="targetCaption">Turma(s) Vinculadas</f:facet>
-						</p:pickList>
-						
 						<p:outputLabel for="perfil" value="Perfil:" />
-						<p:selectOneMenu id="perfil" value="#{alunoBean.facade.aluno.perfil.id}" required="true" style="width:220px;">
+						<p:selectOneMenu id="perfil" value="#{alunoBean.facade.aluno.perfil.id}" required="true" style="width:355px;">
 				            <f:selectItem itemLabel="Aluno" itemValue="2"/>
 				        </p:selectOneMenu>
 
 						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" value="#{alunoBean.facade.aluno.nome}" required="true" style="width:290px;"/>
+						<p:inputText id="nome" value="#{alunoBean.facade.aluno.nome}" required="true" style="width:350px;"/>
 						
 						<p:outputLabel for="cpf" value="CPF:" />
-						<p:inputMask mask="999.999.999-99" id="cpf" value="#{alunoBean.facade.aluno.cpf}" required="true"/>
+						<p:inputMask mask="999.999.999-99" id="cpf" value="#{alunoBean.facade.aluno.cpf}" required="true" style="width:350px;"/>
 						
 						<p:outputLabel for="matricula" value="Matrícula:" />
-						<p:inputText id="matricula" value="#{alunoBean.facade.aluno.matricula}" required="true"/>
+						<p:inputText id="matricula" value="#{alunoBean.facade.aluno.matricula}" required="true" style="width:350px;"/>
 						
 						<p:outputLabel for="senha" value="Senha:" />
-						<p:password id="senha" value="#{alunoBean.facade.aluno.senha}" required="true"/>
+						<p:password id="senha" value="#{alunoBean.facade.aluno.senha}" required="true" style="width:350px;"/>
 						
 						<p:outputLabel for="sexo" value="Sexo:" />
-						<p:selectOneRadio id="sexo" value="#{alunoBean.facade.aluno.sexo}">
+						<p:selectOneRadio id="sexo" value="#{alunoBean.facade.aluno.sexo}" style="width:350px;">
 				            <f:selectItem itemLabel="Masculino" itemValue="M" />
 				            <f:selectItem itemLabel="Feminio" itemValue="F" />
 				        </p:selectOneRadio>
 				        
 				        <p:outputLabel for="status" value="Status:" />
-						<p:inputText id="status" value="#{alunoBean.facade.aluno.status}" required="false"/>
+						<p:inputText id="status" value="#{alunoBean.facade.aluno.status}" required="false" style="width:350px;"/>
 						
 						<p:outputLabel for="email" value="E-mail:" />
-						<p:inputText id="email" value="#{alunoBean.facade.aluno.email}" required="false"/>
+						<p:inputText id="email" value="#{alunoBean.facade.aluno.email}" required="false" style="width:350px;"/>
+						
+						<p:outputLabel for="pickList" value="Turma(s)" />
+						<p:pickList id="pickList" value="#{alunoBean.dualListModel}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}" converter="TurmaConverter"
+								showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
+							<f:facet name="sourceCaption" style="width:350px;">Turma(s)</f:facet>
+        					<f:facet name="targetCaption">Turma(s) Vinculadas</f:facet>
+						</p:pickList>
 						
 					</h:panelGrid>
 					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{alunoBean.save}"

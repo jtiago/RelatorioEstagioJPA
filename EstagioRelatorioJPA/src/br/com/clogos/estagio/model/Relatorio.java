@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
@@ -67,9 +68,8 @@ public class Relatorio implements ObjectModel {
 	@JoinColumn(name = "fkturma")
 	private Turma turmaRelatorio;
 	
-//	@ManyToOne(cascade=CascadeType.DETACH)
-//	@JoinColumn(name="fksemestre", referencedColumnName="idsemestre")
-//	private Semestre semestre;
+	@Transient
+	private Long idSemestre;
 
 	public Long getId() {
 		return id;
@@ -173,5 +173,21 @@ public class Relatorio implements ObjectModel {
 
 	public void setSupervisor(Supervisor supervisor) {
 		this.supervisor = supervisor;
+	}
+
+	public Turma getTurmaRelatorio() {
+		return turmaRelatorio == null ? turmaRelatorio = new Turma() : turmaRelatorio;
+	}
+
+	public void setTurmaRelatorio(Turma turmaRelatorio) {
+		this.turmaRelatorio = turmaRelatorio;
+	}
+
+	public Long getIdSemestre() {
+		return idSemestre;
+	}
+
+	public void setIdSemestre(Long idSemestre) {
+		this.idSemestre = idSemestre;
 	}
 }

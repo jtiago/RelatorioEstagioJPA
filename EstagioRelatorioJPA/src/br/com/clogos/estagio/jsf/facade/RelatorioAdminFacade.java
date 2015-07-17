@@ -24,6 +24,7 @@ import br.com.clogos.estagio.jasper.RelatorioJRDataSource;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.jpa.controller.TurmaController;
 import br.com.clogos.estagio.model.Relatorio;
+import br.com.clogos.estagio.util.Util;
 
 public class RelatorioAdminFacade implements Serializable {
 	private static final long serialVersionUID = 8659107450710545395L;
@@ -40,9 +41,8 @@ public class RelatorioAdminFacade implements Serializable {
 	}
 	
 	public void pesquisaRelatorio() {
-		//if(getRelatorio().getModulo() != null) {
-			listaRelatorios = getRelatorioController().findRelatoriosAdmin(getRelatorio());
-		//}
+		getRelatorio().setIdSemestre(Util.getUsuarioSessao().getIdSemestre());
+		listaRelatorios = getRelatorioController().findRelatoriosAdmin(getRelatorio());
 	}
 	
 	public void validarRelatorio() {

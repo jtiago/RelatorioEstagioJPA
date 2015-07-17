@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templatePages.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	<f:metadata>
+	    <f:event listener="#{relatorioAlunoBean.defineRendered}" type="preRenderComponent" />  
+	</f:metadata>
+	
+	<ui:define name="conteudo">
+		<h:form id="formMensagem">
+			<p:growl autoUpdate="true"/>
+		</h:form>
+		
+		<h:form id="formRelatorio">
+			<p:panel  header="..:: Relatório de Estágio" rendered="#{sessionScope.usuarioLogado.moduloLiberado and !relatorioAlunoBean.relatorioAvaliando
+							and !sessionScope.usuarioLogado.limiteRelatorio}">
+				<h:panelGrid columns="3" width="920">
+					<p:graphicImage url="/images/logo.png" width="120"/>
+					<h:outputLabel value="ESTÁGIO SUPERVISIONADO #{sessionScope.usuarioLogado.modulo}" 
+						style="font-size: 25px; font-weight: bold;"/>
+					<p:graphicImage url="/images/logo.png" width="120"/>
+				</h:panelGrid>
+				
+				<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
+					<h:outputLabel value="CURSO #{sessionScope.usuarioLogado.turmaT.nomeCurso}" />
+				</h:panelGrid>
+				
+				
+					<h:inputHidden value="#{sessionScope.usuarioLogado.id}" />
+					<p:panel>
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Aluno(a):"/>
+							<h:outputLabel value="#{sessionScope.usuarioLogado.nome}" style="font-weight: bold;"/>
+						
+							<h:outputLabel value="Turma:"/>
+							<h:outputLabel value="#{sessionScope.usuarioLogado.nomeTurma}" style="font-weight: bold;"/>
+							
+							<p:outputLabel for="campo" value="Campo:"/>
+							<p:selectOneMenu id="campo" value="#{relatorioAlunoBean.facade.relatorioAluno.campoEstagio.id}"
+								required="true" style="width: 585px;">
+								<f:selectItem itemLabel="Selecione Campo de Estágio" itemValue="#{null}"/>
+								<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
+									itemValue="#{cam.id}"/>
+							</p:selectOneMenu>
+							
+							<p:outputLabel for="supervisor" value="Supervisor:" />
+							<p:selectOneMenu id="supervisor" value="#{relatorioAlunoBean.facade.relatorioAluno.supervisor.id}" required="true" style="width: 585px;">
+					            <f:selectItem itemLabel="Selecione Supervisor" itemValue="#{null}" />
+					            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
+					            	itemValue="#{sup.id}"/>
+					        </p:selectOneMenu>
+							
+							<p:outputLabel for="dataInicial" value="Data de InÍcio:"/>
+							<h:panelGrid columns="4">
+								<p:calendar id="dataInicial" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}" effect="fold" 
+									readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014">
+									<p:ajax event="dateSelect" update="dataTermino" listener="#{relatorioAlunoBean.facade.ajustarDataIntervalo()}"/>
+								</p:calendar>
+								
+								<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
+								<p:outputLabel for="dataTermino" value="Data de Término:"/>
+								<p:calendar id="dataTermino" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataTerminio}" effect="fold" 
+									readonlyInput="true" required="true" locale="pt_BR" mindate="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}"/>
+							</h:panelGrid>
+						</h:panelGrid>
+					</p:panel>
+					<br/>
+					<p:panel>
+						<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
+							<h:outputLabel value="#{sessionScope.usuarioLogado.fichaRelatorio}" />
+						</h:panelGrid><br/>
+						
+						<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.renderedEnfermagem}">
+							<p align="center">
+								Dentre as patologia escontradas no campo de estágio escola uma e desenvolva:<br/>
+								Conceito (O que é a doença), Manifestações Clinicas (sinais e sintomas), Fatores desencadeantes (causas da doença),
+								Diagnóstico (exames laboratoriais e exame clinico etc.), Tratamento (reabilitação, drogas etc.) e Cuidados de Enfermagem.
+							</p>
+						</h:panelGrid>
+						
+						<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.renderedRadiologia}">
+							<p align="center">
+								Escolha o exame que mais gostou e descreva os seguintes dados: patologia, definição clinica, CID, posicionamento, regime
+								aplicado (Kv, mA, tempo), raio central, tamanho de filme, estrutura demonstrada, estado do paciente, local do exame (UTI, 
+								Centro Cirúrgia, Sala de Raio X ou outro), paciente colaborou ou não, colimação e comentários gerais. Não registrar o 
+								nome do paciente.
+							</p>
+						</h:panelGrid>
+						
+						<h:panelGrid columns="1" style="font-family: arial, helvetica, serif; font-size: 12px;">
+							<!-- <p:editor id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" width="865" height="600" controls="size=16px" 
+								widgetVar="editorTexto" required="true"  /><br/> --> 
+							<p:inputTextarea id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" rows="60" cols="95"
+							onkeydown="if (event.keyCode == 13) { return false; }" style="font-size:16px; color:#000000;"/> 
+						</h:panelGrid>
+						
+						<h:panelGrid columns="2">
+							<p:commandButton value="Salvar e Enviar" icon="ui-icon-disk" oncomplete="salvarRelatorio.show()" />
+							<p:commandButton value="Limpar" type="button" icon="ui-icon-minus" onclick="PF('editorTexto').clear();" />
+						</h:panelGrid>
+					</p:panel>
+			</p:panel>
+			
+			<p:panel header="..:: Relatorio de Estágio" rendered="#{!sessionScope.usuarioLogado.moduloLiberado and !relatorioAlunoBean.relatorioAvaliando}" style="margin:0 auto;">
+				<br/><br/><br/><br/><br/><br/>
+				<h:panelGrid columns="1" style="margin:0 auto;">
+					<h:outputLabel value="NÃO EXISTE RELATÓRIO LIBERADO PARA VOCÊ!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+				</h:panelGrid>			
+				<br/><br/><br/><br/><br/><br/>
+			</p:panel>
+			
+			<p:panel header="..:: Relatorio de Estagio" rendered="#{relatorioAlunoBean.relatorioAvaliando}" style="margin:0 auto;">
+				<br/><br/><br/><br/><br/><br/>
+				<h:panelGrid columns="1" style="margin:0 auto;">
+					<h:outputLabel value="RELATÓRIO SENDO AVALIADO!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+				</h:panelGrid>			
+				<br/><br/><br/><br/><br/><br/>
+			</p:panel>
+			
+			<p:panel header="..:: Relatorio de Estagio" rendered="#{sessionScope.usuarioLogado.limiteRelatorio and !relatorioAlunoBean.relatorioAvaliando}" style="margin:0 auto;">
+				<br/><br/><br/><br/><br/><br/>
+				<h:panelGrid columns="1" style="margin:0 auto;">
+					<h:outputLabel value="TODOS OS RELATÓRIOS DO SEMESTRE #{sessionScope.usuarioLogado.semestre.nomeSemestre} JÁ FORAM ENVIANDOS!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+				</h:panelGrid>			
+				<br/><br/><br/><br/><br/><br/>
+			</p:panel>
+		</h:form>
+		
+		<h:form id="formDelete">
+			<p:confirmDialog message="Deseja realmente Salvar e Enviar o Relatório, após escolher sim não será possível edita-ló sem a liberação da Coordenação ?" 
+				header="..:: Salvar e Enviar Relatório" widgetVar="salvarRelatorio">
+				<p:commandButton value="Sim" actionListener="#{relatorioAlunoBean.save}" update=":formMensagem :formDelete :formRelatorio" />
+				<p:commandButton value="Não" oncomplete="salvarRelatorio.hide()"/>
+			</p:confirmDialog>
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

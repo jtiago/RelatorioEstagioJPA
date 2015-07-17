@@ -5,7 +5,9 @@ import java.util.List;
 
 import br.com.clogos.estagio.jpa.dao.LiberarRelatorioDAO;
 import br.com.clogos.estagio.jpa.dao.impl.LiberarRelatorioDAOImpl;
+import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.LiberarRelatorio;
+import br.com.clogos.estagio.model.Turma;
 
 public class LiberarRelatorioController implements Serializable {
 	private static final long serialVersionUID = -7893894309861626614L;
@@ -29,5 +31,13 @@ public class LiberarRelatorioController implements Serializable {
 	
 	public List<LiberarRelatorio> findoAll(Long idSemestre) {
 		return getLiberarRelatorioDAO().findAll(idSemestre);
+	}
+	
+	public Boolean verificaQtdRelatorio(Aluno aluno) {
+		return getLiberarRelatorioDAO().verificaQtdRelatorio(aluno);
+	}
+	
+	public LiberarRelatorio obterLiberarRelatorioPorTurma(Turma turma) { 
+		return getLiberarRelatorioDAO().obterLiberarRelatorioPorTurma(turma);
 	}
 }

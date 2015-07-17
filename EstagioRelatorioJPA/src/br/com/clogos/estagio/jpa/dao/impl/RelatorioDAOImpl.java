@@ -25,11 +25,12 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 	public Boolean existeRelatorioPreenchido(Aluno aluno) {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
-		hql.append("SELECT r FROM Relatorio r JOIN r.aluno ra ");
-		hql.append("WHERE ra.id = :id AND r.validado = :validado");
+		hql.append("SELECT r FROM Relatorio r JOIN r.aluno ra JOIN r.turmaRelatorio t ");
+		hql.append("WHERE ra.cpf = :cpf AND r.validado = :validado AND t.id = :idTurma");
 		try {
 			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class)
-					.setParameter("id", aluno.getId())
+					.setParameter("cpf", aluno.getCpf())
+					.setParameter("idTurma", aluno.getTurmaT().getId())
 					.setParameter("validado", false);
 			return query.getResultList().size() == 1;
 		} catch (Exception e) {
@@ -48,14 +49,14 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		StringBuilder hql = new StringBuilder();
 		List<Relatorio> lista = new LinkedList<Relatorio>();
 		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH r.supervisor s ");
-		hql.append("JOIN FETCH s.imagem i JOIN FETCH a.perfil p ");
-		hql.append("WHERE p.relatorioAluno = 1 ");
+		hql.append("JOIN FETCH s.imagem i JOIN FETCH r.turmaRelatorio t JOIN FETCH t.semestre s ");
+		hql.append("WHERE s.id = :idSemestre ");
 		if(relatorio.getModulo() != null) {
 			hql.append("AND r.modulo = :modulo ");
 		}
-		//if(relatorio.getAluno().getNomeTurma() != "") {
-			//hql.append("AND a.nomeTurma = :nomeTurma ");
-		//}
+		if(relatorio.getTurmaRelatorio().getId() != 0) {
+			hql.append("AND t.id = :idTurma ");
+		}
 		if(relatorio.getCampoEstagio().getId() != 0) {
 			hql.append("AND c.id = :idCampo ");
 		}
@@ -63,12 +64,13 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		
 		try {
 			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class);
+			query.setParameter("idSemestre", relatorio.getIdSemestre());
 			if(relatorio.getModulo() != null) {
 				query.setParameter("modulo", relatorio.getModulo());
 			}
-			//if(relatorio.getAluno().getNomeTurma() != "") {
-				//query.setParameter("nomeTurma", relatorio.getAluno().getNomeTurma());
-			//}
+			if(relatorio.getTurmaRelatorio().getId() != 0) {
+				query.setParameter("idTurma", relatorio.getTurmaRelatorio().getId());
+			}
 			if(relatorio.getCampoEstagio().getId() != 0) {
 				query.setParameter("idCampo", relatorio.getCampoEstagio().getId());
 			}

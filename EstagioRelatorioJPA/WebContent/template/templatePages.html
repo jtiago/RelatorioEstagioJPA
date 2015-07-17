@@ -15,7 +15,7 @@
 
 	<div id="template_pages">
 		<div id="template_pages_top">
-			<p:graphicImage url="/images/bannerestagio.png"/>
+			<p:graphicImage url="/images/_bannerestagio.png"/>
 			<p:commandButton value="Usuário Logado: #{sessionScope.usuarioLogado.nome} #{sessionScope.usuarioLogado.perfil.id eq 2 ? -  sessionScope.usuarioLogado.semestre.nomeSemestre : ''}"/>
 		</div>
 		
@@ -36,7 +36,7 @@
 						<p:menuitem value="Semestre" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroTurma}" url="/pages/semestre.jsf" />
 					</p:submenu>
 
-					<p:menuitem value="Preencher Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAluno}" url="/pages/relatorioAluno.jsf" />
+					<p:menuitem value="Preencher Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAluno}" url="/pages/turmaVinculada.jsf" />
 					<p:menuitem value="Liberar Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.liberarRelatorio}" url="/pages/liberarRelatorio.jsf" />
 					<p:menuitem value="Validar Relatório" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAdmin}" url="/pages/relatorioAdmin.jsf" />
 					<p:menuitem value="Revisar Relatório" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.revisaoRelatorio}" url="/pages/revisaoRelatorio.jsf" />
