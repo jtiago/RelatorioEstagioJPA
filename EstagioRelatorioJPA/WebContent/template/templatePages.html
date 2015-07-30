@@ -43,12 +43,6 @@
 					<p:menuitem value="Relatório Enviado" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioEnviado}" url="/pages/relatorioEnviado.jsf" />
 					<p:menuitem value="Mudar Senha" icon="ui-icon-locked" onclick="mudarSenha.show();"/>
 					<p:menuitem value="Sair" icon="ui-icon-power" actionListener="#{autenticarBean.logout}" />
-					
-					<f:facet name="options">  
-			            <p:inputText style="margin-right:10px"/>  
-			            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />  
-			        </f:facet> 
-
 				</p:menubar>
 			</h:form>
 		</div>

@@ -4,13 +4,10 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ComponentSystemEvent;
-import javax.servlet.http.HttpSession;
 
 import br.com.clogos.estagio.jsf.facade.RevisaoRelatorioFacade;
-import br.com.clogos.estagio.model.Aluno;
 
 @ManagedBean(name="revisaoRelatorioBean")
 @ViewScoped
@@ -23,10 +20,7 @@ public class RevisaoRelatorioBean implements Serializable {
 	}
 	
 	public void buscarListaRevisao(ComponentSystemEvent event) {
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
-		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
-		getFacade().populaListaRevisao(aluno);
+		getFacade().populaListaRevisao();
 	}
 	
 	public void saveRevisao(ActionEvent event) {

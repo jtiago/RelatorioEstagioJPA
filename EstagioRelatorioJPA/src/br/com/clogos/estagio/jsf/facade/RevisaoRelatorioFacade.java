@@ -8,8 +8,8 @@ import javax.faces.context.FacesContext;
 
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
-import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Relatorio;
+import br.com.clogos.estagio.util.Util;
 
 public class RevisaoRelatorioFacade implements Serializable {
 	private static final long serialVersionUID = -1643920823073800053L;
@@ -19,15 +19,12 @@ public class RevisaoRelatorioFacade implements Serializable {
 	private RelatorioController relatorioController;
 	private GenericController genericController;
 	
-	public void populaListaRevisao(Aluno aluno) {
-		if(aluno != null) {
-			listaRevisao = getRelatorioController().findRelatoriosRevisao(aluno);
-		}
+	public void populaListaRevisao() {
+		listaRevisao = getRelatorioController().findRelatoriosRevisao(Util.getAlunoSessao());
 	}
 	
 	public void saveRevisao() {
 		if(relatorioRevisao != null) {
-			//if(getRelatorioController().saveRevisaoRelatorioAluno(getRelatorioRevisao())) {
 			getRelatorioRevisao().setRevisao(false);
 			if(getGenericController().update(getRelatorioRevisao())) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(

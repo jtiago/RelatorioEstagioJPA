@@ -31,7 +31,7 @@ public class Aluno implements ObjectModel {
 	@Column(name="nomealuno", length=100, nullable=false)
 	private String nome;
 	
-	@Column(length=14, nullable=false)
+	@Column(length=14, nullable=false, unique=true)
 	private String cpf;
 	
 	@Column(length=100, nullable=false)
@@ -48,9 +48,6 @@ public class Aluno implements ObjectModel {
 	
 	@Column(length=50, nullable=true)
 	private String email;
-	
-	@Column(name="nometurma", length=15, nullable=true)
-	private String nomeTurma;
 	
 	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
 	@JoinColumn(name="fkperfil", referencedColumnName="idperfil")
@@ -71,16 +68,16 @@ public class Aluno implements ObjectModel {
 	@Transient
 	private Semestre semestre;
 	
-	@Transient
-	private String modulo;
-	@Transient
-	private Boolean moduloLiberado;
-	@Transient
-	private String fichaRelatorio;
-	@Transient
-	private Relatorio relatorioR;
-	@Transient
-	private Boolean limiteRelatorio;
+//	@Transient
+//	private String modulo;
+//	@Transient
+//	private Boolean moduloLiberado;
+//	@Transient
+//	private String fichaRelatorio;
+//	@Transient
+//	private Relatorio relatorioR;
+//	@Transient
+//	private Boolean limiteRelatorio;
 	
 	public Long getId() {
 		return id;
@@ -138,14 +135,6 @@ public class Aluno implements ObjectModel {
 		this.status = status;
 	}
 
-	public String getNomeTurma() {
-		return nomeTurma;
-	}
-
-	public void setNomeTurma(String nomeTurma) {
-		this.nomeTurma = nomeTurma;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -178,52 +167,12 @@ public class Aluno implements ObjectModel {
 		this.perfil = perfil;
 	}
 
-	public String getModulo() {
-		return modulo;
-	}
-
-	public void setModulo(String modulo) {
-		this.modulo = modulo;
-	}
-
-	public Boolean getModuloLiberado() {
-		return moduloLiberado;
-	}
-
-	public void setModuloLiberado(Boolean moduloLiberado) {
-		this.moduloLiberado = moduloLiberado;
-	}
-
-	public String getFichaRelatorio() {
-		return fichaRelatorio;
-	}
-
-	public void setFichaRelatorio(String fichaRelatorio) {
-		this.fichaRelatorio = fichaRelatorio;
-	}
-
-	public Relatorio getRelatorioR() {
-		return relatorioR == null ? relatorioR = new Relatorio() : relatorioR;
-	}
-
-	public void setRelatorioR(Relatorio relatorioR) {
-		this.relatorioR = relatorioR;
-	}
-
 	public Semestre getSemestre() {
 		return semestre == null ? semestre = new Semestre() : semestre;
 	}
 
 	public void setSemestre(Semestre semestre) {
 		this.semestre = semestre;
-	}
-
-	public Boolean getLimiteRelatorio() {
-		return limiteRelatorio;
-	}
-
-	public void setLimiteRelatorio(Boolean limiteRelatorio) {
-		this.limiteRelatorio = limiteRelatorio;
 	}
 
 	public List<Turma> getTurmas() {

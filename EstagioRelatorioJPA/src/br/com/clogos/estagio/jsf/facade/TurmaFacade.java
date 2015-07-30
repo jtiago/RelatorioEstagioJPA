@@ -6,12 +6,11 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.PersistenceException;
-import javax.servlet.http.HttpSession;
 
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.TurmaController;
 import br.com.clogos.estagio.model.Turma;
-import br.com.clogos.estagio.model.Usuario;
+import br.com.clogos.estagio.util.Util;
 
 public class TurmaFacade implements Serializable {
 	private static final long serialVersionUID = -6917985296563545333L;
@@ -24,11 +23,7 @@ public class TurmaFacade implements Serializable {
 	
 	public List<Turma> getListaTurma() {
 		if(listaTurma == null){ 
-			FacesContext context = FacesContext.getCurrentInstance();
-			HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
-			Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
-			
-			listaTurma = getTurmaController().findAll(usuario.getIdSemestre());
+			listaTurma = getTurmaController().findAll(Util.getUsuarioSessao().getIdSemestre());
 		}
 		return listaTurma;
 	}

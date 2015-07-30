@@ -8,19 +8,19 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import br.com.clogos.estagio.jpa.controller.AlunoController;
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Turma;
-import br.com.clogos.estagio.model.Usuario;
 import br.com.clogos.estagio.util.CriptografiaBase64;
+import br.com.clogos.estagio.util.Util;
 
 public class AlunoFacade implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Aluno aluno;
 	private Aluno alunoAltera;
+	private Aluno alunoAssociar;
 	private Turma turma;
 	private List<Aluno> listaAlunos;
 	private List<Aluno> listaAlunosFilter;
@@ -29,11 +29,7 @@ public class AlunoFacade implements Serializable {
 	
 	public List<Aluno> getListaAlunos() {
 		if(listaAlunos == null) {
-			FacesContext context = FacesContext.getCurrentInstance();
-			HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
-			Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
-			
-			listaAlunos = getAlunoController().findAll(usuario.getIdSemestre());
+			listaAlunos = getAlunoController().findAll(Util.getUsuarioSessao().getIdSemestre());
 		}
 		return listaAlunos;
 	}
@@ -42,7 +38,7 @@ public class AlunoFacade implements Serializable {
 		try {
 			getAluno().setCpf(getAluno().getCpf().replace(".", "").replace("-", ""));
 			getAluno().setSenha(CriptografiaBase64.encrypt(getAluno().getSenha()));
-			getAluno().setTurmas(lista);
+			//getAluno().setTurmas(lista);
 			getGenericController().save(getAluno());
 			aluno=null; genericController = null; listaAlunos = null;
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
@@ -52,10 +48,6 @@ public class AlunoFacade implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, "Problemas ao salvar Aluno.", ""));
 		}
-	}
-	
-	public void saveList() {
-		
 	}
 	
 	public void remover() {
@@ -174,5 +166,13 @@ public class AlunoFacade implements Serializable {
 
 	public void setTurma(Turma turma) {
 		this.turma = turma;
+	}
+
+	public Aluno getAlunoAssociar() {
+		return alunoAssociar == null ? alunoAssociar = new Aluno() : alunoAssociar;
+	}
+
+	public void setAlunoAssociar(Aluno alunoAssociar) {
+		this.alunoAssociar = alunoAssociar;
 	}
 }

@@ -24,6 +24,10 @@ public class AlunoController implements Serializable {
 		return getAlunoDAO().updateSenha(cpf, senha);
 	}
 	
+	public Aluno find(Long idAluno) {
+		return getAlunoDAO().find(idAluno);
+	}
+	
 	public AlunoDAO getAlunoDAO() {
 		if(alunoDAO == null) {
 			alunoDAO = new AlunoDAOImpl();

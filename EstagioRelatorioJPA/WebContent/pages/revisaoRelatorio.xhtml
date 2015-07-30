@@ -54,14 +54,14 @@
 		</p:panel>
 		
 		<h:form id="formCorrecao">
-			<p:dialog width="950" height="500" header="..::Correção do Relatório" widgetVar="dialogRevisao" draggable="false" modal="true" resizable="false" position="top" >
+			<p:dialog width="990" height="700" header="..::Correção do Relatório" widgetVar="dialogRevisao" draggable="false" modal="true" resizable="false" position="top" >
 				<p:fieldset>
 					<h:panelGrid id="grid" columns="2">
 						<h:outputLabel value="Nome do Aluno:"/>
 						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.aluno.nome}" style="font-weight: bold;"/>
 						
 						<h:outputLabel value="Turma:"/>
-						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.aluno.nomeTurma}" style="font-weight: bold;"/>
+						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.turmaRelatorio.nome}" style="font-weight: bold;"/>
 						
 						<h:outputLabel value="Módulo:"/>
 						<h:outputLabel value="#{revisaoRelatorioBean.facade.relatorioRevisao.modulo.label}" style="font-weight: bold;"/>
@@ -105,7 +105,7 @@
 					<h:panelGrid columns="1">
 						<h:outputLabel value="Conteúdo do Relatório:"/>
 						<p:inputTextarea id="editor" value="#{revisaoRelatorioBean.facade.relatorioRevisao.texto}" rows="30" cols="95"
-							onkeydown="if (event.keyCode == 13) { return false; }" style="font-size:16px; color:#000000;"/> <br/>
+							onkeydown="if (event.keyCode == 13) { return false; }" style="font-size:16px; color:#000000; width: 850px;"/> <br/>
 					</h:panelGrid>
 				</p:fieldset>
 				<br/>

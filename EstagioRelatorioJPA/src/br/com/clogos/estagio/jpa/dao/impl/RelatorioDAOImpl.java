@@ -141,13 +141,15 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
 		List<Relatorio> lista = new LinkedList<Relatorio>();
-		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH r.supervisor ");
-		hql.append("WHERE a.cpf = :cpf AND r.revisao = :revisao ");
+		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.turmaRelatorio t JOIN FETCH r.aluno a ");
+		hql.append("JOIN FETCH r.campoEstagio c JOIN FETCH r.supervisor JOIN FETCH t.semestre s ");
+		hql.append("WHERE a.cpf = :cpf AND r.revisao = :revisao AND s.id = :idSemestre ");
 		
 		try {
 			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class)
 					.setParameter("cpf", aluno.getCpf())
-					.setParameter("revisao", true);
+					.setParameter("revisao", true)
+					.setParameter("idSemestre", aluno.getSemestre().getId());
 			lista = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -189,12 +191,14 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
 		List<Relatorio> lista = new LinkedList<Relatorio>();
-		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH r.supervisor JOIN FETCH r.semestre ");
-		hql.append("WHERE a.cpf = :cpf");
+		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH r.supervisor ");
+		hql.append("JOIN FETCH r.turmaRelatorio t JOIN FETCH t.semestre s ");
+		hql.append("WHERE a.cpf = :cpf AND s.id = :idSemestre ");
 		
 		try {
 			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class)
-					.setParameter("cpf", aluno.getCpf());
+					.setParameter("cpf", aluno.getCpf())
+					.setParameter("idSemestre", aluno.getSemestre().getId());
 			lista = query.getResultList();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();

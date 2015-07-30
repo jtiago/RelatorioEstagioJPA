@@ -18,18 +18,12 @@ import br.com.clogos.estagio.model.Turma;
 public class RelatorioAlunoBean implements Serializable {
 	private static final long serialVersionUID = 6378902231545732309L;
 	private RelatorioAlunoFacade facade;
-	/*private Boolean renderedEnfermagem = false;
-	private Boolean renderedRadiologia = false;
-	private Boolean relatorioAvaliando;*/
 	
 	public RelatorioAlunoFacade getFacade() {
 		return facade == null ? facade = new RelatorioAlunoFacade() : facade;
 	}
 	
 	public void save(ActionEvent event) {
-		/*FacesContext context = FacesContext.getCurrentInstance();
-		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
-		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");*/
 		getFacade().save();
 	}
 	
@@ -45,52 +39,10 @@ public class RelatorioAlunoBean implements Serializable {
 		getFacade().limpar();
 	}
 	
-	/*public void defineRendered(ComponentSystemEvent event) {
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
-		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
-		relatorioAvaliando = getFacade().existeRelatorioPreenchido(aluno);
-		
-		if(aluno.getModulo() != null) {
-			if((aluno.getModulo().contains("II M") || aluno.getModulo().contains("III M")) && (aluno.getTurmaT().getNomeCurso().contains("enfermagem") || aluno.getTurmaT().getNomeCurso().contains("ENFERMAGEM"))) {
-				renderedEnfermagem = true;
-			} 
-			
-			if((aluno.getModulo().contains("II E III")) && (aluno.getTurmaT().getNomeCurso().contains("radiologia") || aluno.getTurmaT().getNomeCurso().contains("RADIOLOGIA"))) {
-				renderedRadiologia =  true;
-			}
-		}
-	}*/
-	
 	public void buscarListaRelatorio(ComponentSystemEvent event) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
 		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
 		getFacade().populaListaRevisao(aluno);
 	}
-	
-	
-	/*public Boolean getRenderedEnfermagem() {
-		return renderedEnfermagem;
-	}
-
-	public void setRenderedEnfermagem(Boolean renderedEnfermagem) {
-		this.renderedEnfermagem = renderedEnfermagem;
-	}
-
-	public Boolean getRenderedRadiologia() {
-		return renderedRadiologia;
-	}
-
-	public void setRenderedRadiologia(Boolean renderedRadiologia) {
-		this.renderedRadiologia = renderedRadiologia;
-	}
-
-	public Boolean getRelatorioAvaliando() {
-		return relatorioAvaliando;
-	}
-
-	public void setRelatorioAvaliando(Boolean relatorioAvaliando) {
-		this.relatorioAvaliando = relatorioAvaliando;
-	}*/
 }

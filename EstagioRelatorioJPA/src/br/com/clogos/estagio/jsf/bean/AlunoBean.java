@@ -28,6 +28,7 @@ public class AlunoBean implements Serializable {
 	private TurmaFacade facadeTurma;
 	private Perfil perfil;
 	private Aluno aluno;
+	private Aluno alunoAssociado;
 	private Turma turma;
 	private boolean mensagem;
 	
@@ -35,13 +36,17 @@ public class AlunoBean implements Serializable {
 	
 	public AlunoBean() {
 		mensagem = false;
+	}
+	
+	public void processarAlunoAssociado(ActionEvent event) {
 		
-		List<Turma> source = getFacadeTurma().getListaTurma();
-		List<Turma> target = new ArrayList<Turma>();
-		dualListModel = new DualListModel<Turma>(source, target);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 	}
 	
 	public DualListModel<Turma> getDualListModel() {
+		List<Turma> source = getFacadeTurma().getListaTurma();
+		List<Turma> target = new ArrayList<Turma>();
+		dualListModel = new DualListModel<Turma>(source, target);
 		return dualListModel;
 	}
 	
@@ -152,5 +157,13 @@ public class AlunoBean implements Serializable {
 
 	public void setTurma(Turma turma) {
 		this.turma = turma;
+	}
+
+	public Aluno getAlunoAssociado() {
+		return alunoAssociado == null ? alunoAssociado = new Aluno() : alunoAssociado;
+	}
+
+	public void setAlunoAssociado(Aluno alunoAssociado) {
+		this.alunoAssociado = alunoAssociado;
 	}
 }

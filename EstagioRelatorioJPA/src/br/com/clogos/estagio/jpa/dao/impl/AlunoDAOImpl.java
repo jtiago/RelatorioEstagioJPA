@@ -22,10 +22,10 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 	public List<Aluno> findAll(Long idSemestre) {
 		entityManager = JpaUtil.getEntityManager();
 		List<Aluno> lista = new ArrayList<Aluno>();
-		String hql = "SELECT distinct a FROM Aluno a JOIN FETCH a.turmas t WHERE t.semestre.id = :idSemestre ORDER BY a.nome";
+		String hql = "SELECT a FROM Aluno a ORDER BY a.nome";
 		try {
-			TypedQuery<Aluno> query = entityManager.createQuery(hql, Aluno.class)
-					.setParameter("idSemestre", idSemestre);
+			TypedQuery<Aluno> query = entityManager.createQuery(hql, Aluno.class);
+					//.setParameter("idSemestre", idSemestre);
 			lista = query.getResultList();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
@@ -122,5 +122,25 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 				entityManager.close();
 			}
 		}
+	}
+	
+	@Override
+	public Aluno find(Long idAluno) {
+		Aluno aluno = new Aluno();
+		entityManager = JpaUtil.getEntityManager();
+		String hql = "SELECT a FROM Aluno a WHERE a.id = :idAluno";
+		try {
+			TypedQuery<Aluno> query = entityManager.createQuery(hql, Aluno.class)
+					.setParameter("idAluno", idAluno);
+			aluno = query.getSingleResult();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return aluno;
 	}
 }

@@ -26,6 +26,11 @@
     <param-value>redmond</param-value>
   </context-param>
   
+  <context-param> 
+      <param-name>facelets.SKIP_COMMENTS</param-name> 
+      <param-value>true</param-value> 
+   </context-param>
+  
   <filter>
     <display-name>SecurityFilter</display-name>
     <filter-name>SecurityFilter</filter-name>

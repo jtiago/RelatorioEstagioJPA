@@ -129,7 +129,7 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 		sql.append("SELECT qtdRelatorio,  ");
 		sql.append("(SELECT count(*) FROM relatorio rs INNER JOIN Aluno ass ON ass.idaluno=rs.fkaluno ");
 		sql.append("INNER JOIN Turma t ON t.idturma=rs.fkturma INNER JOIN Semestre s ON s.idsemestre=t.fksemestre ");
-		sql.append("WHERE s.idsemestre = :idsemestre and ass.cpf = :cpf) as limiteRelatorio ");
+		sql.append("WHERE s.idsemestre = :idsemestre AND ass.cpf = :cpf AND t.idturma = :idturma) as limiteRelatorio ");
 		sql.append("FROM LiberarRelatorio l INNER JOIN Turma t ON t.idturma=l.fkturma INNER JOIN Semestre s ON s.idsemestre=t.fksemestre ");
 		sql.append("WHERE t.idturma = :idturma AND s.idsemestre = :idsemestre");
 		
