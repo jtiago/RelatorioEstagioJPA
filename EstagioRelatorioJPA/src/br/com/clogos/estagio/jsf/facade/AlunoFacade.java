@@ -34,7 +34,7 @@ public class AlunoFacade implements Serializable {
 		return listaAlunos;
 	}
 	
-	public void save(List<Turma> lista) {
+	public void save() {
 		try {
 			getAluno().setCpf(getAluno().getCpf().replace(".", "").replace("-", ""));
 			getAluno().setSenha(CriptografiaBase64.encrypt(getAluno().getSenha()));
@@ -127,6 +127,10 @@ public class AlunoFacade implements Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void limpar() {
+		alunoAssociar = null;
 	}
 	
 	

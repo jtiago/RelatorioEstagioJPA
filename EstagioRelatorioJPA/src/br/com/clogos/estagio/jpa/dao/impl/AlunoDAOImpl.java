@@ -22,10 +22,13 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 	public List<Aluno> findAll(Long idSemestre) {
 		entityManager = JpaUtil.getEntityManager();
 		List<Aluno> lista = new ArrayList<Aluno>();
-		String hql = "SELECT a FROM Aluno a ORDER BY a.nome";
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECT DISTINCT a FROM Aluno a JOIN FETCH a.turmas t JOIN FETCH t.semestre s ");
+		hql.append("WHERE s.id = :idSemestre ORDER BY a.nome");
+		
 		try {
-			TypedQuery<Aluno> query = entityManager.createQuery(hql, Aluno.class);
-					//.setParameter("idSemestre", idSemestre);
+			TypedQuery<Aluno> query = entityManager.createQuery(hql.toString(), Aluno.class)
+					.setParameter("idSemestre", idSemestre);
 			lista = query.getResultList();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();

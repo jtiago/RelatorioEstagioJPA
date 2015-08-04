@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.FileUploadEvent;
@@ -64,7 +66,8 @@ public class AlunoBean implements Serializable {
 	}
 
 	public void save(ActionEvent event) {
-		getFacade().save(getDualListModel().getTarget());
+		//getFacade().save(getDualListModel().getTarget());
+		getFacade().save();
 		mensagem = true;
 	}
 	
@@ -80,14 +83,22 @@ public class AlunoBean implements Serializable {
 	
 	public void fileUpload(FileUploadEvent event) {
 		Scanner scanner = null;
+		Turma turma = null;
+		List<Aluno> listaAlunos = getFacade().getListaAlunos();
 		try {
 			scanner = new Scanner(event.getFile().getInputstream());
 			while(scanner.hasNext()) {
 				String str = scanner.nextLine();
 				if(!str.contains("nu_matricula")) {
 					String[] token = str.split(";");
-					saveTurma(token);
-					saveAluno(token);
+					turma = facadeTurma.obterTurmaPorNome(token[2]);
+					if(turma == null) {
+						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+								FacesMessage.SEVERITY_ERROR, "Não foi encontrado a Turma cadastrada", ""));
+						return;
+					} else {
+						validarAluno(token, turma, listaAlunos);
+					}
 				}
 			}
 		} catch (IOException e) {
@@ -97,7 +108,19 @@ public class AlunoBean implements Serializable {
 		}
     }
 	
-	private Turma saveTurma(String[] token) {
+	public void validarAluno(String[] token, Turma turma, List<Aluno> lista) {
+		for(Aluno item : lista) {
+			if(item.getCpf().equals(token[6])) {
+				item.getTurmas().add(turma);
+				getFacade().setAlunoAltera(item);
+				getFacade().update();
+				return;
+			}
+		}
+		saveAluno(token, turma);
+	}
+	
+	/*private Turma saveTurma(String[] token) {
 		Turma turma = new Turma();
 		turma.setNome(token[2]);
 		turma.setNomeCurso(token[1]);
@@ -105,21 +128,23 @@ public class AlunoBean implements Serializable {
 		getFacadeTurma().setTurma(turma);
 		getFacadeTurma().save();
 		return turma;
-	}
+	}*/
 	
 	//Matricula - Nome Curso - Nome Turma - Turno - Nome Aluno - Status do Aluno - CPF - Sexo
-	private void saveAluno(String[] token) {
+	private void saveAluno(String[] token, Turma turma) {
 		Aluno aluno = new Aluno();
+		List<Turma> listaTurma = new ArrayList<Turma>();
+		listaTurma.add(turma);
 		aluno.setCpf(token[6]);
 		aluno.setMatricula(token[0]);
 		aluno.setNome(token[4]);
 		aluno.setSenha("12345678");
 		aluno.setSexo(token[7]);
 		aluno.setStatus(token[5]);
-		//aluno.setNomeTurma(token[2]);
 		aluno.setPerfil(getPerfil());
+		aluno.setTurmas(listaTurma);
 		getFacade().setAluno(aluno);
-		//getFacade().save();
+		getFacade().save();
 	}
 	
 	public void resetSenha(ActionEvent event) {

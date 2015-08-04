@@ -187,8 +187,8 @@
 					</h:panelGrid>
 					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{alunoBean.processarAlunoAssociado}"
 						update=":formAssociar:grid :formMessage" onclick="lazyload()"/>
-					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAssociar.hide()"
-						onclick="lazyload()"/>
+					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAssociar.hide()" onclick="lazyload()"
+							actionListener="#{alunoBean.facade.limpar}" update=":formAssociar:grid"/>
 				</p:dialog>
 			</h:form>
 		

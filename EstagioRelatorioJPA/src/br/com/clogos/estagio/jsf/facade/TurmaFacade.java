@@ -80,6 +80,10 @@ public class TurmaFacade implements Serializable {
 		return getTurmaController().obterCurso(nomeTurma).getNomeCurso();
 	}
 	
+	public Turma obterTurmaPorNome(String nomeTurma) {
+		return getTurmaController().obterTurmaPorNome(nomeTurma);
+	}
+	
 	public Turma getTurma() {
 		return turma == null ? turma = new Turma() : turma;
 	}
