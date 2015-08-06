@@ -24,6 +24,7 @@ public class AlunoFacade implements Serializable {
 	private Turma turma;
 	private List<Aluno> listaAlunos;
 	private List<Aluno> listaAlunosFilter;
+	private List<Aluno> listaAlunoPorTurma;
 	private GenericController genericController;
 	private AlunoController alunoController;
 	
@@ -32,6 +33,11 @@ public class AlunoFacade implements Serializable {
 			listaAlunos = getAlunoController().findAll(Util.getUsuarioSessao().getIdSemestre());
 		}
 		return listaAlunos;
+	}
+	
+	public List<Aluno> getListaAlunoPorTurma(Long idTurma) {
+		listaAlunoPorTurma = getAlunoController().findPorTurma(idTurma, Util.getUsuarioSessao().getIdSemestre());
+		return listaAlunoPorTurma;
 	}
 	
 	public void save() {

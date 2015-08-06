@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templatePages.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+	<ui:define name="conteudo">
+		<p:panel  header="..:: Cadastro de Grupo">
+			<h:form id="formMessage">
+				<p:growl autoUpdate="true" rendered="#{grupoBean.mensagem}"/>
+			</h:form>
+			
+			<h:form id="formNovo">
+				<h:panelGrid columns="2">
+					<p:commandButton value="Novo Grupo" icon="ui-icon-disk" oncomplete="dialogCadGrupo.show()"/>
+				</h:panelGrid>
+			</h:form><br/>
+			
+			<h:form id="formTabelaGrupo">
+				<p:dataTable id="tabelaGrupo" var="item" value="#{grupoBean.facade.listaGrupos}" emptyMessage="Sem Registros...">
+					<f:facet name="header">
+						Grupos Cadastrados
+					</f:facet>
+					
+					<p:column headerText="Nome Grupo">
+						<h:outputLabel value="#{item.nomeGrupo}"/>
+					</p:column>
+					
+					<p:column headerText="Turma">
+						<h:outputLabel value="#{item.turmaGrupo.nome}"/>
+					</p:column>
+					
+					<p:column style="text-align:right; width: 185px;">
+						<p:commandButton icon="ui-icon-trash" title="Remover Semestre" oncomplete="">
+							<f:setPropertyActionListener target="#{semestreBean.facade.semestre}" value="#{item}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-pencil" title="Alterar Semestre" oncomplete="" update=":formAlterar">
+							<f:setPropertyActionListener target="#{semestreBean.facade.semestreAltera}" value="#{item}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:panel>
+		
+		<h:form id="formCadastro">
+			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+				header="..::: Novo Grupo - [ * Campo Obrigatório ]" widgetVar="dialogCadGrupo" width="600">
+				<h:panelGrid id="grid" columns="2">
+					<p:outputLabel for="turma" value="Turma:" />
+					<p:selectOneMenu id="turma" value="#{grupoBean.facade.grupo.turmaGrupo.id}" 
+						required="true" style="width:310px;" valueChangeListener="#{grupoBean.carregarTurma}">
+			            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
+						<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.id}" itemLabel="#{tu.nome}"/>
+						 <p:ajax event="valueChange" update=":formCadastro:grid"/>
+			        </p:selectOneMenu>
+					
+					<p:outputLabel for="nome" value="Nome Grupo:" />
+					<p:inputText id="nome" value="#{grupoBean.facade.grupo.nomeGrupo}" required="true" style="width:300px;"/>
+			        
+			        <p:outputLabel for="obs" value="Observação:" />
+					<p:inputText id="obs" value="#{grupoBean.facade.grupo.observacao}" required="true" style="width:300px;"/>
+					
+					<p:outputLabel for="pickListAluno" value="Alunos" />
+					<p:pickList id="pickListAluno" value="#{grupoBean.dualListModelAluno}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"
+							showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
+						<f:facet name="sourceCaption">Alunos</f:facet>
+       					<f:facet name="targetCaption">Alunos Selecionados</f:facet>
+					</p:pickList>
+				</h:panelGrid>
+				
+				<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{grupoBean.save}" onclick="lazyload()"
+					update=":formCadastro:grid :formTabelaGrupo :formMessage"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" onsuccess="dialogCadGrupo.hide()" onclick="lazyload()" 
+						actionListener="#{grupoBean.limpar}" />
+				<p:ajax event="close" resetValues="true" listener="#{grupoBean.limpar}" update="formCadastro" />
+			</p:dialog>
+		</h:form>
+		
+		<!-- 	
+		<h:form id="formAlterar">
+			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+				header="..::: Novo Semestre - [ * Semestre Obrigatório ]" widgetVar="dialogAltSemestre">
+				<h:panelGrid id="grid" columns="2">
+					<p:outputLabel for="nome" value="Nome:" />
+					<p:inputText id="nome" value="#{semestreBean.facade.semestreAltera.nomeSemestre}" required="true"/>
+				</h:panelGrid>
+				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{semestreBean.update}"
+					update=":formTabelaSemestre :formAlterar:grid :formMessage" onclick="lazyload()"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltSemestre.hide()" onclick="lazyload()"/>
+			</p:dialog>
+		</h:form> -->
+		
+		<h:form>
+			<p:remoteCommand name="lazyload">  
+		        <f:setPropertyActionListener value="#{false}" target="#{grupoBean.mensagem}" /> 
+		    </p:remoteCommand> 
+		</h:form>
+	</ui:define>
+</ui:composition>

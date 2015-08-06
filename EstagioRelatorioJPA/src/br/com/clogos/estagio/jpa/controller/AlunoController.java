@@ -28,6 +28,10 @@ public class AlunoController implements Serializable {
 		return getAlunoDAO().find(idAluno);
 	}
 	
+	public List<Aluno> findPorTurma(Long idTurma, Long idSemestre) {
+		return getAlunoDAO().findPorTurma(idTurma, idSemestre);
+	}
+	
 	public AlunoDAO getAlunoDAO() {
 		if(alunoDAO == null) {
 			alunoDAO = new AlunoDAOImpl();

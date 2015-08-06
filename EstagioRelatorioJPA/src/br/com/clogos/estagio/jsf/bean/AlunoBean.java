@@ -56,7 +56,7 @@ public class AlunoBean implements Serializable {
 		this.dualListModel.getSource().removeAll(dualListModel.getTarget());
 		this.dualListModel = dualListModel;
 	}
-	
+
 	public AlunoFacade getFacade() {
 		return facade == null ? facade = new AlunoFacade() : facade;
 	}

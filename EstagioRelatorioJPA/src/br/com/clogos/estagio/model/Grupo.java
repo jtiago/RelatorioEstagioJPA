@@ -27,6 +27,9 @@ public class Grupo implements ObjectModel {
 	@Column(length=100, nullable=false)
 	private String nomeGrupo;
 	
+	@Column(length=300, nullable=true)
+	private String observacao;
+	
 	@ManyToMany
 	@JoinTable(name="grupo_aluno")
 	private List<Aluno> alunosGrupo;
@@ -55,11 +58,27 @@ public class Grupo implements ObjectModel {
 		this.nomeGrupo = nomeGrupo;
 	}
 
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
 	public List<Aluno> getAlunosGrupo() {
 		return alunosGrupo;
 	}
 
 	public void setAlunosGrupo(List<Aluno> alunosGrupo) {
 		this.alunosGrupo = alunosGrupo;
+	}
+
+	public Turma getTurmaGrupo() {
+		return turmaGrupo == null ? turmaGrupo = new Turma() : turmaGrupo;
+	}
+
+	public void setTurmaGrupo(Turma turmaGrupo) {
+		this.turmaGrupo = turmaGrupo;
 	}
 }

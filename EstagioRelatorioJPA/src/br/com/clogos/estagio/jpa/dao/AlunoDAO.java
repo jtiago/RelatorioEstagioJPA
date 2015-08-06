@@ -9,4 +9,5 @@ public interface AlunoDAO {
 	Aluno validarAutenticacao(Aluno aluno);
 	Boolean updateSenha(String cpf, String senha);
 	Aluno find(Long idAluno);
+	List<Aluno> findPorTurma(Long idTurma, Long idSemestre);
 }

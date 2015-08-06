@@ -146,4 +146,27 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		}
 		return aluno;
 	}
+	
+	@Override
+	public List<Aluno> findPorTurma(Long idTurma, Long idSemestre) {
+		List<Aluno> lista = new ArrayList<Aluno>();
+		entityManager = JpaUtil.getEntityManager();
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECT a FROM Aluno a JOIN FETCH a.turmas t JOIN FETCH t.semestre s ");
+		hql.append("WHERE t.id = :idTurma AND s.id = :idSemestre");
+		try {
+			TypedQuery<Aluno> query = entityManager.createQuery(hql.toString(), Aluno.class)
+					.setParameter("idTurma", idTurma)
+					.setParameter("idSemestre", idSemestre);
+			lista = query.getResultList();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return lista;
+	}
 }
