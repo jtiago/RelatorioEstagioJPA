@@ -13,8 +13,10 @@ import org.primefaces.event.CloseEvent;
 import org.primefaces.model.DualListModel;
 
 import br.com.clogos.estagio.jsf.facade.AlunoFacade;
+import br.com.clogos.estagio.jsf.facade.CampoEstagioFacade;
 import br.com.clogos.estagio.jsf.facade.GrupoFacade;
 import br.com.clogos.estagio.model.Aluno;
+import br.com.clogos.estagio.model.CampoEstagio;
 import br.com.clogos.estagio.model.Grupo;
 
 @ManagedBean(name="grupoBean")
@@ -24,9 +26,11 @@ public class GrupoBean implements Serializable {
 	
 	private GrupoFacade facade;
 	private AlunoFacade facadeAluno;
+	private CampoEstagioFacade facadeCampoEstagio;
 	private boolean mensagem;
 	private Long idTurma = 0L;
 	private DualListModel<Aluno> dualListModelAluno;
+	private DualListModel<CampoEstagio> dualListModelCampo;
 	
 	public GrupoFacade getFacade() {
 		return facade == null ? facade = new GrupoFacade() : facade;
@@ -34,6 +38,10 @@ public class GrupoBean implements Serializable {
 	
 	public AlunoFacade getFacadeAluno() {
 		return facadeAluno == null ? facadeAluno = new AlunoFacade() : facadeAluno;
+	}
+	
+	public CampoEstagioFacade getFacadeCampoEstagio() {
+		return facadeCampoEstagio == null ? facadeCampoEstagio = new CampoEstagioFacade() : facadeCampoEstagio;
 	}
 	
 	public void carregarTurma(ValueChangeEvent event) {
@@ -56,6 +64,17 @@ public class GrupoBean implements Serializable {
 		this.dualListModelAluno = dualListModelAluno;
 	}
 	
+	public DualListModel<CampoEstagio> getDualListModelCampo() {
+		List<CampoEstagio> target = new ArrayList<CampoEstagio>();
+		List<CampoEstagio> source = getFacadeCampoEstagio().getListaCampoEstagio();
+		dualListModelCampo = new DualListModel<CampoEstagio>(source, target);
+		return dualListModelCampo;
+	}
+
+	public void setDualListModelCampo(DualListModel<CampoEstagio> dualListModelCampo) {
+		this.dualListModelCampo = dualListModelCampo;
+	}
+
 	public void limpar(CloseEvent event) {
 		this.idTurma = null;
 		getFacade().setGrupo(new Grupo());

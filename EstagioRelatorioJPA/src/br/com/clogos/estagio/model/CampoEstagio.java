@@ -25,6 +25,9 @@ public class CampoEstagio implements ObjectModel {
 	@Column(name="nomecampoestagio", length=100, nullable=false)
 	private String nome;
 	
+	@Column(name="bolSituacao", length=1, nullable=false)
+	private Boolean bolSituacao;
+	
 	@OneToMany(mappedBy = "campoEstagio")
 	private List<Relatorio> relatorios;
 	
@@ -48,5 +51,13 @@ public class CampoEstagio implements ObjectModel {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Boolean getBolSituacao() {
+		return bolSituacao;
+	}
+
+	public void setBolSituacao(Boolean bolSituacao) {
+		this.bolSituacao = bolSituacao;
 	}
 }

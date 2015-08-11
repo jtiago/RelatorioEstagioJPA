@@ -28,6 +28,7 @@ public class CampoEstagioFacade implements Serializable {
 	
 	public void save() {
 		try {
+			getCampoEstagio().setBolSituacao(true);
 			getGenericController().save(getCampoEstagio());
 			campoEstagio=null; genericController = null; listaCampoEstagio = null;
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(

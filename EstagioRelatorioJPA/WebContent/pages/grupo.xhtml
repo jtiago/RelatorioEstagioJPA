@@ -47,8 +47,8 @@
 		</p:panel>
 		
 		<h:form id="formCadastro">
-			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Novo Grupo - [ * Campo Obrigatório ]" widgetVar="dialogCadGrupo" width="600">
+			<p:dialog resizable="false" draggable="false" modal="true" position="center"  closable="false" 
+				header="..::: Novo Grupo - [ * Campo Obrigatório ]" widgetVar="dialogCadGrupo" width="700" height="500">
 				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel for="turma" value="Turma:" />
 					<p:selectOneMenu id="turma" value="#{grupoBean.facade.grupo.turmaGrupo.id}" 
@@ -66,9 +66,16 @@
 					
 					<p:outputLabel for="pickListAluno" value="Alunos" />
 					<p:pickList id="pickListAluno" value="#{grupoBean.dualListModelAluno}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"
-							showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
+							showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" style="height: 50px">
 						<f:facet name="sourceCaption">Alunos</f:facet>
        					<f:facet name="targetCaption">Alunos Selecionados</f:facet>
+					</p:pickList>
+					
+					<p:outputLabel for="pickListCampo" value="Campos" />
+					<p:pickList id="pickListCampo" value="#{grupoBean.dualListModelCampo}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"
+							showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
+						<f:facet name="sourceCaption">Campos</f:facet>
+       					<f:facet name="targetCaption">Campos Selecionados</f:facet>
 					</p:pickList>
 				</h:panelGrid>
 				
