@@ -42,12 +42,6 @@
 						<h:outputLabel value="#{item.matricula}"/>
 					</p:column>
 					
-					<!-- 
-					<p:column headerText="Turma">
-						<p:dataList value="#{item.turmas}" var="tur" style="border:0px;">#{tur.nome}</p:dataList>
-					</p:column>
-					-->
-					
 					<p:column style="text-align:right; width: 150px;">
 						<p:commandButton icon="ui-icon-trash" oncomplete="removeAluno.show()">
 							<f:setPropertyActionListener target="#{alunoBean.facade.aluno}" value="#{item}" />
@@ -112,15 +106,6 @@
 						<p:outputLabel for="email" value="E-mail:" />
 						<p:inputText id="email" value="#{alunoBean.facade.aluno.email}" required="false" style="width:350px;"/>
 						
-						<!-- 
-						<p:outputLabel for="pickList" value="Turma(s)" />
-						<p:pickList id="pickList" value="#{alunoBean.dualListModel}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}" converter="TurmaConverter"
-								showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
-							<f:facet name="sourceCaption" style="width:350px;">Turma(s)</f:facet>
-        					<f:facet name="targetCaption">Turma(s) Vinculadas</f:facet>
-						</p:pickList>
-						-->
-						
 					</h:panelGrid>
 					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{alunoBean.save}"
 						update=":formCadastro:grid :formTabelaAluno :formMessage" onclick="lazyload()"/>
@@ -168,29 +153,24 @@
 					header="..::: Associar Aluno/Turma - [ * Campo Obrigatorio ]" widgetVar="dialogAssociar">
 					<h:panelGrid id="grid" columns="2">
 						<p:outputLabel for="idAlunos" value="Alunos" />
-						<p:selectOneMenu id="idAlunos" value="#{alunoBean.alunoAssociado}" panelStyle="width:350px"
-				                         effect="fade" var="al" style="width:350px" filter="true" filterMatchMode="contains">
-				            <f:selectItem itemLabel="Selecione Aluno" itemValue="#{null}" noSelectionOption="true" />
-				            <f:selectItems value="#{alunoBean.facade.listaAlunos}" var="itemAluno" itemLabel="#{itemAluno.nome}" itemValue="#{itemAluno}" />
-				            <p:column>
-				                <h:outputText value="#{al.nome}" />
-				            </p:column>
-				            <!-- <p:ajax event="change" update="grid, idAlunos, pickList"/> -->
+						<p:selectOneMenu id="idAlunos" value="#{alunoBean.idAluno}" panelStyle="width:350px" filter="true" filterMatchMode="contains"
+				                         effect="fade" style="width:350px" valueChangeListener="#{alunoBean.processarAlunoAssociado}">
+				            <f:selectItem itemLabel="Selecione Aluno" itemValue="#{null}" />
+				            <f:selectItems value="#{alunoBean.facade.listaAlunos}" var="itemAluno" itemLabel="#{itemAluno.nome}" itemValue="#{itemAluno.id}" />
+				            <p:ajax event="valueChange" update=":formAssociar:grid"/>
 				        </p:selectOneMenu>
 						
 						<p:outputLabel for="pickList" value="Turma(s)" />
-						<p:pickList id="pickList" value="#{alunoBean.dualListModel}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}" 
+						<p:pickList id="pickList" value="#{alunoBean.dualListModelTurma}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}" 
 							converter="TurmaConverter" showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
 							<f:facet name="sourceCaption" style="width:350px;">Turma(s)</f:facet>
         					<f:facet name="targetCaption">Turma(s) Vinculadas</f:facet>
 						</p:pickList>
 					</h:panelGrid>
-					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{alunoBean.processarAlunoAssociado}"
+					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{alunoBean.saveAssociacaoAlunoTurma}"
 						update=":formAssociar:grid :formMessage" onclick="lazyload()"/>
-					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAssociar.hide()" onclick="lazyload()"
-							update=":formAssociar:grid">
-							<f:setPropertyActionListener target="#{alunoBean.alunoAssociado}" value="#{null}" />
-					</p:commandButton>
+					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAssociar.hide()" onclick="lazyload()"/>
+					<p:ajax event="close" resetValues="true" listener="#{alunoBean.limpar}" update="formAssociar" />
 				</p:dialog>
 			</h:form>
 		

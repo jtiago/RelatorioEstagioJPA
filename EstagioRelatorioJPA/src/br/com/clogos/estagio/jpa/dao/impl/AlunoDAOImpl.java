@@ -19,16 +19,15 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 	private EntityManager entityManager;
 
 	@Override
-	public List<Aluno> findAll(Long idSemestre) {
+	public List<Aluno> findAll() {
 		entityManager = JpaUtil.getEntityManager();
 		List<Aluno> lista = new ArrayList<Aluno>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("SELECT DISTINCT a FROM Aluno a JOIN FETCH a.turmas t JOIN FETCH t.semestre s ");
-		hql.append("WHERE s.id = :idSemestre ORDER BY a.nome");
+		hql.append("SELECT DISTINCT a FROM Aluno a ");
+		hql.append("ORDER BY a.nome");
 		
 		try {
-			TypedQuery<Aluno> query = entityManager.createQuery(hql.toString(), Aluno.class)
-					.setParameter("idSemestre", idSemestre);
+			TypedQuery<Aluno> query = entityManager.createQuery(hql.toString(), Aluno.class);
 			lista = query.getResultList();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();

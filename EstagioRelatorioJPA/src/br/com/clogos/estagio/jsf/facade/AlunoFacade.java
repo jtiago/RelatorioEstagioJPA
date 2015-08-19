@@ -30,7 +30,7 @@ public class AlunoFacade implements Serializable {
 	
 	public List<Aluno> getListaAlunos() {
 		if(listaAlunos == null) {
-			listaAlunos = getAlunoController().findAll(Util.getUsuarioSessao().getIdSemestre());
+			listaAlunos = getAlunoController().findAll();
 		}
 		return listaAlunos;
 	}
@@ -44,7 +44,6 @@ public class AlunoFacade implements Serializable {
 		try {
 			getAluno().setCpf(getAluno().getCpf().replace(".", "").replace("-", ""));
 			getAluno().setSenha(CriptografiaBase64.encrypt(getAluno().getSenha()));
-			//getAluno().setTurmas(lista);
 			getGenericController().save(getAluno());
 			aluno=null; genericController = null; listaAlunos = null;
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
@@ -53,6 +52,20 @@ public class AlunoFacade implements Serializable {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, "Problemas ao salvar Aluno.", ""));
+		}
+	}
+	
+	public void saveAssociacaoAlunoTurma(List<Turma> turmas, Long idAluno) {
+		try {
+			Aluno aluno = getAlunoController().find(idAluno);
+			aluno.setTurmas(turmas);
+			getGenericController().update(aluno);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Associação de aluno com turma salva com sucesso.", ""));
+		} catch (Exception e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Problemas ao associar aluno com turma.", ""));
 		}
 	}
 	

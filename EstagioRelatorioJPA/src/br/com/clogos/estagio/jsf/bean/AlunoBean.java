@@ -11,7 +11,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 
+import org.primefaces.event.CloseEvent;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DualListModel;
 
@@ -30,45 +32,65 @@ public class AlunoBean implements Serializable {
 	private TurmaFacade facadeTurma;
 	private Perfil perfil;
 	private Aluno aluno;
-	private Aluno alunoAssociado;
+	private Long idAluno;
 	private Turma turma;
 	private boolean mensagem;
 	
-	private DualListModel<Turma> dualListModel;
+	private DualListModel<Turma> dualListModelTurma;
 	
 	public AlunoBean() {
 		mensagem = false;
 	}
 	
-	public void processarAlunoAssociado(ActionEvent event) {
-		
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	/**
+	 * Método para buscar turmas vinculadas a cada alteração da combo de Aluno
+	 * @param event
+	 */
+	public void processarAlunoAssociado(ValueChangeEvent event) {
+		this.idAluno = Long.valueOf(event.getNewValue().toString());
 	}
 	
-	public DualListModel<Turma> getDualListModel() {
+	public DualListModel<Turma> getDualListModelTurma() {
 		List<Turma> source = getFacadeTurma().getListaTurma();
 		List<Turma> target = new ArrayList<Turma>();
-		dualListModel = new DualListModel<Turma>(source, target);
-		return dualListModel;
+		try {
+			if(this.idAluno != null && this.idAluno != 0) {
+				target = getFacadeTurma().listaTurmaPorAluno(getIdAluno());
+				List<Turma> listaTemp = new ArrayList<Turma>();
+				
+				// Tira a duplicidade do Picklist, a Turma que tem em target não pode existir em source
+				for(Turma itemTarget : target) {
+					for(Turma itemSource : source) {
+						if(itemSource.getNome().equalsIgnoreCase(itemTarget.getNome())) {
+							listaTemp.add(itemSource);
+						}
+					}
+				}
+				source.removeAll(listaTemp);
+				getFacadeTurma().setListaTurma(null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		dualListModelTurma = new DualListModel<Turma>(source, target);
+		return dualListModelTurma;
 	}
 	
-	public void setDualListModel(DualListModel<Turma> dualListModel) {
-		this.dualListModel.getSource().removeAll(dualListModel.getTarget());
-		this.dualListModel = dualListModel;
-	}
-
-	public AlunoFacade getFacade() {
-		return facade == null ? facade = new AlunoFacade() : facade;
+	public void setDualListModelTurma(DualListModel<Turma> dualListModel) {
+		this.dualListModelTurma.getSource().removeAll(dualListModel.getTarget());
+		this.dualListModelTurma = dualListModel;
 	}
 	
-	public TurmaFacade getFacadeTurma() {
-		return facadeTurma == null ? facadeTurma = new TurmaFacade() : facadeTurma;
-	}
-
 	public void save(ActionEvent event) {
-		//getFacade().save(getDualListModel().getTarget());
 		getFacade().save();
 		mensagem = true;
+	}
+	
+	public void saveAssociacaoAlunoTurma(ActionEvent event) {
+		getFacade().saveAssociacaoAlunoTurma(dualListModelTurma.getTarget(), idAluno);
+		mensagem = true;
+		getFacadeTurma().setListaTurma(null);
 	}
 	
 	public void remove(ActionEvent event) {
@@ -79,6 +101,11 @@ public class AlunoBean implements Serializable {
 	public void update(ActionEvent event) {
 		getFacade().update();
 		mensagem = true;
+	}
+	
+	public void limpar(CloseEvent event) {
+		this.idAluno = null;
+		getFacadeTurma().setListaTurma(null);
 	}
 	
 	public void fileUpload(FileUploadEvent event) {
@@ -184,11 +211,19 @@ public class AlunoBean implements Serializable {
 		this.turma = turma;
 	}
 
-	public Aluno getAlunoAssociado() {
-		return alunoAssociado == null ? alunoAssociado = new Aluno() : alunoAssociado;
+	public Long getIdAluno() {
+		return idAluno;
 	}
 
-	public void setAlunoAssociado(Aluno alunoAssociado) {
-		this.alunoAssociado = alunoAssociado;
+	public void setIdAluno(Long idAluno) {
+		this.idAluno = idAluno;
+	}
+	
+	public AlunoFacade getFacade() {
+		return facade == null ? facade = new AlunoFacade() : facade;
+	}
+	
+	public TurmaFacade getFacadeTurma() {
+		return facadeTurma == null ? facadeTurma = new TurmaFacade() : facadeTurma;
 	}
 }

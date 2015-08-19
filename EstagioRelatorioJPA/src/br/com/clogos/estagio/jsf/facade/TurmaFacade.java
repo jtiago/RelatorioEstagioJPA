@@ -27,6 +27,10 @@ public class TurmaFacade implements Serializable {
 		}
 		return listaTurma;
 	}
+
+	public List<Turma> listaTurmaPorAluno(Long idAluno) {
+		return getTurmaController().obterTurmaPorAluno(Util.getUsuarioSessao().getIdSemestre(), idAluno);
+	}
 	
 	public void save() {
 		if(getTurmaController().verificaDuplicidade(getTurma().getNome())) {
@@ -41,8 +45,8 @@ public class TurmaFacade implements Serializable {
 						FacesMessage.SEVERITY_ERROR, "Problemas ao salvar Turma.", ""));
 			}
 		} else {
-//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-//					FacesMessage.SEVERITY_WARN, "Turma j� existente.", ""));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_WARN, "Turma já existe neste semestre.", ""));
 		}
 	}
 	
@@ -110,5 +114,9 @@ public class TurmaFacade implements Serializable {
 
 	public void setListaTurmaFilter(List<Turma> listaTurmaFilter) {
 		this.listaTurmaFilter = listaTurmaFilter;
+	}
+
+	public void setListaTurma(List<Turma> listaTurma) {
+		this.listaTurma = listaTurma;
 	}
 }

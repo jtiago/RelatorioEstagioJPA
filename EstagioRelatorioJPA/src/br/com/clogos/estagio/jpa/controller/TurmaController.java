@@ -37,4 +37,8 @@ public class TurmaController implements Serializable {
 	public Turma obterTurmaPorNome(String nomeTurma) {
 		return getTurmaDAO().obterTurmaPorNome(nomeTurma);
 	}
+	
+	public List<Turma> obterTurmaPorAluno(Long idSemestre, Long idAluno) {
+		return getTurmaDAO().obterTurmaPorAluno(idSemestre, idAluno);
+	}
 }

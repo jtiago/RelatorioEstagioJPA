@@ -123,4 +123,28 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 			return ModuloEnum.valueOf(ModuloEnum.class, obj.toString()).getLabel().toUpperCase();
 		}
 	}
+
+	@Override
+	public List<Turma> obterTurmaPorAluno(Long idSemestre, Long idAluno) {
+		entityManager = JpaUtil.getEntityManager();
+		List<Turma> lista = new ArrayList<Turma>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECT t FROM Turma t JOIN FETCH t.alunos a JOIN t.semestre s ");
+		hql.append("WHERE s.id = :idSemestre AND a.id = :idAluno");
+		
+		try {
+			TypedQuery<Turma> query = entityManager.createQuery(hql.toString(), Turma.class)
+					.setParameter("idSemestre", idSemestre)
+					.setParameter("idAluno", idAluno);
+			lista = query.getResultList();
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return lista;
+	}
 }
