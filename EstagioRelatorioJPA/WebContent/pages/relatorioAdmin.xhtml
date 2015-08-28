@@ -14,8 +14,17 @@
 		
 		<p:panel header="..:: Validar Relatórios">
 			<h:form id="formPesquisaRelatorio">
-				<p:fieldset>
+				<p:fieldset legend="Pesquisar Relatórios Enviados">
 					<h:panelGrid id="grid" columns="7">
+						<p:outputLabel for="status" value="Status:" />
+                    	<p:selectOneMenu id="status" value="#{relatorioAdminBean.facade.status}"
+							style="width: 250px;">
+							<f:selectItem itemLabel="Selecione Status" itemValue="#{null}"/>
+							<f:selectItem itemLabel="Validado" itemValue="#{'v'}"/>
+							<f:selectItem itemLabel="Revisão" itemValue="#{'r'}"/>
+							<f:selectItem itemLabel="Em Aberto" itemValue="#{'a'}"/>
+						</p:selectOneMenu>
+						
 						<p:outputLabel for="turma" value="Turma:"/>
 						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.turmaRelatorio.id}" style="width:170px;">
 				            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
@@ -29,13 +38,7 @@
 	                       <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
                     	</p:selectOneMenu>
                     	
-                    	<p:outputLabel for="campo" value="Campo:" />
-                    	<p:selectOneMenu id="campo" value="#{relatorioAdminBean.facade.relatorio.campoEstagio.id}"
-							style="width: 250px;">
-							<f:selectItem itemLabel="Selecione Campo" itemValue="#{null}"/>
-							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
-								itemValue="#{cam.id}"/>
-						</p:selectOneMenu>
+                    	
 				                            	
                     	<p:commandButton icon="ui-icon-search" actionListener="#{relatorioAdminBean.pesquisarRelatorio}" 
                     		update=":formPesquisaRelatorio :tabelaRelatorio"/>
@@ -93,7 +96,8 @@
 		
 		<h:form id="formAvaliacao">
 			<p:focus/>
-			<p:dialog width="900" height="500" header="..::Validar Relatório" widgetVar="dialogValidar" draggable="false" modal="true" resizable="false" position="top">
+			<p:dialog width="900" height="500" header="..::Validar Relatório" widgetVar="dialogValidar" draggable="false" modal="true" 
+				resizable="false" position="top" focus="obs">
 				<p:fieldset>
 					<h:panelGrid id="grid" columns="2">
 						<h:outputLabel id="nome" value="Nome do Aluno:"/>
@@ -112,14 +116,24 @@
 						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.modulo.label}" style="font-weight: bold;"/>
 						
 						<h:outputLabel value="Data Início:"/>
-						<h:panelGrid columns="3">
+						<h:panelGrid columns="4">
+							<p:calendar id="dataInicial" pattern="dd/MM/yyyy" value="#{relatorioAdminBean.facade.relatorioValidar.dataInicio}" effect="fold" 
+								readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014">
+								<p:ajax event="dateSelect" update="dataTermino" listener="#{relatorioAlunoBean.facade.ajustarDataIntervalo()}"/>
+							</p:calendar>
+							
+							<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
+							<p:outputLabel for="dataTermino" value="Data de Término:"/>
+							<p:calendar id="dataTermino" pattern="dd/MM/yyyy" value="#{relatorioAdminBean.facade.relatorioValidar.dataTerminio}" effect="fold" 
+								readonlyInput="true" required="true" locale="pt_BR" mindate="#{relatorioAdminBean.facade.relatorioValidar.dataInicio}"/>
+							<!-- 						
 							<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.dataInicio}" style="font-weight: bold;">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
 							</h:outputLabel>
 							<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data Término:"/>
 							<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.dataTerminio}" style="font-weight: bold;">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
-							</h:outputLabel>
+							</h:outputLabel> -->
 						</h:panelGrid>
 						
 						<h:outputLabel value="Data Cadastro:"/>
@@ -142,8 +156,11 @@
 					
 						<p:commandButton value="Validar" icon="ui-icon-check" oncomplete="validarRelatorio.show()" 
 							disabled="#{relatorioAdminBean.facade.relatorioValidar.validado or relatorioAdminBean.facade.relatorioValidar.revisao}"/>
-						<p:commandButton value="Revisão" icon="ui-icon-pencil" oncomplete="revisaoRelatorio.show()"
-							disabled="#{relatorioAdminBean.facade.relatorioValidar.validado or relatorioAdminBean.facade.relatorioValidar.revisao}"/>
+						<h:panelGrid columns="2">
+							<p:commandButton value="Revisão" icon="ui-icon-pencil" oncomplete="revisaoRelatorio.show()"
+								disabled="#{relatorioAdminBean.facade.relatorioValidar.validado or relatorioAdminBean.facade.relatorioValidar.revisao}"/>
+							<p:commandButton value="Alterar Datas" icon="ui-icon-pencil" oncomplete="alterarDatasRelatorio.show()"/>
+						</h:panelGrid>
 					</h:panelGrid>
 				</p:fieldset>
 			</p:dialog>
@@ -162,6 +179,15 @@
 				<p:commandButton value="Sim" actionListener="#{relatorioAdminBean.validarRelatorio}" oncomplete="dialogValidar.hide()"
 					update=":formMensagem :formValidar :tabelaRelatorio :formAvaliacao" />
 				<p:commandButton value="Não" oncomplete="validarRelatorio.hide()"/>
+			</p:confirmDialog>
+		</h:form>
+		
+		<h:form id="formAlterarDatas">
+			<p:confirmDialog message="Deseja realmente alterar as dastas de Início/Términio do relatório ?" header="..:: Alterar Datas de Início/Términio" 
+				widgetVar="alterarDatasRelatorio">
+				<p:commandButton value="Sim" actionListener="#{relatorioAdminBean.alterarDataInicioTerminio}" oncomplete="alterarDatasRelatorio.hide()"
+					update=":formMensagem :formAlterarDatas :tabelaRelatorio :formAvaliacao" />
+				<p:commandButton value="Não" oncomplete="alterarDatasRelatorio.hide()"/>
 			</p:confirmDialog>
 		</h:form>
 		

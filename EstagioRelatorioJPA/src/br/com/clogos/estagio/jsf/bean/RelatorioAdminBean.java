@@ -33,4 +33,8 @@ public class RelatorioAdminBean implements Serializable {
 	public void gerarRelatorio(ActionEvent event) {
 		getFacade().geraRelatorio();
 	}
+	
+	public void alterarDataInicioTerminio(ActionEvent event) {
+		getFacade().alterarDataInicioTerminioRelatorio();
+	}
 }

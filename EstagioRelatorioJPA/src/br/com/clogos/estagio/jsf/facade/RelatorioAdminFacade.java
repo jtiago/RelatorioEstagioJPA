@@ -35,12 +35,14 @@ public class RelatorioAdminFacade implements Serializable {
 	private List<Relatorio> listaRelatoriosFilter;
 	private RelatorioController relatorioController;
 	private TurmaController turmaController;
+	private String status;
 	
 	public List<Relatorio> getListaRelatorios() {
 		return listaRelatorios;
 	}
 	
 	public void pesquisaRelatorio() {
+		vertificarStatus();
 		getRelatorio().setIdSemestre(Util.getUsuarioSessao().getIdSemestre());
 		listaRelatorios = getRelatorioController().findRelatoriosAdmin(getRelatorio());
 	}
@@ -71,6 +73,18 @@ public class RelatorioAdminFacade implements Serializable {
 		relatorioValidar=null; listaRelatorios=null; relatorioController=null; 
 	}
 	
+	public void alterarDataInicioTerminioRelatorio() {
+		if(getRelatorioValidar() != null) {
+			if(getRelatorioController().alterarDataInicioTerminioRelatorio(getRelatorioValidar())) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_INFO, "Alteração das datas efetuado com sucesso.", ""));
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_ERROR, "Problemas ao alterar ass datas do relatório", ""));
+			}
+		}
+	}
+	
 	public void geraRelatorio() {
 		ServletContext context = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 		Map<String, Object> paramentros = new HashMap<String, Object>();
@@ -99,6 +113,16 @@ public class RelatorioAdminFacade implements Serializable {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private void vertificarStatus() {
+		if(getStatus().equals("v")) {
+			getRelatorio().setValidado(true);
+		} else if(getStatus().equals("a")) {
+			getRelatorio().setValidado(false);
+		} else if(getStatus().equals("r")) {
+			getRelatorio().setRevisao(true);
 		}
 	}
 	
@@ -137,5 +161,13 @@ public class RelatorioAdminFacade implements Serializable {
 	}
 	public TurmaController getTurmaController() {
 		return turmaController == null ? turmaController = new TurmaController() : turmaController ;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }
