@@ -34,7 +34,7 @@ public class SupervisorBean implements Serializable {
 	
 	public void save() {
 		try {
-			String nomeArquivo = new SimpleDateFormat("ddMMyyyyHHmmssSSS").format(new Date());
+			String nomeArquivo = new SimpleDateFormat("ddMMyyyyHHmmssSSS").format(new Date())+".jpg";
 			File file = new File(DIRETORIO+nomeArquivo+".jpg");
 			IOUtils.copyLarge(getFile().getInputstream(), new FileOutputStream(file));
 			

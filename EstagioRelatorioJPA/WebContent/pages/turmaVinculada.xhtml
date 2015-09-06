@@ -42,7 +42,7 @@
 		</p:panel>
 		
 		<h:form id="formRelatorio">
-			<p:dialog resizable="false" draggable="false" modal="true" position="top" closable="true" width="990" height="700" 
+			<p:dialog resizable="false" draggable="false" modal="true" position="top" closable="true" width="990" height="500" 
 					header="..::: Preencher Relatório - [ * Campo Obrigatório ]" widgetVar="preencherRelatorio">
 				
 				<p:panel  header="..:: Relatório de Estágio" rendered="#{relatorioAlunoBean.facade.moduloLiberado 
@@ -124,7 +124,7 @@
 							<h:panelGrid columns="1" style="font-family: arial, helvetica, serif; font-size: 12px;">
 								<!-- <p:editor id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" width="865" height="600" controls="size=16px" 
 									widgetVar="editorTexto" required="true"  /><br/> --> 
-								<p:inputTextarea id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" rows="60" cols="95"
+								<p:inputTextarea id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" rows="40" cols="95"
 								onkeydown="if (event.keyCode == 13) { return false; }" style="font-size:16px; color:#000000; width: 850px;"/> 
 							</h:panelGrid>
 							

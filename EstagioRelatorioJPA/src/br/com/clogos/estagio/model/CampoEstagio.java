@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,11 +30,14 @@ public class CampoEstagio implements ObjectModel {
 	@OneToMany(mappedBy = "campoEstagio")
 	private List<Relatorio> relatorios;
 	
-	@ManyToMany(mappedBy="camposGrupo")
-	private List<Grupo> campogrupos;
+//	@ManyToMany(mappedBy="camposGrupo")
+//	private List<Grupo> campogrupos;
 	
 	@OneToMany(mappedBy="campoEstagio")
 	private List<Supervisor> supervisores;
+	
+	@OneToMany(mappedBy="campoEstagio")
+	private List<GrupoCampoEstagio> listaGrupoCampoEstagio;
 
 	public Long getId() {
 		return id;

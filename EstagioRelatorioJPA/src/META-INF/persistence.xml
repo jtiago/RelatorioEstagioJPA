@@ -18,6 +18,7 @@
 	<class>br.com.clogos.estagio.model.Usuario</class>
 	<class>br.com.clogos.estagio.model.Semestre</class>
 	<class>br.com.clogos.estagio.model.Grupo</class>
+	<class>br.com.clogos.estagio.model.GrupoCampoEstagio</class>
 	
 	<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
@@ -34,13 +35,17 @@ public class Grupo implements ObjectModel {
 	@JoinTable(name="grupo_aluno")
 	private List<Aluno> alunosGrupo;
 	
-	@ManyToMany
-	@JoinTable(name="grupo_campo")
-	private List<CampoEstagio> camposGrupo;
+//	@ManyToMany
+//	@JoinTable(name="grupo_campo")
+//	private List<CampoEstagio> camposGrupo;
 	
 	@ManyToOne
 	@JoinColumn(name = "fkturma")
 	private Turma turmaGrupo;
+	
+	@OneToMany(mappedBy="grupo")
+	private List<GrupoCampoEstagio> listaGrupoCampoEstagio;
+	
 
 	public Long getId() {
 		return id;

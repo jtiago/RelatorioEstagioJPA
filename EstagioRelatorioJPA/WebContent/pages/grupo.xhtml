@@ -66,17 +66,54 @@
 					
 					<p:outputLabel for="pickListAluno" value="Alunos" />
 					<p:pickList id="pickListAluno" value="#{grupoBean.dualListModelAluno}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"
-							showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" style="height: 50px">
+							showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" style="height: 50px" required="true" converter="AlunoPickListConverter">
 						<f:facet name="sourceCaption">Alunos</f:facet>
        					<f:facet name="targetCaption">Alunos Selecionados</f:facet>
 					</p:pickList>
 					
-					<p:outputLabel for="pickListCampo" value="Campos" />
-					<p:pickList id="pickListCampo" value="#{grupoBean.dualListModelCampo}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"
-							showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
-						<f:facet name="sourceCaption">Campos</f:facet>
-       					<f:facet name="targetCaption">Campos Selecionados</f:facet>
-					</p:pickList>
+					<p:outputLabel for="campo1" value="Campo 1:" />
+					<p:panelGrid  columns="2">
+						<p:selectOneMenu id="campo1" value="#{grupoBean.facade.campo1.campoEstagio.id}" 
+							required="true" style="width:310px;">
+				            <f:selectItem itemLabel="Selecione Campo 1" itemValue="#{null}" />
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="campo" itemValue="#{campo.id}" itemLabel="#{campo.nome}"/>
+				        </p:selectOneMenu>
+						<p:calendar id="dataCampo1" pattern="dd/MM/yyyy" value="#{grupoBean.facade.campo1.data}" effect="fold" 
+							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014"/>
+					</p:panelGrid>
+					
+					<p:outputLabel for="campo2" value="Campo 2:" />
+					<p:panelGrid  columns="2">
+						<p:selectOneMenu id="campo2" value="#{grupoBean.facade.campo2.campoEstagio.id}" 
+							required="true" style="width:310px;">
+				            <f:selectItem itemLabel="Selecione Campo 2" itemValue="#{null}" />
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="campo" itemValue="#{campo.id}" itemLabel="#{campo.nome}"/>
+				        </p:selectOneMenu>
+						<p:calendar id="dataCampo2" pattern="dd/MM/yyyy" value="#{grupoBean.facade.campo2.data}" effect="fold" 
+							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014"/>
+					</p:panelGrid>
+					
+					<p:outputLabel for="campo3" value="Campo 3:" />
+					<p:panelGrid  columns="3">
+						<p:selectOneMenu id="campo3" value="#{grupoBean.facade.campo3.campoEstagio.id}" 
+							required="true" style="width:310px;">
+				            <f:selectItem itemLabel="Selecione Campo 3" itemValue="#{null}" />
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="campo" itemValue="#{campo.id}" itemLabel="#{campo.nome}"/>
+				        </p:selectOneMenu>
+						<p:calendar id="dataCampo3" pattern="dd/MM/yyyy" value="#{grupoBean.facade.campo3.data}" effect="fold" 
+							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014"/>
+					</p:panelGrid>
+					
+					<p:outputLabel for="campo4" value="Campo 4:" />
+					<p:panelGrid  columns="4">
+						<p:selectOneMenu id="campo4" value="#{grupoBean.facade.campo4.campoEstagio.id}" 
+							required="true" style="width:310px;">
+				            <f:selectItem itemLabel="Selecione Campo 4" itemValue="#{null}" />
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="campo" itemValue="#{campo.id}" itemLabel="#{campo.nome}"/>
+				        </p:selectOneMenu>
+						<p:calendar id="dataCampo4" pattern="dd/MM/yyyy" value="#{grupoBean.facade.campo4.data}" effect="fold" 
+							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014"/>
+					</p:panelGrid>
 				</h:panelGrid>
 				
 				<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{grupoBean.save}" onclick="lazyload()"

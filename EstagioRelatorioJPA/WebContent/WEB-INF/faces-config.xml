@@ -14,4 +14,9 @@
         <converter-id>AlunoConverter</converter-id>
         <converter-class>br.com.clogos.estagio.jsf.converter.AlunoConverter</converter-class>
     </converter>
+    
+    <converter>
+        <converter-id>AlunoPickListConverter</converter-id>
+        <converter-class>br.com.clogos.estagio.jsf.converter.AlunoPickListConverter</converter-class>
+    </converter>
 </faces-config>
