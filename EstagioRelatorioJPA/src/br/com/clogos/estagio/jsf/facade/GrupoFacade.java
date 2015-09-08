@@ -25,7 +25,12 @@ public class GrupoFacade implements Serializable {
 	private GrupoCampoEstagio campo3;
 	private GrupoCampoEstagio campo4;
 	
+	@SuppressWarnings("unchecked")
 	public List<Grupo> getListaGrupos() {
+		if(listaGrupos== null) {
+			listaGrupos = (List<Grupo>) getGenericController().findAll(Grupo.class, 
+					"nomeGrupo", "asc", "JOIN FETCH c.turmaGrupo t JOIN FETCH c.listaGrupoCampoEstagio l ");
+		}
 		return listaGrupos;
 	}
 	
