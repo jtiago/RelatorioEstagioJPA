@@ -2,6 +2,7 @@ package br.com.clogos.estagio.jpa.dao.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -158,6 +159,45 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 					.setParameter("idTurma", idTurma)
 					.setParameter("idSemestre", idSemestre);
 			lista = query.getResultList();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return lista;
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public List<Aluno> findPorCpf(String cpf, Long idSemestre) {
+		List<Aluno> lista = new ArrayList<Aluno>();
+		entityManager = JpaUtil.getEntityManager();
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECt idaluno, idturma, cpf, a.nomealuno, t.nometurma, t.fksemestre from aluno a  ");
+		hql.append("inner join turma_aluno ta on a.idaluno = ta.alunos_idaluno ");
+		hql.append("inner join turma t on t.idturma = ta.turmas_idturma ");
+		hql.append("where cpf= :cpf and t.fksemestre = :idSemestre ");
+		
+		try {
+			Query query = entityManager.createNativeQuery(hql.toString())
+					.setParameter("cpf", cpf)
+					.setParameter("idSemestre", idSemestre);
+			Iterator i = query.getResultList().iterator();
+			while(i.hasNext()) {
+				Object[] objs = (Object[]) i.next();
+				Aluno aluno = new Aluno();
+				aluno.setId(Long.valueOf(objs[0].toString()));
+				aluno.getTurmaT().setId(Long.valueOf(objs[1].toString()));
+				aluno.setCpf(objs[2].toString());
+				aluno.setNome(objs[3].toString());
+				aluno.getTurmaT().setNome(objs[4].toString());
+				aluno.getTurmaT().getSemestre().setId(Long.valueOf(objs[5].toString()));
+				lista.add(aluno);
+			}
+			
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();

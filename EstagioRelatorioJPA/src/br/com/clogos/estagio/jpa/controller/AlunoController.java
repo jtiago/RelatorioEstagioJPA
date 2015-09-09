@@ -32,6 +32,10 @@ public class AlunoController implements Serializable {
 		return getAlunoDAO().findPorTurma(idTurma, idSemestre);
 	}
 	
+	public List<Aluno> findPorCpf(String cpf, Long idSemestre) {
+		return getAlunoDAO().findPorCpf(cpf, idSemestre);
+	}
+	
 	public AlunoDAO getAlunoDAO() {
 		if(alunoDAO == null) {
 			alunoDAO = new AlunoDAOImpl();

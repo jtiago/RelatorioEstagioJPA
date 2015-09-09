@@ -10,4 +10,5 @@ public interface AlunoDAO {
 	Boolean updateSenha(String cpf, String senha);
 	Aluno find(Long idAluno);
 	List<Aluno> findPorTurma(Long idTurma, Long idSemestre);
+	List<Aluno> findPorCpf(String cpf, Long idSemestre);
 }

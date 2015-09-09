@@ -86,4 +86,13 @@ public class Grupo implements ObjectModel {
 	public void setTurmaGrupo(Turma turmaGrupo) {
 		this.turmaGrupo = turmaGrupo;
 	}
+
+	public List<GrupoCampoEstagio> getListaGrupoCampoEstagio() {
+		return listaGrupoCampoEstagio;
+	}
+
+	public void setListaGrupoCampoEstagio(
+			List<GrupoCampoEstagio> listaGrupoCampoEstagio) {
+		this.listaGrupoCampoEstagio = listaGrupoCampoEstagio;
+	}
 }

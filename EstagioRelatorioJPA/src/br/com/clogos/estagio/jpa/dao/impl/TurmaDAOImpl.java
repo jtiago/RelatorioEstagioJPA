@@ -21,7 +21,7 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 	public List<Turma> findAll(Long idSemestre) {
 		entityManager = JpaUtil.getEntityManager();
 		List<Turma> lista = new ArrayList<Turma>();
-		String hql = "SELECT t  FROM Turma t INNER JOIN FETCH t.semestre s WHERE s.id = :idSemestre";
+		String hql = "SELECT t FROM Turma t INNER JOIN FETCH t.semestre s WHERE s.id = :idSemestre";
 		try {
 		TypedQuery<Turma> query = entityManager.createQuery(hql, Turma.class)
 				.setParameter("idSemestre", idSemestre);

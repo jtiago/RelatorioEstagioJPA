@@ -34,8 +34,8 @@
 					</p:column>
 					
 					<p:column style="text-align:right; width: 185px;">
-						<p:commandButton icon="ui-icon-trash" title="Remover Semestre" oncomplete="">
-							<f:setPropertyActionListener target="#{semestreBean.facade.semestre}" value="#{item}" />
+						<p:commandButton icon="ui-icon-circle-zoomout" title="Visualizar Grupo" oncomplete="dialogView.show()" update=":formView">
+							<f:setPropertyActionListener target="#{grupoBean.facade.grupo}" value="#{item}" />
 						</p:commandButton>
 
 						<p:commandButton icon="ui-icon-pencil" title="Alterar Semestre" oncomplete="" update="">
@@ -121,6 +121,28 @@
 				<p:commandButton value="Sair" icon="ui-icon-close" onsuccess="dialogCadGrupo.hide()" onclick="lazyload()" 
 						actionListener="#{grupoBean.limpar}" />
 				<p:ajax event="close" resetValues="true" listener="#{grupoBean.limpar}" update="formCadastro" />
+			</p:dialog>
+		</h:form>
+		
+		<h:form id="formView">
+			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
+				header="..::: Grupo" widgetVar="dialogView">
+				<p:dataTable var="item" value="#{grupoBean.facade.listaAlunoGrupo}">
+				
+					<p:columnGroup type="header">
+			            <p:row>
+			                <p:column rowspan="2" headerText="#{grupoBean.facade.grupo.nomeGrupo}" />
+			            </p:row>
+			        </p:columnGroup>
+			        
+			        <p:column>
+			        	<p:outputLabel value="#{item.nome}"/>
+			        </p:column>
+				
+				</p:dataTable>
+				<br/>
+				
+				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogView.hide()" onclick="lazyload()"/>
 			</p:dialog>
 		</h:form>
 		

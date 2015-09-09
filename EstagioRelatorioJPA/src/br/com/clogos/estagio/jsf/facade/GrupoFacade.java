@@ -11,12 +11,14 @@ import br.com.clogos.estagio.jpa.controller.GrupoController;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Grupo;
 import br.com.clogos.estagio.model.GrupoCampoEstagio;
+import br.com.clogos.estagio.util.Util;
 
 public class GrupoFacade implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Grupo grupo;
 	private List<Grupo> listaGrupos;
+	private List<Aluno> listaAlunoGrupo;
 	private GenericController genericController;
 	private GrupoController grupoController;
 	
@@ -25,13 +27,16 @@ public class GrupoFacade implements Serializable {
 	private GrupoCampoEstagio campo3;
 	private GrupoCampoEstagio campo4;
 	
-	@SuppressWarnings("unchecked")
 	public List<Grupo> getListaGrupos() {
 		if(listaGrupos== null) {
-			listaGrupos = (List<Grupo>) getGenericController().findAll(Grupo.class, 
-					"nomeGrupo", "asc", "JOIN FETCH c.turmaGrupo t JOIN FETCH c.listaGrupoCampoEstagio l ");
+			listaGrupos = getGrupoController().findAll(Util.getUsuarioSessao().getIdSemestre());
 		}
 		return listaGrupos;
+	}
+	
+	public List<Aluno> getListaAlunoGrupo() {
+		return listaAlunoGrupo = getGrupoController().findGrupoAluno(Util.getUsuarioSessao().getIdSemestre(), 
+				getGrupo().getId()).getAlunosGrupo();
 	}
 	
 	public void save(List<Aluno> listaalunos) {

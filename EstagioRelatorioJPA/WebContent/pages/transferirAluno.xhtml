@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templatePages.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+	  
+	<ui:define name="conteudo">
+		<p:panel  header="..:: Transferir Aluno">
+			<h:form id="formMessage">
+				<p:growl autoUpdate="true" rendered="#{liberarBean.mensagem}"/>
+			</h:form>
+			
+			<h:form id="formProcurar">
+				<h:panelGrid columns="3">
+					<p:outputLabel for="cpf" value="CPF:"/>
+					<p:inputMask id="cpf" mask="999.999.999-99" value="#{transferirAluno.facade.cpfProcura}" required="true"/>
+					<p:commandButton icon="ui-icon-circle-zoomout" actionListener="#{transferirAluno.pesquisarAlunoTurma}" 
+						update=":formProcurar :formTabelaLiberar"/>
+				</h:panelGrid>
+			</h:form><br/>
+			
+			<h:form id="formTabelaLiberar">
+				<p:fieldset rendered="#{transferirAluno.facade.listaAlunoTurma != null}">
+					<p:dataTable id="tabelaLiberar" var="item" value="#{transferirAluno.facade.listaAlunoTurma}" 
+						emptyMessage="Nenhum Aluno encontrado com CPF digitado...">
+						<f:facet name="header">Aluno à Transferir</f:facet>
+						
+						<p:column headerText="CPF Aluno">
+							<h:outputLabel value="#{item.cpf}"/>
+						</p:column>
+						
+						<p:column headerText="Nome Aluno">
+							<h:outputLabel value="#{item.nome}"/>
+						</p:column>
+						
+	                	<p:column headerText="Turma(s)">
+							<h:outputLabel value="#{item.turmaT.nome}"/>	
+						</p:column>
+						
+						
+						<p:column>
+							<p:commandButton icon="ui-icon ui-icon-transferthick-e-w" title="Fechar de Modulo Liberado" oncomplete="" update="">
+								<f:setPropertyActionListener target="#{liberarBean.facade.liberarRelatorio}" value="#{item}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:fieldset>
+			</h:form>
+		</p:panel>
+		
+		
+		<h:form>
+			<p:remoteCommand name="lazyload">  
+		        <f:setPropertyActionListener value="#{false}" target="#{liberarBean.mensagem}" />  
+		    </p:remoteCommand> 
+		</h:form>
+	</ui:define>
+</ui:composition>
