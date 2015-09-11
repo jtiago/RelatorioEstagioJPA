@@ -36,6 +36,10 @@ public class AlunoController implements Serializable {
 		return getAlunoDAO().findPorCpf(cpf, idSemestre);
 	}
 	
+	public Boolean transferirAlunoTurmaRelatorio(Aluno aluno, Long idTurmaTransferir) {
+		return getAlunoDAO().transferirAlunoTurmaRelatorio(aluno, idTurmaTransferir);
+	}
+	
 	public AlunoDAO getAlunoDAO() {
 		if(alunoDAO == null) {
 			alunoDAO = new AlunoDAOImpl();

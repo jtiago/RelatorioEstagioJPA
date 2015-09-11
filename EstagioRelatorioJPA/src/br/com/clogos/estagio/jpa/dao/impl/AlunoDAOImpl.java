@@ -208,4 +208,40 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		}
 		return lista;
 	}
+
+	@Override
+	public Boolean transferirAlunoTurmaRelatorio(Aluno aluno, Long idTurmaTransferir) {
+		entityManager = JpaUtil.getEntityManager();
+		//ExemploJPA: Update Key k set k.counter = 0 where exists (Select u from User u join u.devices d where u.login = "x" and d.applet.key = k)
+		String hql = "UPDATE turma_aluno SET turmas_idturma = :idTurmaTransf WHERE alunos_idaluno = :idAluno AND turmas_idturma = :idTurmaOri";
+		try {
+			Query queryAlunoTurma = entityManager.createNativeQuery(hql)
+					.setParameter("idTurmaTransf", idTurmaTransferir)
+					.setParameter("idAluno", aluno.getId())
+					.setParameter("idTurmaOri", aluno.getTurmaT().getId());
+			entityManager.getTransaction().begin();
+			queryAlunoTurma.executeUpdate();
+			
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE Relatorio r JOIN r.turmaRelatorio t JOIN r.aluno a SET t.id = ? ");
+			sql.append("WHERE t.id = ? AND a.id = ?");
+			
+			Query queryRelatorio = entityManager.createNativeQuery(sql.toString())
+					.setParameter(1, idTurmaTransferir)
+					.setParameter(2, aluno.getTurmaT().getId())
+					.setParameter(3, aluno.getId());
+			queryRelatorio.executeUpdate();
+			
+			entityManager.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			entityManager.getTransaction().rollback();
+			return false;
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+	}
 }
