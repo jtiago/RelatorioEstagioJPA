@@ -60,13 +60,13 @@
 					
 						<p:outputLabel for="turma" value="Turma à Transferir:" />
 						<p:selectOneMenu id="turma" value="#{transferirAluno.facade.turma.id}" required="true" style="width:220px;">
-				            <f:selectItems value="#{turmaBean.facade.listaTurma}" var="tur" itemLabel="#{tur.nome}"
+				            <f:selectItems value="#{transferirAluno.facade.listaTurmaSemVinculoAluno}" var="tur" itemLabel="#{tur.nome}"
 				            	itemValue="#{tur.id}"/>
 				        </p:selectOneMenu>
 					</h:panelGrid>
 					<p:commandButton value="Transferir Aluno" icon="ui-icon ui-icon-transferthick-e-w" oncomplete="dialogConfirmacao.show()"
 							update=":formConfirmacao" />
-					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogTransferir.hide()" onclick="lazyload()"/>
+					<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogTransferir.hide()"/>
 					<p:ajax event="close" resetValues="true" listener="#{transferirAluno.limpar}" update="formTransferir" />
 				</p:dialog>
 			</h:form>
@@ -75,7 +75,7 @@
 			<p:confirmDialog message="Deseja realmente transferir o Aluno(a): #{transferirAluno.facade.aluno.nome}?" 
 					header="..:: Confirmação - Transferir Aluno" widgetVar="dialogConfirmacao">
 				<p:commandButton value="Sim" actionListener="#{transferirAluno.transferirAluno}" oncomplete="dialogConfirmacao.hide()"
-					update=":formMessagem :formConfirmacao :formTabelaTransferir :formTransferir" />
+					update=":formMessagem :formConfirmacao :formTabelaTransferir :formTransferir" onclick="lazyload()" />
 				<p:commandButton value="Não" oncomplete="dialogConfirmacao.hide()"/>
 			</p:confirmDialog>
 		</h:form>

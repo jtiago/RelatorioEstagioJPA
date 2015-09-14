@@ -31,6 +31,7 @@ public class TransferirAlunoBean implements Serializable {
 	
 	public void transferirAluno(ActionEvent event) {
 		getFacade().transferirAluno();
+		this.mensagem = true;
 	}
 	
 	public void limpar(CloseEvent event) {

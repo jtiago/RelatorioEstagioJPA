@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 
 import br.com.clogos.estagio.jpa.controller.AlunoController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
+import br.com.clogos.estagio.jpa.controller.TurmaController;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Turma;
 import br.com.clogos.estagio.util.Util;
@@ -22,11 +23,19 @@ public class TransferirAlunoFacade implements Serializable {
 	private Aluno aluno;
 	private Turma turma;
 	private List<Aluno> listaAlunoTurma;
+	private List<Turma> listaTurmaSemVinculoAluno;
 	private AlunoController alunoController;
 	private RelatorioController relatorioController;
+	private TurmaController turmaController;
 	
 	public List<Aluno> getListaAlunoTurma() {
 		return listaAlunoTurma;
+	}
+	
+	public List<Turma> getListaTurmaSemVinculoAluno() {
+		listaTurmaSemVinculoAluno = getTurmaController().obterTurmaSemVinculoAluno(getAluno().getId(), 
+				Util.getUsuarioSessao().getIdSemestre());
+		return listaTurmaSemVinculoAluno;
 	}
 	
 	public void pesquisarAlunoTurma() {
@@ -41,21 +50,16 @@ public class TransferirAlunoFacade implements Serializable {
 	}
 	
 	public void transferirAluno() {
-		/*if(aluno != null) {
-			if(getAlunoController().transferirAlunoTurma(getAluno(), getTurma().getId())) {
-				if(getRelatorioController().aleterarTurmaRelatorio(getAluno(), getTurma().getId())) {
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-							FacesMessage.SEVERITY_INFO, "Transferencia efetuada com sucesso.", ""));
-				} else {
-					
-				}
-				
+		if(aluno != null) {
+			if(getAlunoController().transferirAlunoTurmaRelatorio(getAluno(), getTurma().getId())) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_INFO, "Transferência efetuada com sucesso.", ""));
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 						FacesMessage.SEVERITY_ERROR, "Problemas ao transferir aluno.", ""));
 			}
 			cpfProcura=null;listaAlunoTurma=null;aluno=null;turma=null;
-		}*/
+		}
 	}
 	
 	public void limpar() {
@@ -76,6 +80,10 @@ public class TransferirAlunoFacade implements Serializable {
 	
 	public RelatorioController getRelatorioController() {
 		return relatorioController == null ? relatorioController = new RelatorioController() : relatorioController;
+	}
+	
+	public TurmaController getTurmaController() {
+		return turmaController == null ? turmaController = new TurmaController() : turmaController;
 	}
 
 	public String getCpfProcura() {

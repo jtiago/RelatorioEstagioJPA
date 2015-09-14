@@ -223,8 +223,8 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 			queryAlunoTurma.executeUpdate();
 			
 			StringBuilder sql = new StringBuilder();
-			sql.append("UPDATE Relatorio r JOIN r.turmaRelatorio t JOIN r.aluno a SET t.id = ? ");
-			sql.append("WHERE t.id = ? AND a.id = ?");
+			sql.append("UPDATE Relatorio SET fkturma = ? ");
+			sql.append("WHERE fkturma = ? AND fkaluno = ?");
 			
 			Query queryRelatorio = entityManager.createNativeQuery(sql.toString())
 					.setParameter(1, idTurmaTransferir)
