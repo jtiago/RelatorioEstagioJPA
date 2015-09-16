@@ -153,8 +153,8 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 		entityManager = JpaUtil.getEntityManager();
 		List<Turma> lista = new ArrayList<Turma>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("SELECT t FROM Turma t JOIN FETCH t.alunos a JOIN t.semestre s ");
-		hql.append("WHERE s.id = :idSemestre AND a.id != :idAluno");
+		hql.append("SELECT t FROM Turma t JOIN t.semestre s WHERE NOT EXISTS (SELECT t FROM Turma t JOIN t.alunos a JOIN t.semestre s WHERE a.id = :idAluno AND s.id = :idSemestre) ");
+		hql.append("AND s.id = :idSemestre");
 		
 		try {
 			TypedQuery<Turma> query = entityManager.createQuery(hql.toString(), Turma.class)
