@@ -23,7 +23,7 @@
 				<p:dataTable id="tabelaTurma" var="item" value="#{turmaBean.facade.listaTurma}" emptyMessage="Sem Registros..."
 					filteredValue="#{turmaBean.facade.listaTurmaFilter}">
 					<f:facet name="header">
-						Turmas Cadastrados
+						Turmas Cadastradas (Somente as turmas do semestre logado)
 					</f:facet>
 					
 					<p:column headerText="Nome" filterBy="#{item.nome}" filterMatchMode="contains">

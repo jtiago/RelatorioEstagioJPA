@@ -29,6 +29,10 @@
 						<h:outputLabel value="#{item.nome}"/>
 					</p:column>
 					
+					<p:column headerText="Sigla">
+						<h:outputLabel value="#{item.sigla}"/>
+					</p:column>
+					
 					<p:column style="text-align:right; width: 100px;">
 						<p:commandButton icon="ui-icon-trash" oncomplete="removeCampo.show()">
 							<f:setPropertyActionListener target="#{campoBean.facade.campoEstagio}" value="#{item}" />
@@ -55,6 +59,9 @@
 					<h:panelGrid id="grid" columns="2">	
 						<p:outputLabel for="nome" value="Nome:" />
 						<p:inputText id="nome" value="#{campoBean.facade.campoEstagio.nome}" required="true" style="width:400px;"/>
+						
+						<p:outputLabel for="sigla" value="Sigla:" />
+						<p:inputText id="sigla" value="#{campoBean.facade.campoEstagio.sigla}" required="true" style="width:400px;" maxlength="5"/>
 					</h:panelGrid>
 					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{campoBean.save}" onclick="lazyload()"
 						update=":formCadastro:grid :formTabelaCampo :formMessage"/>
@@ -68,6 +75,9 @@
 				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{campoBean.facade.campoEstagioAltera.nome}" required="true" style="width:400px;"/>
+					
+					<p:outputLabel for="sigla" value="Sigla:" />
+					<p:inputText id="sigla" value="#{campoBean.facade.campoEstagioAltera.sigla}" required="true" style="width:400px;" maxlength="5"/>
 				</h:panelGrid>
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{campoBean.update}"
 					update=":formTabelaCampo :formAlterar:grid" onclick="lazyload()"/>

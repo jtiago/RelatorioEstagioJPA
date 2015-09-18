@@ -77,6 +77,24 @@ public class AlunoBean implements Serializable {
 		return dualListModelTurma;
 	}
 	
+	public void validarAluno(String[] token, Turma turma, List<Aluno> lista) {
+		for(Aluno item : lista) {
+			if(item.getCpf().equals(token[6])) {
+				if(!item.getTurmas().contains(turma)) {
+					item.getTurmas().add(turma);
+					getFacade().setAlunoAltera(item);
+					getFacade().update();
+					return;
+				} else {
+					return;
+				}
+			} else {
+				return;
+			}
+		}
+		saveAluno(token, turma);
+	}
+	
 	public void setDualListModelTurma(DualListModel<Turma> dualListModel) {
 		this.dualListModelTurma.getSource().removeAll(dualListModel.getTarget());
 		this.dualListModelTurma = dualListModel;
@@ -134,18 +152,6 @@ public class AlunoBean implements Serializable {
 			scanner.close();
 		}
     }
-	
-	public void validarAluno(String[] token, Turma turma, List<Aluno> lista) {
-		for(Aluno item : lista) {
-			if(item.getCpf().equals(token[6])) {
-				item.getTurmas().add(turma);
-				getFacade().setAlunoAltera(item);
-				getFacade().update();
-				return;
-			}
-		}
-		saveAluno(token, turma);
-	}
 	
 	/*private Turma saveTurma(String[] token) {
 		Turma turma = new Turma();

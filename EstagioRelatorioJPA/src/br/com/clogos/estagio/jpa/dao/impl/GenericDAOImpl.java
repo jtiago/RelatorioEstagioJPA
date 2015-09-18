@@ -47,8 +47,8 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO, Serial
 			entityManager.getTransaction().commit();
 			return true;
 		} catch (PersistenceException e) {
-			entityManager.getTransaction().rollback();
 			e.printStackTrace();
+			entityManager.getTransaction().rollback();
 			return false;
 		} finally {
 			if(entityManager.isOpen()) {

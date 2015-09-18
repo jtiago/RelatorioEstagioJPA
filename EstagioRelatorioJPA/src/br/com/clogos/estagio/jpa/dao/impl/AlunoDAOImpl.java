@@ -24,7 +24,7 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		entityManager = JpaUtil.getEntityManager();
 		List<Aluno> lista = new ArrayList<Aluno>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("SELECT DISTINCT a FROM Aluno a ");
+		hql.append("SELECT DISTINCT a FROM Aluno a JOIN FETCH a.turmas t ");
 		hql.append("ORDER BY a.nome");
 		
 		try {

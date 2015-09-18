@@ -68,6 +68,10 @@ public class Relatorio implements ObjectModel {
 	@JoinColumn(name = "fkturma")
 	private Turma turmaRelatorio;
 	
+	@ManyToOne
+	@JoinColumn(name = "fkgrupocampoestagio")
+	private GrupoCampoEstagio grupoCampoEstagio;
+	
 	@Transient
 	private Long idSemestre;
 
@@ -189,5 +193,13 @@ public class Relatorio implements ObjectModel {
 
 	public void setIdSemestre(Long idSemestre) {
 		this.idSemestre = idSemestre;
+	}
+
+	public GrupoCampoEstagio getGrupoCampoEstagio() {
+		return grupoCampoEstagio == null ? grupoCampoEstagio = new GrupoCampoEstagio() : grupoCampoEstagio;
+	}
+
+	public void setGrupoCampoEstagio(GrupoCampoEstagio grupoCampoEstagio) {
+		this.grupoCampoEstagio = grupoCampoEstagio;
 	}
 }

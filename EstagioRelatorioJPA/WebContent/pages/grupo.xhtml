@@ -92,9 +92,9 @@
 				            <f:selectItem itemLabel="Selecione Campo 2" itemValue="#{null}" />
 							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="campo" itemValue="#{campo.id}" itemLabel="#{campo.nome}"/>
 				        </p:selectOneMenu>
-						<p:calendar id="dataCampo2Inicial" pattern="dd/MM/yyyy" value="#{grupoBean.facade.campo2.dataInicial}" effect="fold" 
+						<p:calendar id="dataCampo2Inicial" pattern="dd/MM" value="#{grupoBean.facade.campo2.dataInicial}" effect="fold" 
 							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
-						<p:calendar id="dataCampo2Final" pattern="dd/MM/yyyy" value="#{grupoBean.facade.campo2.dataFinal}" effect="fold" 
+						<p:calendar id="dataCampo2Final" pattern="dd/MM" value="#{grupoBean.facade.campo2.dataFinal}" effect="fold" 
 							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
 					</h:panelGrid>
 					
@@ -105,9 +105,9 @@
 				            <f:selectItem itemLabel="Selecione Campo 3" itemValue="#{null}" />
 							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="campo" itemValue="#{campo.id}" itemLabel="#{campo.nome}"/>
 				        </p:selectOneMenu>
-						<p:calendar id="dataCampo3Inicial" pattern="dd/MM/yyyy" value="#{grupoBean.facade.campo3.dataInicial}" effect="fold" 
+						<p:calendar id="dataCampo3Inicial" pattern="dd/MM" value="#{grupoBean.facade.campo3.dataInicial}" effect="fold" 
 							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
-						<p:calendar id="dataCampo3Final" pattern="dd/MM/yyyy" value="#{grupoBean.facade.campo3.dataFinal}" effect="fold" 
+						<p:calendar id="dataCampo3Final" pattern="dd/MM" value="#{grupoBean.facade.campo3.dataFinal}" effect="fold" 
 							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
 					</h:panelGrid>
 					
