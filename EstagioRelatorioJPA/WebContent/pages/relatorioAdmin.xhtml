@@ -18,7 +18,7 @@
 					<h:panelGrid id="grid" columns="7">
 						<p:outputLabel for="status" value="Status:" />
                     	<p:selectOneMenu id="status" value="#{relatorioAdminBean.facade.status}"
-							style="width: 250px;">
+							style="width: 200px;">
 							<f:selectItem itemLabel="Selecione Status" itemValue="#{null}"/>
 							<f:selectItem itemLabel="Validado" itemValue="#{'v'}"/>
 							<f:selectItem itemLabel="Revisão" itemValue="#{'r'}"/>
@@ -31,15 +31,13 @@
 							<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.id}" itemLabel="#{tu.nome}"/>
 				        </p:selectOneMenu>				        
 				         
-				        <p:outputLabel for="modulo" value="Módulo:" />
-						<p:selectOneMenu id="modulo" value="#{relatorioAdminBean.facade.relatorio.modulo}" 
-							style="width:170px;">  
-	                       <f:selectItem itemLabel="Selecione Modulo" itemValue="#{null}" />  
-	                       <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
+				        <p:outputLabel for="campo" value="Campo:" />
+						<p:selectOneMenu id="campo" value="#{relatorioAdminBean.facade.relatorio.campoEstagio.id}" 
+							style="width:300px;">  
+	                       <f:selectItem itemLabel="Selecione Campo" itemValue="#{null}" />  
+	                       <f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="c" itemValue="#{c.id}" itemLabel="#{c.nome}"/>  
                     	</p:selectOneMenu>
-                    	
-                    	
-				                            	
+                    	     	
                     	<p:commandButton icon="ui-icon-search" actionListener="#{relatorioAdminBean.pesquisarRelatorio}" 
                     		update=":formPesquisaRelatorio :tabelaRelatorio"/>
 					</h:panelGrid>

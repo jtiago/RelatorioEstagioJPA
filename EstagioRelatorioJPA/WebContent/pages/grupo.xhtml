@@ -141,13 +141,18 @@
 					<p:columnGroup type="header">
 			            <p:row>
 			                <p:column headerText="#{grupoBean.facade.grupo.turmaGrupo.nome}" />
-			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(0).campoEstagio.nome}" />
+			                
+			                <p:subTable var="subItem" value="grupoBean.facade.grupo.listaGrupoCampoEstagio">
+			                	<p:column headerText="#{subItem.campoEstagio.sigla}" />
+			                </p:subTable>
+			                <!-- <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(0).campoEstagio.nome}" />
 			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(1).campoEstagio.nome}" />
 			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(2).campoEstagio.nome}" />
-			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(3).campoEstagio.nome}" />
-			                <p:column rowspan="2" headerText="Observação" />
+			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(3).campoEstagio.nome}" />-->
+			                
 			            </p:row>
 			            <p:row>
+			            	
 			                <p:column headerText="#{grupoBean.facade.grupo.nomeGrupo}" />
 			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(0).dataInicialFormatada} a #{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(0).dataFinalFormatada}" />
 			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(1).dataInicialFormatada} a #{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(1).dataFinalFormatada}" />
