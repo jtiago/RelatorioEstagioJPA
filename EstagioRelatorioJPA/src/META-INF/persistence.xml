@@ -30,11 +30,18 @@
 	    <property name="javax.persistence.jdbc.password" value="#gaba159" />
 	    <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" /> -->
 	    
+	    <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+	   	<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://postgresql02.clogos.com.br:5432/clogos3" />
+	   	<property name="javax.persistence.jdbc.user" value="clogos3" />
+	   	<property name="javax.persistence.jdbc.password" value="Logos1990" />
+	   	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+	    
+	    <!-- 
 		<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 	   	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/estagio_new" />
 	   	<property name="javax.persistence.jdbc.user" value="root" />
 	   	<property name="javax.persistence.jdbc.password" value="root" />
-	   	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+	   	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> -->
 	   	
 		<property name="hibernate.show_sql" value="true" />
 	  	<property name="hibernate.format_sql" value="true" />
