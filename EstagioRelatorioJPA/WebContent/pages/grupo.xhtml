@@ -142,9 +142,11 @@
 			            <p:row>
 			                <p:column headerText="#{grupoBean.facade.grupo.turmaGrupo.nome}" />
 			                
-			                <p:subTable var="subItem" value="grupoBean.facade.grupo.listaGrupoCampoEstagio">
-			                	<p:column headerText="#{subItem.campoEstagio.sigla}" />
-			                </p:subTable>
+			                <ui:repeat value="#{grupoBean.facade.grupo.listaGrupoCampoEstagio}" var="cam">
+			                    <p:column headerText="#{cam.campoEstagio.sigla}" />
+			                </ui:repeat>
+
+			                
 			                <!-- <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(0).campoEstagio.nome}" />
 			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(1).campoEstagio.nome}" />
 			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(2).campoEstagio.nome}" />
