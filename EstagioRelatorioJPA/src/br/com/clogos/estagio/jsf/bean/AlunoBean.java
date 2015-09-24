@@ -88,9 +88,7 @@ public class AlunoBean implements Serializable {
 				} else {
 					return;
 				}
-			} else {
-				return;
-			}
+			} 
 		}
 		saveAluno(token, turma);
 	}

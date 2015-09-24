@@ -26,6 +26,8 @@ public class GrupoFacade implements Serializable {
 	private GrupoCampoEstagio campo2;
 	private GrupoCampoEstagio campo3;
 	private GrupoCampoEstagio campo4;
+	private GrupoCampoEstagio campo5;
+	private GrupoCampoEstagio campo6;
 	
 	public List<Grupo> getListaGrupos() {
 		if(listaGrupos== null) {
@@ -55,17 +57,33 @@ public class GrupoFacade implements Serializable {
 	}
 	
 	private void saveGrupoCampoEstagio() {
-		getCampo1().getGrupo().setId(getGrupo().getId());;
-		getCampo2().getGrupo().setId(getGrupo().getId());;
-		getCampo3().getGrupo().setId(getGrupo().getId());;
-		getCampo4().getGrupo().setId(getGrupo().getId());;
-		
 		try {
-			getGenericController().save(campo1);
-			getGenericController().save(campo2);
-			getGenericController().save(campo3);
-			getGenericController().save(campo4);
-			grupo = null; campo1 = null; campo2 = null; campo3 = null; campo4 = null;
+			if(campo1.getDataInicial() != null) {
+				getCampo1().getGrupo().setId(getGrupo().getId());
+				getGenericController().save(campo1);
+			}
+			if(campo2.getDataInicial() != null) {
+				getCampo2().getGrupo().setId(getGrupo().getId());
+				getGenericController().save(campo2);
+			}
+			if(campo3.getDataInicial() != null) {
+				getCampo3().getGrupo().setId(getGrupo().getId());
+				getGenericController().save(campo3);
+			}
+			if(campo4.getDataInicial() != null) {
+				getCampo4().getGrupo().setId(getGrupo().getId());
+				getGenericController().save(campo4);
+			}
+			if(campo5.getDataInicial() != null) {
+				getCampo5().getGrupo().setId(getGrupo().getId());
+				getGenericController().save(campo5);
+			}
+			if(campo6.getDataInicial() != null) {
+				getCampo6().getGrupo().setId(getGrupo().getId());
+				getGenericController().save(campo6);
+			}
+			
+			grupo = null; campo1 = null; campo2 = null; campo3 = null; campo4 = null; campo5 = null; campo6 = null;
 			genericController = null;
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
@@ -120,5 +138,21 @@ public class GrupoFacade implements Serializable {
 
 	public void setCampo4(GrupoCampoEstagio campo4) {
 		this.campo4 = campo4;
+	}
+
+	public GrupoCampoEstagio getCampo5() {
+		return campo5 == null ? campo5 = new GrupoCampoEstagio() : campo5;
+	}
+
+	public void setCampo5(GrupoCampoEstagio campo5) {
+		this.campo5 = campo5;
+	}
+
+	public GrupoCampoEstagio getCampo6() {
+		return campo6 == null ? campo6 = new GrupoCampoEstagio() : campo6;
+	}
+
+	public void setCampo6(GrupoCampoEstagio campo6) {
+		this.campo6 = campo6;
 	}
 }

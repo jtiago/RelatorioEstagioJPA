@@ -5,7 +5,8 @@
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core">
 	  
 	<ui:define name="conteudo">
 		<p:panel  header="..:: Cadastro de Grupo">
@@ -15,7 +16,7 @@
 			
 			<h:form id="formNovo">
 				<h:panelGrid columns="2">
-					<p:commandButton value="Novo Grupo" icon="ui-icon-disk" oncomplete="dialogCadGrupo.show()"/>
+					<p:commandButton value="Novo Grupo" icon="ui-icon-disk" onclick="dialogCadGrupo.show()"/>
 				</h:panelGrid>
 			</h:form><br/>
 			
@@ -48,7 +49,7 @@
 		
 		<h:form id="formCadastro">
 			<p:dialog resizable="false" draggable="false" modal="true" position="top"  closable="false" 
-				header="..::: Novo Grupo - [ * Campo Obrigatório ]" widgetVar="dialogCadGrupo" width="900" height="550">
+				header="..::: Novo Grupo - [ * Campo ObrigatÃ³rio ]" widgetVar="dialogCadGrupo" width="900" height="550">
 				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel for="turma" value="Turma:" />
 					<p:selectOneMenu id="turma" value="#{grupoBean.facade.grupo.turmaGrupo.id}" 
@@ -88,40 +89,66 @@
 					<p:outputLabel for="campo2" value="Campo 2:" />
 					<h:panelGrid  columns="3">
 						<p:selectOneMenu id="campo2" value="#{grupoBean.facade.campo2.campoEstagio.id}" 
-							required="true" style="width:310px;">
+							style="width:310px;">
 				            <f:selectItem itemLabel="Selecione Campo 2" itemValue="#{null}" />
 							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="campo" itemValue="#{campo.id}" itemLabel="#{campo.nome}"/>
 				        </p:selectOneMenu>
 						<p:calendar id="dataCampo2Inicial" pattern="dd/MM" value="#{grupoBean.facade.campo2.dataInicial}" effect="fold" 
-							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
+							readonlyInput="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
 						<p:calendar id="dataCampo2Final" pattern="dd/MM" value="#{grupoBean.facade.campo2.dataFinal}" effect="fold" 
-							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
+							readonlyInput="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
 					</h:panelGrid>
 					
 					<p:outputLabel for="campo3" value="Campo 3:" />
 					<h:panelGrid  columns="3">
 						<p:selectOneMenu id="campo3" value="#{grupoBean.facade.campo3.campoEstagio.id}" 
-							required="true" style="width:310px;">
+							style="width:310px;">
 				            <f:selectItem itemLabel="Selecione Campo 3" itemValue="#{null}" />
 							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="campo" itemValue="#{campo.id}" itemLabel="#{campo.nome}"/>
 				        </p:selectOneMenu>
 						<p:calendar id="dataCampo3Inicial" pattern="dd/MM" value="#{grupoBean.facade.campo3.dataInicial}" effect="fold" 
-							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
+							readonlyInput="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
 						<p:calendar id="dataCampo3Final" pattern="dd/MM" value="#{grupoBean.facade.campo3.dataFinal}" effect="fold" 
-							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
+							readonlyInput="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
 					</h:panelGrid>
 					
 					<p:outputLabel for="campo4" value="Campo 4:" />
 					<h:panelGrid  columns="3">
 						<p:selectOneMenu id="campo4" value="#{grupoBean.facade.campo4.campoEstagio.id}" 
-							required="true" style="width:310px;">
+							style="width:310px;">
 				            <f:selectItem itemLabel="Selecione Campo 4" itemValue="#{null}" />
 							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="campo" itemValue="#{campo.id}" itemLabel="#{campo.nome}"/>
 				        </p:selectOneMenu>
 						<p:calendar id="dataCampo4Inicial" pattern="dd/MM" value="#{grupoBean.facade.campo4.dataInicial}" effect="fold" 
-							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
+							readonlyInput="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
 						<p:calendar id="dataCampo4Final" pattern="dd/MM" value="#{grupoBean.facade.campo4.dataFinal}" effect="fold" 
-							readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
+							readonlyInput="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
+					</h:panelGrid>
+					
+					<p:outputLabel for="campo5" value="Campo 5:" />
+					<h:panelGrid  columns="3">
+						<p:selectOneMenu id="campo5" value="#{grupoBean.facade.campo5.campoEstagio.id}" 
+							style="width:310px;">
+				            <f:selectItem itemLabel="Selecione Campo 5" itemValue="#{null}" />
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="campo" itemValue="#{campo.id}" itemLabel="#{campo.nome}"/>
+				        </p:selectOneMenu>
+						<p:calendar id="dataCampo5Inicial" pattern="dd/MM" value="#{grupoBean.facade.campo5.dataInicial}" effect="fold" 
+							readonlyInput="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
+						<p:calendar id="dataCampo5Final" pattern="dd/MM" value="#{grupoBean.facade.campo5.dataFinal}" effect="fold" 
+							readonlyInput="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
+					</h:panelGrid>
+					
+					<p:outputLabel for="campo6" value="Campo 6:" />
+					<h:panelGrid  columns="3">
+						<p:selectOneMenu id="campo6" value="#{grupoBean.facade.campo6.campoEstagio.id}" 
+							style="width:310px;">
+				            <f:selectItem itemLabel="Selecione Campo 6" itemValue="#{null}" />
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="campo" itemValue="#{campo.id}" itemLabel="#{campo.nome}"/>
+				        </p:selectOneMenu>
+						<p:calendar id="dataCampo6Inicial" pattern="dd/MM" value="#{grupoBean.facade.campo6.dataInicial}" effect="fold" 
+							readonlyInput="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
+						<p:calendar id="dataCampo6Final" pattern="dd/MM" value="#{grupoBean.facade.campo6.dataFinal}" effect="fold" 
+							readonlyInput="true" locale="pt_BR" mindate="01/01/2014" size="5"/>
 					</h:panelGrid>
 				</h:panelGrid>
 				
@@ -137,29 +164,21 @@
 			<p:dialog resizable="false" draggable="false" modal="true" position="top" closable="false" 
 				header="..::: Grupo" widgetVar="dialogView">
 				<p:dataTable var="item" value="#{grupoBean.facade.listaAlunoGrupo}">
+				
+				
 					
 					<p:columnGroup type="header">
 			            <p:row>
 			                <p:column headerText="#{grupoBean.facade.grupo.turmaGrupo.nome}" />
-			                
-			                <ui:repeat value="#{grupoBean.facade.grupo.listaGrupoCampoEstagio}" var="cam">
-			                    <p:column headerText="#{cam.campoEstagio.sigla}" />
-			                </ui:repeat>
-
-			                
-			                <!-- <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(0).campoEstagio.nome}" />
-			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(1).campoEstagio.nome}" />
-			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(2).campoEstagio.nome}" />
-			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(3).campoEstagio.nome}" />-->
-			                
+			                <c:forEach var="cam" items="${grupoBean.facade.grupo.listaGrupoCampoEstagio}">
+							    <p:column headerText="${cam.campoEstagio.sigla}" />
+							</c:forEach>
 			            </p:row>
 			            <p:row>
-			            	
 			                <p:column headerText="#{grupoBean.facade.grupo.nomeGrupo}" />
-			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(0).dataInicialFormatada} a #{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(0).dataFinalFormatada}" />
-			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(1).dataInicialFormatada} a #{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(1).dataFinalFormatada}" />
-			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(2).dataInicialFormatada} a #{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(2).dataFinalFormatada}" />
-			                <p:column headerText="#{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(3).dataInicialFormatada} a #{grupoBean.facade.grupo.listaGrupoCampoEstagio.get(3).dataFinalFormatada}" />
+			                <c:forEach var="cam" items="${grupoBean.facade.grupo.listaGrupoCampoEstagio}">
+							    <p:column headerText="${cam.dataInicialFormatada} a ${cam.dataFinalFormatada}" />
+							</c:forEach>
 			            </p:row>
 			        </p:columnGroup>
 			        
@@ -181,7 +200,7 @@
 		<!-- 	
 		<h:form id="formAlterar">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Novo Semestre - [ * Semestre Obrigatório ]" widgetVar="dialogAltSemestre">
+				header="..::: Novo Semestre - [ * Semestre ObrigatÃ³rio ]" widgetVar="dialogAltSemestre">
 				<h:panelGrid id="grid" columns="2">
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{semestreBean.facade.semestreAltera.nomeSemestre}" required="true"/>

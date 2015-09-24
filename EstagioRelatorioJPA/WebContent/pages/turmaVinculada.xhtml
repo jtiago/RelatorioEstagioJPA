@@ -32,7 +32,7 @@
 					</p:column>
 					
 					<p:column style="text-align:right; width: 185px;">
-						<p:commandButton value="Preencher Relatório" icon="ui-icon-clipboard" actionListener="#{relatorioAlunoBean.preencherRelatorio}" 
+						<p:commandButton value="Preencher Relatorio" icon="ui-icon-clipboard" actionListener="#{relatorioAlunoBean.preencherRelatorio}" 
 							oncomplete="preencherRelatorio.show()" update=":formRelatorio" >
 							<f:attribute name="actionTurma" value="#{item}" />
 						</p:commandButton>
@@ -43,7 +43,7 @@
 		
 		<h:form id="formRelatorio">
 			<p:dialog resizable="false" draggable="false" modal="true" position="top" closable="true" width="990" height="500" 
-					header="..::: Preencher Relatório - [ * Campo Obrigatório ]" widgetVar="preencherRelatorio">
+					header="..::: Preencher Relatorio - [ * Campo Obrigatório ]" widgetVar="preencherRelatorio">
 				
 				<p:panel  header="..:: Relatório de Estágio" rendered="#{relatorioAlunoBean.facade.moduloLiberado 
 								and !relatorioAlunoBean.facade.relatorioAvaliando
