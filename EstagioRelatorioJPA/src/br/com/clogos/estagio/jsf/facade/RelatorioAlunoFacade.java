@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import br.com.clogos.estagio.enums.StatusEnum;
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.LiberarRelatorioController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
@@ -36,8 +37,9 @@ public class RelatorioAlunoFacade implements Serializable {
 	}
 	
 	public void save() {
-		getRelatorioAluno().setRevisao(false);
-		getRelatorioAluno().setValidado(false);
+//		getRelatorioAluno().setRevisao(false);
+//		getRelatorioAluno().setValidado(false);
+		getRelatorioAluno().setStatus(StatusEnum.ABERTO);
 		getRelatorioAluno().setDataCadastro(new Date());
 		getRelatorioAluno().setModulo(getLiberarRelatorio().getModulo());
 		if(getGenericController().save(getRelatorioAluno())) {

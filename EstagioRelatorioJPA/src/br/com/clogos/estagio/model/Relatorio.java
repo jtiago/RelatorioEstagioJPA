@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import br.com.clogos.estagio.enums.ModuloEnum;
+import br.com.clogos.estagio.enums.StatusEnum;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
 @Entity
@@ -71,6 +72,9 @@ public class Relatorio implements ObjectModel {
 	@ManyToOne
 	@JoinColumn(name = "fkgrupocampoestagio")
 	private GrupoCampoEstagio grupoCampoEstagio;
+	
+	@Enumerated(EnumType.ORDINAL)
+	private StatusEnum status;
 	
 	@Transient
 	private Long idSemestre;
@@ -201,5 +205,13 @@ public class Relatorio implements ObjectModel {
 
 	public void setGrupoCampoEstagio(GrupoCampoEstagio grupoCampoEstagio) {
 		this.grupoCampoEstagio = grupoCampoEstagio;
+	}
+
+	public StatusEnum getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusEnum status) {
+		this.status = status;
 	}
 }

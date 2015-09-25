@@ -18,6 +18,7 @@ public class GrupoFacade implements Serializable {
 	
 	private Grupo grupo;
 	private List<Grupo> listaGrupos;
+	@SuppressWarnings("unused")
 	private List<Aluno> listaAlunoGrupo;
 	private GenericController genericController;
 	private GrupoController grupoController;

@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.com.clogos.estagio.enums.StatusEnum;
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.RelatorioDAO;
 import br.com.clogos.estagio.model.Aluno;
@@ -26,12 +27,12 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
 		hql.append("SELECT r FROM Relatorio r JOIN r.aluno ra JOIN r.turmaRelatorio t ");
-		hql.append("WHERE ra.cpf = :cpf AND r.validado = :validado AND t.id = :idTurma");
+		hql.append("WHERE ra.cpf = :cpf AND r.status = :validado AND t.id = :idTurma");
 		try {
 			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class)
 					.setParameter("cpf", aluno.getCpf())
 					.setParameter("idTurma", aluno.getTurmaT().getId())
-					.setParameter("validado", false);
+					.setParameter("validado", StatusEnum.VALIDADO);
 			return query.getResultList().size() == 1;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,18 +52,14 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.supervisor s JOIN r.campoEstagio c ");
 		hql.append("JOIN FETCH s.imagem i JOIN FETCH r.turmaRelatorio t JOIN FETCH t.semestre s ");
 		hql.append("WHERE s.id = :idSemestre ");
-		if(relatorio.getCampoEstagio() != null) {
+		if(relatorio.getCampoEstagio().getId() != 0) {
 			hql.append("AND c.id = :idCampo ");
 		}
 		if(relatorio.getTurmaRelatorio().getId() != 0) {
 			hql.append("AND t.id = :idTurma ");
 		}
-		if(relatorio.getValidado() != null) {
-			hql.append("AND r.validado = :validado ");
-		}
-		
-		if(relatorio.getRevisao() != null) {
-			hql.append("AND r.revisao = :revisao ");
+		if(relatorio.getStatus() != null) {
+			hql.append("AND r.status = :status ");
 		}
 		
 		hql.append("ORDER BY a.nome ");
@@ -70,17 +67,14 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		try {
 			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class);
 			query.setParameter("idSemestre", relatorio.getIdSemestre());
-			if(relatorio.getCampoEstagio() != null) {
+			if(relatorio.getCampoEstagio().getId() != 0) {
 				query.setParameter("idCampo", relatorio.getCampoEstagio().getId());
 			}
 			if(relatorio.getTurmaRelatorio().getId() != 0) {
 				query.setParameter("idTurma", relatorio.getTurmaRelatorio().getId());
 			}
-			if(relatorio.getValidado() != null) {
-				query.setParameter("validado", relatorio.getValidado());
-			}
-			if(relatorio.getRevisao() != null) {
-				query.setParameter("revisao", relatorio.getValidado());
+			if(relatorio.getStatus() != null) {
+				query.setParameter("status", relatorio.getStatus());
 			}
 					
 			lista = query.getResultList();
@@ -99,10 +93,10 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		entityManager.getTransaction().begin();
 		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE Relatorio SET validado = ?, observacao = ? WHERE idrelatorio = ?");
+		sql.append("UPDATE Relatorio SET status = ?, observacao = ? WHERE idrelatorio = ?");
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString())
-					.setParameter(1, 1)
+					.setParameter(1, StatusEnum.VALIDADO)
 					.setParameter(2, observacao)
 					.setParameter(3, id);
 			query.executeUpdate();
@@ -124,10 +118,10 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		entityManager.getTransaction().begin();
 		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE Relatorio SET revisao = ?, observacao = ? WHERE idrelatorio = ?");
+		sql.append("UPDATE Relatorio SET status = ?, observacao = ? WHERE idrelatorio = ?");
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString())
-					.setParameter(1, 1)
+					.setParameter(1, StatusEnum.REVISAO)
 					.setParameter(2, observacao)
 					.setParameter(3, id);
 			query.executeUpdate();
@@ -151,12 +145,12 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		List<Relatorio> lista = new LinkedList<Relatorio>();
 		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.turmaRelatorio t JOIN FETCH r.aluno a ");
 		hql.append("JOIN FETCH r.campoEstagio c JOIN FETCH r.supervisor JOIN FETCH t.semestre s ");
-		hql.append("WHERE a.cpf = :cpf AND r.revisao = :revisao AND s.id = :idSemestre ");
+		hql.append("WHERE a.cpf = :cpf AND r.status = :status AND s.id = :idSemestre ");
 		
 		try {
 			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class)
 					.setParameter("cpf", aluno.getCpf())
-					.setParameter("revisao", true)
+					.setParameter("status", StatusEnum.REVISAO)
 					.setParameter("idSemestre", aluno.getSemestre().getId());
 			lista = query.getResultList();
 		} catch (Exception e) {
@@ -169,12 +163,12 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		return lista;
 	}
 
-	@Override
+	/*@Override
 	public Boolean saveRevisaoRelatorioAluno(Relatorio relatorio) {
 		entityManager = JpaUtil.getEntityManager();
 		entityManager.getTransaction().begin();
 		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE Relatorio SET revisao = ?, texto = ? WHERE idrelatorio = ?");
+		sql.append("UPDATE Relatorio SET status = ?, texto = ? WHERE idrelatorio = ?");
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString())
 					.setParameter(1, 0)
@@ -192,7 +186,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 				entityManager.close();
 			}
 		}
-	}
+	}*/
 	
 	public Boolean alterarDataInicioTerminioRelatorio(Relatorio relatorio) {
 		entityManager = JpaUtil.getEntityManager();

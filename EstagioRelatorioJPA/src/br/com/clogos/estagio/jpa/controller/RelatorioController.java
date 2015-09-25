@@ -36,9 +36,9 @@ public class RelatorioController implements Serializable {
 		return getRelatorioDAO().findRelatoriosRevisao(aluno);
 	}
 	
-	public Boolean saveRevisaoRelatorioAluno(Relatorio relatorio) {
+	/*public Boolean saveRevisaoRelatorioAluno(Relatorio relatorio) {
 		return getRelatorioDAO().saveRevisaoRelatorioAluno(relatorio);
-	}
+	}*/
 	
 	public List<Relatorio> findRelatorioEnviado(Aluno aluno) {
 		return getRelatorioDAO().findRelatorioEnviado(aluno);
