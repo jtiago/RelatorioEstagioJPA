@@ -121,7 +121,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		sql.append("UPDATE Relatorio SET status = ?, observacao = ? WHERE idrelatorio = ?");
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString())
-					.setParameter(1, StatusEnum.REVISAO)
+					.setParameter(1, StatusEnum.REVISAO.getCodigo())
 					.setParameter(2, observacao)
 					.setParameter(3, id);
 			query.executeUpdate();

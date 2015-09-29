@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import br.com.clogos.estagio.enums.StatusEnum;
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.model.Relatorio;
@@ -25,7 +26,8 @@ public class RevisaoRelatorioFacade implements Serializable {
 	
 	public void saveRevisao() {
 		if(relatorioRevisao != null) {
-			getRelatorioRevisao().setRevisao(false);
+			//getRelatorioRevisao().setRevisao(false);
+			getRelatorioRevisao().setStatus(StatusEnum.ABERTO);
 			if(getGenericController().update(getRelatorioRevisao())) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 						FacesMessage.SEVERITY_INFO, "Relatório salvo e enviando para validação com sucesso.", ""));

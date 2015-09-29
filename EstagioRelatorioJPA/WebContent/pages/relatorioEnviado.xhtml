@@ -39,7 +39,7 @@
 						</p:column>
 						
 						<p:column headerText="Status">
-							<h:outputLabel value="#{item.validado eq 'true' ? 'Validado' : item.revisao eq 'true' ? 'Revisão' : 'Em Aberto'}"/>
+							<h:outputLabel value="#{item.status.label}"/>
 						</p:column>
 						
 						<p:column headerText="Dt. Inic/Térm">
