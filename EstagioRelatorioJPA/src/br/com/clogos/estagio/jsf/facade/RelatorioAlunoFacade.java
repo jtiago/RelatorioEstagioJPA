@@ -45,13 +45,12 @@ public class RelatorioAlunoFacade implements Serializable {
 	
 	public void buscaGrupoCampo(Long idCampo) {
 		Aluno aluno = Util.getAlunoSessao();
-		grupo = getGrupoController().findGrupoCPF(aluno.getSemestre().getId(), aluno.getCpf(), 
-				idCampo);
+		grupo = getGrupoController().findGrupoCPF(aluno.getSemestre().getId(), aluno.getCpf(), idCampo);
 	}
 	
 	public void save() {
-		getRelatorioAluno().setDataInicio(getRelatorioAluno().getGrupoCampoEstagio().getDataInicial());
-		getRelatorioAluno().setDataTerminio(getRelatorioAluno().getGrupoCampoEstagio().getDataFinal());
+		getRelatorioAluno().setDataInicio(getGrupoCampoEstagio().getDataInicial());
+		getRelatorioAluno().setDataTerminio(getGrupoCampoEstagio().getDataFinal());
 		getRelatorioAluno().setStatus(StatusEnum.ABERTO);
 		getRelatorioAluno().setDataCadastro(new Date());
 		getRelatorioAluno().setModulo(getLiberarRelatorio().getModulo());
