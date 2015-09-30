@@ -9,18 +9,25 @@ import javax.faces.context.FacesContext;
 
 import br.com.clogos.estagio.enums.StatusEnum;
 import br.com.clogos.estagio.jpa.controller.GenericController;
+import br.com.clogos.estagio.jpa.controller.GrupoController;
 import br.com.clogos.estagio.jpa.controller.LiberarRelatorioController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.model.Aluno;
+import br.com.clogos.estagio.model.Grupo;
+import br.com.clogos.estagio.model.GrupoCampoEstagio;
 import br.com.clogos.estagio.model.LiberarRelatorio;
 import br.com.clogos.estagio.model.Relatorio;
 import br.com.clogos.estagio.model.Turma;
+import br.com.clogos.estagio.util.Util;
 
 public class RelatorioAlunoFacade implements Serializable {
 	private static final long serialVersionUID = 3016523488152504622L;
 	private Relatorio relatorioAluno;
 	private LiberarRelatorio liberarRelatorio;
+	private GrupoCampoEstagio grupoCampoEstagio;
+	private Grupo grupo;
 	private List<Relatorio> listaRelatorioEnviado;
+	private GrupoController grupoController;
 	private GenericController genericController;
 	private LiberarRelatorioController liberarRelatorioController;
 	private RelatorioController relatorioController;
@@ -36,9 +43,15 @@ public class RelatorioAlunoFacade implements Serializable {
 		}
 	}
 	
+	public void buscaGrupoCampo(Long idCampo) {
+		Aluno aluno = Util.getAlunoSessao();
+		grupo = getGrupoController().findGrupoCPF(aluno.getSemestre().getId(), aluno.getCpf(), 
+				idCampo);
+	}
+	
 	public void save() {
-//		getRelatorioAluno().setRevisao(false);
-//		getRelatorioAluno().setValidado(false);
+		getRelatorioAluno().setDataInicio(getRelatorioAluno().getGrupoCampoEstagio().getDataInicial());
+		getRelatorioAluno().setDataTerminio(getRelatorioAluno().getGrupoCampoEstagio().getDataFinal());
 		getRelatorioAluno().setStatus(StatusEnum.ABERTO);
 		getRelatorioAluno().setDataCadastro(new Date());
 		getRelatorioAluno().setModulo(getLiberarRelatorio().getModulo());
@@ -134,6 +147,11 @@ public class RelatorioAlunoFacade implements Serializable {
 	public RelatorioController getRelatorioController() {
 		return relatorioController == null ? relatorioController = new RelatorioController() : relatorioController;
 	}
+	
+	public GrupoController getGrupoController() {
+		return grupoController == null ? grupoController = new GrupoController() : grupoController;
+	}
+	
 	public Boolean getRenderedEnfermagem() {
 		return renderedEnfermagem;
 	}
@@ -179,5 +197,19 @@ public class RelatorioAlunoFacade implements Serializable {
 
 	public void setLiberarRelatorio(LiberarRelatorio liberarRelatorio) {
 		this.liberarRelatorio = liberarRelatorio;
+	}
+
+	public GrupoCampoEstagio getGrupoCampoEstagio() {
+		return grupoCampoEstagio == null ? grupoCampoEstagio = new GrupoCampoEstagio() : grupoCampoEstagio;
+	}
+
+	public void setGrupoCampoEstagio(GrupoCampoEstagio grupoCampoEstagio) {
+		this.grupoCampoEstagio = grupoCampoEstagio;
+	}
+	public Grupo getGrupo() {
+		return grupo == null ? grupo = new Grupo() : grupo;
+	}
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 }

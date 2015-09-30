@@ -59,5 +59,30 @@ public class GrupoDAOImpl implements GrupoDAO {
 		}
 		return grupo;
 	}
+	
+	@Override
+	public Grupo findGrupoCPF(Long idSemestre, String cpf, Long idCampo) {
+		entityManager = JpaUtil.getEntityManager();
+		Grupo grupo = new Grupo();
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECT g FROM Grupo g JOIN FETCH g.turmaGrupo t JOIN g.alunosGrupo a ");
+		hql.append("JOIN FETCH t.semestre s JOIN FETCH g.listaGrupoCampoEstagio gc JOIN gc.campoEstagio ce ");
+		hql.append("WHERE s.id = :idSemestre AND a.cpf = :cpf AND ce.id = :idCampo");
+		try {
+		TypedQuery<Grupo> query = entityManager.createQuery(hql.toString(), Grupo.class)
+				.setParameter("idSemestre", idSemestre)
+				.setParameter("cpf", cpf)
+				.setParameter("idCampo", idCampo);
+		grupo = query.getSingleResult();
+			
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return grupo;
+	}
 
 }

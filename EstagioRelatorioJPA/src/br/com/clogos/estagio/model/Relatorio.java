@@ -42,12 +42,6 @@ public class Relatorio implements ObjectModel {
 	@Column(length=4000, nullable=false)
 	private String texto;
 	
-	private Boolean validado;
-	
-	private Boolean confirmado;
-	
-	private Boolean revisao;
-	
 	@Enumerated(EnumType.STRING)
 	private ModuloEnum modulo;
 	
@@ -117,30 +111,6 @@ public class Relatorio implements ObjectModel {
 
 	public void setTexto(String texto) {
 		this.texto = texto;
-	}
-
-	public Boolean getValidado() {
-		return validado;
-	}
-
-	public void setValidado(Boolean validado) {
-		this.validado = validado;
-	}
-
-	public Boolean getConfirmado() {
-		return confirmado;
-	}
-
-	public void setConfirmado(Boolean confirmado) {
-		this.confirmado = confirmado;
-	}
-
-	public Boolean getRevisao() {
-		return revisao;
-	}
-
-	public void setRevisao(Boolean revisao) {
-		this.revisao = revisao;
 	}
 
 	public ModuloEnum getModulo() {

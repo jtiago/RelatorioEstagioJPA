@@ -42,7 +42,6 @@ public class RelatorioAdminFacade implements Serializable {
 	}
 	
 	public void pesquisaRelatorio() {
-		vertificarStatus();
 		getRelatorio().setIdSemestre(Util.getUsuarioSessao().getIdSemestre());
 		listaRelatorios = getRelatorioController().findRelatoriosAdmin(getRelatorio());
 	}
@@ -113,16 +112,6 @@ public class RelatorioAdminFacade implements Serializable {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-	
-	private void vertificarStatus() {
-		if(getStatus().equals("v")) {
-			getRelatorio().setValidado(true);
-		} else if(getStatus().equals("a")) {
-			getRelatorio().setValidado(false);
-		} else if(getStatus().equals("r")) {
-			getRelatorio().setRevisao(true);
 		}
 	}
 	

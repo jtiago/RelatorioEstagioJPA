@@ -41,6 +41,23 @@ public class GrupoCampoEstagio implements Serializable {
 	@Transient
 	private String dataFinalFormatada;
 
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setDataInicialFormatada(String dataInicialFormatada) {
+		this.dataInicialFormatada = dataInicialFormatada;
+	}
+
+	public void setDataFinalFormatada(String dataFinalFormatada) {
+		this.dataFinalFormatada = dataFinalFormatada;
+	}
+
 	public Grupo getGrupo() {
 		return grupo == null ? grupo = new Grupo() : grupo;
 	}

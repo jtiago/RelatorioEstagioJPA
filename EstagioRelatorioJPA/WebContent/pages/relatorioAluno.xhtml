@@ -54,6 +54,13 @@
 					            	itemValue="#{sup.id}"/>
 					        </p:selectOneMenu>
 							
+							<p:outputLabel for="datIni" value="Data Inicial:" />
+							<p:selectOneMenu id="datIni" value="#{relatorioAlunoBean.facade.relatorioAluno.grupoCampoEstagio}" required="true" style="width: 585px;">
+					            <f:selectItem itemLabel="Selecione Data" itemValue="#{null}" />
+					            <f:selectItems value="#{relatorioAlunoBean.facade.grupo.listaGrupoCampoEstagio}" var="gru" 
+					            	itemLabel="#{gru.dataInicialFormatada} a #{gru.dataFinalFormatada}" itemValue="#{gru}"/>
+					        </p:selectOneMenu>
+							
 							<p:outputLabel for="dataInicial" value="Data de InÍcio:"/>
 							<h:panelGrid columns="4">
 								<p:calendar id="dataInicial" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}" effect="fold" 

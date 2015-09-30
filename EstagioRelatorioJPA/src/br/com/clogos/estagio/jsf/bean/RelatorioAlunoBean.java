@@ -7,6 +7,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ComponentSystemEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpSession;
 
 import br.com.clogos.estagio.jsf.facade.RelatorioAlunoFacade;
@@ -44,5 +45,10 @@ public class RelatorioAlunoBean implements Serializable {
 		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
 		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
 		getFacade().populaListaRevisao(aluno);
+	}
+	
+	public void processaGrupoCampo(ValueChangeEvent event) {
+		Long idCampo = Long.valueOf(event.getNewValue().toString());
+		getFacade().buscaGrupoCampo(idCampo);
 	}
 }

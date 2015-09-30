@@ -57,7 +57,8 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		sql.append("LEFT JOIN Semestre s ON l.fksemestre = s.idsemestre ");
 		sql.append("WHERE a.cpf = :cpf AND a.senha = :senha ORDER BY idrelatorio DESC ");*/
 		
-		sql.append("SELECT a FROM Aluno a JOIN a.perfil p JOIN FETCH a.turmas t JOIN t.semestre s LEFT JOIN t.liberarRelatorios l ");
+		sql.append("SELECT a FROM Aluno a JOIN a.perfil p JOIN FETCH a.turmas t JOIN t.semestre s ");
+		sql.append("LEFT JOIN t.liberarRelatorios l ");
 		sql.append("WHERE s.id = :semestre AND a.cpf  = :cpf AND a.senha = :senha");
 		
 		Aluno aluno = null;
