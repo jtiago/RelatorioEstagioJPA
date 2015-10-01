@@ -30,12 +30,6 @@ public class Relatorio implements ObjectModel {
 	@Column(name = "idrelatorio")
 	private Long id;
 	
-	@Temporal(TemporalType.DATE)
-	private Date dataInicio;
-	
-	@Temporal(TemporalType.DATE)
-	private Date dataTerminio;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro;
 	
@@ -80,18 +74,6 @@ public class Relatorio implements ObjectModel {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Date getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public Date getDataTerminio() {
-		return dataTerminio;
-	}
 	
 	public Date getDataCadastro() {
 		return dataCadastro;
@@ -99,10 +81,6 @@ public class Relatorio implements ObjectModel {
 
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
-	}
-
-	public void setDataTerminio(Date dataTerminio) {
-		this.dataTerminio = dataTerminio;
 	}
 
 	public String getTexto() {

@@ -43,11 +43,11 @@
 						</p:column>
 						
 						<p:column headerText="Dt. Inic/Térm">
-							<h:outputLabel value="#{item.dataInicio}">
+							<h:outputLabel value="#{item.grupoCampoEstagio.dataInicial}">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
 							</h:outputLabel>
 							à<br/>
-							<h:outputLabel value="#{item.dataTerminio}">
+							<h:outputLabel value="#{item.grupoCampoEstagio.dataFinal}">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
 							</h:outputLabel>
 						</p:column>
@@ -71,13 +71,15 @@
 							<h:outputLabel value="Semestre: " />
 							<h:outputLabel value="#{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.semestre.nomeSemestre}" />
 							<h:outputLabel value="Data Início: " />
-							<h:outputLabel value="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}">
+							<h:outputLabel value="#{relatorioAlunoBean.facade.relatorioAluno.grupoCampoEstagio.dataInicial}">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
 							</h:outputLabel>
 							<h:outputLabel value="Data Términio:" />
-							<h:outputLabel value="#{relatorioAlunoBean.facade.relatorioAluno.dataTerminio}">
+							<h:outputLabel value="#{relatorioAlunoBean.facade.relatorioAluno.grupoCampoEstagio.dataFinal}">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
 							</h:outputLabel>
+							<h:outputLabel value="Status: " />
+							<h:outputLabel value="#{relatorioAlunoBean.facade.relatorioAluno.status.label}" />
 						</h:panelGrid>
 						<br/>
 						<h:outputLabel value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" escape="false" /><br/>

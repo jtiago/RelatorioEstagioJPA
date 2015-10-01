@@ -189,27 +189,28 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 	}*/
 	
 	public Boolean alterarDataInicioTerminioRelatorio(Relatorio relatorio) {
-		entityManager = JpaUtil.getEntityManager();
-		entityManager.getTransaction().begin();
-		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE Relatorio SET dataInicio = ?, dataTerminio = ? WHERE idrelatorio = ?");
-		try {
-			Query query = entityManager.createNativeQuery(sql.toString())
-					.setParameter(1, relatorio.getDataInicio())
-					.setParameter(2, relatorio.getDataTerminio())
-					.setParameter(3, relatorio.getId());
-			query.executeUpdate();
-			entityManager.getTransaction().commit();
-			return true;
-		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
-			e.printStackTrace();
-			return false;
-		} finally {
-			if(entityManager.isOpen()) {
-				entityManager.close();
-			}
-		}
+//		entityManager = JpaUtil.getEntityManager();
+//		entityManager.getTransaction().begin();
+//		StringBuilder sql = new StringBuilder();
+//		sql.append("UPDATE Relatorio SET dataInicio = ?, dataTerminio = ? WHERE idrelatorio = ?");
+//		try {
+//			Query query = entityManager.createNativeQuery(sql.toString())
+//					.setParameter(1, relatorio.getDataInicio())
+//					.setParameter(2, relatorio.getDataTerminio())
+//					.setParameter(3, relatorio.getId());
+//			query.executeUpdate();
+//			entityManager.getTransaction().commit();
+//			return true;
+//		} catch (Exception e) {
+//			entityManager.getTransaction().rollback();
+//			e.printStackTrace();
+//			return false;
+//		} finally {
+//			if(entityManager.isOpen()) {
+//				entityManager.close();
+//			}
+//		}
+		return null;
 	}
 
 	@Override
@@ -218,7 +219,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		StringBuilder hql = new StringBuilder();
 		List<Relatorio> lista = new LinkedList<Relatorio>();
 		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.campoEstagio c JOIN FETCH r.supervisor ");
-		hql.append("JOIN FETCH r.turmaRelatorio t JOIN FETCH t.semestre s ");
+		hql.append("JOIN FETCH r.turmaRelatorio t JOIN FETCH t.semestre s JOIN FETCH r.grupoCampoEstagio gc ");
 		hql.append("WHERE a.cpf = :cpf AND s.id = :idSemestre ");
 		
 		try {

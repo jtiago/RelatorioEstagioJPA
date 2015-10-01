@@ -34,10 +34,10 @@ public class RelatorioJRDataSource implements JRDataSource {
 			return relatorio.getSupervisor().getNome();
 		} 
 		if(nome.getName().equals("DATAINICIO")) {
-			return relatorio.getDataInicio();
+			return relatorio.getGrupoCampoEstagio().getDataInicial();
 		}
 		if(nome.getName().equals("DATATERMINO")) {
-			return relatorio.getDataTerminio();
+			return relatorio.getGrupoCampoEstagio().getDataFinal();
 		}
 		if(nome.getName().equals("TEXTO")) {
 			return relatorio.getTexto();

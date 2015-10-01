@@ -49,8 +49,6 @@ public class RelatorioAlunoFacade implements Serializable {
 	}
 	
 	public void save() {
-		getRelatorioAluno().setDataInicio(getGrupoCampoEstagio().getDataInicial());
-		getRelatorioAluno().setDataTerminio(getGrupoCampoEstagio().getDataFinal());
 		getRelatorioAluno().setStatus(StatusEnum.ABERTO);
 		getRelatorioAluno().setDataCadastro(new Date());
 		getRelatorioAluno().setModulo(getLiberarRelatorio().getModulo());

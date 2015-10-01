@@ -99,14 +99,14 @@
 										mindate="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}"/>
 								</h:panelGrid>-->
 								 
-								 <!-- 
+								
 								<p:outputLabel for="periodo" value="Período:" />
-								<p:selectOneMenu id="periodo" value="#{relatorioAlunoBean.facade.grupoCampoEstagio}" required="true" style="width: 200px;">
+								<p:selectOneMenu id="periodo" value="#{relatorioAlunoBean.facade.relatorioAluno.grupoCampoEstagio.id}" required="true" style="width: 200px;">
 						            <f:selectItem itemLabel="Selecione Período" itemValue="#{null}" />
 						            <f:selectItems value="#{relatorioAlunoBean.facade.grupo.listaGrupoCampoEstagio}" var="gru" 
 						            	itemLabel="#{gru.grupo.nomeGrupo} - #{gru.dataInicialFormatada} a #{gru.dataFinalFormatada}" 
-						            	itemValue="#{gru}"/>
-						        </p:selectOneMenu> -->
+						            	itemValue="#{gru.id}"/>
+						        </p:selectOneMenu>
 							</h:panelGrid>
 						</p:panel>
 						<br/>
