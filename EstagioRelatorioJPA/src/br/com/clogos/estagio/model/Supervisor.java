@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
@@ -29,8 +30,14 @@ public class Supervisor implements ObjectModel {
 	@Column(name="nomesupervisor", length=100, nullable=false)
 	private String nome;
 	
+	@Column(name="cpfsupervisor", nullable=false)
+	private String cpf;
+	
 	@Column(name="codSituacao", nullable=false)
 	private Integer codigoSituacao;
+	
+	@Column(name="senhasupervisor", nullable=false)
+	private String senha;
 	
 	@OneToMany(mappedBy = "supervisor")
 	private List<Relatorio> Relatorios;
@@ -46,6 +53,9 @@ public class Supervisor implements ObjectModel {
 	@ManyToOne
 	@JoinColumn(name = "fkPerfil")
 	private Perfil perfil;
+	
+	@Transient
+	private Long idSemestre;
 
 	public Long getId() {
 		return id;
@@ -63,6 +73,14 @@ public class Supervisor implements ObjectModel {
 		this.nome = nome;
 	}
 
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public ImagemAssinatura getImagem() {
 		return imagem;
 	}
@@ -77,6 +95,14 @@ public class Supervisor implements ObjectModel {
 
 	public void setCodigoSituacao(Integer codigoSituacao) {
 		this.codigoSituacao = codigoSituacao;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public List<Relatorio> getRelatorios() {
@@ -96,10 +122,18 @@ public class Supervisor implements ObjectModel {
 	}
 
 	public Perfil getPerfil() {
-		return perfil;
+		return perfil == null ? perfil = new Perfil() : perfil;
 	}
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
+	}
+
+	public Long getIdSemestre() {
+		return idSemestre;
+	}
+
+	public void setIdSemestre(Long idSemestre) {
+		this.idSemestre = idSemestre;
 	}
 }

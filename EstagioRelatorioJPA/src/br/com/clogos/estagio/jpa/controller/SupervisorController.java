@@ -16,6 +16,14 @@ public class SupervisorController implements Serializable {
 		return getSupervisorDAO().findAll();
 	}
 	
+	public List<Supervisor> findPorCampo(Long idCampo) {
+		return getSupervisorDAO().findPorCampo(idCampo);
+	}
+	
+	public Supervisor validarAutenticacao(Supervisor param) {
+		return getSupervisorDAO().validarAutenticacao(param);
+	}
+	
 	public SupervisorDAO getSupervisorDAO() {
 		if(supervisorDAO == null) {
 			supervisorDAO = new SupervisorDAOImpl();

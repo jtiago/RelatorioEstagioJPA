@@ -17,12 +17,10 @@
 				<p:fieldset legend="Pesquisar Relatórios Enviados">
 					<h:panelGrid id="grid" columns="7">
 						<p:outputLabel for="status" value="Status:" />
-                    	<p:selectOneMenu id="status" value="#{relatorioAdminBean.facade.status}"
-							style="width: 200px;">
+                    	<p:selectOneMenu id="status" value="#{relatorioAdminBean.facade.relatorio.status}"
+							style="width: 190px;">
 							<f:selectItem itemLabel="Selecione Status" itemValue="#{null}"/>
-							<f:selectItem itemLabel="Validado" itemValue="#{2}"/>
-							<f:selectItem itemLabel="Revisão" itemValue="#{1}"/>
-							<f:selectItem itemLabel="Em Aberto" itemValue="#{0}"/>
+							<f:selectItems var="stat" value="#{relatorioAdminBean.facade.status}" itemLabel="#{stat.label}" itemValue="#{stat}"/>
 						</p:selectOneMenu>
 						
 						<p:outputLabel for="turma" value="Turma:"/>
@@ -116,7 +114,7 @@
 						<h:outputLabel value="Módulo:"/>
 						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.modulo.label}" style="font-weight: bold;"/>
 						
-						<h:outputLabel value="Data Início:"/>
+						<h:outputLabel value="Período:"/>
 						<h:panelGrid columns="4">
 							<!-- <p:calendar id="dataInicial" pattern="dd/MM/yyyy" value="#{relatorioAdminBean.facade.relatorioValidar.dataInicio}" effect="fold" 
 								readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014">
@@ -126,7 +124,7 @@
 							<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
 							<p:outputLabel for="dataTermino" value="Data de Término:"/>
 							<p:calendar id="dataTermino" pattern="dd/MM/yyyy" value="#{relatorioAdminBean.facade.relatorioValidar.dataTerminio}" effect="fold" 
-								readonlyInput="true" required="true" locale="pt_BR" mindate="#{relatorioAdminBean.facade.relatorioValidar.dataInicio}"/>-->
+								readonlyInput="true" required="true" locale="pt_BR" mindate="#{relatorioAdminBean.facade.relatorioValidar.dataInicio}"/>
 													
 							<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.grupoCampoEstagio.dataInicial}" style="font-weight: bold;">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
@@ -134,7 +132,13 @@
 							<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data Término:"/>
 							<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.grupoCampoEstagio.dataFinal}" style="font-weight: bold;">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
-							</h:outputLabel>
+							</h:outputLabel>-->
+							
+							<p:selectOneMenu id="periodo" value="#{relatorioAdminBean.facade.relatorioValidar.grupoCampoEstagio.id}" required="true" style="width: 300px;">
+					            <f:selectItems value="#{relatorioAdminBean.facade.listaGrupoCampoEstagio}" var="gru" 
+					            	itemLabel="#{gru.grupo.nomeGrupo} - #{gru.dataInicialFormatada} a #{gru.dataFinalFormatada}" 
+					            	itemValue="#{gru.id}"/>
+					        </p:selectOneMenu>
 						</h:panelGrid>
 						
 						<h:outputLabel value="Data Cadastro:"/>
@@ -160,7 +164,7 @@
 						<h:panelGrid columns="2">
 							<p:commandButton value="Revisão" icon="ui-icon-pencil" oncomplete="revisaoRelatorio.show()"
 								disabled="#{relatorioAdminBean.facade.relatorioValidar.status.codigo == 2 or relatorioAdminBean.facade.relatorioValidar.status.codigo == 1}"/>
-							<!-- <p:commandButton value="Alterar Datas" icon="ui-icon-pencil" oncomplete="alterarDatasRelatorio.show()"/>-->
+							<p:commandButton value="Alterar Datas" icon="ui-icon-pencil" oncomplete="alterarDatasRelatorio.show()"/>
 						</h:panelGrid>
 					</h:panelGrid>
 				</p:fieldset>

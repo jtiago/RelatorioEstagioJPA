@@ -21,8 +21,8 @@ width: 350px
 
 	<div id="template_pages">
 		<div id="template_pages_top">
-			<p:graphicImage url="/images/_bannerestagio.png"/>
-			<p:commandButton value="Usuário Logado: #{sessionScope.usuarioLogado.nome} #{sessionScope.usuarioLogado.perfil.id eq 2 ? -  sessionScope.usuarioLogado.semestre.nomeSemestre : ''}"/>
+			<p:graphicImage url="/images/bannerestagio.png"/>
+			<p:commandButton value="#{sessionScope.usuarioLogado.nome} #{sessionScope.usuarioLogado.perfil.id eq 2 ? -  sessionScope.usuarioLogado.semestre.nomeSemestre : ''}"/>
 		</div>
 		
 		<div id="template_pages_menu">
@@ -48,7 +48,7 @@ width: 350px
 					<p:menuitem value="Validar Relatório" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAdmin}" url="/pages/relatorioAdmin.jsf" />
 					<p:menuitem value="Revisar Relatório" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.revisaoRelatorio}" url="/pages/revisaoRelatorio.jsf" />
 					<p:menuitem value="Relatório Enviado" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioEnviado}" url="/pages/relatorioEnviado.jsf" />
-					<p:menuitem value="Transferir Aluno" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAdmin}" url="/pages/transferirAluno.jsf" />
+					<p:menuitem value="Transferir Aluno" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.cadastroUsuario}" url="/pages/transferirAluno.jsf" />
 					<p:menuitem value="Mudar Senha" icon="ui-icon-locked" onclick="mudarSenha.show();"/>
 					<p:menuitem value="Sair" icon="ui-icon-power" actionListener="#{autenticarBean.logout}" />
 				</p:menubar>

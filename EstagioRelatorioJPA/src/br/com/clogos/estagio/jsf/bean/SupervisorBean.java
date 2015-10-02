@@ -22,7 +22,6 @@ public class SupervisorBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private SupervisorFacade facade;
 	private UploadedFile file;
-	private String nome;
 	private static final String DIRETORIO = "C:/IMGESTAGIO/";
 	
 	public SupervisorFacade getFacade() {
@@ -41,7 +40,7 @@ public class SupervisorBean implements Serializable {
 			ImagemAssinatura assinatura = new ImagemAssinatura();
 			assinatura.setNome(nomeArquivo);
 			assinatura.setCaminho(DIRETORIO);
-			getFacade().save(assinatura, getNome());
+			getFacade().save(assinatura);
 			file = null;
 
 		} catch (Exception e) {
@@ -62,11 +61,5 @@ public class SupervisorBean implements Serializable {
 	}
 	public void setFile(UploadedFile file) {
 		this.file = file;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 }

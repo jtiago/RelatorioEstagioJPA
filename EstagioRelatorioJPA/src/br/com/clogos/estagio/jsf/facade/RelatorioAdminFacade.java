@@ -20,9 +20,12 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import br.com.clogos.estagio.enums.StatusEnum;
 import br.com.clogos.estagio.jasper.RelatorioJRDataSource;
+import br.com.clogos.estagio.jpa.controller.GrupoCampoEstagioController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.jpa.controller.TurmaController;
+import br.com.clogos.estagio.model.GrupoCampoEstagio;
 import br.com.clogos.estagio.model.Relatorio;
 import br.com.clogos.estagio.util.Util;
 
@@ -33,16 +36,29 @@ public class RelatorioAdminFacade implements Serializable {
 	private Relatorio relatorioImprimir;
 	private List<Relatorio> listaRelatorios;
 	private List<Relatorio> listaRelatoriosFilter;
+	private List<GrupoCampoEstagio> listaGrupoCampoEstagio;
+			
+	private GrupoCampoEstagioController grupoCampoEstagioController;
 	private RelatorioController relatorioController;
 	private TurmaController turmaController;
-	private String status;
 	
 	public List<Relatorio> getListaRelatorios() {
 		return listaRelatorios;
 	}
 	
+	public List<GrupoCampoEstagio> getListaGrupoCampoEstagio() {
+		if(relatorioValidar != null) {
+			listaGrupoCampoEstagio = getGrupoCampoEstagioController().find(getRelatorioValidar().getGrupoCampoEstagio());
+		}
+		return listaGrupoCampoEstagio;
+	}
+	
+	public StatusEnum[] getStatus() {
+		return StatusEnum.values();
+	}
+	
 	public void pesquisaRelatorio() {
-		getRelatorio().setIdSemestre(Util.getUsuarioSessao().getIdSemestre());
+		getRelatorio().setIdSemestre(Util.getIdSemestre());
 		listaRelatorios = getRelatorioController().findRelatoriosAdmin(getRelatorio());
 	}
 	
@@ -151,12 +167,8 @@ public class RelatorioAdminFacade implements Serializable {
 	public TurmaController getTurmaController() {
 		return turmaController == null ? turmaController = new TurmaController() : turmaController ;
 	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	
+	public GrupoCampoEstagioController getGrupoCampoEstagioController() {
+		return grupoCampoEstagioController == null ? grupoCampoEstagioController = new GrupoCampoEstagioController() : grupoCampoEstagioController;
 	}
 }

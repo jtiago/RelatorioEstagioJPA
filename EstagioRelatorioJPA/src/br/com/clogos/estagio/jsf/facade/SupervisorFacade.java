@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.SupervisorController;
 import br.com.clogos.estagio.model.ImagemAssinatura;
 import br.com.clogos.estagio.model.Supervisor;
+import br.com.clogos.estagio.util.CriptografiaBase64;
 
 public class SupervisorFacade implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -26,10 +28,12 @@ public class SupervisorFacade implements Serializable {
 		return listaSupervisores;
 	}
 	
-	public void save(ImagemAssinatura assinatura, String nome) {
-		getSupervisor().setNome(nome);
+	public void save(ImagemAssinatura assinatura) {
+		getSupervisor().setCpf(getSupervisor().getCpf().replace(".", "").replace("-", ""));
 		getSupervisor().setCodigoSituacao(1);
+		getSupervisor().getPerfil().setId(3L);
 		getSupervisor().setImagem(assinatura);
+		getSupervisor().setSenha(CriptografiaBase64.encrypt("12345678"));
 		try {
 			getGenericControl().save(getSupervisor());
 			supervisor=null; genericControl = null; listaSupervisores = null;
@@ -63,6 +67,28 @@ public class SupervisorFacade implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problemas ao alterar Supervisor.", ""));
+		}
+	}
+	
+	public void login(Supervisor supervisor) {
+		supervisor.setCpf(supervisor.getCpf().replace(".", "").replace("-", ""));
+		Supervisor usuarioLogado = getSupervisorController().validarAutenticacao(supervisor);
+		
+		try {
+			if(usuarioLogado != null) { 
+				usuarioLogado.setIdSemestre(supervisor.getIdSemestre());
+				HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
+						.getExternalContext().getRequest();
+				request.getSession().setAttribute("usuarioLogado", usuarioLogado);
+				FacesContext.getCurrentInstance().getExternalContext().redirect((
+						new StringBuilder(String.valueOf(request.getContextPath()))).append("/pages/home.jsf").toString());
+			} else {
+				supervisor = null;
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_ERROR, "Login ou Senha Inválida.", ""));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

@@ -96,7 +96,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		sql.append("UPDATE Relatorio SET status = ?, observacao = ? WHERE idrelatorio = ?");
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString())
-					.setParameter(1, StatusEnum.VALIDADO)
+					.setParameter(1, StatusEnum.VALIDADO.getCodigo())
 					.setParameter(2, observacao)
 					.setParameter(3, id);
 			query.executeUpdate();
@@ -189,28 +189,26 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 	}*/
 	
 	public Boolean alterarDataInicioTerminioRelatorio(Relatorio relatorio) {
-//		entityManager = JpaUtil.getEntityManager();
-//		entityManager.getTransaction().begin();
-//		StringBuilder sql = new StringBuilder();
-//		sql.append("UPDATE Relatorio SET dataInicio = ?, dataTerminio = ? WHERE idrelatorio = ?");
-//		try {
-//			Query query = entityManager.createNativeQuery(sql.toString())
-//					.setParameter(1, relatorio.getDataInicio())
-//					.setParameter(2, relatorio.getDataTerminio())
-//					.setParameter(3, relatorio.getId());
-//			query.executeUpdate();
-//			entityManager.getTransaction().commit();
-//			return true;
-//		} catch (Exception e) {
-//			entityManager.getTransaction().rollback();
-//			e.printStackTrace();
-//			return false;
-//		} finally {
-//			if(entityManager.isOpen()) {
-//				entityManager.close();
-//			}
-//		}
-		return null;
+		entityManager = JpaUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE Relatorio SET fkgrupocampoestagio = ? WHERE idrelatorio = ?");
+		try {
+			Query query = entityManager.createNativeQuery(sql.toString())
+					.setParameter(1, relatorio.getGrupoCampoEstagio().getId())
+					.setParameter(2, relatorio.getId());
+			query.executeUpdate();
+			entityManager.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 
 	@Override

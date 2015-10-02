@@ -49,10 +49,10 @@
 								and !relatorioAlunoBean.facade.relatorioAvaliando
 								and !relatorioAlunoBean.facade.limiteRelatorio}">
 					<h:panelGrid columns="3" width="920">
-						<p:graphicImage url="/images/_logo.png" width="120"/>
+						<p:graphicImage url="/images/logo.png" width="120"/>
 						<h:outputLabel value="ESTÁGIO SUPERVISIONADO #{relatorioAlunoBean.facade.liberarRelatorio.modulo.label.toUpperCase()}" 
 							style="font-size: 25px; font-weight: bold;"/>
-						<p:graphicImage url="/images/_logo.png" width="120"/>
+						<p:graphicImage url="/images/logo.png" width="120"/>
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
@@ -80,7 +80,7 @@
 								<p:outputLabel for="supervisor" value="Supervisor:" />
 								<p:selectOneMenu id="supervisor" value="#{relatorioAlunoBean.facade.relatorioAluno.supervisor.id}" required="true" style="width: 585px;">
 						            <f:selectItem itemLabel="Selecione Supervisor" itemValue="#{null}" />
-						            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
+						            <f:selectItems value="#{relatorioAlunoBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
 						            	itemValue="#{sup.id}"/>
 						        </p:selectOneMenu>
 								
@@ -101,7 +101,7 @@
 								 
 								
 								<p:outputLabel for="periodo" value="Período:" />
-								<p:selectOneMenu id="periodo" value="#{relatorioAlunoBean.facade.relatorioAluno.grupoCampoEstagio.id}" required="true" style="width: 200px;">
+								<p:selectOneMenu id="periodo" value="#{relatorioAlunoBean.facade.relatorioAluno.grupoCampoEstagio.id}" required="true" style="width: 300px;">
 						            <f:selectItem itemLabel="Selecione Período" itemValue="#{null}" />
 						            <f:selectItems value="#{relatorioAlunoBean.facade.grupo.listaGrupoCampoEstagio}" var="gru" 
 						            	itemLabel="#{gru.grupo.nomeGrupo} - #{gru.dataInicialFormatada} a #{gru.dataFinalFormatada}" 

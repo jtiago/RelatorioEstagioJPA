@@ -49,6 +49,6 @@ public class RelatorioAlunoBean implements Serializable {
 	
 	public void processaGrupoCampo(ValueChangeEvent event) {
 		Long idCampo = Long.valueOf(event.getNewValue().toString());
-		getFacade().buscaGrupoCampo(idCampo);
+		getFacade().buscaGrupoCampoESupervisores(idCampo);
 	}
 }

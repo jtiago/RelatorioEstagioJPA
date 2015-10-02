@@ -27,6 +27,10 @@
 						<h:outputLabel value="#{item.nome}"/>
 					</p:column>
 					
+					<p:column headerText="Campo de Estágio">
+						<h:outputLabel value="#{item.campoEstagio.nome}"/>
+					</p:column>
+					
 					<p:column style="text-align:right; width: 100px;">
 						<p:commandButton icon="ui-icon-trash" oncomplete="removeSupervisor.show()">
 							<f:setPropertyActionListener target="#{supervisorBean.facade.supervisor}" value="#{item}" />
@@ -59,7 +63,10 @@
 						</p:selectOneMenu>
 					
 						<h:outputLabel value="Nome:" />
-						<p:inputText value="#{supervisorBean.nome}" style="width: 400px;"/>
+						<p:inputText value="#{supervisorBean.facade.supervisor.nome}" style="width: 400px;"/>
+						
+						<p:outputLabel for="cpf" value="CPF:" />
+						<p:inputMask mask="999.999.999-99" id="cpf" value="#{supervisorBean.facade.supervisor.cpf}" required="true"/>
 						
 						<h:outputLabel value="Assinatura:" />
 						<p:fileUpload value="#{supervisorBean.file}" mode="simple"/>

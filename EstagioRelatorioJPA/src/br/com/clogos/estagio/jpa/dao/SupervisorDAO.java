@@ -6,5 +6,6 @@ import br.com.clogos.estagio.model.Supervisor;
 
 public interface SupervisorDAO {
 	List<Supervisor> findAll();
-
+	List<Supervisor> findPorCampo(Long idCampo);
+	Supervisor validarAutenticacao(Supervisor param);
 }

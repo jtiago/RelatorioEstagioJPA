@@ -23,7 +23,7 @@ public class TurmaFacade implements Serializable {
 	
 	public List<Turma> getListaTurma() {
 		if(listaTurma == null){ 
-			listaTurma = getTurmaController().findAll(Util.getUsuarioSessao().getIdSemestre());
+			listaTurma = getTurmaController().findAll(Util.getIdSemestre());
 		}
 		return listaTurma;
 	}

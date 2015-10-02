@@ -12,11 +12,13 @@ import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.GrupoController;
 import br.com.clogos.estagio.jpa.controller.LiberarRelatorioController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
+import br.com.clogos.estagio.jpa.controller.SupervisorController;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Grupo;
 import br.com.clogos.estagio.model.GrupoCampoEstagio;
 import br.com.clogos.estagio.model.LiberarRelatorio;
 import br.com.clogos.estagio.model.Relatorio;
+import br.com.clogos.estagio.model.Supervisor;
 import br.com.clogos.estagio.model.Turma;
 import br.com.clogos.estagio.util.Util;
 
@@ -27,10 +29,14 @@ public class RelatorioAlunoFacade implements Serializable {
 	private GrupoCampoEstagio grupoCampoEstagio;
 	private Grupo grupo;
 	private List<Relatorio> listaRelatorioEnviado;
+	private List<Supervisor> listaSupervisores;
+	
 	private GrupoController grupoController;
 	private GenericController genericController;
 	private LiberarRelatorioController liberarRelatorioController;
 	private RelatorioController relatorioController;
+	private SupervisorController supervisorController;
+	
 	private Boolean relatorioAvaliando;
 	private Boolean moduloLiberado;
 	private Boolean limiteRelatorio;
@@ -43,9 +49,10 @@ public class RelatorioAlunoFacade implements Serializable {
 		}
 	}
 	
-	public void buscaGrupoCampo(Long idCampo) {
+	public void buscaGrupoCampoESupervisores(Long idCampo) {
 		Aluno aluno = Util.getAlunoSessao();
 		grupo = getGrupoController().findGrupoCPF(aluno.getSemestre().getId(), aluno.getCpf(), idCampo);
+		listaSupervisores = getSupervisorController().findPorCampo(idCampo);
 	}
 	
 	public void save() {
@@ -149,6 +156,10 @@ public class RelatorioAlunoFacade implements Serializable {
 		return grupoController == null ? grupoController = new GrupoController() : grupoController;
 	}
 	
+	public SupervisorController getSupervisorController() {
+		return supervisorController == null ? supervisorController = new SupervisorController() : supervisorController;
+	}
+	
 	public Boolean getRenderedEnfermagem() {
 		return renderedEnfermagem;
 	}
@@ -208,5 +219,9 @@ public class RelatorioAlunoFacade implements Serializable {
 	}
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
+	}
+	
+	public List<Supervisor> getListaSupervisores() {
+		return listaSupervisores;
 	}
 }
