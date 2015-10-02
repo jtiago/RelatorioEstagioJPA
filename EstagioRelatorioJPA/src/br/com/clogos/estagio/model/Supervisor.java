@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.clogos.estagio.enums.CursoEnum;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
 @Entity
@@ -32,6 +35,9 @@ public class Supervisor implements ObjectModel {
 	
 	@Column(name="cpfsupervisor", nullable=false)
 	private String cpf;
+	
+	@Enumerated(EnumType.ORDINAL)
+	private CursoEnum curso;
 	
 	@Column(name="codSituacao", nullable=false)
 	private Integer codigoSituacao;
@@ -79,6 +85,14 @@ public class Supervisor implements ObjectModel {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public CursoEnum getCurso() {
+		return curso;
+	}
+
+	public void setCurso(CursoEnum curso) {
+		this.curso = curso;
 	}
 
 	public ImagemAssinatura getImagem() {

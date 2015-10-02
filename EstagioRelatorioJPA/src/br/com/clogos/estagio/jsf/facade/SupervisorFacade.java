@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import br.com.clogos.estagio.enums.CursoEnum;
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.SupervisorController;
 import br.com.clogos.estagio.model.ImagemAssinatura;
@@ -42,6 +43,10 @@ public class SupervisorFacade implements Serializable {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problemas ao salvar Supervisor.", ""));
 		}
+	}
+	
+	public CursoEnum[] getCursoEnum() {
+		return CursoEnum.values();
 	}
 	
 	public void remover() {

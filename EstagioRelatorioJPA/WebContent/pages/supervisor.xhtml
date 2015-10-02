@@ -31,6 +31,10 @@
 						<h:outputLabel value="#{item.campoEstagio.nome}"/>
 					</p:column>
 					
+					<p:column headerText="Curso">
+						<h:outputLabel value="#{item.curso.label}"/>
+					</p:column>
+					
 					<p:column style="text-align:right; width: 100px;">
 						<p:commandButton icon="ui-icon-trash" oncomplete="removeSupervisor.show()">
 							<f:setPropertyActionListener target="#{supervisorBean.facade.supervisor}" value="#{item}" />
@@ -56,11 +60,18 @@
 					header="..::: Novo Supervisor - [ * Campo Obrigatório ]" widgetVar="dialogCadSupervisor">
 					<h:panelGrid columns="2">
 						<p:outputLabel for="campo" value="Campo:" />
-                    	<p:selectOneMenu id="campo" value="#{supervisorBean.facade.supervisor.campoEstagio.id}" style="width: 250px;">
+                    	<p:selectOneMenu id="campo" value="#{supervisorBean.facade.supervisor.campoEstagio.id}" style="width: 400px;">
 							<f:selectItem itemLabel="Selecione Campo" itemValue="#{null}"/>
-							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.sigla} - #{cam.nome}"
 								itemValue="#{cam.id}"/>
 						</p:selectOneMenu>
+						
+						<p:outputLabel for="curso" value="Curso:" />
+						 <p:selectOneMenu id="curso" value="#{supervisorBean.facade.supervisor.curso}" 
+						 	required="true" style="width:300px;">  
+	                        <f:selectItem itemLabel="Selecione Curso" itemValue="#{null}" />  
+	                        <f:selectItems value="#{supervisorBean.facade.cursoEnum}" var="c" itemValue="#{c}" itemLabel="#{c.label}"/>  
+	                    </p:selectOneMenu>
 					
 						<h:outputLabel value="Nome:" />
 						<p:inputText value="#{supervisorBean.facade.supervisor.nome}" style="width: 400px;"/>
@@ -83,6 +94,13 @@
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Nome:" />
 					<p:inputText value="#{supervisorBean.facade.supervisorAltera.nome}" style="width: 400px;"/>
+					
+					<p:outputLabel for="curso" value="Curso:" />
+						 <p:selectOneMenu id="curso" value="#{supervisorBean.facade.supervisorAltera.curso}" 
+						 	required="true" style="width:300px;">  
+	                        <f:selectItem itemLabel="Selecione Curso" itemValue="#{null}" />  
+	                        <f:selectItems value="#{supervisorBean.facade.cursoEnum}" var="c" itemValue="#{c}" itemLabel="#{c.label}"/>  
+	                    </p:selectOneMenu>
 					
 				</h:panelGrid>
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{supervisorBean.update}"

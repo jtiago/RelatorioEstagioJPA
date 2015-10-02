@@ -24,7 +24,7 @@ public class CampoEstagio implements ObjectModel {
 	@Column(name="nomecampoestagio", length=100, nullable=false)
 	private String nome;
 	
-	@Column(name="siglacampoestagio", length=5, nullable=false)
+	@Column(name="siglacampoestagio", length=15, nullable=false)
 	private String sigla;
 	
 	@Column(name="bolSituacao", length=1, nullable=false)

@@ -61,7 +61,7 @@
 						<p:inputText id="nome" value="#{campoBean.facade.campoEstagio.nome}" required="true" style="width:400px;"/>
 						
 						<p:outputLabel for="sigla" value="Sigla:" />
-						<p:inputText id="sigla" value="#{campoBean.facade.campoEstagio.sigla}" required="true" style="width:400px;" maxlength="5"/>
+						<p:inputText id="sigla" value="#{campoBean.facade.campoEstagio.sigla}" required="true" style="width:400px;" maxlength="10"/>
 					</h:panelGrid>
 					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{campoBean.save}" onclick="lazyload()"
 						update=":formCadastro:grid :formTabelaCampo :formMessage"/>
@@ -77,7 +77,7 @@
 					<p:inputText id="nome" value="#{campoBean.facade.campoEstagioAltera.nome}" required="true" style="width:400px;"/>
 					
 					<p:outputLabel for="sigla" value="Sigla:" />
-					<p:inputText id="sigla" value="#{campoBean.facade.campoEstagioAltera.sigla}" required="true" style="width:400px;" maxlength="5"/>
+					<p:inputText id="sigla" value="#{campoBean.facade.campoEstagioAltera.sigla}" required="true" style="width:400px;" maxlength="10"/>
 				</h:panelGrid>
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{campoBean.update}"
 					update=":formTabelaCampo :formAlterar:grid" onclick="lazyload()"/>
