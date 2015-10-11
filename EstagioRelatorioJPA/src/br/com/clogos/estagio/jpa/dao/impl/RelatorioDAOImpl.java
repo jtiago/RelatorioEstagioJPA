@@ -32,7 +32,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class)
 					.setParameter("cpf", aluno.getCpf())
 					.setParameter("idTurma", aluno.getTurmaT().getId())
-					.setParameter("validado", StatusEnum.VALIDADO);
+					.setParameter("validado", StatusEnum.ABERTO);
 			return query.getResultList().size() == 1;
 		} catch (Exception e) {
 			e.printStackTrace();
