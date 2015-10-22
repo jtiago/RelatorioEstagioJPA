@@ -1,14 +1,19 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.com.clogos.estagio.enums.StatusEnum;
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.GrupoDAO;
+import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Grupo;
 
 public class GrupoDAOImpl implements GrupoDAO {
@@ -41,16 +46,42 @@ public class GrupoDAOImpl implements GrupoDAO {
 	public Grupo findGrupoAluno(Long idSemestre, Long idGrupo) {
 		entityManager = JpaUtil.getEntityManager();
 		Grupo grupo = new Grupo();
+		grupo.setAlunosGrupo(new LinkedList<Aluno>());
 		StringBuilder hql = new StringBuilder();
-		hql.append("SELECT g FROM Grupo g JOIN FETCH g.turmaGrupo t JOIN FETCH g.alunosGrupo a ");
-		hql.append("JOIN FETCH t.semestre s WHERE s.id = :idSemestre AND g.id = :idGrupo");
+		hql.append("select gru.nomealuno, rel1.status as col1, rel2.status as col2, rel3.status as col3, rel4.status as col4 from ");
+		hql.append("(select distinct g.nomeGrupo, a.idaluno, a.nomealuno from grupo g ");
+		hql.append("inner join grupo_aluno ga on ga.grupos_idgrupo=g.idgrupo inner join aluno a on a.idaluno=ga.alunosGrupo_idaluno ");
+		hql.append("inner join Turma t on t.idturma=g.fkturma where g.idgrupo = :idGrupo and t.fksemestre = :idSemestre ) as gru ");
+		hql.append("left join relatorio as rel1 on rel1.fkaluno=gru.idaluno and rel1.fkgrupocampoestagio = ");
+		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.id>=gc2.id and gc2.fkgrupo=:idGrupo ");
+		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.id, gc1.fkgrupo having count(*) = 1) ");
+		hql.append("left join relatorio as rel2 on rel2.fkaluno=gru.idaluno and rel2.fkgrupocampoestagio = ");
+		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.id>=gc2.id and gc2.fkgrupo=:idGrupo ");
+		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.id, gc1.fkgrupo having count(*) = 2) ");
+		hql.append("left join relatorio as rel3 on rel3.fkaluno=gru.idaluno and rel3.fkgrupocampoestagio = ");
+		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.id>=gc2.id and gc2.fkgrupo=:idGrupo ");
+		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.id, gc1.fkgrupo having count(*) = 3) ");
+		hql.append("left join relatorio as rel4 on rel4.fkaluno=gru.idaluno and rel4.fkgrupocampoestagio = ");
+		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.id>=gc2.id and gc2.fkgrupo=:idGrupo ");
+		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.id, gc1.fkgrupo having count(*) = 4) ");
+		
 		try {
-		TypedQuery<Grupo> query = entityManager.createQuery(hql.toString(), Grupo.class)
-				.setParameter("idSemestre", idSemestre)
-				.setParameter("idGrupo", idGrupo);
-		grupo = query.getSingleResult();
-			
-		} catch (PersistenceException e) {
+			Query query = entityManager.createNativeQuery(hql.toString())
+					.setParameter("idGrupo", idGrupo)
+					.setParameter("idSemestre", idSemestre);
+			@SuppressWarnings("rawtypes")
+			Iterator i = query.getResultList().iterator();
+			while(i.hasNext()) {
+				Object[] objs = (Object[]) i.next();
+				Aluno aluno = new Aluno();
+				aluno.setNome(objs[0].toString());
+				aluno.setStatus1(objs[1] != null ? StatusEnum.getLabelStatus(objs[1].toString()) : StatusEnum.NAOENVIADO.getLabel());
+				aluno.setStatus2(objs[2] != null ? StatusEnum.getLabelStatus(objs[2].toString()) : StatusEnum.NAOENVIADO.getLabel());
+				aluno.setStatus3(objs[3] != null ? StatusEnum.getLabelStatus(objs[3].toString()) : StatusEnum.NAOENVIADO.getLabel());
+				aluno.setStatus4(objs[4] != null ? StatusEnum.getLabelStatus(objs[4].toString()) : StatusEnum.NAOENVIADO.getLabel());
+				grupo.getAlunosGrupo().add(aluno);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if(entityManager.isOpen()) {

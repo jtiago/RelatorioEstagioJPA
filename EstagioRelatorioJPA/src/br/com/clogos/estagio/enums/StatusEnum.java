@@ -3,7 +3,8 @@ package br.com.clogos.estagio.enums;
 public enum StatusEnum {
 	ABERTO(0, "ABERTO"),
 	REVISAO(1, "REVISÃO"),
-	VALIDADO(2, "VALIDADO");
+	VALIDADO(2, "VALIDADO"),
+	NAOENVIADO(3, "NÃO ENVIADO");
 	
 	private Integer codigo;
 	private String label;
@@ -19,5 +20,17 @@ public enum StatusEnum {
 	
 	public String getLabel() {
 		return label;
+	}
+	
+	public static String getLabelStatus(String id) {
+		if(id.equals("0"))  {
+			return ABERTO.label;
+		} else if (id.equals("1")) {
+			return REVISAO.label;
+		} else if(id.equals("2")) {
+			return VALIDADO.label;
+		} else {
+			return NAOENVIADO.label;
+		}
 	}
 }
