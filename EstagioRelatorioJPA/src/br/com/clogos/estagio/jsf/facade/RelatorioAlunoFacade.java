@@ -88,7 +88,8 @@ public class RelatorioAlunoFacade implements Serializable {
 		getRelatorioAluno().setAluno(aluno);
 		getRelatorioAluno().setTurmaRelatorio(turma);
 		
-		setRelatorioAvaliando(getRelatorioController().existeRelatorioPreenchido(preencheAluno(aluno, turma)));
+		//setRelatorioAvaliando(getRelatorioController().existeRelatorioPreenchido(preencheAluno(aluno, turma)));
+		setRelatorioAvaliando(false);
 		setModuloLiberado(getLiberarRelatorioController().existeModuloAberto(preencheLiberarRelatorio(aluno, turma)));
 		setLimiteRelatorio(getLiberarRelatorioController().verificaQtdRelatorio(preencheAluno(aluno, turma)));
 		setLiberarRelatorio(getLiberarRelatorioController().obterLiberarRelatorioPorTurma(turma));

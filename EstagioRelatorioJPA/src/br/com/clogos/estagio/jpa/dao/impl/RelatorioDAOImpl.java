@@ -50,7 +50,8 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		StringBuilder hql = new StringBuilder();
 		List<Relatorio> lista = new LinkedList<Relatorio>();
 		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.aluno a JOIN FETCH r.supervisor s JOIN r.campoEstagio c ");
-		hql.append("JOIN FETCH s.imagem i JOIN FETCH r.turmaRelatorio t JOIN FETCH t.semestre s ");
+		hql.append("JOIN FETCH s.imagem i JOIN FETCH r.turmaRelatorio t JOIN FETCH r.grupoCampoEstagio gc ");
+		hql.append("JOIN FETCH gc.grupo JOIN FETCH t.semestre s ");
 		hql.append("WHERE s.id = :idSemestre ");
 		if(relatorio.getCampoEstagio().getId() != 0) {
 			hql.append("AND c.id = :idCampo ");

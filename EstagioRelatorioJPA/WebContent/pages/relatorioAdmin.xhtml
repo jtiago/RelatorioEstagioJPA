@@ -52,7 +52,8 @@
 						</f:facet>
 						
 						<p:column headerText="Turma" filterBy="#{item.turmaRelatorio.nome}">
-							<h:outputLabel value="#{item.turmaRelatorio.nome}"/>
+							<h:outputLabel value="#{item.turmaRelatorio.nome}"/><br/>
+							<h:outputLabel value="#{item.grupoCampoEstagio.grupo.nomeGrupo}" />
 						</p:column>
 						
 						<p:column headerText="Nome Aluno" filterBy="#{item.aluno.nome}" filterMatchMode="contains" sortBy="#{item.aluno.nome}">

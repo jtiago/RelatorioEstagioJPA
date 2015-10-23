@@ -25,11 +25,11 @@
 	<properties>
 		
 		
-		<!-- <property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/>
+		<property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/>
 	    <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.1.29:1433/relestagio"/>
 	    <property name="javax.persistence.jdbc.user" value="uniweb"/>
 	    <property name="javax.persistence.jdbc.password" value="#uniweb!" />
-	    <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" /> -->
+	    <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />
 	    
 	     <!-- 
 	    <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
@@ -38,11 +38,12 @@
 	   	<property name="javax.persistence.jdbc.password" value="#Logos1990" />
 	   	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />-->
 	    
-	    <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-	   	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/estagio_new" />
-	   	<property name="javax.persistence.jdbc.user" value="root" />
-	   	<property name="javax.persistence.jdbc.password" value="root" />
-	   	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+	    
+<!-- 	    <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" /> -->
+<!-- 	   	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/estagio_new" /> -->
+<!-- 	   	<property name="javax.persistence.jdbc.user" value="root" /> -->
+<!-- 	   	<property name="javax.persistence.jdbc.password" value="root" /> -->
+<!-- 	   	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> -->
 	   	
 		<property name="hibernate.show_sql" value="true" />
 	  	<property name="hibernate.format_sql" value="true" />
