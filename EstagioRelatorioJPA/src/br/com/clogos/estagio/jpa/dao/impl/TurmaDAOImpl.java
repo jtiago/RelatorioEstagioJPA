@@ -172,4 +172,27 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 		}
 		return lista;
 	}
+	
+	@Override
+	public List<Turma> obterTurmaGrupo(Long idSemestre) {
+		entityManager = JpaUtil.getEntityManager();
+		List<Turma> lista = new ArrayList<Turma>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECT DISTINCT t FROM Turma t JOIN FETCH t.listaGrupos g JOIN t.semestre s ");
+		hql.append("WHERE s.id = :idSemestre");
+		
+		try {
+			TypedQuery<Turma> query = entityManager.createQuery(hql.toString(), Turma.class)
+					.setParameter("idSemestre", idSemestre);
+			lista = query.getResultList();
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return lista;
+	}
 }

@@ -8,9 +8,11 @@ import javax.faces.context.FacesContext;
 
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.GrupoController;
+import br.com.clogos.estagio.jpa.controller.TurmaController;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Grupo;
 import br.com.clogos.estagio.model.GrupoCampoEstagio;
+import br.com.clogos.estagio.model.Turma;
 import br.com.clogos.estagio.util.Util;
 
 public class GrupoFacade implements Serializable {
@@ -20,8 +22,10 @@ public class GrupoFacade implements Serializable {
 	private List<Grupo> listaGrupos;
 	@SuppressWarnings("unused")
 	private List<Aluno> listaAlunoGrupo;
+	private List<Turma> listaTurmas;
 	private GenericController genericController;
 	private GrupoController grupoController;
+	private TurmaController turmaController;
 	
 	private GrupoCampoEstagio campo1;
 	private GrupoCampoEstagio campo2;
@@ -41,6 +45,26 @@ public class GrupoFacade implements Serializable {
 		return listaAlunoGrupo = getGrupoController().findGrupoAluno(Util.getUsuarioSessao().getIdSemestre(), 
 				getGrupo().getId()).getAlunosGrupo();
 	}
+	
+	public List<Turma> getListaTurmas() {
+		if(listaTurmas == null) {
+			listaTurmas = getTurmaController().obterTurmaGrupo(Util.getIdSemestre());
+		}
+		return listaTurmas;
+	}
+	
+	/*private void mezclarTurmaPorGrupo() {
+		if(listaGrupos != null) {
+			Turma temp = new Turma();
+			for(Grupo g : listaGrupos) {
+				if(g.getTurmaGrupo().getNome().equalsIgnoreCase(temp.getNome())) {
+					g.getTurmaGrupo().setNome("");
+				}
+				temp = g.getTurmaGrupo();
+				System.out.println(g.getTurmaGrupo().getNome()+" - "+g.getNomeGrupo());
+			}
+		}
+	}*/
 	
 	public void save(List<Aluno> listaalunos) {
 		getGrupo().setAlunosGrupo(listaalunos);
@@ -99,6 +123,10 @@ public class GrupoFacade implements Serializable {
 	
 	public GrupoController getGrupoController() {
 		return grupoController == null ? grupoController = new GrupoController() : grupoController;
+	}
+	
+	public TurmaController getTurmaController() {
+		return turmaController == null ? turmaController = new TurmaController() : turmaController;
 	}
 	
 	public Grupo getGrupo() {

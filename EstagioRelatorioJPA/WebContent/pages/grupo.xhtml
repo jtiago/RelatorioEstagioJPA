@@ -20,19 +20,21 @@
 				</h:panelGrid>
 			</h:form><br/>
 			
+			<!-- 
 			<h:form id="formTabelaGrupo">
 				<p:dataTable id="tabelaGrupo" var="item" value="#{grupoBean.facade.listaGrupos}" emptyMessage="Sem Registros...">
 					<f:facet name="header">
 						Grupos Cadastrados
 					</f:facet>
 					
+					<p:column headerText="Turma">
+						<h:outputLabel value="#{item.turmaGrupo.nome}"/>
+					</p:column>
+				
 					<p:column headerText="Nome Grupo">
 						<h:outputLabel value="#{item.nomeGrupo}"/>
 					</p:column>
 					
-					<p:column headerText="Turma">
-						<h:outputLabel value="#{item.turmaGrupo.nome}"/>
-					</p:column>
 					
 					<p:column style="text-align:right; width: 185px;">
 						<p:commandButton icon="ui-icon-circle-zoomout" title="Visualizar Grupo" oncomplete="dialogView.show()" update=":formView">
@@ -43,6 +45,50 @@
 							<f:setPropertyActionListener target="#{semestreBean.facade.semestreAltera}" value="#{item}" />
 						</p:commandButton>
 					</p:column>
+				</p:dataTable>
+			</h:form>
+			-->
+			
+			<h:form id="formTabelaGrupo">
+				<p:dataTable id="tabelaTurma" var="item" value="#{grupoBean.facade.listaTurmas}" emptyMessage="Sem Registros...">
+					<f:facet name="header">
+						Expande para visualizar os Grupos para cada Turma
+					</f:facet>
+					
+					<p:column style="width:16px">
+			            <p:rowToggler />
+			        </p:column>
+					
+					<p:column headerText="Turma">
+						<h:outputLabel value="#{item.nome}"/>
+					</p:column>
+				
+					<p:column headerText="Curso">
+						<h:outputLabel value="#{item.nomeCurso}"/>
+					</p:column>
+					
+					<p:column headerText="Turno">
+						<h:outputLabel value="#{item.turno}"/>
+					</p:column>
+					
+					 <p:rowExpansion>
+					 	<p:dataTable id="tabelaGrupo" var="itemGrupo" value="#{item.listaGrupos}">
+					 		
+					 		<p:column headerText="Nome Grupo">
+								<h:outputLabel value="#{itemGrupo.nomeGrupo}"/>
+							</p:column>
+					 		
+					 		<p:column style="text-align:right; width: 185px;">
+								<p:commandButton icon="ui-icon-circle-zoomout" title="Visualizar Grupo" oncomplete="dialogView.show()" update=":formView">
+									<f:setPropertyActionListener target="#{grupoBean.facade.grupo}" value="#{itemGrupo}" />
+								</p:commandButton>
+		
+								<p:commandButton icon="ui-icon-pencil" title="Alterar Semestre" oncomplete="" update="">
+									<f:setPropertyActionListener target="#{semestreBean.facade.semestreAltera}" value="#{itemGrupo}" />
+								</p:commandButton>
+							</p:column>
+					 	</p:dataTable>
+					 </p:rowExpansion>
 				</p:dataTable>
 			</h:form>
 		</p:panel>

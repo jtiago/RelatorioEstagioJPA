@@ -45,4 +45,8 @@ public class TurmaController implements Serializable {
 	public List<Turma> obterTurmaSemVinculoAluno(Long idAluno, Long idSemestre) {
 		return getTurmaDAO().obterTurmaSemVinculoAluno(idAluno, idSemestre);
 	}
+	
+	public List<Turma> obterTurmaGrupo(Long idSemestre) {
+		return getTurmaDAO().obterTurmaGrupo(idSemestre);
+	}
 }
