@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.clogos.estagio.jpa.dao.GrupoCampoEstagioDAO;
 import br.com.clogos.estagio.jpa.dao.impl.GrupoCampoEstagioDAOImpl;
+import br.com.clogos.estagio.model.Grupo;
 import br.com.clogos.estagio.model.GrupoCampoEstagio;
 
 public class GrupoCampoEstagioController implements Serializable {
@@ -17,5 +18,9 @@ public class GrupoCampoEstagioController implements Serializable {
 	
 	public List<GrupoCampoEstagio> find(GrupoCampoEstagio grupoCampo) {
 		return getDao().find(grupoCampo);
+	}
+	
+	public List<GrupoCampoEstagio> findPorGrupo(Grupo grupo) {
+		return getDao().findPorGrupo(grupo);
 	}
 }

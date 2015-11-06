@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import br.com.clogos.estagio.jpa.controller.GenericController;
+import br.com.clogos.estagio.jpa.controller.GrupoCampoEstagioController;
 import br.com.clogos.estagio.jpa.controller.GrupoController;
 import br.com.clogos.estagio.jpa.controller.TurmaController;
 import br.com.clogos.estagio.model.Aluno;
@@ -23,9 +24,11 @@ public class GrupoFacade implements Serializable {
 	@SuppressWarnings("unused")
 	private List<Aluno> listaAlunoGrupo;
 	private List<Turma> listaTurmas;
+	private List<GrupoCampoEstagio> listaGrupoCampoEstagio;
 	private GenericController genericController;
 	private GrupoController grupoController;
 	private TurmaController turmaController;
+	private GrupoCampoEstagioController grupoCampoEstagioController;
 	
 	private GrupoCampoEstagio campo1;
 	private GrupoCampoEstagio campo2;
@@ -51,6 +54,13 @@ public class GrupoFacade implements Serializable {
 			listaTurmas = getTurmaController().obterTurmaGrupo(Util.getIdSemestre());
 		}
 		return listaTurmas;
+	}
+	
+	public List<GrupoCampoEstagio> getListaGrupoCampoEstagio() {
+		if(grupo != null && listaGrupoCampoEstagio == null) {
+			listaGrupoCampoEstagio = getGrupoCampoEstagioController().findPorGrupo(getGrupo());
+		}
+		return listaGrupoCampoEstagio;
 	}
 	
 	/*private void mezclarTurmaPorGrupo() {
@@ -125,12 +135,19 @@ public class GrupoFacade implements Serializable {
 		return grupoController == null ? grupoController = new GrupoController() : grupoController;
 	}
 	
+	public GrupoCampoEstagioController getGrupoCampoEstagioController() {
+		return grupoCampoEstagioController == null ? grupoCampoEstagioController = new GrupoCampoEstagioController() : grupoCampoEstagioController;
+	}
+	
 	public TurmaController getTurmaController() {
 		return turmaController == null ? turmaController = new TurmaController() : turmaController;
 	}
 	
 	public Grupo getGrupo() {
-		return grupo == null ? grupo = new Grupo() : grupo;
+		if(grupo == null) {
+			grupo = new Grupo();
+		}
+		return grupo;
 	}
 	
 	public void setGrupo(Grupo grupo) {

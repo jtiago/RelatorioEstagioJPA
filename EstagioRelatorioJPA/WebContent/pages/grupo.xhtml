@@ -220,13 +220,13 @@
 					<p:columnGroup type="header">
 			            <p:row>
 			                <p:column headerText="#{grupoBean.facade.grupo.turmaGrupo.nome}" />
-			                <c:forEach var="cam" items="${grupoBean.facade.grupo.listaGrupoCampoEstagio}">
+			                <c:forEach var="cam" items="${grupoBean.facade.listaGrupoCampoEstagio}">
 							    <p:column headerText="${cam.campoEstagio.sigla}" />
 							</c:forEach>
 			            </p:row>
 			            <p:row>
 			                <p:column headerText="#{grupoBean.facade.grupo.nomeGrupo}" />
-			                <c:forEach var="cam" items="${grupoBean.facade.grupo.listaGrupoCampoEstagio}">
+			                <c:forEach var="cam" items="${grupoBean.facade.listaGrupoCampoEstagio}">
 							    <p:column headerText="${cam.dataInicialFormatada} a ${cam.dataFinalFormatada}" />
 							</c:forEach>
 			            </p:row>
@@ -236,7 +236,7 @@
 			        	<p:outputLabel value="#{item.nome}"/>
 			        </p:column>
 			        
-			        <c:forEach var="counter" begin="1" end="${grupoBean.facade.grupo.listaGrupoCampoEstagio.size()}">
+			        <c:forEach var="counter" begin="1" end="${grupoBean.facade.listaGrupoCampoEstagio.size()}">
 			        	<p:column style="text-align:center;">
 			        		<c:if test="${counter == 1}">  
 			        			<p:outputLabel value="#{item.status1}" rendered="#{item.status1 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
