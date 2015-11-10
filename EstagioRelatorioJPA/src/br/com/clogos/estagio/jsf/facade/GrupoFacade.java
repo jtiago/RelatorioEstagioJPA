@@ -57,24 +57,11 @@ public class GrupoFacade implements Serializable {
 	}
 	
 	public List<GrupoCampoEstagio> getListaGrupoCampoEstagio() {
-		if(grupo != null && listaGrupoCampoEstagio == null) {
-			listaGrupoCampoEstagio = getGrupoCampoEstagioController().findPorGrupo(getGrupo());
+		if(grupo != null && listaGrupoCampoEstagio == null && grupo.getNomeGrupo() != null) {
+			listaGrupoCampoEstagio = getGrupoCampoEstagioController().findPorGrupo(grupo);
 		}
 		return listaGrupoCampoEstagio;
 	}
-	
-	/*private void mezclarTurmaPorGrupo() {
-		if(listaGrupos != null) {
-			Turma temp = new Turma();
-			for(Grupo g : listaGrupos) {
-				if(g.getTurmaGrupo().getNome().equalsIgnoreCase(temp.getNome())) {
-					g.getTurmaGrupo().setNome("");
-				}
-				temp = g.getTurmaGrupo();
-				System.out.println(g.getTurmaGrupo().getNome()+" - "+g.getNomeGrupo());
-			}
-		}
-	}*/
 	
 	public void save(List<Aluno> listaalunos) {
 		getGrupo().setAlunosGrupo(listaalunos);

@@ -178,7 +178,7 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 		entityManager = JpaUtil.getEntityManager();
 		List<Turma> lista = new ArrayList<Turma>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("SELECT DISTINCT t FROM Turma t JOIN FETCH t.listaGrupos g JOIN t.semestre s ");
+		hql.append("SELECT DISTINCT t FROM Turma t JOIN FETCH t.listaGrupos g JOIN FETCH t.semestre s ");
 		hql.append("WHERE s.id = :idSemestre");
 		
 		try {
