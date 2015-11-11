@@ -43,6 +43,34 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		}
 		return true;
 	}
+	
+	/**
+	 * Verifica se existe relatório enviado com o mesmo grupoCampoEstagio
+	 * @param aluno
+	 * @return
+	 */
+	@Override
+	public Boolean existeRelatorioGrupoCampoEstagio(Relatorio relatorio) {
+		entityManager = JpaUtil.getEntityManager();
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECT r FROM Relatorio r JOIN r.aluno ra JOIN r.turmaRelatorio t ");
+		hql.append("JOIN r.grupoCampoEstagio gc ");
+		hql.append("WHERE ra.cpf = :cpf AND t.id = :idTurma AND gc.id = :idGrupoCampo ");
+		try {
+			TypedQuery<Relatorio> query = entityManager.createQuery(hql.toString(), Relatorio.class)
+					.setParameter("cpf", relatorio.getAluno().getCpf())
+					.setParameter("idTurma", relatorio.getTurmaRelatorio().getId())
+					.setParameter("idGrupoCampo", relatorio.getGrupoCampoEstagio().getId());
+			return query.getResultList().size() > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return true;
+	}
 
 	@Override
 	public List<Relatorio> findRelatoriosAdmin(Relatorio relatorio) {

@@ -48,6 +48,10 @@ public class RelatorioController implements Serializable {
 		return getRelatorioDAO().alterarDataInicioTerminioRelatorio(relatorio);
 	}
 	
+	public Boolean existeRelatorioGrupoCampoEstagio(Relatorio relatorio) {
+		return getRelatorioDAO().existeRelatorioGrupoCampoEstagio(relatorio);
+	}
+	
 	public RelatorioDAO getRelatorioDAO() {
 		return relatorioDAO == null ? relatorioDAO = new RelatorioDAOImpl() : relatorioDAO;
 	}

@@ -14,4 +14,5 @@ public interface RelatorioDAO {
 //	Boolean saveRevisaoRelatorioAluno(Relatorio relatorio);
 	List<Relatorio> findRelatorioEnviado(Aluno aluno);
 	Boolean alterarDataInicioTerminioRelatorio(Relatorio relatorio);
+	Boolean existeRelatorioGrupoCampoEstagio(Relatorio relatorio);
 }
