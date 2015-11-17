@@ -65,6 +65,7 @@ public class GrupoBean implements Serializable {
 	public void limpar(CloseEvent event) {
 		this.idTurma = null;
 		getFacade().setGrupo(new Grupo());
+		getFacade().setListaGrupoCampoEstagio(null);
 	}
 	
 	public void save(ActionEvent event) {

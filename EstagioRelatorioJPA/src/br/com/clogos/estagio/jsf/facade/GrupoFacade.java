@@ -188,4 +188,9 @@ public class GrupoFacade implements Serializable {
 	public void setCampo6(GrupoCampoEstagio campo6) {
 		this.campo6 = campo6;
 	}
+	
+	public void setListaGrupoCampoEstagio(
+			List<GrupoCampoEstagio> listaGrupoCampoEstagio) {
+		this.listaGrupoCampoEstagio = listaGrupoCampoEstagio;
+	}
 }

@@ -56,7 +56,7 @@ public class RelatorioAlunoFacade implements Serializable {
 	}
 	
 	public void save() {
-		if(!getRelatorioController().existeRelatorioGrupoCampoEstagio(getRelatorioAluno())) {
+		//if(!getRelatorioController().existeRelatorioGrupoCampoEstagio(getRelatorioAluno())) {
 			getRelatorioAluno().setStatus(StatusEnum.ABERTO);
 			getRelatorioAluno().setDataCadastro(new Date());
 			getRelatorioAluno().setModulo(getLiberarRelatorio().getModulo());
@@ -67,10 +67,10 @@ public class RelatorioAlunoFacade implements Serializable {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 						FacesMessage.SEVERITY_ERROR, "Problemas ao salvar relatório, por favor entre em contato com a coordenação Logos", ""));
 			}
-		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_WARN, "Já foi enviado um relatório com o mesmo Campo e Período", ""));
-		}
+//		} else {
+//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+//					FacesMessage.SEVERITY_WARN, "Já foi enviado um relatório com o mesmo Campo e Período", ""));
+//		}
 		limpar();
 	}
 	

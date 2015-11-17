@@ -285,7 +285,9 @@
 				</p:dataTable>
 				<br/>
 				
-				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogView.hide()" onclick="lazyload()"/>
+				<p:commandButton value="Sair" icon="ui-icon-close" listener="#{grupoBean.limpar}" 
+					oncomplete="dialogView.hide()" onclick="lazyload()" />
+				<p:ajax event="close" resetValues="true" listener="#{grupoBean.limpar}" update="formView" />
 			</p:dialog>
 		</h:form>
 		

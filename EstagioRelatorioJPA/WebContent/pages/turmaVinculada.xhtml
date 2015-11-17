@@ -36,6 +36,9 @@
 							oncomplete="preencherRelatorio.show()" update=":formRelatorio" >
 							<f:attribute name="actionTurma" value="#{item}" />
 						</p:commandButton>
+<!-- 							<p:commandLink value="Preencher Relatório" actionListener="#{relatorioAlunoBean.preencherRelatorio}"> -->
+<!-- 								<f:attribute name="actionTurma" value="#{item}" /> -->
+<!-- 							</p:commandLink> -->
 					</p:column>
 				</p:dataTable>
 			</h:form>
@@ -83,22 +86,6 @@
 						            <f:selectItems value="#{relatorioAlunoBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
 						            	itemValue="#{sup.id}"/>
 						        </p:selectOneMenu>
-								
-								<!--  
-								<p:outputLabel for="dataInicial" value="Data de InÍcio:"/>
-								<h:panelGrid columns="4">
-									<p:calendar id="dataInicial" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}" 
-										effect="fold" readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014">
-										<p:ajax event="dateSelect" update="dataTermino" listener="#{relatorioAlunoBean.facade.ajustarDataIntervalo()}"/>
-									</p:calendar>
-									
-									<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
-									<p:outputLabel for="dataTermino" value="Data de Término:"/>
-									<p:calendar id="dataTermino" pattern="dd/MM/yyyy" value="#{relatorioAlunoBean.facade.relatorioAluno.dataTerminio}" 
-										effect="fold" readonlyInput="true" required="true" locale="pt_BR" 
-										mindate="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}"/>
-								</h:panelGrid>-->
-								 
 								
 								<p:outputLabel for="periodo" value="Período:" />
 								<p:selectOneMenu id="periodo" value="#{relatorioAlunoBean.facade.relatorioAluno.grupoCampoEstagio.id}" required="true" style="width: 300px;">

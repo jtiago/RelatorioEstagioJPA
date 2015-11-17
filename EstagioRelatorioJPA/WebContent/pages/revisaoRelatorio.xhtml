@@ -72,19 +72,28 @@
 				</p:fieldset>
 				<br/>
 				<p:fieldset>
-					<h:panelGrid columns="2">
+					<h:panelGrid id="grid2" columns="2">	
 						<p:outputLabel for="campo" value="Campo:"/>
 						<p:selectOneMenu id="campo" value="#{revisaoRelatorioBean.facade.relatorioRevisao.campoEstagio.id}"
-							required="true" style="width: 585px;">
+							required="true" style="width: 585px;" valueChangeListener="#{relatorioAlunoBean.processaGrupoCampo}">
 							<f:selectItem itemLabel="Selecione Campo de Estágio" itemValue="#{null}"/>
 							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
 								itemValue="#{cam.id}"/>
+							<p:ajax event="valueChange" update=":formCorrecao:grid2"/>
 						</p:selectOneMenu>
+						
+						<p:outputLabel for="periodo" value="Período:" />
+						<p:selectOneMenu id="periodo" value="#{revisaoRelatorioBean.facade.relatorioRevisao.grupoCampoEstagio.id}" required="true" style="width: 300px;">
+				            <f:selectItem itemLabel="Selecione Período" itemValue="#{null}" />
+				            <f:selectItems value="#{relatorioAlunoBean.facade.grupo.listaGrupoCampoEstagio}" var="gru" 
+				            	itemLabel="#{gru.grupo.nomeGrupo} - #{gru.dataInicialFormatada} a #{gru.dataFinalFormatada}" 
+				            	itemValue="#{gru.id}"/>
+				        </p:selectOneMenu>
 						
 						<p:outputLabel for="supervisor" value="Supervisor:" />
 						<p:selectOneMenu id="supervisor" value="#{revisaoRelatorioBean.facade.relatorioRevisao.supervisor.id}" required="true" style="width: 585px;">
 				            <f:selectItem itemLabel="Selecione Supervisor" itemValue="#{null}" />
-				            <f:selectItems value="#{supervisorBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
+				            <f:selectItems value="#{relatorioAlunoBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
 				            	itemValue="#{sup.id}"/>
 				        </p:selectOneMenu>
 						
