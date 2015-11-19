@@ -75,7 +75,7 @@
 								<p:selectOneMenu id="campo" value="#{relatorioAlunoBean.facade.relatorioAluno.campoEstagio.id}"
 									required="true" style="width: 585px;" valueChangeListener="#{relatorioAlunoBean.processaGrupoCampo}">
 									<f:selectItem itemLabel="Selecione Campo de Estágio" itemValue="#{null}"/>
-									<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
+									<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome} / #{cam.sigla}"
 										itemValue="#{cam.id}"/>
 									<p:ajax event="valueChange" update=":formRelatorio:grid"/>
 								</p:selectOneMenu>

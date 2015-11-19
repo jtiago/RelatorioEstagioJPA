@@ -21,7 +21,6 @@ public class GrupoFacade implements Serializable {
 	
 	private Grupo grupo;
 	private List<Grupo> listaGrupos;
-	@SuppressWarnings("unused")
 	private List<Aluno> listaAlunoGrupo;
 	private List<Turma> listaTurmas;
 	private List<GrupoCampoEstagio> listaGrupoCampoEstagio;
@@ -45,8 +44,10 @@ public class GrupoFacade implements Serializable {
 	}
 	
 	public List<Aluno> getListaAlunoGrupo() {
-		return listaAlunoGrupo = getGrupoController().findGrupoAluno(Util.getUsuarioSessao().getIdSemestre(), 
+		listaAlunoGrupo = getGrupoController().findGrupoAluno(Util.getUsuarioSessao().getIdSemestre(), 
 				getGrupo().getId()).getAlunosGrupo();
+		return listaAlunoGrupo;
+		
 	}
 	
 	public List<Turma> getListaTurmas() {

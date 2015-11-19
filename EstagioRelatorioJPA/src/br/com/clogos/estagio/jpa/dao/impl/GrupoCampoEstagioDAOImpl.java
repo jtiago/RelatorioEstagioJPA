@@ -47,7 +47,7 @@ public class GrupoCampoEstagioDAOImpl implements GrupoCampoEstagioDAO, Serializa
 		StringBuilder hql = new StringBuilder();
 		List<GrupoCampoEstagio> lista = new LinkedList<GrupoCampoEstagio>();
 		hql.append("SELECT gc FROM GrupoCampoEstagio gc JOIN gc.grupo g JOIN gc.campoEstagio c ");
-		hql.append("WHERE g.id = :idGrupo ");
+		hql.append("WHERE g.id = :idGrupo ORDER BY gc.dataInicial ");
 		
 		try {
 			TypedQuery<GrupoCampoEstagio> query = entityManager.createQuery(hql.toString(), GrupoCampoEstagio.class)

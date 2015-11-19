@@ -75,15 +75,15 @@
 					<h:panelGrid id="grid2" columns="2">	
 						<p:outputLabel for="campo" value="Campo:"/>
 						<p:selectOneMenu id="campo" value="#{revisaoRelatorioBean.facade.relatorioRevisao.campoEstagio.id}"
-							required="true" style="width: 585px;" valueChangeListener="#{relatorioAlunoBean.processaGrupoCampo}">
+							required="true" style="width: 550px;" valueChangeListener="#{relatorioAlunoBean.processaGrupoCampo}">
 							<f:selectItem itemLabel="Selecione Campo de Estágio" itemValue="#{null}"/>
-							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
+							<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome} / #{cam.sigla}"
 								itemValue="#{cam.id}"/>
 							<p:ajax event="valueChange" update=":formCorrecao:grid2"/>
 						</p:selectOneMenu>
 						
 						<p:outputLabel for="periodo" value="Período:" />
-						<p:selectOneMenu id="periodo" value="#{revisaoRelatorioBean.facade.relatorioRevisao.grupoCampoEstagio.id}" required="true" style="width: 300px;">
+						<p:selectOneMenu id="periodo" value="#{revisaoRelatorioBean.facade.relatorioRevisao.grupoCampoEstagio.id}" required="true" style="width: 550px;">
 				            <f:selectItem itemLabel="Selecione Período" itemValue="#{null}" />
 				            <f:selectItems value="#{relatorioAlunoBean.facade.grupo.listaGrupoCampoEstagio}" var="gru" 
 				            	itemLabel="#{gru.grupo.nomeGrupo} - #{gru.dataInicialFormatada} a #{gru.dataFinalFormatada}" 
@@ -91,24 +91,11 @@
 				        </p:selectOneMenu>
 						
 						<p:outputLabel for="supervisor" value="Supervisor:" />
-						<p:selectOneMenu id="supervisor" value="#{revisaoRelatorioBean.facade.relatorioRevisao.supervisor.id}" required="true" style="width: 585px;">
+						<p:selectOneMenu id="supervisor" value="#{revisaoRelatorioBean.facade.relatorioRevisao.supervisor.id}" required="true" style="width: 550px;">
 				            <f:selectItem itemLabel="Selecione Supervisor" itemValue="#{null}" />
 				            <f:selectItems value="#{relatorioAlunoBean.facade.listaSupervisores}" var="sup" itemLabel="#{sup.nome}"
 				            	itemValue="#{sup.id}"/>
 				        </p:selectOneMenu>
-						
-						<!-- <p:outputLabel for="dataInicial" value="Data de InÍcio:"/>
-						<h:panelGrid columns="4">
-							<p:calendar id="dataInicial" pattern="dd/MM/yyyy" value="#{revisaoRelatorioBean.facade.relatorioRevisao.dataInicio}" effect="fold" 
-								readonlyInput="true" required="true" locale="pt_BR" mindate="01/01/2014">
-								<p:ajax event="dateSelect" update="dataTermino" listener="#{relatorioAlunoBean.facade.ajustarDataIntervalo()}"/>
-							</p:calendar>
-							
-							<h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
-							<p:outputLabel for="dataTermino" value="Data de Término:"/>
-							<p:calendar id="dataTermino" pattern="dd/MM/yyyy" value="#{revisaoRelatorioBean.facade.relatorioRevisao.dataTerminio}" effect="fold" 
-								readonlyInput="false" required="true" locale="pt_BR" mindate="#{relatorioAlunoBean.facade.relatorioAluno.dataInicio}"/>
-						</h:panelGrid>-->
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1">
