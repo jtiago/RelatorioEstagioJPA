@@ -51,21 +51,20 @@
 							Relatórios 
 						</f:facet>
 						
-						<p:column headerText="Turma" filterBy="#{item.turmaRelatorio.nome}">
+						<p:column headerText="Tur/Gru/Cam">
 							<h:outputLabel value="#{item.turmaRelatorio.nome}"/><br/>
-							<h:outputLabel value="#{item.grupoCampoEstagio.grupo.nomeGrupo}" />
+							<h:outputLabel value="#{item.grupoCampoEstagio.grupo.nomeGrupo}" /><br/>
+							<h:outputLabel value="#{item.campoEstagio.sigla}" />
 						</p:column>
 						
 						<p:column headerText="Nome Aluno" filterBy="#{item.aluno.nome}" filterMatchMode="contains" sortBy="#{item.aluno.nome}">
 							<h:outputLabel value="#{item.aluno.nome}"/>
 						</p:column>
 						
-						<p:column headerText="Módulo" filterBy="#{item.aluno.matricula}" filterMatchMode="contains">
-							<h:outputLabel value="#{item.modulo.label} - #{item.turmaRelatorio.semestre.nomeSemestre}"/>
-						</p:column>
-						
 						<p:column headerText="Status">
-							<h:outputLabel value="#{item.status.label}"/>
+							<p:outputLabel value="#{item.status.label}" rendered="#{item.status.label == 'ABERTO'}" style="color:red;font-weight:bold;"/>
+			        		<p:outputLabel value="#{item.status.label}" rendered="#{item.status.label == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
+			        		<p:outputLabel value="#{item.status.label}" rendered="#{item.status.label == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
 						</p:column>
 						
 						<p:column headerText="Dt. Inic/Térm">
@@ -84,6 +83,10 @@
 							</p:commandButton>
 							<p:commandButton icon="ui-icon-print" disabled="#{item.status.codigo == 2}" oncomplete="imprimirRelatorio.show()" update=":formImprimir">
                     			<f:setPropertyActionListener target="#{relatorioAdminBean.facade.relatorioImprimir}" value="#{item}" />
+                    		</p:commandButton>
+                    		
+                    		<p:commandButton icon="ui-icon-trash" oncomplete="removeRelatorio.show()" title="Remove Relatório">
+                    			<f:setPropertyActionListener target="#{relatorioAdminBean.facade.relatorioValidar}" value="#{item}" />
                     		</p:commandButton>
 						</p:column>
 					</p:dataTable>
@@ -185,6 +188,19 @@
 					update=":formMensagem :formImprimir :tabelaRelatorio" />
 				<p:commandButton value="Não" oncomplete="imprimirRelatorio.hide()"/>
 			</p:confirmDialog>
+		</h:form>
+		
+		<h:form id="formDelete">
+			<p:confirmDialog message="Deseja realmente remover este Relatório ?" header="..:: Remover Relatório" widgetVar="removeRelatorio">
+				<p:commandButton value="Sim" actionListener="#{relatorioAdminBean.remove}" update=":formMensagem :formDelete :tabelaRelatorio" onclick="lazyload()"/>
+				<p:commandButton value="Não" oncomplete="removeRelatorio.hide()" onclick="lazyload()"/>
+			</p:confirmDialog>
+		</h:form>
+		
+		<h:form>
+			<p:remoteCommand name="lazyload">  
+		        <f:setPropertyActionListener value="#{false}" target="#{relatorioAdminBean.mensagem}" />  
+		    </p:remoteCommand> 
 		</h:form>
 	</ui:define>
 </ui:composition>

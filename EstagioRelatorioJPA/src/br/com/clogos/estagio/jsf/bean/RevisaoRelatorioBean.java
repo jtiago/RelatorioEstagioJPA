@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
-import javax.faces.event.ComponentSystemEvent;
 
 import br.com.clogos.estagio.jsf.facade.RevisaoRelatorioFacade;
 
@@ -19,9 +18,9 @@ public class RevisaoRelatorioBean implements Serializable {
 		return facade == null ? facade = new RevisaoRelatorioFacade() : facade;
 	}
 	
-	public void buscarListaRevisao(ComponentSystemEvent event) {
-		getFacade().populaListaRevisao();
-	}
+//	public void buscarListaRevisao(ComponentSystemEvent event) {
+//		getFacade().populaListaRevisao();
+//	}
 	
 	public void saveRevisao(ActionEvent event) {
 		getFacade().saveRevisao();

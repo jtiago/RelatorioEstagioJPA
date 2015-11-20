@@ -39,7 +39,7 @@
 					</p:column>
 					
 					<p:column style="text-align:right; width: 185px;">
-						<p:commandButton icon="ui-icon-trash" title="Remover Turma" oncomplete="removeTurma.show()">
+						<p:commandButton icon="ui-icon-trash" disabled="true" title="Remover Turma" oncomplete="removeTurma.show()">
 							<f:setPropertyActionListener target="#{turmaBean.facade.turma}" value="#{item}" />
 						</p:commandButton>
 

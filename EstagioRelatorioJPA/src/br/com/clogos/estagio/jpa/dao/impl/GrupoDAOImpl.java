@@ -54,22 +54,22 @@ public class GrupoDAOImpl implements GrupoDAO {
 		hql.append("inner join grupo_aluno ga on ga.grupos_idgrupo=g.idgrupo inner join aluno a on a.idaluno=ga.alunosGrupo_idaluno ");
 		hql.append("inner join Turma t on t.idturma=g.fkturma where g.idgrupo = :idGrupo and t.fksemestre = :idSemestre ) as gru ");
 		hql.append("left join relatorio as rel1 on rel1.fkaluno=gru.idaluno and rel1.fkgrupocampoestagio = ");
-		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.id>=gc2.id and gc2.fkgrupo=:idGrupo ");
+		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.datainicial>=gc2.datainicial and gc2.fkgrupo=:idGrupo ");
 		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.datainicial,gc1.id, gc1.fkgrupo having count(*) = 1) ");
 		hql.append("left join relatorio as rel2 on rel2.fkaluno=gru.idaluno and rel2.fkgrupocampoestagio = ");
-		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.id>=gc2.id and gc2.fkgrupo=:idGrupo ");
+		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.datainicial>=gc2.datainicial and gc2.fkgrupo=:idGrupo ");
 		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.datainicial, gc1.id, gc1.fkgrupo having count(*) = 2) ");
 		hql.append("left join relatorio as rel3 on rel3.fkaluno=gru.idaluno and rel3.fkgrupocampoestagio = ");
-		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.id>=gc2.id and gc2.fkgrupo=:idGrupo ");
+		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.datainicial>=gc2.datainicial and gc2.fkgrupo=:idGrupo ");
 		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.datainicial, gc1.id, gc1.fkgrupo having count(*) = 3) ");
 		hql.append("left join relatorio as rel4 on rel4.fkaluno=gru.idaluno and rel4.fkgrupocampoestagio = ");
-		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.id>=gc2.id and gc2.fkgrupo=:idGrupo ");
+		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.datainicial>=gc2.datainicial and gc2.fkgrupo=:idGrupo ");
 		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.datainicial, gc1.id, gc1.fkgrupo having count(*) = 4) ");
 		hql.append("left join relatorio as rel5 on rel5.fkaluno=gru.idaluno and rel5.fkgrupocampoestagio = ");
-		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.id>=gc2.id and gc2.fkgrupo=:idGrupo ");
+		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.datainicial>=gc2.datainicial and gc2.fkgrupo=:idGrupo ");
 		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.datainicial, gc1.id, gc1.fkgrupo having count(*) = 5) ");
 		hql.append("left join relatorio as rel6 on rel6.fkaluno=gru.idaluno and rel6.fkgrupocampoestagio = ");
-		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.id>=gc2.id and gc2.fkgrupo=:idGrupo ");
+		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.datainicial>=gc2.datainicial and gc2.fkgrupo=:idGrupo ");
 		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.datainicial, gc1.id, gc1.fkgrupo having count(*) = 6) ");
 		
 		try {

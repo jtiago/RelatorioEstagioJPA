@@ -13,6 +13,7 @@ import br.com.clogos.estagio.jsf.facade.RelatorioAdminFacade;
 public class RelatorioAdminBean implements Serializable {
 	private static final long serialVersionUID = -7198762966541652474L;
 	private RelatorioAdminFacade facade;
+	private boolean mensagem;
 	
 	public RelatorioAdminFacade getFacade() {
 		return facade == null ? facade = new RelatorioAdminFacade() : facade;
@@ -36,5 +37,18 @@ public class RelatorioAdminBean implements Serializable {
 	
 	public void alterarDataInicioTerminio(ActionEvent event) {
 		getFacade().alterarDataInicioTerminioRelatorio();
+	}
+	
+	public void remove(ActionEvent event) {
+		getFacade().remover();
+		mensagem = true;
+	}
+
+	public boolean isMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(boolean mensagem) {
+		this.mensagem = mensagem;
 	}
 }

@@ -22,6 +22,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import br.com.clogos.estagio.enums.StatusEnum;
 import br.com.clogos.estagio.jasper.RelatorioJRDataSource;
+import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.GrupoCampoEstagioController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.jpa.controller.TurmaController;
@@ -41,6 +42,7 @@ public class RelatorioAdminFacade implements Serializable {
 	private GrupoCampoEstagioController grupoCampoEstagioController;
 	private RelatorioController relatorioController;
 	private TurmaController turmaController;
+	private GenericController genericController;
 	
 	public List<Relatorio> getListaRelatorios() {
 		return listaRelatorios;
@@ -73,6 +75,21 @@ public class RelatorioAdminFacade implements Serializable {
 			}
 		}
 		listaRelatorios=null;relatorioController=null;relatorioValidar=null;
+	}
+	
+	public void remover() {
+		try {
+			if(getRelatorioValidar() != null) {
+				getGenericController().remove(getRelatorioValidar());
+				relatorioValidar = null; genericController = null; listaRelatorios = null; listaRelatoriosFilter = null;
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_INFO, "Relatório removido com sucesso.", ""));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Problemas ao remover Relatório.", ""));
+		}
 	}
 	
 	public void revisarRelatorio() {
@@ -170,5 +187,9 @@ public class RelatorioAdminFacade implements Serializable {
 	
 	public GrupoCampoEstagioController getGrupoCampoEstagioController() {
 		return grupoCampoEstagioController == null ? grupoCampoEstagioController = new GrupoCampoEstagioController() : grupoCampoEstagioController;
+	}
+	
+	public GenericController getGenericController() {
+		return genericController == null ? genericController = new GenericController() : genericController;
 	}
 }

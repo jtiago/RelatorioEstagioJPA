@@ -31,7 +31,7 @@
 						</p:column>
 						
 						<p:column headerText="Campo de Estágio">
-							<h:outputLabel value="#{item.campoEstagio.nome}"/>
+							<h:outputLabel value="#{item.campoEstagio.nome} / #{item.campoEstagio.sigla}"/>
 						</p:column>
 						
 						<p:column headerText="Módulo/Semestre">
@@ -39,7 +39,9 @@
 						</p:column>
 						
 						<p:column headerText="Status">
-							<h:outputLabel value="#{item.status.label}"/>
+							<p:outputLabel value="#{item.status.label}" rendered="#{item.status.label == 'ABERTO'}" style="color:red;font-weight:bold;"/>
+			        		<p:outputLabel value="#{item.status.label}" rendered="#{item.status.label == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
+			        		<p:outputLabel value="#{item.status.label}" rendered="#{item.status.label == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
 						</p:column>
 						
 						<p:column headerText="Dt. Inic/Térm">

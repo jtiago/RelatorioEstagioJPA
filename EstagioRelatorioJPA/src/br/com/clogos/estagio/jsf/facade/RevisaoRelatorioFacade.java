@@ -8,25 +8,50 @@ import javax.faces.context.FacesContext;
 
 import br.com.clogos.estagio.enums.StatusEnum;
 import br.com.clogos.estagio.jpa.controller.GenericController;
+import br.com.clogos.estagio.jpa.controller.GrupoController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
+import br.com.clogos.estagio.jpa.controller.SupervisorController;
+import br.com.clogos.estagio.model.Grupo;
 import br.com.clogos.estagio.model.Relatorio;
+import br.com.clogos.estagio.model.Supervisor;
 import br.com.clogos.estagio.util.Util;
 
 public class RevisaoRelatorioFacade implements Serializable {
 	private static final long serialVersionUID = -1643920823073800053L;
 	private Relatorio relatorioRevisao;
+	private Grupo grupo;
 	private List<Relatorio> listaRevisao;
 	private List<Relatorio> listaRevisaoFilter;
+	private List<Supervisor> listaSupervisor;
 	private RelatorioController relatorioController;
 	private GenericController genericController;
+	private SupervisorController supervisorController;
+	private GrupoController grupoController;
 	
-	public void populaListaRevisao() {
-		listaRevisao = getRelatorioController().findRelatoriosRevisao(Util.getAlunoSessao());
+	public List<Supervisor> getListaSupervisor() {
+		if(relatorioRevisao != null && relatorioRevisao.getId() != null) {
+			listaSupervisor = getSupervisorController().findPorCampo(getRelatorioRevisao().getCampoEstagio().getId());
+		}
+		return listaSupervisor;
+	}
+	
+	public Grupo getGrupo() {
+		if(relatorioRevisao != null && relatorioRevisao.getId() != null) {
+			grupo = getGrupoController().findGrupoCPF(getRelatorioRevisao().getTurmaRelatorio().getSemestre().getId()
+					,getRelatorioRevisao().getAluno().getCpf(), getRelatorioRevisao().getCampoEstagio().getId());
+		}
+		return grupo;
+	}
+	
+	public List<Relatorio> getListaRevisao() {
+		if(listaRevisao == null) {
+			listaRevisao = getRelatorioController().findRelatoriosRevisao(Util.getAlunoSessao());
+		}
+		return listaRevisao;
 	}
 	
 	public void saveRevisao() {
 		if(relatorioRevisao != null) {
-			//getRelatorioRevisao().setRevisao(false);
 			getRelatorioRevisao().setStatus(StatusEnum.ABERTO);
 			if(getGenericController().update(getRelatorioRevisao())) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
@@ -37,10 +62,6 @@ public class RevisaoRelatorioFacade implements Serializable {
 			}
 			relatorioRevisao=null; listaRevisao=null; relatorioController=null;
 		}
-	}
-	
-	public List<Relatorio> getListaRevisao() {
-		return listaRevisao;
 	}
 
 	public List<Relatorio> getListaRevisaoFilter() {
@@ -65,5 +86,13 @@ public class RevisaoRelatorioFacade implements Serializable {
 	
 	public GenericController getGenericController() {
 		return genericController == null ? genericController = new GenericController() : genericController;
+	}
+	
+	public SupervisorController getSupervisorController() {
+		return supervisorController == null ? supervisorController = new SupervisorController() : supervisorController;
+	}
+	
+	public GrupoController getGrupoController() {
+		return grupoController == null ? grupoController = new GrupoController() : grupoController;
 	}
 }

@@ -174,6 +174,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		List<Relatorio> lista = new LinkedList<Relatorio>();
 		hql.append("SELECT r FROM Relatorio r JOIN FETCH r.turmaRelatorio t JOIN FETCH r.aluno a ");
 		hql.append("JOIN FETCH r.campoEstagio c JOIN FETCH r.supervisor JOIN FETCH t.semestre s ");
+		hql.append("JOIN FETCH r.grupoCampoEstagio gc ");
 		hql.append("WHERE a.cpf = :cpf AND r.status = :status AND s.id = :idSemestre ");
 		
 		try {
