@@ -56,7 +56,7 @@ public class RelatorioAlunoFacade implements Serializable {
 		Aluno aluno = Util.getAlunoSessao();
 		grupo = getGrupoController().findGrupoPorTurmaAluno(relatorioAluno.getTurmaRelatorio().getId(),
 				aluno.getId(), aluno.getSemestre().getId());
-		//listaGrupoCampoEstagios = getGrupoCampoEstagioController().findPorGrupo(grupo)
+		listaGrupoCampoEstagios = getGrupoCampoEstagioController().findPorGrupoCampo(grupo.getId(), idCampo);
 		listaSupervisores = getSupervisorController().findPorCampo(idCampo);
 	}
 	

@@ -23,4 +23,8 @@ public class GrupoCampoEstagioController implements Serializable {
 	public List<GrupoCampoEstagio> findPorGrupo(Grupo grupo) {
 		return getDao().findPorGrupo(grupo);
 	}
+	
+	public List<GrupoCampoEstagio> findPorGrupoCampo(Long idGrupo, Long idCampo) {
+		return getDao().findPorGrupoCampo(idGrupo, idCampo);
+	}
 }

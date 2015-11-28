@@ -63,4 +63,28 @@ public class GrupoCampoEstagioDAOImpl implements GrupoCampoEstagioDAO, Serializa
 		}
 		return lista;
 	}
+	
+	@Override
+	public List<GrupoCampoEstagio> findPorGrupoCampo(Long idGrupo, Long idCampo) {
+		entityManager = JpaUtil.getEntityManager();
+		StringBuilder hql = new StringBuilder();
+		List<GrupoCampoEstagio> lista = new LinkedList<GrupoCampoEstagio>();
+		hql.append("SELECT gc FROM GrupoCampoEstagio gc JOIN gc.grupo g JOIN gc.campoEstagio c ");
+		hql.append("WHERE g.id = :idGrupo and c.id = :idCampo ORDER BY gc.dataInicial ");
+		
+		try {
+			TypedQuery<GrupoCampoEstagio> query = entityManager.createQuery(hql.toString(), GrupoCampoEstagio.class)
+					.setParameter("idGrupo", idGrupo)
+					.setParameter("idCampo", idCampo);
+			lista = query.getResultList();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return lista;
+	}
 }
