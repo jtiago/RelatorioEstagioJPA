@@ -57,7 +57,7 @@ public class Aluno implements ObjectModel {
 	private List<Relatorio> relatorios;
 	
 	@ManyToMany
-	@JoinTable(name = "turma_aluno")
+	@JoinTable(name = "turma_aluno", schema="uniweb")
 	private List<Turma> turmas; 
 	
 	@ManyToMany(mappedBy="alunosGrupo")

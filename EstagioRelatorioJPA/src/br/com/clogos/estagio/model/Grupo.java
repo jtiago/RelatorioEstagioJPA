@@ -32,12 +32,8 @@ public class Grupo implements ObjectModel {
 	private String observacao;
 	
 	@ManyToMany
-	@JoinTable(name="grupo_aluno")
+	@JoinTable(name="grupo_aluno", schema="uniweb")
 	private List<Aluno> alunosGrupo;
-	
-//	@ManyToMany
-//	@JoinTable(name="grupo_campo")
-//	private List<CampoEstagio> camposGrupo;
 	
 	@ManyToOne
 	@JoinColumn(name = "fkturma")
