@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
 @Entity
-@Table(name="PERFIL")
+@Table(name="PERFIL", schema="uniweb")
 public class Perfil implements ObjectModel {
 	private static final long serialVersionUID = -1232891701475637425L;
 	@Id

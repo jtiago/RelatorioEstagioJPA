@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
 @Entity
-@Table(name="IMAGEMASSINATURA")
+@Table(name="IMAGEMASSINATURA", schema="uniweb")
 public class ImagemAssinatura implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	

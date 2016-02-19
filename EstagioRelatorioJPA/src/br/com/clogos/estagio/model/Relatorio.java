@@ -22,7 +22,7 @@ import br.com.clogos.estagio.enums.StatusEnum;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
 @Entity
-@Table(name = "RELATORIO")
+@Table(name = "RELATORIO", schema="uniweb")
 public class Relatorio implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	
