@@ -49,10 +49,11 @@ public class GrupoDAOImpl implements GrupoDAO {
 		grupo.setAlunosGrupo(new LinkedList<Aluno>());
 		StringBuilder hql = new StringBuilder();
 		hql.append("select gru.nomealuno, rel1.status as col1, rel2.status as col2, rel3.status as col3, rel4.status as col4, ");
-		hql.append("rel5.status as col5, rel6.status as col6 from ");
-		hql.append("(select distinct g.nomeGrupo, a.idaluno, a.nomealuno from grupo g ");
+		hql.append("rel5.status as col5, rel6.status, gru.status as col6 from ");
+		hql.append("(select distinct g.nomeGrupo, a.idaluno, a.nomealuno, a.status from grupo g ");
 		hql.append("inner join grupo_aluno ga on ga.grupos_idgrupo=g.idgrupo inner join aluno a on a.idaluno=ga.alunosGrupo_idaluno ");
-		hql.append("inner join Turma t on t.idturma=g.fkturma where g.idgrupo = :idGrupo and t.fksemestre = :idSemestre ) as gru ");
+		hql.append("inner join Turma t on t.idturma=g.fkturma ");
+		hql.append("where g.idgrupo = :idGrupo and t.fksemestre = :idSemestre) as gru ");
 		hql.append("left join relatorio as rel1 on rel1.fkaluno=gru.idaluno and rel1.fkgrupocampoestagio = ");
 		hql.append("(select gc1.id from grupocampoestagio gc1 inner join grupocampoestagio gc2 on gc1.datainicial>=gc2.datainicial and gc2.fkgrupo=:idGrupo ");
 		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.datainicial,gc1.id, gc1.fkgrupo having count(*) = 1) ");
@@ -82,12 +83,21 @@ public class GrupoDAOImpl implements GrupoDAO {
 				Object[] objs = (Object[]) i.next();
 				Aluno aluno = new Aluno();
 				aluno.setNome(objs[0].toString());
-				aluno.setStatus1(objs[1] != null ? StatusEnum.getLabelStatus(objs[1].toString()) : StatusEnum.NAOENVIADO.getLabel());
-				aluno.setStatus2(objs[2] != null ? StatusEnum.getLabelStatus(objs[2].toString()) : StatusEnum.NAOENVIADO.getLabel());
-				aluno.setStatus3(objs[3] != null ? StatusEnum.getLabelStatus(objs[3].toString()) : StatusEnum.NAOENVIADO.getLabel());
-				aluno.setStatus4(objs[4] != null ? StatusEnum.getLabelStatus(objs[4].toString()) : StatusEnum.NAOENVIADO.getLabel());
-				aluno.setStatus5(objs[5] != null ? StatusEnum.getLabelStatus(objs[5].toString()) : StatusEnum.NAOENVIADO.getLabel());
-				aluno.setStatus6(objs[6] != null ? StatusEnum.getLabelStatus(objs[6].toString()) : StatusEnum.NAOENVIADO.getLabel());
+				if (objs[7].toString().contains("DESISTENTE") || objs[7].toString().contains("TRANCOU")) {
+					aluno.setStatus1(objs[7].toString());
+					aluno.setStatus2(objs[7].toString());
+					aluno.setStatus3(objs[7].toString());
+					aluno.setStatus4(objs[7].toString());
+					aluno.setStatus5(objs[7].toString());
+					aluno.setStatus6(objs[7].toString());
+				} else {
+					aluno.setStatus1(objs[1] != null ? StatusEnum.getLabelStatus(objs[1].toString()) : StatusEnum.NAOENVIADO.getLabel());
+					aluno.setStatus2(objs[2] != null ? StatusEnum.getLabelStatus(objs[2].toString()) : StatusEnum.NAOENVIADO.getLabel());
+					aluno.setStatus3(objs[3] != null ? StatusEnum.getLabelStatus(objs[3].toString()) : StatusEnum.NAOENVIADO.getLabel());
+					aluno.setStatus4(objs[4] != null ? StatusEnum.getLabelStatus(objs[4].toString()) : StatusEnum.NAOENVIADO.getLabel());
+					aluno.setStatus5(objs[5] != null ? StatusEnum.getLabelStatus(objs[5].toString()) : StatusEnum.NAOENVIADO.getLabel());
+					aluno.setStatus6(objs[6] != null ? StatusEnum.getLabelStatus(objs[6].toString()) : StatusEnum.NAOENVIADO.getLabel());
+				}
 				grupo.getAlunosGrupo().add(aluno);
 			}
 		} catch (Exception e) {

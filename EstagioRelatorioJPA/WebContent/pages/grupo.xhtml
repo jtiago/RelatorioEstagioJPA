@@ -215,74 +215,88 @@
 		<h:form id="formView">
 			<p:dialog resizable="false" draggable="false" modal="true" position="top" closable="false" 
 				header="..::: Grupo" widgetVar="dialogView">
-				<p:dataTable var="item" value="#{grupoBean.facade.listaAlunoGrupo}">
+				<p:scrollPanel mode="native" style="max-height: 500px">
+					<p:dataTable var="item" value="#{grupoBean.facade.listaAlunoGrupo}">
 
-					<p:columnGroup type="header">
-			            <p:row>
-			                <p:column headerText="#{grupoBean.facade.grupo.turmaGrupo.nome}" />
-			                <c:forEach var="cam" items="${grupoBean.facade.listaGrupoCampoEstagio}">
-							    <p:column headerText="${cam.campoEstagio.sigla}" />
-							</c:forEach>
-			            </p:row>
-			            <p:row>
-			                <p:column headerText="#{grupoBean.facade.grupo.nomeGrupo}" />
-			                <c:forEach var="cam" items="${grupoBean.facade.listaGrupoCampoEstagio}">
-							    <p:column headerText="${cam.dataInicialFormatada} a ${cam.dataFinalFormatada}" />
-							</c:forEach>
-			            </p:row>
-			        </p:columnGroup>
-			        
-			        <p:column>
-			        	<p:outputLabel value="#{item.nome}"/>
-			        </p:column>
-			        
-			        <c:forEach var="counter" begin="1" end="${grupoBean.facade.listaGrupoCampoEstagio.size()}">
-			        	<p:column style="text-align:center;">
-			        		<c:if test="${counter == 1}">  
-			        			<p:outputLabel value="#{item.status1}" rendered="#{item.status1 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status1}" rendered="#{item.status1 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status1}" rendered="#{item.status1 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status1}" rendered="#{item.status1 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
-			        		</c:if>
-			        		
-			        		<c:if test="${counter == 2}">  
-			        			<p:outputLabel value="#{item.status2}" rendered="#{item.status2 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status2}" rendered="#{item.status2 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status2}" rendered="#{item.status2 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status2}" rendered="#{item.status2 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
-			        		</c:if>
-			        		
-			        		<c:if test="${counter == 3}">  
-			        			<p:outputLabel value="#{item.status3}" rendered="#{item.status3 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status3}" rendered="#{item.status3 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status3}" rendered="#{item.status3 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status3}" rendered="#{item.status3 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
-			        		</c:if>
-			        		
-			        		<c:if test="${counter == 4}">  
-			        			<p:outputLabel value="#{item.status4}" rendered="#{item.status4 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status4}" rendered="#{item.status4 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status4}" rendered="#{item.status4 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status4}" rendered="#{item.status4 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
-			        		</c:if>
-			        		
-			        		<c:if test="${counter == 5}">  
-			        			<p:outputLabel value="#{item.status5}" rendered="#{item.status5 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status5}" rendered="#{item.status5 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status5}" rendered="#{item.status5 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status5}" rendered="#{item.status5 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
-			        		</c:if>
-			        		
-			        		<c:if test="${counter == 6}">  
-			        			<p:outputLabel value="#{item.status6}" rendered="#{item.status6 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status6}" rendered="#{item.status6 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status6}" rendered="#{item.status6 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
-			        			<p:outputLabel value="#{item.status6}" rendered="#{item.status6 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
-			        		</c:if>
-			        		
-			        	</p:column>
-			        </c:forEach>
-				</p:dataTable>
+						<p:columnGroup type="header">
+				            <p:row>
+				                <p:column headerText="#{grupoBean.facade.grupo.turmaGrupo.nome}" />
+				                <c:forEach var="cam" items="${grupoBean.facade.listaGrupoCampoEstagio}">
+								    <p:column headerText="${cam.campoEstagio.sigla}" />
+								</c:forEach>
+				            </p:row>
+				            <p:row>
+				                <p:column headerText="#{grupoBean.facade.grupo.nomeGrupo}" />
+				                <c:forEach var="cam" items="${grupoBean.facade.listaGrupoCampoEstagio}">
+								    <p:column headerText="${cam.dataInicialFormatada} a ${cam.dataFinalFormatada}" />
+								</c:forEach>
+				            </p:row>
+				        </p:columnGroup>
+				        
+				        <p:column>
+				        	<p:outputLabel value="#{item.nome}"/>
+				        </p:column>
+				        
+				        <c:forEach var="counter" begin="1" end="${grupoBean.facade.listaGrupoCampoEstagio.size()}">
+				        	<p:column style="text-align:center;">
+				        		<c:if test="${counter == 1}">  
+				        			<p:outputLabel value="#{item.status1}" rendered="#{item.status1 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status1}" rendered="#{item.status1 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status1}" rendered="#{item.status1 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status1}" rendered="#{item.status1 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status1}" rendered="#{item.status1 == 'TRANCOU'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status1}" rendered="#{item.status1 == 'DESISTENTE'}" style="font-weight:bold;"/>
+				        		</c:if>
+				        		
+				        		<c:if test="${counter == 2}">  
+				        			<p:outputLabel value="#{item.status2}" rendered="#{item.status2 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status2}" rendered="#{item.status2 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status2}" rendered="#{item.status2 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status2}" rendered="#{item.status2 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status2}" rendered="#{item.status2 == 'TRANCOU'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status2}" rendered="#{item.status2 == 'DESISTENTE'}" style="font-weight:bold;"/>
+				        		</c:if>
+				        		
+				        		<c:if test="${counter == 3}">  
+				        			<p:outputLabel value="#{item.status3}" rendered="#{item.status3 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status3}" rendered="#{item.status3 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status3}" rendered="#{item.status3 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status3}" rendered="#{item.status3 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status3}" rendered="#{item.status3 == 'TRANCOU'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status3}" rendered="#{item.status3 == 'DESISTENTE'}" style="font-weight:bold;"/>
+				        		</c:if>
+				        		
+				        		<c:if test="${counter == 4}">  
+				        			<p:outputLabel value="#{item.status4}" rendered="#{item.status4 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status4}" rendered="#{item.status4 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status4}" rendered="#{item.status4 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status4}" rendered="#{item.status4 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status4}" rendered="#{item.status4 == 'TRANCOU'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status4}" rendered="#{item.status4 == 'DESISTENTE'}" style="font-weight:bold;"/>
+				        		</c:if>
+				        		
+				        		<c:if test="${counter == 5}">  
+				        			<p:outputLabel value="#{item.status5}" rendered="#{item.status5 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status5}" rendered="#{item.status5 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status5}" rendered="#{item.status5 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status5}" rendered="#{item.status5 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status5}" rendered="#{item.status5 == 'TRANCOU'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status5}" rendered="#{item.status5 == 'DESISTENTE'}" style="font-weight:bold;"/>
+				        		</c:if>
+				        		
+				        		<c:if test="${counter == 6}">  
+				        			<p:outputLabel value="#{item.status6}" rendered="#{item.status6 == 'ABERTO'}" style="color:red;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status6}" rendered="#{item.status6 == 'REVISÃO'}" style="color:#FA6900;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status6}" rendered="#{item.status6 == 'VALIDADO'}" style="color:green;font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status6}" rendered="#{item.status6 == 'NÃO ENVIADO'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status6}" rendered="#{item.status6 == 'TRANCOU'}" style="font-weight:bold;"/>
+				        			<p:outputLabel value="#{item.status6}" rendered="#{item.status6 == 'DESISTENTE'}" style="font-weight:bold;"/>
+				        		</c:if>
+				        		
+				        	</p:column>
+				        </c:forEach>
+					</p:dataTable>
+				</p:scrollPanel>
 				<br/>
 				
 				<p:commandButton value="Sair" icon="ui-icon-close" listener="#{grupoBean.limpar}" 
