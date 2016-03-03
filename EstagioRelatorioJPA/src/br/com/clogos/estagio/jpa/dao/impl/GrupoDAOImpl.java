@@ -49,8 +49,8 @@ public class GrupoDAOImpl implements GrupoDAO {
 		grupo.setAlunosGrupo(new LinkedList<Aluno>());
 		StringBuilder hql = new StringBuilder();
 		hql.append("select gru.nomealuno, rel1.status as col1, rel2.status as col2, rel3.status as col3, rel4.status as col4, ");
-		hql.append("rel5.status as col5, rel6.status as col6 from ");
-		hql.append("(select distinct g.nomeGrupo, a.idaluno, a.nomealuno from uniweb.grupo g ");
+		hql.append("rel5.status as col5, rel6.status as col6, gru.status from ");
+		hql.append("(select distinct g.nomeGrupo, a.idaluno, a.nomealuno, a.status from uniweb.grupo g ");
 		hql.append("inner join uniweb.grupo_aluno ga on ga.grupos_idgrupo=g.idgrupo inner join uniweb.aluno a on a.idaluno=ga.alunosGrupo_idaluno ");
 		hql.append("inner join uniweb.Turma t on t.idturma=g.fkturma where g.idgrupo = :idGrupo and t.fksemestre = :idSemestre ) as gru ");
 		hql.append("left join uniweb.relatorio as rel1 on rel1.fkaluno=gru.idaluno and rel1.fkgrupocampoestagio = ");

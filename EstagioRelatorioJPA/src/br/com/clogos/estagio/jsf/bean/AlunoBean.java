@@ -134,7 +134,7 @@ public class AlunoBean implements Serializable {
 				String str = scanner.nextLine();
 				if(!str.contains("nu_matricula")) {
 					String[] token = str.split(";");
-					turma = facadeTurma.obterTurmaPorNome(token[2]);
+					turma = facadeTurma.obterTurmaPorNome(token[1]);
 					if(turma == null) {
 						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 								FacesMessage.SEVERITY_ERROR, "Não foi encontrado a Turma cadastrada", ""));
@@ -162,18 +162,29 @@ public class AlunoBean implements Serializable {
 	}*/
 	
 	//Matricula - Nome Curso - Nome Turma - Turno - Nome Aluno - Status do Aluno - CPF - Sexo
+	//curso;turma;turno;nu_matricula;aluno;status;cpfcgc;sexo;
 	private void saveAluno(String[] token, Turma turma) {
 		Aluno aluno = new Aluno();
 		List<Turma> listaTurma = new ArrayList<Turma>();
 		listaTurma.add(turma);
+//		aluno.setCpf(token[6]);
+//		aluno.setMatricula(token[0]);
+//		aluno.setNome(token[4]);
+//		aluno.setSenha("12345678");
+//		aluno.setSexo(token[7]);
+//		aluno.setStatus(token[5]);
+//		aluno.setPerfil(getPerfil());
+//		aluno.setTurmas(listaTurma);
+		
 		aluno.setCpf(token[6]);
-		aluno.setMatricula(token[0]);
+		aluno.setMatricula(token[3]);
 		aluno.setNome(token[4]);
 		aluno.setSenha("12345678");
 		aluno.setSexo(token[7]);
 		aluno.setStatus(token[5]);
 		aluno.setPerfil(getPerfil());
 		aluno.setTurmas(listaTurma);
+		
 		getFacade().setAluno(aluno);
 		getFacade().save();
 	}
