@@ -177,9 +177,9 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		List<Aluno> lista = new ArrayList<Aluno>();
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
-		hql.append("SELECt idaluno, idturma, cpf, a.nomealuno, t.nometurma, t.fksemestre from aluno a  ");
-		hql.append("inner join turma_aluno ta on a.idaluno = ta.alunos_idaluno ");
-		hql.append("inner join turma t on t.idturma = ta.turmas_idturma ");
+		hql.append("SELECt idaluno, idturma, cpf, a.nomealuno, t.nometurma, t.fksemestre from uniweb.aluno a  ");
+		hql.append("inner join uniweb.turma_aluno ta on a.idaluno = ta.alunos_idaluno ");
+		hql.append("inner join uniweb.turma t on t.idturma = ta.turmas_idturma ");
 		hql.append("where cpf= :cpf and t.fksemestre = :idSemestre ");
 		
 		try {
@@ -214,7 +214,7 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 	public Boolean transferirAlunoTurmaRelatorio(Aluno aluno, Long idTurmaTransferir) {
 		entityManager = JpaUtil.getEntityManager();
 		//ExemploJPA: Update Key k set k.counter = 0 where exists (Select u from User u join u.devices d where u.login = "x" and d.applet.key = k)
-		String hql = "UPDATE turma_aluno SET turmas_idturma = :idTurmaTransf WHERE alunos_idaluno = :idAluno AND turmas_idturma = :idTurmaOri";
+		String hql = "UPDATE uniweb.turma_aluno SET turmas_idturma = :idTurmaTransf WHERE alunos_idaluno = :idAluno AND turmas_idturma = :idTurmaOri";
 		try {
 			Query queryAlunoTurma = entityManager.createNativeQuery(hql)
 					.setParameter("idTurmaTransf", idTurmaTransferir)

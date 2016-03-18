@@ -80,7 +80,7 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 		entityManager = JpaUtil.getEntityManager();
 		entityManager.getTransaction().begin();
 		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE LiberarRelatorio SET aberto = ? WHERE fkturma = ? AND modulo = ?");
+		sql.append("UPDATE uniweb.LiberarRelatorio SET aberto = ? WHERE fkturma = ? AND modulo = ?");
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString())
 					.setParameter(1, 0)
@@ -127,10 +127,10 @@ public class LiberarRelatorioDAOImpl implements LiberarRelatorioDAO, Serializabl
 		StringBuilder sql = new StringBuilder();
 		Boolean isQtdRelatorio = null;
 		sql.append("SELECT qtdRelatorio,  ");
-		sql.append("(SELECT count(*) FROM relatorio rs INNER JOIN Aluno ass ON ass.idaluno=rs.fkaluno ");
-		sql.append("INNER JOIN Turma t ON t.idturma=rs.fkturma INNER JOIN Semestre s ON s.idsemestre=t.fksemestre ");
+		sql.append("(SELECT count(*) FROM uniweb.relatorio rs INNER JOIN uniweb.Aluno ass ON ass.idaluno=rs.fkaluno ");
+		sql.append("INNER JOIN uniweb.Turma t ON t.idturma=rs.fkturma INNER JOIN uniweb.Semestre s ON s.idsemestre=t.fksemestre ");
 		sql.append("WHERE s.idsemestre = :idsemestre AND ass.cpf = :cpf AND t.idturma = :idturma) as limiteRelatorio ");
-		sql.append("FROM LiberarRelatorio l INNER JOIN Turma t ON t.idturma=l.fkturma INNER JOIN Semestre s ON s.idsemestre=t.fksemestre ");
+		sql.append("FROM uniweb.LiberarRelatorio l INNER JOIN uniweb.Turma t ON t.idturma=l.fkturma INNER JOIN uniweb.Semestre s ON s.idsemestre=t.fksemestre ");
 		sql.append("WHERE t.idturma = :idturma AND s.idsemestre = :idsemestre");
 		
 		try {

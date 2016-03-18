@@ -122,7 +122,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		entityManager.getTransaction().begin();
 		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE Relatorio SET status = ?, observacao = ? WHERE idrelatorio = ?");
+		sql.append("UPDATE uniweb.Relatorio SET status = ?, observacao = ? WHERE idrelatorio = ?");
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString())
 					.setParameter(1, StatusEnum.VALIDADO.getCodigo())
@@ -147,7 +147,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		entityManager.getTransaction().begin();
 		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE Relatorio SET status = ?, observacao = ? WHERE idrelatorio = ?");
+		sql.append("UPDATE uniweb.Relatorio SET status = ?, observacao = ? WHERE idrelatorio = ?");
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString())
 					.setParameter(1, StatusEnum.REVISAO.getCodigo())
