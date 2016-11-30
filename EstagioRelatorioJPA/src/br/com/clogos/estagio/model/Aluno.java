@@ -20,7 +20,7 @@ import javax.persistence.Transient;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
 @Entity
-@Table(name="ALUNO", schema="uniweb")
+@Table(name="ALUNO")
 public class Aluno implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	

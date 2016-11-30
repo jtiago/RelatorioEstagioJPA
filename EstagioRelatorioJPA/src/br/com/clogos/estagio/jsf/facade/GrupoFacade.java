@@ -44,7 +44,7 @@ public class GrupoFacade implements Serializable {
 	}
 	
 	public List<Aluno> getListaAlunoGrupo() {
-		listaAlunoGrupo = getGrupoController().findGrupoAluno(Util.getUsuarioSessao().getIdSemestre(), 
+		listaAlunoGrupo = getGrupoController().findGrupoAluno(Util.getIdSemestre(), 
 				getGrupo().getId()).getAlunosGrupo();
 		return listaAlunoGrupo;
 		

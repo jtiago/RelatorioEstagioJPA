@@ -22,7 +22,7 @@ import br.com.clogos.estagio.enums.CursoEnum;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
 @Entity
-@Table(name="SUPERVISOR", schema="uniweb")
+@Table(name="SUPERVISOR")
 public class Supervisor implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	

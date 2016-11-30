@@ -16,7 +16,7 @@ import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
 @Entity
-@Table(name = "LIBERARRELATORIO", schema="uniweb")
+@Table(name = "LIBERARRELATORIO")
 public class LiberarRelatorio implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	

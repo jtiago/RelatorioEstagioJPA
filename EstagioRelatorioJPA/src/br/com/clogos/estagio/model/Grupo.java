@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
 @Entity
-@Table(name = "GRUPO", schema="uniweb")
+@Table(name = "GRUPO")
 public class Grupo implements ObjectModel {
 	private static final long serialVersionUID = 1L;
 	

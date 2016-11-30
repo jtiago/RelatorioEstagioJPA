@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import br.com.clogos.estagio.jpa.dao.ObjectModel;
 
 @Entity
-@Table(name="PERFIL", schema="uniweb")
+@Table(name="PERFIL")
 public class Perfil implements ObjectModel {
 	private static final long serialVersionUID = -1232891701475637425L;
 	@Id
@@ -32,6 +32,8 @@ public class Perfil implements ObjectModel {
 	@OneToMany(mappedBy = "perfil")
 	private List<Supervisor> supervisores;
 	
+	@Column(length=1)
+	private Boolean cadastro;
 	@Column(length=1)
 	private Boolean cadastroAluno;
 	@Column(length=1)
@@ -52,6 +54,8 @@ public class Perfil implements ObjectModel {
 	private Boolean cadastroUsuario;
 	@Column(length=1)
 	private Boolean relatorioEnviado;
+	@Column(length=1)
+	private Boolean cadastroGrupo;
 	
 //	update perfil set cadastroAluno = 1, cadastroCampo = 1, cadastroSupervisor = 1, cadastroTurma = 1, liberarrelatorio = 1, relatorioAdmin = 1,
 //			relatorioAluno = 0, revisaoRelatorio = 0 where idperfil = 1;
@@ -59,8 +63,8 @@ public class Perfil implements ObjectModel {
 //	update perfil set cadastroAluno = 0, cadastroCampo = 0, cadastroSupervisor = 0, cadastroTurma = 0, liberarrelatorio = 0, relatorioAdmin = 0,
 //			relatorioAluno = 1, revisaoRelatorio = 1 where idperfil = 2;
 	
-//	alter table perfil add cadastroUsuario tinyint(1)
-//	alter table perfil add relatorioEnviado tinyint(1)
+//	alter table perfil add cadastroGrupo tinyint(1)
+//	alter table uniweb.perfil add cadastroGrupo bit
 //	update perfil set cadastroUsuario = 0 where idperfil = 2
 //	update perfil set relatorioEnviado = 0 where idperfil = 1
 
@@ -78,6 +82,15 @@ public class Perfil implements ObjectModel {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	
+	public Boolean getCadastro() {
+		return cadastro;
+	}
+
+	public void setCadastro(Boolean cadastro) {
+		this.cadastro = cadastro;
 	}
 
 	public Boolean getCadastroAluno() {
@@ -166,5 +179,13 @@ public class Perfil implements ObjectModel {
 
 	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
+	}
+
+	public Boolean getCadastroGrupo() {
+		return cadastroGrupo;
+	}
+
+	public void setCadastroGrupo(Boolean cadastroGrupo) {
+		this.cadastroGrupo = cadastroGrupo;
 	}
 }

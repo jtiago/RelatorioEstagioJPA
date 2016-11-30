@@ -16,7 +16,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(schema="uniweb")
 public class GrupoCampoEstagio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
