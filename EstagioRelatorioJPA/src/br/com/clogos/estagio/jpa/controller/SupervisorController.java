@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.clogos.estagio.jpa.dao.SupervisorDAO;
 import br.com.clogos.estagio.jpa.dao.impl.SupervisorDAOImpl;
 import br.com.clogos.estagio.model.Supervisor;
+import br.com.clogos.estagio.vo.SupervisorVO;
 
 
 public class SupervisorController implements Serializable {
@@ -22,6 +23,10 @@ public class SupervisorController implements Serializable {
 	
 	public Supervisor validarAutenticacao(Supervisor param) {
 		return getSupervisorDAO().validarAutenticacao(param);
+	}
+	
+	public List<SupervisorVO> findSupervisorAnalitico() {
+		return getSupervisorDAO().findSupervisorAnalitico();
 	}
 	
 	public SupervisorDAO getSupervisorDAO() {

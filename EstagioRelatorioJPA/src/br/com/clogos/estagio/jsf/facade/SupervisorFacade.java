@@ -13,6 +13,7 @@ import br.com.clogos.estagio.jpa.controller.SupervisorController;
 import br.com.clogos.estagio.model.ImagemAssinatura;
 import br.com.clogos.estagio.model.Supervisor;
 import br.com.clogos.estagio.util.CriptografiaBase64;
+import br.com.clogos.estagio.vo.SupervisorVO;
 
 public class SupervisorFacade implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,12 +22,20 @@ public class SupervisorFacade implements Serializable {
 	private SupervisorController supervisorController;
 	private GenericController genericControl;
 	private List<Supervisor> listaSupervisores;
+	private List<SupervisorVO> listaSupervisoresAnalitico;
 	
 	public List<Supervisor> getListaSupervisores() {
 		if(listaSupervisores == null) {
 			listaSupervisores = getSupervisorController().findAll();
 		}
 		return listaSupervisores;
+	}
+	
+	public List<SupervisorVO> getListaSupervisoresAnalitico() {
+		if(listaSupervisoresAnalitico == null) {
+			listaSupervisoresAnalitico = getSupervisorController().findSupervisorAnalitico();
+		}
+		return listaSupervisoresAnalitico;
 	}
 	
 	public void save(ImagemAssinatura assinatura) {

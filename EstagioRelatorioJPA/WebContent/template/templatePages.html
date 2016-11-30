@@ -42,6 +42,10 @@ width: 350px
 						<p:menuitem value="Semestre" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroTurma}" url="/pages/semestre.jsf" />
 						<p:menuitem value="Grupo" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroGrupo}" url="/pages/grupo.jsf" />
 					</p:submenu>
+					
+					<p:submenu label="Relatórios">
+						<p:menuitem value="Supervisor Analítico" icon="ui-icon-person" url="/pages/supervisorAnalitico.jsf" />
+					</p:submenu>
 
 					<p:menuitem value="Preencher Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAluno}" url="/pages/turmaVinculada.jsf" />
 					<p:menuitem value="Liberar Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.liberarRelatorio}" url="/pages/liberarRelatorio.jsf" />

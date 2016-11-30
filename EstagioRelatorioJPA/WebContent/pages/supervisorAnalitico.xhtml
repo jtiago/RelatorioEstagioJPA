@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/template/templatePages.html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<ui:define name="conteudo">
+		<h:form id="formMensagem">
+			<p:growl id="mesg" autoUpdate="true"/>
+		</h:form>
+		
+		<p:panel header="..:: Validar Relatórios">
+			<h:form id="tabelaRelatorio">
+				<p:dataTable id="tabela" var="item" value="#{supervisorBean.facade.listaSupervisoresAnalitico}" emptyMessage="Sem Registro...">
+					<f:facet name="header">
+						Relatório de Supervisores Analítico 
+					</f:facet>
+					
+					<p:column headerText="CPF">
+						<h:outputLabel value="#{item.cpfSupervisor}"/>
+					</p:column>
+					
+					<p:column headerText="Nome Supervisor">
+						<h:outputLabel value="#{item.nomeSupervisor}"/>
+					</p:column>
+					
+					<p:column headerText="Campo de Estágio">
+						<h:outputLabel value="#{item.siglaCampoEstagio}" /> -
+						<h:outputLabel value="#{item.nomeCampoEstagio}"/>
+					</p:column>
+					
+					<p:column headerText="Qtd Validado">
+						<h:outputLabel value="#{item.qtdValidado}"/>
+					</p:column>
+					
+					<p:column headerText="Qtd Aberto">
+						<h:outputLabel value="#{item.qtdAberto}"/>
+					</p:column>
+					
+					<p:column headerText="Qtd Revisão">
+						<h:outputLabel value="#{item.qtdRevisao}"/>
+					</p:column>
+					
+					<p:column headerText="Situação">
+						<h:outputLabel value="#{item.situacao}"/>
+					</p:column>
+					
+				</p:dataTable>
+			</h:form>
+		</p:panel>
+		
+		<!-- 
+		<h:form id="formImprimir">
+			<p:confirmDialog message="Deseja Imprimir este relatório ?" header="..:: Imprimir Relatório" widgetVar="imprimirRelatorio">
+				<p:commandButton value="Sim" actionListener="#{relatorioAdminBean.gerarRelatorio}" oncomplete="imprimirRelatorio.hide()" 
+					update=":formMensagem :formImprimir :tabelaRelatorio" />
+				<p:commandButton value="Não" oncomplete="imprimirRelatorio.hide()"/>
+			</p:confirmDialog>
+		</h:form>
+		-->
+		<!-- 
+		<h:form>
+			<p:remoteCommand name="lazyload">  
+		        <f:setPropertyActionListener value="#{false}" target="#{relatorioAdminBean.mensagem}" />  
+		    </p:remoteCommand> 
+		</h:form>
+		-->
+	</ui:define>
+</ui:composition>
