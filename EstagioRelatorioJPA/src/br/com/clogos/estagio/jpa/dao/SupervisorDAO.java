@@ -9,5 +9,5 @@ public interface SupervisorDAO {
 	List<Supervisor> findAll();
 	List<Supervisor> findPorCampo(Long idCampo);
 	Supervisor validarAutenticacao(Supervisor param);
-	List<SupervisorVO> findSupervisorAnalitico();
+	List<SupervisorVO> findSupervisorAnalitico(Long idSemestre);
 }

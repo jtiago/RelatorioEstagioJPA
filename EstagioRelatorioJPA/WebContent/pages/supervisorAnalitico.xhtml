@@ -12,7 +12,7 @@
 			<p:growl id="mesg" autoUpdate="true"/>
 		</h:form>
 		
-		<p:panel header="..:: Validar Relatórios">
+		<p:panel header="..:: Relatório">
 			<h:form id="tabelaRelatorio">
 				<p:dataTable id="tabela" var="item" value="#{supervisorBean.facade.listaSupervisoresAnalitico}" emptyMessage="Sem Registro...">
 					<f:facet name="header">
@@ -45,7 +45,8 @@
 					</p:column>
 					
 					<p:column headerText="Situação">
-						<h:outputLabel value="#{item.situacao}"/>
+						<p:outputLabel value="#{item.situacao}" rendered="#{item.situacao == 'Pedente'}" style="color:red;font-weight:bold;"/>
+						<p:outputLabel value="#{item.situacao}" rendered="#{item.situacao == 'OK'}" style="color:green;font-weight:bold;"/>
 					</p:column>
 					
 				</p:dataTable>

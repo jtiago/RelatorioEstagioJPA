@@ -25,8 +25,8 @@ public class SupervisorController implements Serializable {
 		return getSupervisorDAO().validarAutenticacao(param);
 	}
 	
-	public List<SupervisorVO> findSupervisorAnalitico() {
-		return getSupervisorDAO().findSupervisorAnalitico();
+	public List<SupervisorVO> findSupervisorAnalitico(Long idSemestre) {
+		return getSupervisorDAO().findSupervisorAnalitico(idSemestre);
 	}
 	
 	public SupervisorDAO getSupervisorDAO() {

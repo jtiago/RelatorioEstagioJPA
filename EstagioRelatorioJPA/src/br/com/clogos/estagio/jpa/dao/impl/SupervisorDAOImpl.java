@@ -90,21 +90,24 @@ public class SupervisorDAOImpl implements SupervisorDAO, Serializable {
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public List<SupervisorVO> findSupervisorAnalitico() {
+	public List<SupervisorVO> findSupervisorAnalitico(Long idSemestre) {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder sql = new StringBuilder();
 		List<SupervisorVO> listaSupervisoresVO = new LinkedList<SupervisorVO>();
 		sql.append("select super.idsupervisor, super.cpfsupervisor, super.nomesupervisor, super.nomecampoestagio, super.siglacampoestagio, ");
-		sql.append("(select count(*) from uniweb.RELATORIO rel where rel.status = 2 and fksupervisor = super.idsupervisor) as Validado,  ");
-		sql.append("(select count(*) from uniweb.RELATORIO rel where rel.status = 0 and fksupervisor = super.idsupervisor) as Aberto, ");
-		sql.append("(select count(*) from uniweb.RELATORIO rel where rel.status = 1 and fksupervisor = super.idsupervisor) as Revisão, ");
-		sql.append("CASE ISNULL((select count(*) from uniweb.relatorio re where status in (0,1) and super.idsupervisor=re.fksupervisor),0) ");
-		sql.append("when 0 THEN 'OK' ELSE 'Pedente'	END	Situação from ");
-		sql.append("(select s.idsupervisor, s.cpfsupervisor, s.nomesupervisor, c.nomecampoestagio, c.siglacampoestagio from uniweb.SUPERVISOR s " );
+		sql.append("(select count(*) from uniweb.RELATORIO rel inner join uniweb.TURMA t on rel.fkturma=t.idturma ");
+		sql.append("inner join uniweb.SEMESTRE se on t.fksemestre=se.idsemestre where rel.status = 2 and fksupervisor = super.idsupervisor and se.idsemestre = :idSemestre) as Validado, ");
+		sql.append("(select count(*) from uniweb.RELATORIO rel inner join uniweb.TURMA t on rel.fkturma=t.idturma ");
+		sql.append("inner join uniweb.SEMESTRE se on t.fksemestre=se.idsemestre where rel.status = 0 and fksupervisor = super.idsupervisor and se.idsemestre = :idSemestre) as Aberto, ");
+		sql.append("(select count(*) from uniweb.RELATORIO rel inner join uniweb.TURMA t on rel.fkturma=t.idturma ");
+		sql.append("inner join uniweb.SEMESTRE se on t.fksemestre=se.idsemestre where rel.status = 1 and fksupervisor = super.idsupervisor and se.idsemestre = :idSemestre) as Revisão ");
+		//sql.append("CASE ISNULL((select count(*) from uniweb.relatorio re where status in (0,1) and super.idsupervisor=re.fksupervisor),0) ");
+		//sql.append("when 0 THEN 'OK' ELSE 'Pedente'	END	Situação ");
+		sql.append("from (select s.idsupervisor, s.cpfsupervisor, s.nomesupervisor, c.nomecampoestagio, c.siglacampoestagio from uniweb.SUPERVISOR s " );
 		sql.append("inner join uniweb.CAMPOESTAGIO c on c.idcampoestagio = s.fkcampoEstagio ) as super");
 		
 		try {
-			Query query = entityManager.createNativeQuery(sql.toString());
+			Query query = entityManager.createNativeQuery(sql.toString()).setParameter("idSemestre", idSemestre);
 			Iterator i = query.getResultList().iterator();
 			
 			while(i.hasNext()) {
@@ -118,7 +121,7 @@ public class SupervisorDAOImpl implements SupervisorDAO, Serializable {
 				vo.setQtdValidado(Integer.valueOf(objs[5].toString()));
 				vo.setQtdAberto(Integer.valueOf(objs[6].toString()));
 				vo.setQtdRevisao(Integer.valueOf(objs[7].toString()));
-				vo.setSituacao(objs[8].toString());
+				vo.setSituacao(validarSituacao(objs));
 				
 				listaSupervisoresVO.add(vo);
 			}
@@ -130,5 +133,16 @@ public class SupervisorDAOImpl implements SupervisorDAO, Serializable {
 			}
 		}
 		return listaSupervisoresVO;
+	}
+	
+	private String validarSituacao(Object[] objs) {
+		String retorno = null;
+		if(objs[6].toString().matches("[0]") && objs[7].toString().matches("[0]")) {
+			retorno = "OK";
+		} else {
+			retorno = "Pedente";
+		}
+		
+		return retorno;
 	}
 }

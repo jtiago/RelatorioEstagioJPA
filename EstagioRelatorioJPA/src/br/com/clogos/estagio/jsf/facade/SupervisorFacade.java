@@ -13,6 +13,7 @@ import br.com.clogos.estagio.jpa.controller.SupervisorController;
 import br.com.clogos.estagio.model.ImagemAssinatura;
 import br.com.clogos.estagio.model.Supervisor;
 import br.com.clogos.estagio.util.CriptografiaBase64;
+import br.com.clogos.estagio.util.Util;
 import br.com.clogos.estagio.vo.SupervisorVO;
 
 public class SupervisorFacade implements Serializable {
@@ -33,7 +34,7 @@ public class SupervisorFacade implements Serializable {
 	
 	public List<SupervisorVO> getListaSupervisoresAnalitico() {
 		if(listaSupervisoresAnalitico == null) {
-			listaSupervisoresAnalitico = getSupervisorController().findSupervisorAnalitico();
+			listaSupervisoresAnalitico = getSupervisorController().findSupervisorAnalitico(Util.getIdSemestre());
 		}
 		return listaSupervisoresAnalitico;
 	}
