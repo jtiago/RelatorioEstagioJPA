@@ -32,21 +32,22 @@
 						<h:outputLabel value="#{item.nomeCampoEstagio}"/>
 					</p:column>
 					
-					<p:column headerText="Qtd Validado">
+					<p:column headerText="Qtd Validado" style="text-align:center;font-weight:bold;">
 						<h:outputLabel value="#{item.qtdValidado}"/>
 					</p:column>
 					
-					<p:column headerText="Qtd Aberto">
+					<p:column headerText="Qtd Aberto" style="text-align:center;font-weight:bold;">
 						<h:outputLabel value="#{item.qtdAberto}"/>
 					</p:column>
 					
-					<p:column headerText="Qtd Revisão">
+					<p:column headerText="Qtd Revisão" style="text-align:center;font-weight:bold;">
 						<h:outputLabel value="#{item.qtdRevisao}"/>
 					</p:column>
 					
-					<p:column headerText="Situação">
-						<p:outputLabel value="#{item.situacao}" rendered="#{item.situacao == 'Pedente'}" style="color:red;font-weight:bold;"/>
+					<p:column headerText="Situação" style="text-align:center">
+						<p:outputLabel value="#{item.situacao}" rendered="#{item.situacao == 'Pendência'}" style="color:red;font-weight:bold;"/>
 						<p:outputLabel value="#{item.situacao}" rendered="#{item.situacao == 'OK'}" style="color:green;font-weight:bold;"/>
+						<p:outputLabel value="#{item.situacao}" rendered="#{item.situacao == 'Sem Relatórios'}" style="color:blue;font-weight:bold;"/>
 					</p:column>
 					
 				</p:dataTable>

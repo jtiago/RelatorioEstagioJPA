@@ -137,10 +137,12 @@ public class SupervisorDAOImpl implements SupervisorDAO, Serializable {
 	
 	private String validarSituacao(Object[] objs) {
 		String retorno = null;
-		if(objs[6].toString().matches("[0]") && objs[7].toString().matches("[0]")) {
-			retorno = "OK";
+		if(!objs[6].toString().equals("0") || !objs[7].toString().equals("0")) {
+			retorno = "Pendência";
+		} else if (objs[6].toString().equals("0") && objs[7].toString().equals("0") && objs[5].toString().equals("0")) {
+			retorno = "Sem Relatórios";
 		} else {
-			retorno = "Pedente";
+			retorno = "OK";
 		}
 		
 		return retorno;
