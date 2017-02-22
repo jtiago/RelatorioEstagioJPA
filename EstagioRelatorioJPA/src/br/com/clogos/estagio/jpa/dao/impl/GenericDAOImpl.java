@@ -114,4 +114,25 @@ public class GenericDAOImpl<T extends ObjectModel> implements GenericDAO, Serial
 		}
         return lista;
     }
+	
+	@Override
+	public Object findID(Class<?> clazz, String coluna, Long id) {
+		entityManager = JpaUtil.getEntityManager();
+		Object obj = null;
+		try {
+			entityManager.getTransaction().begin();
+			String nameClass = clazz.getSimpleName();
+			obj = entityManager.createQuery("SELECT c FROM " + nameClass+ " c WHERE "+coluna+" = "+id)
+					.getSingleResult();
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			entityManager.getTransaction().rollback();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+        return obj;
+    }
 }

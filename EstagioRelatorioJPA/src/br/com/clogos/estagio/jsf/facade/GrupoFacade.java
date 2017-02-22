@@ -38,7 +38,7 @@ public class GrupoFacade implements Serializable {
 	
 	public List<Grupo> getListaGrupos() {
 		if(listaGrupos== null) {
-			listaGrupos = getGrupoController().findAll(Util.getUsuarioSessao().getIdSemestre());
+			listaGrupos = getGrupoController().findAll(Util.getUsuarioSessao().getSemestre().getId());
 		}
 		return listaGrupos;
 	}

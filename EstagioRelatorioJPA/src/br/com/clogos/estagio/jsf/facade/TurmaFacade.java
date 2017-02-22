@@ -29,7 +29,7 @@ public class TurmaFacade implements Serializable {
 	}
 
 	public List<Turma> listaTurmaPorAluno(Long idAluno) {
-		return getTurmaController().obterTurmaPorAluno(Util.getUsuarioSessao().getIdSemestre(), idAluno);
+		return getTurmaController().obterTurmaPorAluno(Util.getUsuarioSessao().getSemestre().getId(), idAluno);
 	}
 	
 	public void save() {

@@ -10,6 +10,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.com.clogos.estagio.exception.ExceptionNegocial;
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.AlunoDAO;
 import br.com.clogos.estagio.model.Aluno;
@@ -45,63 +46,28 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 	public Aluno validarAutenticacao(Aluno param) {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder sql = new StringBuilder();
-		/*sql.append("SELECT idaluno,a.nomealuno,a.cpf,a.nometurma,t.nomeCurso,p.nomeperfil,p.idperfil,l.modulo,  ");
-		sql.append("cadastroAluno,cadastroCampo,cadastroSupervisor,cadastroTurma,liberarRelatorio,relatorioAluno, ");
-		sql.append("relatorioAdmin,l.aberto,validado,revisao,t.idturma,revisaoRelatorio,relatorioEnviado, s.idsemestre, nomeSemestre, ");
-		sql.append("(SELECT count(*) FROM relatorio rs INNER JOIN Aluno ass ON ass.idaluno=rs.fkaluno WHERE rs.fksemestre = :semestre and ass.cpf = :cpf) as limiteRelatorio, ");
-		sql.append("qtdRelatorio FROM Aluno a ");
-		sql.append("INNER JOIN Turma t ON a.nometurma = t.nometurma ");
-		sql.append("INNER JOIN Perfil p ON p.idperfil = a.fkperfil ");
-		sql.append("LEFT JOIN LiberarRelatorio l ON l.fkturma = t.idturma AND l.fksemestre = :semestre ");
-		sql.append("LEFT JOIN Relatorio r ON r.fkaluno = a.idaluno ");
-		sql.append("LEFT JOIN Semestre s ON l.fksemestre = s.idsemestre ");
-		sql.append("WHERE a.cpf = :cpf AND a.senha = :senha ORDER BY idrelatorio DESC ");*/
-		
-		sql.append("SELECT a FROM Aluno a JOIN a.perfil p JOIN FETCH a.turmas t JOIN t.semestre s ");
-		sql.append("LEFT JOIN t.liberarRelatorios l ");
-		sql.append("WHERE s.id = :semestre AND a.cpf  = :cpf AND a.senha = :senha");
-		
 		Aluno aluno = null;
-		try {
-			TypedQuery<Aluno> query = entityManager.createQuery(sql.toString(), Aluno.class)
-					.setParameter("semestre", param.getSemestre().getId())
-					.setParameter("cpf", param.getCpf())
-					.setParameter("senha", CriptografiaBase64.encrypt(param.getSenha()));
-		aluno = query.getSingleResult();
-			/*Iterator i = query.getResultList().iterator();
-			if(i.hasNext()) {
-				Object[] objs = (Object[]) i.next();
-				aluno = new Aluno();
-				aluno.setId(Long.valueOf(objs[0].toString()));
-				aluno.setNome(objs[1].toString());
-				aluno.setCpf(objs[2].toString());
-				//aluno.setNomeTurma(objs[3].toString());
-				aluno.getTurmaT().setNomeCurso(objs[4].toString());
-				aluno.getPerfil().setNome(objs[5].toString());
-				aluno.getPerfil().setId(Long.valueOf(objs[6].toString()));
-				aluno.setModulo(objs[7] == null ? null : ModuloEnum.valueOf(ModuloEnum.class, objs[7].toString()).getLabel().toUpperCase());
-				aluno.setFichaRelatorio(objs[7] == null ? null : ModuloEnum.valueOf(ModuloEnum.class, objs[7].toString()).getFicha());
-				aluno.getPerfil().setCadastroAluno(Boolean.valueOf(objs[8].toString()));
-				aluno.getPerfil().setCadastroCampo(Boolean.valueOf(objs[9].toString()));
-				aluno.getPerfil().setCadastroSupervisor(Boolean.valueOf(objs[10].toString()));
-				aluno.getPerfil().setCadastroTurma(Boolean.valueOf(objs[11].toString()));
-				aluno.getPerfil().setLiberarRelatorio(Boolean.valueOf(objs[12].toString()));
-				aluno.getPerfil().setRelatorioAluno(Boolean.valueOf(objs[13].toString()));
-				aluno.getPerfil().setRelatorioAdmin(Boolean.valueOf(objs[14].toString()));
-				aluno.setModuloLiberado(objs[15] == null ? false : Boolean.valueOf(objs[15].toString()));
-				aluno.getRelatorioR().setValidado(objs[16] == null ? false : Boolean.valueOf(objs[16].toString()));
-				aluno.getRelatorioR().setRevisao(objs[17] == null ? false : Boolean.valueOf(objs[17].toString()));
-				aluno.getTurmaT().setId(Long.valueOf(objs[18].toString()));
-				aluno.getPerfil().setRevisaoRelatorio(Boolean.valueOf(objs[19].toString()));
-				aluno.getPerfil().setRelatorioEnviado(Boolean.valueOf(objs[20].toString()));
-				aluno.getSemestre().setId(objs[21] == null ? null : Long.valueOf(objs[21].toString()));
-				aluno.getSemestre().setNomeSemestre(objs[22].toString());
-				aluno.setLimiteRelatorio(objs[23].toString().equals(objs[24].toString()));
-			}:*/
-		} catch (PersistenceException e) {
-			e.printStackTrace();
-			entityManager.getTransaction().rollback();
+		
+		if(existeCPFSemestre(param.getCpf(), param.getSemestre().getId())) {
+		
+			sql.append("SELECT a FROM Aluno a JOIN FETCH a.perfil p JOIN FETCH a.turmas t JOIN FETCH t.semestre s ");
+			sql.append("LEFT JOIN t.liberarRelatorios l ");
+			sql.append("WHERE s.id = :semestre AND a.cpf  = :cpf AND a.senha = :senha");
+		
+			try {
+				TypedQuery<Aluno> query = entityManager.createQuery(sql.toString(), Aluno.class)
+						.setParameter("semestre", param.getSemestre().getId())
+						.setParameter("cpf", param.getCpf())
+						.setParameter("senha", CriptografiaBase64.encrypt(param.getSenha()));
+			aluno = query.getSingleResult();
+			} catch (PersistenceException e) {
+				ExceptionNegocial.exibirMsgWarn("Atenção: Usuário ou Senha Inválida!");
+				entityManager.getTransaction().rollback();
+			}
+		} else {
+			ExceptionNegocial.exibirMsgWarn("Atenção: Não está matrículado no Semestre selecionado");
 		}
+			
 		return aluno;
 	}
 
@@ -177,7 +143,7 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 		List<Aluno> lista = new ArrayList<Aluno>();
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
-		hql.append("SELECt idaluno, idturma, cpf, a.nomealuno, t.nometurma, t.fksemestre from uniweb.aluno a  ");
+		hql.append("SELECT idaluno, idturma, cpf, a.nomealuno, t.nometurma, t.fksemestre from uniweb.aluno a  ");
 		hql.append("inner join uniweb.turma_aluno ta on a.idaluno = ta.alunos_idaluno ");
 		hql.append("inner join uniweb.turma t on t.idturma = ta.turmas_idturma ");
 		hql.append("where cpf= :cpf and t.fksemestre = :idSemestre ");
@@ -244,5 +210,30 @@ public class AlunoDAOImpl implements Serializable, AlunoDAO {
 				entityManager.close();
 			}
 		}
+	}
+	
+	private Boolean existeCPFSemestre(String cpf, Long idSemestre) {
+		Boolean retorno = false;
+		entityManager = JpaUtil.getEntityManager();
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECT idaluno, idturma, cpf, a.nomealuno, t.nometurma, t.fksemestre from uniweb.aluno a  ");
+		hql.append("inner join uniweb.turma_aluno ta on a.idaluno = ta.alunos_idaluno ");
+		hql.append("inner join uniweb.turma t on t.idturma = ta.turmas_idturma ");
+		hql.append("where cpf= :cpf and t.fksemestre = :idSemestre ");
+		
+		try {
+			Query query = entityManager.createNativeQuery(hql.toString())
+					.setParameter("cpf", cpf)
+					.setParameter("idSemestre", idSemestre);
+			if(query.getResultList().size() > 0) {
+				retorno = true;
+			}
+			
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			ExceptionNegocial.exibirMsgErro("Problemas ao verificar Aluno Matrículado.");
+		}
+		
+		return retorno;
 	}
 }

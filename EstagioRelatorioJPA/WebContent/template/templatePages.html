@@ -22,7 +22,7 @@ width: 350px
 	<div id="template_pages">
 		<div id="template_pages_top">
 			<p:graphicImage url="/images/bannerestagio.png"/>
-			<p:commandButton value="#{sessionScope.usuarioLogado.nome} #{sessionScope.usuarioLogado.perfil.id eq 2 ? -  sessionScope.usuarioLogado.semestre.nomeSemestre : ''}"/>
+			<p:commandButton value="Usuário: #{sessionScope.usuarioLogado.nome} / Semestre: #{sessionScope.usuarioLogado.semestre.nomeSemestre}"/>
 		</div>
 		
 		<div id="template_pages_menu">
@@ -34,20 +34,20 @@ width: 350px
 					</p:submenu>
 					
 					<p:submenu label="Cadastro" rendered="#{sessionScope.usuarioLogado.perfil.cadastro}">
-						<p:menuitem value="Usuário" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroUsuario}" url="/pages/usuario.jsf" />
-						<p:menuitem value="Campo" icon="ui-icon-home" rendered="#{sessionScope.usuarioLogado.perfil.cadastroCampo}" url="/pages/campoEstagio.jsf" />
-						<p:menuitem value="Supervisor" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroSupervisor}" url="/pages/supervisor.jsf" />
-						<p:menuitem value="Aluno" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroAluno}" url="/pages/aluno.jsf" />
-						<p:menuitem value="Turma" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroTurma}" url="/pages/turma.jsf" />
-						<p:menuitem value="Semestre" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroTurma}" url="/pages/semestre.jsf" />
-						<p:menuitem value="Grupo" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroGrupo}" url="/pages/grupo.jsf" />
+						<p:menuitem value="Usuário" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroUsuario}" url="/pages/cadastroUsuario.jsf" />
+						<p:menuitem value="Campo" icon="ui-icon-home" rendered="#{sessionScope.usuarioLogado.perfil.cadastroCampo}" url="/pages/cadastroCampo.jsf" />
+						<p:menuitem value="Supervisor" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroSupervisor}" url="/pages/cadastroSupervisor.jsf" />
+						<p:menuitem value="Aluno" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.cadastroAluno}" url="/pages/cadastroAluno.jsf" />
+						<p:menuitem value="Turma" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroTurma}" url="/pages/cadastroTurma.jsf" />
+						<p:menuitem value="Semestre" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroSemestre}" url="/pages/cadastroSemestre.jsf" />
+						<p:menuitem value="Grupo" icon="ui-icon-newwin" rendered="#{sessionScope.usuarioLogado.perfil.cadastroGrupo}" url="/pages/cadastroGrupo.jsf" />
 					</p:submenu>
 					
-					<p:submenu label="Relatórios">
-						<p:menuitem value="Supervisor Analítico" icon="ui-icon-person" url="/pages/supervisorAnalitico.jsf" />
+					<p:submenu label="Relatórios" rendered="#{sessionScope.usuarioLogado.perfil.relatorios}">
+						<p:menuitem value="Supervisor Analítico" icon="ui-icon-person" rendered="#{sessionScope.usuarioLogado.perfil.relatorioSupervisorAnalitico}" url="/pages/relatorioSupervisorAnalitico.jsf" />
 					</p:submenu>
 
-					<p:menuitem value="Preencher Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAluno}" url="/pages/turmaVinculada.jsf" />
+					<p:menuitem value="Preencher Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.turmaVinculada}" url="/pages/turmaVinculada.jsf" />
 					<p:menuitem value="Liberar Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.liberarRelatorio}" url="/pages/liberarRelatorio.jsf" />
 					<p:menuitem value="Validar Relatório" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.relatorioAdmin}" url="/pages/relatorioAdmin.jsf" />
 					<p:menuitem value="Revisar Relatório" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.revisaoRelatorio}" url="/pages/revisaoRelatorio.jsf" />

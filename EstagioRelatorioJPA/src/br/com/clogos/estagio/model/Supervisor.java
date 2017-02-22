@@ -61,7 +61,7 @@ public class Supervisor implements ObjectModel {
 	private Perfil perfil;
 	
 	@Transient
-	private Long idSemestre;
+	private Semestre semestre;
 
 	public Long getId() {
 		return id;
@@ -143,11 +143,11 @@ public class Supervisor implements ObjectModel {
 		this.perfil = perfil;
 	}
 
-	public Long getIdSemestre() {
-		return idSemestre;
+	public Semestre getSemestre() {
+		return semestre == null ? semestre = new Semestre() : semestre;
 	}
 
-	public void setIdSemestre(Long idSemestre) {
-		this.idSemestre = idSemestre;
+	public void setSemestre(Semestre semestre) {
+		this.semestre = semestre;
 	}
 }

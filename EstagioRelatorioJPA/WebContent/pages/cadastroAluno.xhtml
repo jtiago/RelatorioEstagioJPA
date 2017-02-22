@@ -43,7 +43,7 @@
 					</p:column>
 					
 					<p:column style="text-align:right; width: 150px;">
-						<p:commandButton icon="ui-icon-trash" oncomplete="removeAluno.show()">
+						<p:commandButton icon="ui-icon-trash" oncomplete="removeAluno.show()" disabled="true">
 							<f:setPropertyActionListener target="#{alunoBean.facade.aluno}" value="#{item}" />
 						</p:commandButton>
 

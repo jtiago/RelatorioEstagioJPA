@@ -34,14 +34,14 @@ public class TransferirAlunoFacade implements Serializable {
 	
 	public List<Turma> getListaTurmaSemVinculoAluno() {
 		listaTurmaSemVinculoAluno = getTurmaController().obterTurmaSemVinculoAluno(getAluno().getId(), 
-				Util.getUsuarioSessao().getIdSemestre());
+				Util.getUsuarioSessao().getSemestre().getId());
 		return listaTurmaSemVinculoAluno;
 	}
 	
 	public void pesquisarAlunoTurma() {
 		if(cpfProcura != null) {
 			String cpf = cpfProcura.replace(".", "").replace("-", "");
-			listaAlunoTurma = getAlunoController().findPorCpf(cpf, Util.getUsuarioSessao().getIdSemestre());
+			listaAlunoTurma = getAlunoController().findPorCpf(cpf, Util.getUsuarioSessao().getSemestre().getId());
 			if(listaAlunoTurma.size() == 0) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 						FacesMessage.SEVERITY_INFO, "Nenhum Aluno encontrado.", ""));

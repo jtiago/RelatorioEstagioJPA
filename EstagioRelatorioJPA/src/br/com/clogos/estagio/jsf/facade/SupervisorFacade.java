@@ -11,6 +11,7 @@ import br.com.clogos.estagio.enums.CursoEnum;
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.SupervisorController;
 import br.com.clogos.estagio.model.ImagemAssinatura;
+import br.com.clogos.estagio.model.Semestre;
 import br.com.clogos.estagio.model.Supervisor;
 import br.com.clogos.estagio.util.CriptografiaBase64;
 import br.com.clogos.estagio.util.Util;
@@ -91,7 +92,7 @@ public class SupervisorFacade implements Serializable {
 		
 		try {
 			if(usuarioLogado != null) { 
-				usuarioLogado.setIdSemestre(supervisor.getIdSemestre());
+				usuarioLogado.setSemestre((Semestre) getGenericControl().findID(Semestre.class, "idSemestre", supervisor.getSemestre().getId()));
 				HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
 						.getExternalContext().getRequest();
 				request.getSession().setAttribute("usuarioLogado", usuarioLogado);

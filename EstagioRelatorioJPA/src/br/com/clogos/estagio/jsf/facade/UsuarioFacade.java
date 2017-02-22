@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.UsuarioController;
+import br.com.clogos.estagio.model.Semestre;
 import br.com.clogos.estagio.model.Usuario;
 import br.com.clogos.estagio.util.CriptografiaBase64;
 
@@ -47,7 +48,8 @@ public class UsuarioFacade implements Serializable {
 		
 		try {
 			if(usuarioLogado != null) { 
-				usuarioLogado.setIdSemestre(usuario.getIdSemestre());
+				usuarioLogado.setSemestre(new Semestre());
+				usuarioLogado.setSemestre((Semestre)getGenericController().findID(Semestre.class, "id", usuario.getSemestre().getId()));
 				HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
 						.getExternalContext().getRequest();
 				request.getSession().setAttribute("usuarioLogado", usuarioLogado);

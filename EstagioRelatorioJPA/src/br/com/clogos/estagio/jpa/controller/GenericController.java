@@ -30,6 +30,10 @@ public class GenericController implements Serializable {
 		return getGenericDAO().findAll(clazz, coluna, order, join);
 	}
 	
+	public Object findID(Class<?> clazz, String coluna, Long id) {
+		return getGenericDAO().findID(clazz, coluna, id);
+	}
+	
 	@SuppressWarnings("rawtypes")
 	public GenericDAO getGenericDAO() {
 		if(genericDAO == null) {

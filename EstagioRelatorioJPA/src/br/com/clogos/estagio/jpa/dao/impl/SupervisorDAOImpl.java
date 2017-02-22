@@ -101,10 +101,11 @@ public class SupervisorDAOImpl implements SupervisorDAO, Serializable {
 		sql.append("inner join uniweb.SEMESTRE se on t.fksemestre=se.idsemestre where rel.status = 0 and fksupervisor = super.idsupervisor and se.idsemestre = :idSemestre) as Aberto, ");
 		sql.append("(select count(*) from uniweb.RELATORIO rel inner join uniweb.TURMA t on rel.fkturma=t.idturma ");
 		sql.append("inner join uniweb.SEMESTRE se on t.fksemestre=se.idsemestre where rel.status = 1 and fksupervisor = super.idsupervisor and se.idsemestre = :idSemestre) as Revisão ");
-		//sql.append("CASE ISNULL((select count(*) from uniweb.relatorio re where status in (0,1) and super.idsupervisor=re.fksupervisor),0) ");
-		//sql.append("when 0 THEN 'OK' ELSE 'Pedente'	END	Situação ");
-		sql.append("from (select s.idsupervisor, s.cpfsupervisor, s.nomesupervisor, c.nomecampoestagio, c.siglacampoestagio from uniweb.SUPERVISOR s " );
-		sql.append("inner join uniweb.CAMPOESTAGIO c on c.idcampoestagio = s.fkcampoEstagio ) as super");
+		sql.append("from (select distinct s.idsupervisor, s.cpfsupervisor, s.nomesupervisor, c.nomecampoestagio, c.siglacampoestagio from uniweb.SUPERVISOR s " );
+		sql.append("inner join uniweb.CAMPOESTAGIO c on c.idcampoestagio = s.fkcampoEstagio ");
+		sql.append("inner join uniweb.RELATORIO rel on rel.fksupervisor=s.idsupervisor ");
+		sql.append("inner join uniweb.TURMA t on t.idturma=rel.fkturma where t.fksemestre = :idSemestre ");
+		sql.append(") as super");
 		
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString()).setParameter("idSemestre", idSemestre);

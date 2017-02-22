@@ -18,6 +18,7 @@ public class SemestreFacade implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Semestre semestre;
 	private Semestre semestreAltera;
+	private Semestre semestreBusca;
 	private List<Semestre> listaSemestre;
 	private GenericController genericController;
 	
@@ -27,6 +28,14 @@ public class SemestreFacade implements Serializable {
 			listaSemestre = (List<Semestre>) getGenericController().findAll(Semestre.class, "nomeSemestre", "desc", "");
 		}
 		return listaSemestre;
+	}
+	
+	public Semestre getSemestreBusca(Long id) {
+		if(semestreBusca != null) {
+			semestreBusca = (Semestre) getGenericController().findID(Semestre.class, "id", id);
+		}
+		
+		return semestreBusca;
 	}
 	
 	public void save() {

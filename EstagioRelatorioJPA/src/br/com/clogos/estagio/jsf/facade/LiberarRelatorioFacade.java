@@ -26,7 +26,7 @@ public class LiberarRelatorioFacade implements Serializable {
 	
 	public List<LiberarRelatorio> getListaLiberados() {
 		if(listaLiberados == null) {
-			listaLiberados = getLiberarRelatorioController().findoAll(Util.getUsuarioSessao().getIdSemestre());
+			listaLiberados = getLiberarRelatorioController().findoAll(Util.getUsuarioSessao().getSemestre().getId());
 		}
 		return listaLiberados;
 	}

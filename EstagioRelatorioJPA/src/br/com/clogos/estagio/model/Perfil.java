@@ -43,9 +43,14 @@ public class Perfil implements ObjectModel {
 	@Column(length=1)
 	private Boolean cadastroTurma;
 	@Column(length=1)
+	private Boolean cadastroSemestre;
+	@Column(length=1)
+	private Boolean cadastroGrupo;
+	
+	@Column(length=1)
 	private Boolean liberarRelatorio;
 	@Column(length=1)
-	private Boolean relatorioAluno;
+	private Boolean turmaVinculada;
 	@Column(length=1)
 	private Boolean relatorioAdmin;
 	@Column(length=1)
@@ -55,7 +60,12 @@ public class Perfil implements ObjectModel {
 	@Column(length=1)
 	private Boolean relatorioEnviado;
 	@Column(length=1)
-	private Boolean cadastroGrupo;
+	private Boolean transferirAluno;
+	
+	@Column(length=1)
+	private Boolean relatorios;
+	@Column(length=1)
+	private Boolean relatorioSupervisorAnalitico;
 	
 //	update perfil set cadastroAluno = 1, cadastroCampo = 1, cadastroSupervisor = 1, cadastroTurma = 1, liberarrelatorio = 1, relatorioAdmin = 1,
 //			relatorioAluno = 0, revisaoRelatorio = 0 where idperfil = 1;
@@ -124,6 +134,14 @@ public class Perfil implements ObjectModel {
 	public void setCadastroTurma(Boolean cadastroTurma) {
 		this.cadastroTurma = cadastroTurma;
 	}
+	
+	public Boolean getCadastroSemestre() {
+		return cadastroSemestre;
+	}
+
+	public void setCadastroSemestre(Boolean cadastroSemestre) {
+		this.cadastroSemestre = cadastroSemestre;
+	}
 
 	public Boolean getLiberarRelatorio() {
 		return liberarRelatorio;
@@ -133,12 +151,12 @@ public class Perfil implements ObjectModel {
 		this.liberarRelatorio = liberarRelatorio;
 	}
 
-	public Boolean getRelatorioAluno() {
-		return relatorioAluno;
+	public Boolean getTurmaVinculada() {
+		return turmaVinculada;
 	}
 
-	public void setRelatorioAluno(Boolean relatorioAluno) {
-		this.relatorioAluno = relatorioAluno;
+	public void setTurmaVinculada(Boolean turmaVinculada) {
+		this.turmaVinculada = turmaVinculada;
 	}
 
 	public Boolean getRelatorioAdmin() {
@@ -172,6 +190,14 @@ public class Perfil implements ObjectModel {
 	public void setRelatorioEnviado(Boolean relatorioEnviado) {
 		this.relatorioEnviado = relatorioEnviado;
 	}
+	
+	public Boolean getTransferirAluno() {
+		return transferirAluno;
+	}
+
+	public void setTransferirAluno(Boolean transferirAluno) {
+		this.transferirAluno = transferirAluno;
+	}
 
 	public List<Aluno> getAlunos() {
 		return alunos;
@@ -187,5 +213,21 @@ public class Perfil implements ObjectModel {
 
 	public void setCadastroGrupo(Boolean cadastroGrupo) {
 		this.cadastroGrupo = cadastroGrupo;
+	}
+
+	public Boolean getRelatorios() {
+		return relatorios;
+	}
+
+	public void setRelatorios(Boolean relatorios) {
+		this.relatorios = relatorios;
+	}
+
+	public Boolean getRelatorioSupervisorAnalitico() {
+		return relatorioSupervisorAnalitico;
+	}
+
+	public void setRelatorioSupervisorAnalitico(Boolean relatorioSupervisorAnalitico) {
+		this.relatorioSupervisorAnalitico = relatorioSupervisorAnalitico;
 	}
 }

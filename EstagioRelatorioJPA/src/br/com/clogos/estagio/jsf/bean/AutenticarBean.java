@@ -50,14 +50,14 @@ public class AutenticarBean implements Serializable {
 			usuario.setSenha(getAluno().getSenha());
 			usuario.setPerfil(new Perfil());
 			usuario.getPerfil().setId(getPerfil().getId());
-			usuario.setIdSemestre(getAluno().getSemestre().getId());
+			usuario.getSemestre().setId(getAluno().getSemestre().getId());
 			getFacadeUsuario().login(usuario); 
 		} else if(getPerfil().getId() == 3) {
 			Supervisor supervisor = new Supervisor();
 			supervisor.setCpf(getAluno().getCpf());
 			supervisor.setSenha(getAluno().getSenha());
 			supervisor.getPerfil().setId(getPerfil().getId());
-			supervisor.setIdSemestre(getAluno().getSemestre().getId());
+			supervisor.getSemestre().setId(getAluno().getSemestre().getId());
 			getFacadeSupervisor().login(supervisor);
 		}else {
 			getAlunoFacade().login(getAluno());

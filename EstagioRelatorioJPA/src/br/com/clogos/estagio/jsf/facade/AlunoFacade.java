@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import br.com.clogos.estagio.jpa.controller.AlunoController;
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.model.Aluno;
+import br.com.clogos.estagio.model.Semestre;
 import br.com.clogos.estagio.model.Turma;
 import br.com.clogos.estagio.util.CriptografiaBase64;
 import br.com.clogos.estagio.util.Util;
@@ -36,7 +37,7 @@ public class AlunoFacade implements Serializable {
 	}
 	
 	public List<Aluno> getListaAlunoPorTurma(Long idTurma) {
-		listaAlunoPorTurma = getAlunoController().findPorTurma(idTurma, Util.getUsuarioSessao().getIdSemestre());
+		listaAlunoPorTurma = getAlunoController().findPorTurma(idTurma, Util.getUsuarioSessao().getSemestre().getId());
 		return listaAlunoPorTurma;
 	}
 	
@@ -116,18 +117,18 @@ public class AlunoFacade implements Serializable {
 		
 		try {
 			if(alunoLogado != null) { 
+				Semestre semestre = (Semestre) getGenericController().findID(Semestre.class, "idSemestre", usuario.getSemestre().getId());
+				alunoLogado.getSemestre().setNomeSemestre(semestre.getNomeSemestre());
 				alunoLogado.getSemestre().setId(usuario.getSemestre().getId());
 				HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
 						.getExternalContext().getRequest();
 				request.getSession().setAttribute("usuarioLogado", alunoLogado);
 				FacesContext.getCurrentInstance().getExternalContext().redirect((
 						new StringBuilder(String.valueOf(request.getContextPath()))).append("/pages/home.jsf").toString());
-			} else {
-				usuario = null;
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-						FacesMessage.SEVERITY_ERROR, "Login ou Senha Invalida.", ""));
-			}
+			} 
+			
 		} catch (Exception e) {
+			usuario = null;
 			e.printStackTrace();
 		}
 	}

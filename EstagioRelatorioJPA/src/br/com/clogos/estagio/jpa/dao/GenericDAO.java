@@ -8,4 +8,5 @@ public interface GenericDAO {
 	Boolean delete(Object oT);
 	Boolean saveList(List<?> list);
 	List<?> findAll(Class<?> clazz, String coluna, String order, String join);
+	Object findID(Class<?> clazz, String coluna, Long id);
 }

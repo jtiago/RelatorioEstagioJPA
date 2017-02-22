@@ -30,10 +30,10 @@ public class Util {
 		
 		if (object instanceof Usuario) {
 			Usuario usuario = (Usuario) object;
-			return usuario.getIdSemestre();
+			return usuario.getSemestre().getId();
 		} else {
 			Supervisor supervisor = (Supervisor) object;
-			return supervisor.getIdSemestre();
+			return supervisor.getSemestre().getId();
 		}
 	}
 }

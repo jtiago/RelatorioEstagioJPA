@@ -59,7 +59,7 @@
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
-						<h:outputLabel value="CURSO #{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.nomeCurso.toUpperCase()}" />
+						<h:outputLabel value="CURSO #{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.nomeCurso.toUpperCase()}"/>
 					</h:panelGrid>
 
 						<h:inputHidden value="#{sessionScope.usuarioLogado.id}" />
@@ -153,7 +153,7 @@
 				<p:panel header="..:: Relatorio de Estagio" rendered="#{relatorioAlunoBean.facade.limiteRelatorio and !relatorioAlunoBean.facade.relatorioAvaliando}" style="margin:0 auto;">
 					<br/><br/><br/><br/><br/><br/>
 					<h:panelGrid columns="1" style="margin:0 auto;">
-						<h:outputLabel value="TODOS OS RELATÃ“RIOS DA TURMA #{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.nome}/#{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.semestre.nomeSemestre} JÃ� FORAM ENVIANDOS!" 
+						<h:outputLabel value="TODOS OS RELATÓRIOS DA TURMA #{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.nome}/#{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.semestre.nomeSemestre} JÁ FORAM ENVIANDOS!" 
 								style="font-size: 25px; font-weight:bold; text-align:center;"/>
 					</h:panelGrid>			
 					<br/><br/><br/><br/><br/><br/>
