@@ -7,6 +7,7 @@ import br.com.clogos.estagio.jpa.dao.RelatorioDAO;
 import br.com.clogos.estagio.jpa.dao.impl.RelatorioDAOImpl;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Relatorio;
+import br.com.clogos.estagio.vo.RelatorioStatusVO;
 
 public class RelatorioController implements Serializable {
 
@@ -50,6 +51,10 @@ public class RelatorioController implements Serializable {
 	
 	public Boolean existeRelatorioGrupoCampoEstagio(Relatorio relatorio) {
 		return getRelatorioDAO().existeRelatorioGrupoCampoEstagio(relatorio);
+	}
+	
+	public List<RelatorioStatusVO> findRelatorioStatus(Long idTurma, Long idSemestre) {
+		return getRelatorioDAO().findRelatorioStatus(idTurma, idSemestre);
 	}
 	
 	public RelatorioDAO getRelatorioDAO() {

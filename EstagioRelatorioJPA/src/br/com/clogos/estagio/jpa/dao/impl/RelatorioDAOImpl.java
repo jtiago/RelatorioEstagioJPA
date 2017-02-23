@@ -1,6 +1,7 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.RelatorioDAO;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Relatorio;
+import br.com.clogos.estagio.vo.RelatorioStatusVO;
 
 public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 
@@ -255,6 +257,51 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 					.setParameter("cpf", aluno.getCpf())
 					.setParameter("idSemestre", aluno.getSemestre().getId());
 			lista = query.getResultList();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return lista;
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public List<RelatorioStatusVO> findRelatorioStatus(Long idTurma, Long idSemestre) {
+		entityManager = JpaUtil.getEntityManager();
+		StringBuilder sql = new StringBuilder();
+		List<RelatorioStatusVO> lista = new LinkedList<RelatorioStatusVO>();
+		sql.append("SELECT cpf, a.nomealuno, t.nometurma, s.nomeSemestre, lr.qtdRelatorio, lr.modulo, COUNT(rel.fkaluno) as relenviados from uniweb.aluno a ");
+		sql.append("inner join uniweb.turma_aluno ta on a.idaluno = ta.alunos_idaluno ");
+		sql.append("inner join uniweb.turma t on t.idturma = ta.turmas_idturma ");
+		sql.append("inner join uniweb.SEMESTRE s on s.idsemestre=t.fksemestre ");
+		sql.append("inner join uniweb.LIBERARRELATORIO lr on lr.fkturma=t.idturma ");
+		sql.append("left join uniweb.RELATORIO rel on rel.fkaluno=a.idaluno and rel.modulo=lr.modulo and t.idturma=rel.fkturma ");
+		sql.append("WHERE t.fksemestre = :idSemestre AND t.idturma = :idTurma ");
+		sql.append("GROUP BY a.cpf, a.nomealuno, t.nometurma, s.nomeSemestre, qtdRelatorio, lr.modulo " );
+		sql.append("HAVING (SIGN(COUNT(rel.fkaluno) - lr.qtdRelatorio) = -1) ORDER BY a.nomealuno");
+		
+		try {
+			Query query = entityManager.createNativeQuery(sql.toString()).setParameter("idSemestre", idSemestre).setParameter("idTurma", idTurma);
+			Iterator i = query.getResultList().iterator();
+			
+			while(i.hasNext()) {
+				Object[] objs = (Object[]) i.next();
+				RelatorioStatusVO vo = new RelatorioStatusVO();
+				vo.setCpf(objs[0].toString());
+				vo.setNomeAluno(objs[1].toString());
+				vo.setNomeTurma(objs[2].toString());
+				vo.setNomeSemestre(objs[3].toString());
+				vo.setQtdRelatorio(Integer.valueOf(objs[4].toString()));
+				vo.setModulo(objs[5].toString());
+				vo.setRelEnviados(Integer.valueOf(objs[6].toString()));
+				
+				lista.add(vo);
+			}
+
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();

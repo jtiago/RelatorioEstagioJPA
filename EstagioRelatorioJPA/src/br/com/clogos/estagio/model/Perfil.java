@@ -66,6 +66,8 @@ public class Perfil implements ObjectModel {
 	private Boolean relatorios;
 	@Column(length=1)
 	private Boolean relatorioSupervisorAnalitico;
+	@Column(length=1)
+	private Boolean relatorioPendencia;
 	
 //	update perfil set cadastroAluno = 1, cadastroCampo = 1, cadastroSupervisor = 1, cadastroTurma = 1, liberarrelatorio = 1, relatorioAdmin = 1,
 //			relatorioAluno = 0, revisaoRelatorio = 0 where idperfil = 1;
@@ -230,4 +232,12 @@ public class Perfil implements ObjectModel {
 	public void setRelatorioSupervisorAnalitico(Boolean relatorioSupervisorAnalitico) {
 		this.relatorioSupervisorAnalitico = relatorioSupervisorAnalitico;
 	}
+
+	public Boolean getRelatorioPendencia() {
+		return relatorioPendencia;
+	}
+
+	public void setRelatorioPendencia(Boolean relatorioPendencia) {
+		this.relatorioPendencia = relatorioPendencia;
+	}	
 }
