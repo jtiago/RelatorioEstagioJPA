@@ -93,15 +93,21 @@
 				header="..::: Novo Supervisor - [ * Campo Obrigatório ]" widgetVar="dialogAltSupervisor">
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Nome:" />
-					<p:inputText value="#{supervisorBean.facade.supervisorAltera.nome}" style="width: 400px;"/>
+					<p:inputText value="#{supervisorBean.facade.supervisorAltera.nome}" style="width: 500px;"/>
 					
 					<p:outputLabel for="curso" value="Curso:" />
-						 <p:selectOneMenu id="curso" value="#{supervisorBean.facade.supervisorAltera.curso}" 
-						 	required="true" style="width:300px;">  
-	                        <f:selectItem itemLabel="Selecione Curso" itemValue="#{null}" />  
-	                        <f:selectItems value="#{supervisorBean.facade.cursoEnum}" var="c" itemValue="#{c}" itemLabel="#{c.label}"/>  
-	                    </p:selectOneMenu>
-					
+					 <p:selectOneMenu id="curso" value="#{supervisorBean.facade.supervisorAltera.curso}" 
+					 	required="true" style="width:500px;">  
+                        <f:selectItem itemLabel="Selecione Curso" itemValue="#{null}" />  
+                        <f:selectItems value="#{supervisorBean.facade.cursoEnum}" var="c" itemValue="#{c}" itemLabel="#{c.label}"/>  
+                    </p:selectOneMenu>
+	                    
+                    <p:outputLabel for="campo" value="Campo:" />
+                   	<p:selectOneMenu id="campo" value="#{supervisorBean.facade.supervisorAltera.campoEstagio.id}" style="width: 500px;">
+						<f:selectItem itemLabel="Selecione Campo" itemValue="#{null}"/>
+						<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.sigla} - #{cam.nome}"
+							itemValue="#{cam.id}"/>
+					</p:selectOneMenu>
 				</h:panelGrid>
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{supervisorBean.update}"
 					update=":formTabelaSupervisor"/>

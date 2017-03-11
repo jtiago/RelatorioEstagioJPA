@@ -20,35 +20,6 @@
 				</h:panelGrid>
 			</h:form><br/>
 			
-			<!-- 
-			<h:form id="formTabelaGrupo">
-				<p:dataTable id="tabelaGrupo" var="item" value="#{grupoBean.facade.listaGrupos}" emptyMessage="Sem Registros...">
-					<f:facet name="header">
-						Grupos Cadastrados
-					</f:facet>
-					
-					<p:column headerText="Turma">
-						<h:outputLabel value="#{item.turmaGrupo.nome}"/>
-					</p:column>
-				
-					<p:column headerText="Nome Grupo">
-						<h:outputLabel value="#{item.nomeGrupo}"/>
-					</p:column>
-					
-					
-					<p:column style="text-align:right; width: 185px;">
-						<p:commandButton icon="ui-icon-circle-zoomout" title="Visualizar Grupo" oncomplete="dialogView.show()" update=":formView">
-							<f:setPropertyActionListener target="#{grupoBean.facade.grupo}" value="#{item}" />
-						</p:commandButton>
-
-						<p:commandButton icon="ui-icon-pencil" title="Alterar Semestre" oncomplete="" update="">
-							<f:setPropertyActionListener target="#{semestreBean.facade.semestreAltera}" value="#{item}" />
-						</p:commandButton>
-					</p:column>
-				</p:dataTable>
-			</h:form>
-			-->
-			
 			<h:form id="formTabelaGrupo">
 				<p:dataTable id="tabelaTurma" var="item" value="#{grupoBean.facade.listaTurmas}" emptyMessage="Sem Registros...">
 					<f:facet name="header">

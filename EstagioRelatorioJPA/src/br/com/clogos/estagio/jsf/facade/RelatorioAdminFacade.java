@@ -56,7 +56,7 @@ public class RelatorioAdminFacade implements Serializable {
 	}
 	
 	public StatusEnum[] getStatus() {
-		return StatusEnum.values();
+		return StatusEnum.getStatusRelAdmin();
 	}
 	
 	public void pesquisaRelatorio() {

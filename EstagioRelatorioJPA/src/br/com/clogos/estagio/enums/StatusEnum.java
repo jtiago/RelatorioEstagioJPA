@@ -4,7 +4,10 @@ public enum StatusEnum {
 	ABERTO(0, "ABERTO"),
 	REVISAO(1, "REVISÃO"),
 	VALIDADO(2, "VALIDADO"),
-	NAOENVIADO(3, "NÃO ENVIADO");
+	NAOENVIADO(3, "NÃO ENVIADO"),
+	TRANCOU(4, "TRANCOU"),
+	DESISTENTE(5, "DESISTENTE"),
+	CURSANDO(6, "CURSANDO");
 	
 	private Integer codigo;
 	private String label;
@@ -32,5 +35,10 @@ public enum StatusEnum {
 		} else {
 			return NAOENVIADO.label;
 		}
+	}
+	
+	public static StatusEnum[] getStatusRelAdmin() {
+		return new StatusEnum[]{StatusEnum.ABERTO,StatusEnum.VALIDADO,StatusEnum.REVISAO};
+		
 	}
 }

@@ -39,7 +39,7 @@
 					</p:column>
 					
 					<p:column style="text-align:right; width: 185px;">
-						<p:commandButton icon="ui-icon-trash" disabled="true" title="Remover Turma" oncomplete="removeTurma.show()">
+						<p:commandButton icon="ui-icon-trash" title="Remover Turma" oncomplete="removeTurma.show()">
 							<f:setPropertyActionListener target="#{turmaBean.facade.turma}" value="#{item}" />
 						</p:commandButton>
 
@@ -71,8 +71,12 @@
 						<p:outputLabel for="nome" value="Nome:" />
 						<p:inputText id="nome" value="#{turmaBean.facade.turma.nome}" required="true"/>
 						
-						<p:outputLabel for="nomeCurso" value="Nome do Curso:" />
-						<p:inputText id="nomeCurso" value="#{turmaBean.facade.turma.nomeCurso}" required="true"/>
+						<p:outputLabel for="curso" value="Curso:" />
+						<p:selectOneMenu id="curso" value="#{turmaBean.facade.turma.nomeCurso}" 
+						 	required="true" style="width:220px;">  
+	                        <f:selectItem itemLabel="Selecione Curso" itemValue="#{null}" />  
+	                        <f:selectItems value="#{supervisorBean.facade.cursoEnum}" var="c" itemValue="#{c.label}" itemLabel="#{c.label}"/>  
+	                    </p:selectOneMenu>
 						
 						<p:outputLabel for="turno" value="Turno:" />
 						<p:selectOneMenu id="turno" value="#{turmaBean.facade.turma.turno}" required="true" style="width:170px;"> 
@@ -95,8 +99,12 @@
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" value="#{turmaBean.facade.turmaAltera.nome}" required="true"/>
 					
-					<p:outputLabel for="nomeCurso" value="Nome do Curso:" />
-					<p:inputText id="nomeCurso" value="#{turmaBean.facade.turmaAltera.nomeCurso}" required="true"/>
+					<p:outputLabel for="curso" value="Curso:" />
+					<p:selectOneMenu id="curso" value="#{turmaBean.facade.turmaAltera.nomeCurso}" 
+					 	required="true" style="width:220px;">  
+                        <f:selectItem itemLabel="Selecione Curso" itemValue="#{null}" />  
+                        <f:selectItems value="#{supervisorBean.facade.cursoEnum}" var="c" itemValue="#{c.label}" itemLabel="#{c.label}"/>  
+                    </p:selectOneMenu>
 					
 					<p:outputLabel for="turno" value="Turno:" />
 					<p:selectOneMenu id="turno" value="#{turmaBean.facade.turmaAltera.turno}" required="true">

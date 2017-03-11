@@ -20,7 +20,7 @@
                     	<p:selectOneMenu id="status" value="#{relatorioAdminBean.facade.relatorio.status}"
 							style="width: 190px;">
 							<f:selectItem itemLabel="Selecione Status" itemValue="#{null}"/>
-							<f:selectItems var="stat" value="#{relatorioAdminBean.facade.status}" itemLabel="#{stat.label}" itemValue="#{stat}" itemDisabled="#{stat.label == 'NÃO ENVIADO'}"/>
+							<f:selectItems var="stat" value="#{relatorioAdminBean.facade.status}" itemLabel="#{stat.label}" itemValue="#{stat}" />
 						</p:selectOneMenu>
 						
 						<p:outputLabel for="turma" value="Turma:"/>
