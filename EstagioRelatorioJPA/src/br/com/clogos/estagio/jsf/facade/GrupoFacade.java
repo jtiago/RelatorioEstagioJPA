@@ -35,6 +35,7 @@ public class GrupoFacade implements Serializable {
 	private GrupoCampoEstagio campo4;
 	private GrupoCampoEstagio campo5;
 	private GrupoCampoEstagio campo6;
+	private GrupoCampoEstagio campo7;
 	
 	public List<Grupo> getListaGrupos() {
 		if(listaGrupos== null) {
@@ -105,8 +106,12 @@ public class GrupoFacade implements Serializable {
 				getCampo6().getGrupo().setId(getGrupo().getId());
 				getGenericController().save(campo6);
 			}
+			if(campo7.getDataInicial() != null) {
+				getCampo7().getGrupo().setId(getGrupo().getId());
+				getGenericController().save(campo7);
+			}
 			
-			grupo = null; campo1 = null; campo2 = null; campo3 = null; campo4 = null; campo5 = null; campo6 = null;
+			grupo = null; campo1 = null; campo2 = null; campo3 = null; campo4 = null; campo5 = null; campo6 = null; campo7 = null;
 			genericController = null;
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
@@ -190,6 +195,14 @@ public class GrupoFacade implements Serializable {
 		this.campo6 = campo6;
 	}
 	
+	public GrupoCampoEstagio getCampo7() {
+		return campo7 == null ? campo7 = new GrupoCampoEstagio() : campo7;
+	}
+
+	public void setCampo7(GrupoCampoEstagio campo7) {
+		this.campo7 = campo7;
+	}
+
 	public void setListaGrupoCampoEstagio(
 			List<GrupoCampoEstagio> listaGrupoCampoEstagio) {
 		this.listaGrupoCampoEstagio = listaGrupoCampoEstagio;

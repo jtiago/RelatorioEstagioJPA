@@ -49,7 +49,7 @@ public class GrupoDAOImpl implements GrupoDAO {
 		grupo.setAlunosGrupo(new LinkedList<Aluno>());
 		StringBuilder hql = new StringBuilder();
 		hql.append("select gru.nomealuno, rel1.status as col1, rel2.status as col2, rel3.status as col3, rel4.status as col4, ");
-		hql.append("rel5.status as col5, rel6.status as col6, gru.status from ");
+		hql.append("rel5.status as col5, rel6.status as col6, rel7.status as col7, gru.status from ");
 		hql.append("(select distinct g.nomeGrupo, a.idaluno, a.nomealuno, a.status from uniweb.grupo g ");
 		hql.append("inner join uniweb.grupo_aluno ga on ga.grupos_idgrupo=g.idgrupo inner join uniweb.aluno a on a.idaluno=ga.alunosGrupo_idaluno ");
 		hql.append("inner join uniweb.Turma t on t.idturma=g.fkturma where g.idgrupo = :idGrupo and t.fksemestre = :idSemestre ) as gru ");
@@ -71,6 +71,10 @@ public class GrupoDAOImpl implements GrupoDAO {
 		hql.append("left join uniweb.relatorio as rel6 on rel6.fkaluno=gru.idaluno and rel6.fkgrupocampoestagio = ");
 		hql.append("(select gc1.id from uniweb.grupocampoestagio gc1 inner join uniweb.grupocampoestagio gc2 on gc1.datainicial>=gc2.datainicial and gc2.fkgrupo=:idGrupo ");
 		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.datainicial, gc1.id, gc1.fkgrupo having count(*) = 6) ");
+		hql.append("left join uniweb.relatorio as rel7 on rel7.fkaluno=gru.idaluno and rel7.fkgrupocampoestagio = ");
+		hql.append("(select gc1.id from uniweb.grupocampoestagio gc1 inner join uniweb.grupocampoestagio gc2 on gc1.datainicial>=gc2.datainicial and gc2.fkgrupo=:idGrupo ");
+		hql.append("where gc1.fkgrupo = :idGrupo group by gc1.datainicial, gc1.id, gc1.fkgrupo having count(*) = 7) ");
+
 		
 		try {
 			Query query = entityManager.createNativeQuery(hql.toString())
@@ -82,13 +86,14 @@ public class GrupoDAOImpl implements GrupoDAO {
 				Object[] objs = (Object[]) i.next();
 				Aluno aluno = new Aluno();
 				aluno.setNome(objs[0].toString());
-				if (objs[7].toString().contains("DESISTENTE") || objs[7].toString().contains("TRANCOU")) {
-					aluno.setStatus1(objs[7].toString());
-					aluno.setStatus2(objs[7].toString());
-					aluno.setStatus3(objs[7].toString());
-					aluno.setStatus4(objs[7].toString());
-					aluno.setStatus5(objs[7].toString());
-					aluno.setStatus6(objs[7].toString());
+				if (objs[8] != null && (objs[8].toString().contains("DESISTENTE") || objs[8].toString().contains("TRANCOU"))) {
+					aluno.setStatus1(objs[8].toString());
+					aluno.setStatus2(objs[8].toString());
+					aluno.setStatus3(objs[8].toString());
+					aluno.setStatus4(objs[8].toString());
+					aluno.setStatus5(objs[8].toString());
+					aluno.setStatus6(objs[8].toString());
+					aluno.setStatus7(objs[8].toString());
 				} else {
 					aluno.setStatus1(objs[1] != null ? StatusEnum.getLabelStatus(objs[1].toString()) : StatusEnum.NAOENVIADO.getLabel());
 					aluno.setStatus2(objs[2] != null ? StatusEnum.getLabelStatus(objs[2].toString()) : StatusEnum.NAOENVIADO.getLabel());
@@ -96,6 +101,7 @@ public class GrupoDAOImpl implements GrupoDAO {
 					aluno.setStatus4(objs[4] != null ? StatusEnum.getLabelStatus(objs[4].toString()) : StatusEnum.NAOENVIADO.getLabel());
 					aluno.setStatus5(objs[5] != null ? StatusEnum.getLabelStatus(objs[5].toString()) : StatusEnum.NAOENVIADO.getLabel());
 					aluno.setStatus6(objs[6] != null ? StatusEnum.getLabelStatus(objs[6].toString()) : StatusEnum.NAOENVIADO.getLabel());
+					aluno.setStatus7(objs[7] != null ? StatusEnum.getLabelStatus(objs[7].toString()) : StatusEnum.NAOENVIADO.getLabel());
 				}
 				grupo.getAlunosGrupo().add(aluno);
 			}

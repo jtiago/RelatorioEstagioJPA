@@ -74,6 +74,7 @@ public class Aluno implements ObjectModel {
 	private String status4;
 	private String status5;
 	private String status6;
+	private String status7;
 	
 //	@Transient
 //	private String modulo;
@@ -244,5 +245,13 @@ public class Aluno implements ObjectModel {
 
 	public void setStatus6(String status6) {
 		this.status6 = status6;
+	}
+
+	public String getStatus7() {
+		return status7;
+	}
+
+	public void setStatus7(String status7) {
+		this.status7 = status7;
 	}
 }
