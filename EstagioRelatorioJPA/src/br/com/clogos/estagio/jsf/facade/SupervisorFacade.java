@@ -86,6 +86,16 @@ public class SupervisorFacade implements Serializable {
 		}
 	}
 	
+	public void updateSenha(String cpf, String senha) {
+		if(getSupervisorController().updateSenha(cpf, senha)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Senha alterado com suceso.", ""));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Problemas ao alterar Senha.", ""));
+		}
+	}
+	
 	public void login(Supervisor supervisor) {
 		supervisor.setCpf(supervisor.getCpf().replace(".", "").replace("-", ""));
 		Supervisor usuarioLogado = getSupervisorController().validarAutenticacao(supervisor);

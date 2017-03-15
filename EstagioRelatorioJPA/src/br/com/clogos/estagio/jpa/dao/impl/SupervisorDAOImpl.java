@@ -76,7 +76,8 @@ public class SupervisorDAOImpl implements SupervisorDAO, Serializable {
 			TypedQuery<Supervisor> query = entityManager.createQuery(hql.toString(), Supervisor.class)
 					.setParameter("numCpf", param.getCpf())
 					.setParameter("senha", CriptografiaBase64.encrypt(param.getSenha()))
-					.setParameter("perfil", param.getPerfil().getId());
+					.setParameter("perfil", param.getPerfil().getId())
+					.setMaxResults(1);
 			if(query.getResultList().size() != 0) {
 				supervisor = query.getSingleResult();
 			}
@@ -147,5 +148,28 @@ public class SupervisorDAOImpl implements SupervisorDAO, Serializable {
 		}
 		
 		return retorno;
+	}
+	
+	@Override
+	public Boolean updateSenha(String cpf, String senha) {
+		entityManager = JpaUtil.getEntityManager();
+		String hql = "UPDATE Supervisor SET senha = :senha WHERE cpf = :cpf";
+		try {
+			Query query = entityManager.createQuery(hql)
+					.setParameter("senha", CriptografiaBase64.encrypt(senha))
+					.setParameter("cpf", cpf);
+			entityManager.getTransaction().begin();
+			query.executeUpdate();
+			entityManager.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 }

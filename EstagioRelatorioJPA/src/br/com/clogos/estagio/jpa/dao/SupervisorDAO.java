@@ -10,4 +10,5 @@ public interface SupervisorDAO {
 	List<Supervisor> findPorCampo(Long idCampo);
 	Supervisor validarAutenticacao(Supervisor param);
 	List<SupervisorVO> findSupervisorAnalitico(Long idSemestre);
+	Boolean updateSenha(String cpf, String senha);
 }

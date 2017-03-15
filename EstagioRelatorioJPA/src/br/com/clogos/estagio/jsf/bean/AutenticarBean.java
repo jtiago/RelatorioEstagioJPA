@@ -67,6 +67,8 @@ public class AutenticarBean implements Serializable {
 	public void mudarSenha(ActionEvent event) {
 		if(getPerfil().getId() == 1) {
 			getFacadeUsuario().updateSenha(getCpf(), getSenha());
+		} else if (getPerfil().getId() == 3) {
+			getFacadeSupervisor().updateSenha(getCpf(), getSenha());
 		} else {
 			getAlunoFacade().updateSenha(getCpf(), getSenha());
 		}

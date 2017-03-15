@@ -29,6 +29,10 @@ public class SupervisorController implements Serializable {
 		return getSupervisorDAO().findSupervisorAnalitico(idSemestre);
 	}
 	
+	public Boolean updateSenha(String cpf, String senha) {
+		return getSupervisorDAO().updateSenha(cpf, senha);
+	}
+	
 	public SupervisorDAO getSupervisorDAO() {
 		if(supervisorDAO == null) {
 			supervisorDAO = new SupervisorDAOImpl();
