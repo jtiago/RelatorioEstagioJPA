@@ -40,6 +40,10 @@ public class AlunoController implements Serializable {
 		return getAlunoDAO().transferirAlunoTurmaRelatorio(aluno, idTurmaTransferir);
 	}
 	
+	public List<Aluno> findPorTurmaGrupo(Long idTurma, Long idSemestre) {
+		return getAlunoDAO().findPorTurmaGrupo(idTurma, idSemestre);
+	}
+	
 	public AlunoDAO getAlunoDAO() {
 		if(alunoDAO == null) {
 			alunoDAO = new AlunoDAOImpl();

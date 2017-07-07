@@ -68,6 +68,8 @@ public class Perfil implements ObjectModel {
 	private Boolean relatorioSupervisorAnalitico;
 	@Column(length=1)
 	private Boolean relatorioPendencia;
+	@Column(length=1)
+	private Boolean fichaAvaliacao;
 	
 //	update perfil set cadastroAluno = 1, cadastroCampo = 1, cadastroSupervisor = 1, cadastroTurma = 1, liberarrelatorio = 1, relatorioAdmin = 1,
 //			relatorioAluno = 0, revisaoRelatorio = 0 where idperfil = 1;
@@ -76,9 +78,9 @@ public class Perfil implements ObjectModel {
 //			relatorioAluno = 1, revisaoRelatorio = 1 where idperfil = 2;
 	
 //	alter table perfil add cadastroGrupo tinyint(1)
-//	alter table uniweb.perfil add cadastroGrupo bit
-//	update perfil set cadastroUsuario = 0 where idperfil = 2
-//	update perfil set relatorioEnviado = 0 where idperfil = 1
+//	alter table uniweb.perfil add fichaAvaliacao bit
+//	update perfil set fichaAvaliacao = 1 where idperfil = 1
+//	update perfil set fichaAvaliacao = 0 where idperfil in (2,3)
 
 	public Long getId() {
 		return id;
@@ -239,5 +241,13 @@ public class Perfil implements ObjectModel {
 
 	public void setRelatorioPendencia(Boolean relatorioPendencia) {
 		this.relatorioPendencia = relatorioPendencia;
-	}	
+	}
+
+	public Boolean getFichaAvaliacao() {
+		return fichaAvaliacao;
+	}
+
+	public void setFichaAvaliacao(Boolean fichaAvaliacao) {
+		this.fichaAvaliacao = fichaAvaliacao;
+	}
 }

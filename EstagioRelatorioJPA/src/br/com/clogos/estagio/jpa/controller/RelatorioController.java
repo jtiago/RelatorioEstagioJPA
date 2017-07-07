@@ -7,6 +7,7 @@ import br.com.clogos.estagio.jpa.dao.RelatorioDAO;
 import br.com.clogos.estagio.jpa.dao.impl.RelatorioDAOImpl;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Relatorio;
+import br.com.clogos.estagio.vo.FichaAvaliacaoVO;
 import br.com.clogos.estagio.vo.RelatorioStatusVO;
 
 public class RelatorioController implements Serializable {
@@ -55,6 +56,10 @@ public class RelatorioController implements Serializable {
 	
 	public List<RelatorioStatusVO> findRelatorioStatus(Long idTurma, Long idSemestre) {
 		return getRelatorioDAO().findRelatorioStatus(idTurma, idSemestre);
+	}
+	
+	public FichaAvaliacaoVO findFichaAvaliacao(Long idAluno, Long idTurma, Long idSemestre) {
+		return getRelatorioDAO().findFichaAvaliacao(idAluno, idTurma, idSemestre);
 	}
 	
 	public RelatorioDAO getRelatorioDAO() {

@@ -9,11 +9,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.enums.StatusEnum;
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.RelatorioDAO;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Relatorio;
+import br.com.clogos.estagio.util.Util;
+import br.com.clogos.estagio.vo.AlunoFichaVO;
+import br.com.clogos.estagio.vo.FichaAvaliacaoVO;
+import br.com.clogos.estagio.vo.GrupoFichaVO;
 import br.com.clogos.estagio.vo.RelatorioStatusVO;
 
 public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
@@ -194,31 +199,6 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		}
 		return lista;
 	}
-
-	/*@Override
-	public Boolean saveRevisaoRelatorioAluno(Relatorio relatorio) {
-		entityManager = JpaUtil.getEntityManager();
-		entityManager.getTransaction().begin();
-		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE Relatorio SET status = ?, texto = ? WHERE idrelatorio = ?");
-		try {
-			Query query = entityManager.createNativeQuery(sql.toString())
-					.setParameter(1, 0)
-					.setParameter(2, relatorio.getTexto())
-					.setParameter(3, relatorio.getId());
-			query.executeUpdate();
-			entityManager.getTransaction().commit();
-			return true;
-		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
-			e.printStackTrace();
-			return false;
-		} finally {
-			if(entityManager.isOpen()) {
-				entityManager.close();
-			}
-		}
-	}*/
 	
 	public Boolean alterarDataInicioTerminioRelatorio(Relatorio relatorio) {
 		entityManager = JpaUtil.getEntityManager();
@@ -311,5 +291,85 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 			}
 		}
 		return lista;
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public FichaAvaliacaoVO findFichaAvaliacao(Long idAluno, Long idTurma, Long idSemestre) {
+		entityManager = JpaUtil.getEntityManager();
+		StringBuilder sqlAlunoFicha = new StringBuilder();
+		StringBuilder sqlGrupoFicha = new StringBuilder();
+		
+		AlunoFichaVO  alunoFichaVO = new AlunoFichaVO();
+		GrupoFichaVO grupoFichaVO = null;
+		FichaAvaliacaoVO fichaAvaliacaoVO = new FichaAvaliacaoVO();
+		List<GrupoFichaVO> listaGrupoCampo = new LinkedList<GrupoFichaVO>();
+		
+		sqlAlunoFicha.append("SELECT a.idaluno, cpf, a.nomealuno, t.nometurma, t.nomeCurso, rel.modulo, g.nomeGrupo, s.nomeSemestre, lr.qtdRelatorio, count(rel.idrelatorio) from uniweb.aluno a ");
+		sqlAlunoFicha.append("inner join uniweb.turma_aluno ta on a.idaluno = ta.alunos_idaluno ");
+		sqlAlunoFicha.append("inner join uniweb.turma t on t.idturma = ta.turmas_idturma ");
+		sqlAlunoFicha.append("inner join uniweb.SEMESTRE s on s.idsemestre=t.fksemestre ");
+		sqlAlunoFicha.append("inner join uniweb.LIBERARRELATORIO lr on lr.fkturma=t.idturma ");
+		sqlAlunoFicha.append("left join uniweb.RELATORIO rel on rel.fkaluno=a.idaluno and rel.modulo=lr.modulo and t.idturma=rel.fkturma ");
+		sqlAlunoFicha.append("inner join uniweb.grupo g on g.idgrupo in (select g.idgrupo from uniweb.GRUPO g inner join uniweb.grupo_aluno ga on g.idgrupo=ga.grupos_idgrupo where ga.alunosGrupo_idaluno=a.idaluno and g.fkturma=t.idturma) ");
+		sqlAlunoFicha.append("WHERE t.fksemestre = :idSemestre AND t.idturma = :idTurma and a.idaluno= :idAluno ");
+		sqlAlunoFicha.append("group by a.idaluno, cpf, a.nomealuno, t.nometurma, t.nomeCurso, rel.modulo, s.nomeSemestre, lr.qtdRelatorio, g.nomeGrupo order by a.nomealuno");
+
+		sqlGrupoFicha.append("select g.idgrupo, c.siglacampoestagio, gc.dataInicial, gc.dataFinal, rel.idrelatorio from uniweb.grupo_aluno ga ");
+		sqlGrupoFicha.append("inner join uniweb.GRUPO g on g.idgrupo=ga.grupos_idgrupo ");
+		sqlGrupoFicha.append("inner join uniweb.TURMA t on t.idturma=g.fkturma ");
+		sqlGrupoFicha.append("inner join uniweb.SEMESTRE s on s.idsemestre=t.fksemestre ");
+		sqlGrupoFicha.append("inner join uniweb.GrupoCampoEstagio gc on gc.fkgrupo=g.idgrupo ");
+		sqlGrupoFicha.append("inner join uniweb.CAMPOESTAGIO c on c.idcampoestagio=gc.fkcampoEstagio ");
+		sqlGrupoFicha.append("left join uniweb.RELATORIO rel on rel.fkgrupocampoestagio=gc.id and rel.fkaluno=ga.alunosGrupo_idaluno ");
+		sqlGrupoFicha.append("where s.idsemestre = :idSemestre and alunosGrupo_idaluno = :idAluno order by gc.dataInicial ");
+		
+		try {
+			Query queryAluno = entityManager.createNativeQuery(sqlAlunoFicha.toString())
+					.setParameter("idSemestre", idSemestre).setParameter("idTurma", idTurma).setParameter("idAluno", idAluno);
+			
+			Iterator iAluno = queryAluno.getResultList().iterator();
+			
+			while(iAluno.hasNext()) {
+				Object[] objs = (Object[]) iAluno.next();
+				alunoFichaVO.setIdAluno(Long.valueOf(objs[0].toString()));
+				alunoFichaVO.setCpf(objs[1].toString());
+				alunoFichaVO.setNomeAluno(objs[2].toString());
+				alunoFichaVO.setNomeTurma(objs[3].toString());
+				alunoFichaVO.setNomeCurso(objs[4].toString());
+				alunoFichaVO.setModulo(ModuloEnum.getModuloTipo(objs[5].toString()));
+				alunoFichaVO.setNomeGrupo(objs[6].toString());
+				alunoFichaVO.setSemestre(objs[7].toString());
+				alunoFichaVO.setQtdRelatorio(Integer.valueOf(objs[8].toString()));
+				alunoFichaVO.setQtdRelatorioEnviado(Integer.valueOf(objs[9].toString()));
+			}
+			fichaAvaliacaoVO.setAlunoFichaVO(alunoFichaVO);
+			
+			Query queryGrupo = entityManager.createNativeQuery(sqlGrupoFicha.toString())
+					.setParameter("idSemestre", idSemestre).setParameter("idAluno", idAluno);
+			
+			Iterator iGrupo = queryGrupo.getResultList().iterator();
+			while(iGrupo.hasNext()) {
+				grupoFichaVO = new GrupoFichaVO();
+				Object[] objs = (Object[]) iGrupo.next();
+				grupoFichaVO.setIdGrupo(Long.valueOf(objs[0].toString()));
+				grupoFichaVO.setSiglaCampoEstagio(objs[1].toString());
+				grupoFichaVO.setDataInicial(Util.convertStringToDate(objs[2].toString()));
+				grupoFichaVO.setDataFinal(Util.convertStringToDate(objs[3].toString()));
+				grupoFichaVO.setRelEnviado(objs[4] == null ? "NH" : "H");
+				listaGrupoCampo.add(grupoFichaVO);
+				
+			}
+			fichaAvaliacaoVO.setListaGrupoCampo(listaGrupoCampo);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entityManager.getTransaction().rollback();
+		} finally {
+			if(entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+		return fichaAvaliacaoVO;
 	}
 }

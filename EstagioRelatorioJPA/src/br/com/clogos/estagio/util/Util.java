@@ -1,5 +1,9 @@
 package br.com.clogos.estagio.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -35,5 +39,16 @@ public class Util {
 			Supervisor supervisor = (Supervisor) object;
 			return supervisor.getSemestre().getId();
 		}
+	}
+	
+	public static Date convertStringToDate(String param) {
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+		Date data = null;
+		try {
+			data = formato.parse(param);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return data;
 	}
 }

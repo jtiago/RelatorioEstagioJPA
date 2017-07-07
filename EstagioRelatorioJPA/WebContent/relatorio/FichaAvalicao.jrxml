@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEstagio" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c54d93ac-b954-40d4-a44e-2250a46a2714">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="129"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="TITULO" class="java.lang.String"/>
+	<parameter name="NOMECURSO" class="java.lang.String"/>
+	<parameter name="IMGSUPERVISOR" class="java.lang.String"/>
+	<field name="NOMEALUNO" class="java.lang.String"/>
+	<field name="NOMETURMA" class="java.lang.String"/>
+	<field name="CAMPO" class="java.lang.String"/>
+	<field name="SUPERVISOR" class="java.lang.String"/>
+	<field name="NOMEGRUPO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="198" splitType="Stretch">
+			<image>
+				<reportElement x="455" y="29" width="100" height="50" uuid="5c371ea3-b442-48dd-b4a4-330cdaf6e7d6"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="119" y="31" width="320" height="20" uuid="3bc4f831-e74e-4c01-b0eb-113820f7bd0e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TITULO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="130" width="55" height="20" uuid="ef86e53b-013e-4463-8dd0-68c82015828a"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ALUNO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="150" width="50" height="20" uuid="6bbcb81a-4f3b-4132-9fb0-9ebf3a053013"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[TURMA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="55" y="130" width="500" height="20" uuid="f390ebb7-bcad-4e67-b087-0fc8e0959d3b"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMEALUNO}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="285" y="150" width="154" height="20" uuid="0cec9927-275e-4aba-84f7-c82fecc61ab0"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMETURMA}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="29" width="100" height="50" uuid="c9233033-f0a8-484d-9357-8f95f22be105"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="150" width="235" height="20" uuid="7b5dcf65-9c9c-4cf9-8a05-df3cc4841e26"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[CARGA HORARIA TOTAL: 305 HORAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="119" y="11" width="320" height="20" uuid="62566135-ffa0-4bf1-90d4-861408f040f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTÁGIO SUPERVISIONADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="51" width="355" height="20" uuid="75469ed8-8929-4e3e-86f4-816eb3a62a7a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SAÚDE PÚBLICA, GERIATRIA E NEUROPSIQUIATRIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="124" y="89" width="320" height="20" uuid="eb1afc58-581e-4dad-adce-cf3757d26431"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[FICHA DE AVALIAÇÃO E FREQUÊNCIA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="439" y="150" width="116" height="20" uuid="861393c8-eb28-4e39-8522-0ec2a73a09c8"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMEGRUPO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="178" width="100" height="20" uuid="9ad53b96-e81c-4ba3-8a99-fb48e178a41b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[CAMPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="178" width="100" height="20" uuid="c93f58ee-09b2-44aa-9e72-da97582a3670"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[INÍCIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="178" width="100" height="20" uuid="5aa06f46-555c-4a24-b65e-7dd84c5d2a97"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[TÉRMINO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="178" width="208" height="20" uuid="bf26e610-81a2-4400-9cad-c783bbad4c07"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ASSINATURA DO ALUNO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="508" y="178" width="47" height="20" uuid="0d594b9a-de8e-4ca3-b9bc-05df4ccd95f6"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[H/NH]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="50"/>
+	</detail>
+	<lastPageFooter>
+		<band height="57">
+			<line>
+				<reportElement x="276" y="19" width="249" height="1" uuid="f84a6142-3868-4136-953f-1a2ebbd54c6e"/>
+			</line>
+			<textField>
+				<reportElement x="276" y="20" width="249" height="20" uuid="ca7b539b-d1cd-411d-bef8-711cb446c038"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMEALUNO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

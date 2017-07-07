@@ -35,4 +35,18 @@ public enum ModuloEnum {
 			return null;
 		}
 	}
+	
+	public static ModuloEnum getModuloTipo(String str) {
+		if(str.equalsIgnoreCase("Modulo_I"))  {
+			return Modulo_I;
+		} else if (str.equalsIgnoreCase("Modulo_II")) {
+			return Modulo_II;
+		} else if(str.equalsIgnoreCase("Modulo_III")) {
+			return Modulo_III;
+		} else if(str.equalsIgnoreCase("Modulo_II_III")) {
+			return Modulo_II_III;
+		} else {
+			return null;
+		}
+	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Relatorio;
+import br.com.clogos.estagio.vo.FichaAvaliacaoVO;
 import br.com.clogos.estagio.vo.RelatorioStatusVO;
 
 public interface RelatorioDAO {
@@ -18,4 +19,5 @@ public interface RelatorioDAO {
 	Boolean existeRelatorioGrupoCampoEstagio(Relatorio relatorio);
 	
 	List<RelatorioStatusVO> findRelatorioStatus(Long idTurma, Long idSemestre);
+	FichaAvaliacaoVO findFichaAvaliacao(Long idAluno, Long idTurma, Long idSemestre);
 }

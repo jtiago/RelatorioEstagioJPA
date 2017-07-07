@@ -46,6 +46,7 @@ width: 350px
 					<p:submenu label="Relatórios" rendered="#{sessionScope.usuarioLogado.perfil.relatorios}">
 						<p:menuitem value="Supervisor Analítico" rendered="#{sessionScope.usuarioLogado.perfil.relatorioSupervisorAnalitico}" url="/pages/relatorioSupervisorAnalitico.jsf" />
 						<p:menuitem value="Turma c/ Pendência" rendered="#{sessionScope.usuarioLogado.perfil.relatorioPendencia}" url="/pages/relatorioPendencia.jsf" />
+						<p:menuitem value="Ficha Avaliação" rendered="#{sessionScope.usuarioLogado.perfil.fichaAvaliacao}" url="/pages/fichaAvaliacao.jsf" />
 					</p:submenu>
 
 					<p:menuitem value="Preencher Relatorio" icon="ui-icon-clipboard" rendered="#{sessionScope.usuarioLogado.perfil.turmaVinculada}" url="/pages/turmaVinculada.jsf" />

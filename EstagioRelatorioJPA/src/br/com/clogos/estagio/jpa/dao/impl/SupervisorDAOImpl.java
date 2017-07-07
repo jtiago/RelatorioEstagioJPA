@@ -69,7 +69,7 @@ public class SupervisorDAOImpl implements SupervisorDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder hql = new StringBuilder();
 		hql.append("SELECT s FROM Supervisor s JOIN s.perfil p ");
-		hql.append("WHERE s.cpf = :numCpf AND s.senha = :senha AND p.id = :perfil");
+		hql.append("WHERE s.cpf = :numCpf AND s.senha = :senha AND p.id = :perfil and s.codigoSituacao = :codigoSituacao");
 		Supervisor supervisor = null;
 		
 		try {
@@ -77,6 +77,7 @@ public class SupervisorDAOImpl implements SupervisorDAO, Serializable {
 					.setParameter("numCpf", param.getCpf())
 					.setParameter("senha", CriptografiaBase64.encrypt(param.getSenha()))
 					.setParameter("perfil", param.getPerfil().getId())
+					.setParameter("codigoSituacao", 1)
 					.setMaxResults(1);
 			if(query.getResultList().size() != 0) {
 				supervisor = query.getSingleResult();
