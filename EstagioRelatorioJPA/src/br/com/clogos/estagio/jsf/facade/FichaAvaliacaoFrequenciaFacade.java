@@ -64,9 +64,7 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 	public void geraRelatorio() {
 		ServletContext context = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 		Map<String, Object> paramentros = new HashMap<String, Object>();
-		List<FichaAvaliacaoVO> lista = new LinkedList<FichaAvaliacaoVO>();
 		pesquisarDadosFicha();
-		lista.add(getFichaAvaliacaoVO());
 		
 		try {
 			File fileJasper = new File(context.getRealPath("/relatorio/FichaAvalicao.jasper"));
@@ -74,8 +72,12 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			BufferedImage logo = ImageIO.read(fileLogo);
 			paramentros.put("LOGO", logo);
 			paramentros.put("TITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeCurso()+" "+getFichaAvaliacaoVO().getAlunoFichaVO().getModulo().getLabel().toUpperCase());
+			paramentros.put("NOMEALUNO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno());
+			paramentros.put("NOMETURMA", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeTurma());
+			paramentros.put("NOMEGRUPO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeGrupo());
+			
 		
-			JasperPrint jasperPrint = JasperFillManager.fillReport(fileJasper.getAbsolutePath(), paramentros, new FichaAvaliacaoJRDataSource(lista));
+			JasperPrint jasperPrint = JasperFillManager.fillReport(fileJasper.getAbsolutePath(), paramentros, new FichaAvaliacaoJRDataSource(getFichaAvaliacaoVO().getListaGrupoCampo()));
 			//JasperViewer.viewReport(jasperPrint,false);
 			String dataReport = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno().replaceAll(" ", "")+".pdf";
 			String diretorio = System.getProperty ("java.io.tmpdir");
