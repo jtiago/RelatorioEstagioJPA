@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +20,7 @@ import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.util.Util;
 import br.com.clogos.estagio.vo.FichaAvaliacaoVO;
+import br.com.clogos.estagio.vo.GrupoFichaVO;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -67,7 +67,7 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		pesquisarDadosFicha();
 		
 		try {
-			File fileJasper = new File(context.getRealPath("/relatorio/FichaAvalicao.jasper"));
+			File fileJasper = new File(context.getRealPath("/relatorio/FichaAvaliacao.jasper"));
 			File fileLogo = new File(context.getRealPath("/images/logo.gif"));
 			BufferedImage logo = ImageIO.read(fileLogo);
 			paramentros.put("LOGO", logo);
@@ -75,6 +75,7 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			paramentros.put("NOMEALUNO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno());
 			paramentros.put("NOMETURMA", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeTurma());
 			paramentros.put("NOMEGRUPO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeGrupo());
+			paramentros.put("SITUACAOFINAL", retornaSituacaoFinal(getFichaAvaliacaoVO().getListaGrupoCampo()));
 			
 		
 			JasperPrint jasperPrint = JasperFillManager.fillReport(fileJasper.getAbsolutePath(), paramentros, new FichaAvaliacaoJRDataSource(getFichaAvaliacaoVO().getListaGrupoCampo()));
@@ -91,6 +92,15 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private String retornaSituacaoFinal(List<GrupoFichaVO> lista) {
+		for(GrupoFichaVO g : lista) {
+			if(g.getRelEnviado().contains("NH")) {
+				return "NH";
+			}
+		}
+		return "H";
 	}
 	
 	public List<Aluno> getListaAlunoPorTurma() {
