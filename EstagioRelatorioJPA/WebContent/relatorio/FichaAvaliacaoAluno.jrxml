@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEstagio" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c54d93ac-b954-40d4-a44e-2250a46a2714">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEstagio" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="c54d93ac-b954-40d4-a44e-2250a46a2714">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="141"/>
 	<parameter name="LOGO" class="java.lang.Object"/>
 	<parameter name="TITULO" class="java.lang.String"/>
 	<parameter name="NOMECURSO" class="java.lang.String"/>
@@ -11,9 +11,8 @@
 	<parameter name="NOMETURMA" class="java.lang.String"/>
 	<parameter name="NOMEGRUPO" class="java.lang.String"/>
 	<parameter name="SITUACAOFINAL" class="java.lang.String"/>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\Tiago\\git\\RelatorioEstagioJPA\\EstagioRelatorioJPA\\WebContent\\relatorio\\"]]></defaultValueExpression>
-	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="listaCampoEstagio" class="java.lang.Object"/>
 	<field name="INICIO" class="java.util.Date"/>
 	<field name="TERMINIO" class="java.util.Date"/>
 	<field name="CAMPO" class="java.lang.String"/>
@@ -259,7 +258,7 @@
 				</textElement>
 			</textField>
 			<textField>
-				<reportElement x="508" y="0" width="47" height="20" uuid="a2a1b4c6-c763-427c-9149-df8ffd61f9bf"/>
+				<reportElement x="508" y="0" width="47" height="20" forecolor="#000000" uuid="a2a1b4c6-c763-427c-9149-df8ffd61f9bf"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -267,21 +266,12 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{AVALIACAO}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="50">
-			<subreport>
-				<reportElement x="0" y="0" width="554" height="50" uuid="1b7bb270-414c-4253-978c-3f2b03e96760"/>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubFichaAvaliacao.jasper"]]></subreportExpression>
-			</subreport>
-		</band>
-	</columnFooter>
 	<lastPageFooter>
 		<band height="35">
 			<staticText>
@@ -302,7 +292,7 @@ Autorizações Resoluções 044 de 21/12/07 MEC CEE/GO
 		</band>
 	</lastPageFooter>
 	<summary>
-		<band height="87">
+		<band height="192">
 			<staticText>
 				<reportElement x="0" y="0" width="272" height="20" uuid="d0a4f601-719b-4570-95d8-4ba31ba2e7da"/>
 				<box leftPadding="2">
@@ -358,6 +348,24 @@ Autorizações Resoluções 044 de 21/12/07 MEC CEE/GO
 			<line>
 				<reportElement x="0" y="81" width="554" height="1" uuid="4e4bc9e0-2b8f-4413-a5c2-58bf23cfd9aa"/>
 			</line>
+			<subreport>
+				<reportElement x="1" y="88" width="554" height="55" uuid="cc7b58e4-290a-4e6e-b944-d7ca6e5bd574"/>
+				<subreportParameter name="listaCampoEstagio">
+					<subreportParameterExpression><![CDATA[$P{listaCampoEstagio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{listaCampoEstagio}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "//SubFichaAvaliacao.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="121" y="163" width="287" height="1" uuid="d82256f5-e841-4eea-bdc8-8b4eb08f0c2b"/>
+			</line>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="121" y="164" width="287" height="20" uuid="264e020a-87c8-4639-8f46-f858389d05ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Visto da Autoridade Escolar]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>
