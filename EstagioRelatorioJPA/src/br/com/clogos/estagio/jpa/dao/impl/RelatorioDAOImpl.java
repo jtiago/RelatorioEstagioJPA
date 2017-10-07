@@ -5,7 +5,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -17,6 +20,7 @@ import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.model.Relatorio;
 import br.com.clogos.estagio.util.Util;
 import br.com.clogos.estagio.vo.AlunoFichaVO;
+import br.com.clogos.estagio.vo.CampoEstagioFichaVO;
 import br.com.clogos.estagio.vo.FichaAvaliacaoVO;
 import br.com.clogos.estagio.vo.GrupoFichaVO;
 import br.com.clogos.estagio.vo.RelatorioStatusVO;
@@ -299,11 +303,14 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		StringBuilder sqlAlunoFicha = new StringBuilder();
 		StringBuilder sqlGrupoFicha = new StringBuilder();
+		StringBuilder sqlCampoEstagio = new StringBuilder();
 		
 		AlunoFichaVO  alunoFichaVO = new AlunoFichaVO();
 		GrupoFichaVO grupoFichaVO = null;
+		CampoEstagioFichaVO campoEstagioFichaVO = null;
 		FichaAvaliacaoVO fichaAvaliacaoVO = new FichaAvaliacaoVO();
 		List<GrupoFichaVO> listaGrupoCampo = new LinkedList<GrupoFichaVO>();
+		List<CampoEstagioFichaVO> listaCampoEstagio = new LinkedList<CampoEstagioFichaVO>();
 		
 		sqlAlunoFicha.append("SELECT a.idaluno, cpf, a.nomealuno, t.nometurma, t.nomeCurso, rel.modulo, g.nomeGrupo, s.nomeSemestre, lr.qtdRelatorio, count(rel.idrelatorio) from uniweb.aluno a ");
 		sqlAlunoFicha.append("inner join uniweb.turma_aluno ta on a.idaluno = ta.alunos_idaluno ");
@@ -323,6 +330,12 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		sqlGrupoFicha.append("inner join uniweb.CAMPOESTAGIO c on c.idcampoestagio=gc.fkcampoEstagio ");
 		sqlGrupoFicha.append("left join uniweb.RELATORIO rel on rel.fkgrupocampoestagio=gc.id and rel.fkaluno=ga.alunosGrupo_idaluno ");
 		sqlGrupoFicha.append("where s.idsemestre = :idSemestre and alunosGrupo_idaluno = :idAluno order by gc.dataInicial ");
+		
+		sqlCampoEstagio.append("select c.idcampoestagio, c.nomecampoestagio from uniweb.GRUPO g ");
+		sqlCampoEstagio.append("inner join uniweb.grupo_aluno ga on ga.grupos_idgrupo=g.idgrupo ");
+		sqlCampoEstagio.append("inner join uniweb.GrupoCampoEstagio gce on g.idgrupo=gce.fkgrupo ");
+		sqlCampoEstagio.append("inner join uniweb.CAMPOESTAGIO c on c.idcampoestagio=gce.fkcampoEstagio ");
+		sqlCampoEstagio.append("where g.fkturma=:idTurma and ga.alunosGrupo_idaluno=:idAluno");
 		
 		try {
 			Query queryAluno = entityManager.createNativeQuery(sqlAlunoFicha.toString())
@@ -361,10 +374,28 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 				
 			}
 			fichaAvaliacaoVO.setListaGrupoCampo(listaGrupoCampo);
+			
+			Query queryCampo = entityManager.createNativeQuery(sqlCampoEstagio.toString())
+					.setParameter("idTurma", idTurma).setParameter("idAluno", idAluno);
+			
+			Iterator iCampo = queryCampo.getResultList().iterator();
+			while(iCampo.hasNext()) {
+				campoEstagioFichaVO = new CampoEstagioFichaVO();
+				Object[] objs = (Object[]) iCampo.next();
+				campoEstagioFichaVO.setIdCampoEstagio(Long.valueOf(objs[0].toString()));
+				campoEstagioFichaVO.setNomeCampoEstagio(objs[1].toString());
+				listaCampoEstagio.add(campoEstagioFichaVO);
+			}
+			fichaAvaliacaoVO.setListaCampoEstagio(listaCampoEstagio);
+			
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			entityManager.getTransaction().rollback();
+		} catch (NumberFormatException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Erro ao obter dados para Ficha de Avaliação", e.getMessage()));
+			throw new NumberFormatException();
+		} catch (PersistenceException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Erro ao obter dados para Ficha de Avaliação", e.getMessage()));
 		} finally {
 			if(entityManager.isOpen()) {
 				entityManager.close();

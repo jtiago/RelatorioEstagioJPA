@@ -25,6 +25,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 
@@ -67,7 +68,9 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		pesquisarDadosFicha();
 		
 		try {
-			File fileJasper = new File(context.getRealPath("/relatorio/FichaAvaliacao.jasper"));
+			File fileJasper = new File(context.getRealPath("/relatorio/FichaAvaliacaoAluno.jasper"));
+			File fileJasperSub = new File(context.getRealPath("/relatorio/"));
+			
 			File fileLogo = new File(context.getRealPath("/images/logo.gif"));
 			BufferedImage logo = ImageIO.read(fileLogo);
 			paramentros.put("LOGO", logo);
@@ -76,10 +79,10 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			paramentros.put("NOMETURMA", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeTurma());
 			paramentros.put("NOMEGRUPO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeGrupo());
 			paramentros.put("SITUACAOFINAL", retornaSituacaoFinal(getFichaAvaliacaoVO().getListaGrupoCampo()));
+			paramentros.put("SUBREPORT_DIR", fileJasperSub.getAbsolutePath());
+			paramentros.put("listaCampoEstagio", new JRBeanCollectionDataSource(getFichaAvaliacaoVO().getListaCampoEstagio()));
 			
-		
 			JasperPrint jasperPrint = JasperFillManager.fillReport(fileJasper.getAbsolutePath(), paramentros, new FichaAvaliacaoJRDataSource(getFichaAvaliacaoVO().getListaGrupoCampo()));
-			//JasperViewer.viewReport(jasperPrint,false);
 			String dataReport = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno().replaceAll(" ", "")+".pdf";
 			String diretorio = System.getProperty ("java.io.tmpdir");
 			JasperExportManager.exportReportToPdfFile(jasperPrint, diretorio+dataReport);

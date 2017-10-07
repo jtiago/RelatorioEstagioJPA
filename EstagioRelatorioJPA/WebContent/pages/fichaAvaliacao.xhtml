@@ -8,10 +8,11 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
 	
 	<ui:define name="conteudo">
-		<p:panel header="..:: Ficha de Avaliação de Alunos">
+		<p:panel header="..:: Ficha de Avalia&#231;&#227;o de Alunos">
 			
 			<h:form id="formMessage">
 				<p:growl autoUpdate="true" rendered="#{fichaBean.mensagem}"/>
+				<p:messages autoUpdate="true" showDetail="true"/>
 			</h:form>
 			<br/>
 			
@@ -75,7 +76,7 @@
 						<p:outputLabel for="aluno" value="Aluno(a):" />
 						<p:outputLabel id="aluno" value="#{fichaBean.facade.fichaAvaliacaoVO.alunoFichaVO.nomeAluno}" style="width:100px;"/>
 						
-						<p:outputLabel for="carga" value="Carga Horária:" />
+						<p:outputLabel for="carga" value="Carga HorÃ¡ria:" />
 						<p:outputLabel id="carga" value="350 Horas" style="width:100px;"/>
 						
 						<p:outputLabel for="turma" value="Turma:" />
@@ -87,7 +88,7 @@
 					
 					<br/>
 					<p:dataTable id="tabelaDadosFicha" var="itemDados" value="#{fichaBean.facade.fichaAvaliacaoVO.listaGrupoCampo}">
-						<p:column headerText="Campo Estágio">
+						<p:column headerText="Campo Estáio">
 							<h:outputLabel value="#{itemDados.siglaCampoEstagio}"/>
 						</p:column>
 						
