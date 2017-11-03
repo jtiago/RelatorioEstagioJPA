@@ -312,7 +312,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		List<GrupoFichaVO> listaGrupoCampo = new LinkedList<GrupoFichaVO>();
 		List<CampoEstagioFichaVO> listaCampoEstagio = new LinkedList<CampoEstagioFichaVO>();
 		
-		sqlAlunoFicha.append("SELECT a.idaluno, cpf, a.nomealuno, t.nometurma, t.nomeCurso, rel.modulo, g.nomeGrupo, s.nomeSemestre, lr.qtdRelatorio, count(rel.idrelatorio) from uniweb.aluno a ");
+		sqlAlunoFicha.append("SELECT a.idaluno, cpf, a.nomealuno, t.nometurma, t.nomeCurso, lr.modulo, g.nomeGrupo, s.nomeSemestre, lr.qtdRelatorio, count(rel.idrelatorio) from uniweb.aluno a ");
 		sqlAlunoFicha.append("inner join uniweb.turma_aluno ta on a.idaluno = ta.alunos_idaluno ");
 		sqlAlunoFicha.append("inner join uniweb.turma t on t.idturma = ta.turmas_idturma ");
 		sqlAlunoFicha.append("inner join uniweb.SEMESTRE s on s.idsemestre=t.fksemestre ");
@@ -320,7 +320,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		sqlAlunoFicha.append("left join uniweb.RELATORIO rel on rel.fkaluno=a.idaluno and rel.modulo=lr.modulo and t.idturma=rel.fkturma ");
 		sqlAlunoFicha.append("inner join uniweb.grupo g on g.idgrupo in (select g.idgrupo from uniweb.GRUPO g inner join uniweb.grupo_aluno ga on g.idgrupo=ga.grupos_idgrupo where ga.alunosGrupo_idaluno=a.idaluno and g.fkturma=t.idturma) ");
 		sqlAlunoFicha.append("WHERE t.fksemestre = :idSemestre AND t.idturma = :idTurma and a.idaluno= :idAluno ");
-		sqlAlunoFicha.append("group by a.idaluno, cpf, a.nomealuno, t.nometurma, t.nomeCurso, rel.modulo, s.nomeSemestre, lr.qtdRelatorio, g.nomeGrupo order by a.nomealuno");
+		sqlAlunoFicha.append("group by a.idaluno, cpf, a.nomealuno, t.nometurma, t.nomeCurso, lr.modulo, s.nomeSemestre, lr.qtdRelatorio, g.nomeGrupo order by a.nomealuno");
 
 		sqlGrupoFicha.append("select g.idgrupo, c.siglacampoestagio, gc.dataInicial, gc.dataFinal, rel.idrelatorio from uniweb.grupo_aluno ga ");
 		sqlGrupoFicha.append("inner join uniweb.GRUPO g on g.idgrupo=ga.grupos_idgrupo ");
