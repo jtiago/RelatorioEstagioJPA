@@ -59,9 +59,12 @@
 							<f:setPropertyActionListener target="#{fichaBean.facade.alunoDados}" value="#{item}" />
 						</p:commandButton>
 					
+						<!-- 
 						<p:commandButton icon="ui-icon-print" disabled="#{item.status != 'cursando'}" oncomplete="imprimirRelatorio.show()" update=":formImprimir">
                     			<f:setPropertyActionListener target="#{fichaBean.facade.alunoDados}" value="#{item}" />
-                    	</p:commandButton>
+                    	</p:commandButton> -->
+                    	
+                    	<h:commandLink id="btnGerarRelatorio" value="Relatório" action="#{fichaBean.gerarRelatorio(item)}" target="_blank" />
 					</p:column>
 					
 				</p:dataTable>
