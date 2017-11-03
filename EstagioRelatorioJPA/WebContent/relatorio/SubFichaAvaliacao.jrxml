@@ -8,19 +8,19 @@
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="55">
+		<band height="65">
 			<textField>
-				<reportElement x="115" y="38" width="287" height="14" uuid="4621b1ac-c0bc-4f9e-9b53-daa5ff5048b5"/>
+				<reportElement x="115" y="48" width="287" height="14" uuid="4621b1ac-c0bc-4f9e-9b53-daa5ff5048b5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nomeCampoEstagio}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="116" y="23" width="287" height="1" uuid="b0beb5c5-7a70-4408-ae7b-c94d37d18f04"/>
+				<reportElement x="116" y="33" width="287" height="1" uuid="b0beb5c5-7a70-4408-ae7b-c94d37d18f04"/>
 			</line>
 			<staticText>
-				<reportElement x="116" y="24" width="286" height="14" uuid="55da4671-9eff-42ec-86da-463ab5a655d5"/>
+				<reportElement x="116" y="34" width="286" height="14" uuid="55da4671-9eff-42ec-86da-463ab5a655d5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial"/>
 				</textElement>
