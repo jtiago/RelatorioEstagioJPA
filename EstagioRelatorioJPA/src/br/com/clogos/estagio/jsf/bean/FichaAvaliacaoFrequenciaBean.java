@@ -6,7 +6,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.model.StreamedContent;
+
 import br.com.clogos.estagio.jsf.facade.FichaAvaliacaoFrequenciaFacade;
+import br.com.clogos.estagio.model.Aluno;
 
 @ManagedBean(name="fichaBean")
 @ViewScoped
@@ -36,8 +39,8 @@ public class FichaAvaliacaoFrequenciaBean implements Serializable {
 		getFacade().pesquisarDadosFicha();
 	}
 	
-	public void gerarRelatorio(ActionEvent event) {
-		getFacade().geraRelatorio();
+	public StreamedContent gerarRelatorio(Aluno aluno) {
+		return getFacade().geraRelatorio(aluno);
 	}
 	
 	public boolean isMensagem() {
