@@ -13,6 +13,10 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import org.primefaces.model.StreamedContent;
 
 import br.com.clogos.estagio.jasper.FichaAvaliacaoJRDataSource;
 import br.com.clogos.estagio.jpa.controller.AlunoController;
@@ -22,9 +26,7 @@ import br.com.clogos.estagio.util.Util;
 import br.com.clogos.estagio.vo.FichaAvaliacaoVO;
 import br.com.clogos.estagio.vo.GrupoFichaVO;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class FichaAvaliacaoFrequenciaFacade implements Serializable {
@@ -62,7 +64,9 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		fichaAvaliacaoVO = getRelatorioController().findFichaAvaliacao(getAlunoDados().getId(), getAlunoDados().getTurmaT().getId(), Util.getIdSemestre());
 	}
 	
-	public void geraRelatorio() {
+	public StreamedContent geraRelatorio(Aluno aluno) {
+		StreamedContent streamedContent = null;
+		this.alunoDados = aluno;
 		ServletContext context = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 		Map<String, Object> paramentros = new HashMap<String, Object>();
 		pesquisarDadosFicha();
@@ -70,9 +74,10 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		try {
 			File fileJasper = new File(context.getRealPath("/relatorio/FichaAvaliacaoAluno.jasper"));
 			File fileJasperSub = new File(context.getRealPath("/relatorio/"));
-			
 			File fileLogo = new File(context.getRealPath("/images/logo.gif"));
 			BufferedImage logo = ImageIO.read(fileLogo);
+			
+			// Atribuição as parametros do relatório
 			paramentros.put("LOGO", logo);
 			paramentros.put("TITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeCurso()+" "+getFichaAvaliacaoVO().getAlunoFichaVO().getModulo().getLabel().toUpperCase());
 			paramentros.put("NOMEALUNO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno());
@@ -82,19 +87,45 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			paramentros.put("SUBREPORT_DIR", fileJasperSub.getAbsolutePath());
 			paramentros.put("listaCampoEstagio", new JRBeanCollectionDataSource(getFichaAvaliacaoVO().getListaCampoEstagio()));
 			
-			JasperPrint jasperPrint = JasperFillManager.fillReport(fileJasper.getAbsolutePath(), paramentros, new FichaAvaliacaoJRDataSource(getFichaAvaliacaoVO().getListaGrupoCampo()));
-			String dataReport = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno().replaceAll(" ", "")+".pdf";
-			String diretorio = System.getProperty ("java.io.tmpdir");
-			JasperExportManager.exportReportToPdfFile(jasperPrint, diretorio+dataReport);
-			Runtime.getRuntime().exec("cmd /c start "+diretorio+dataReport);
+			String nomeReportPDF = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno().replaceAll(" ", "")+".pdf";
+			HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();   
+		    ServletOutputStream servletOutputStream = response.getOutputStream();
+		    byte[] bytes = JasperRunManager.runReportToPdf(fileJasper.getAbsolutePath(), paramentros, new FichaAvaliacaoJRDataSource(getFichaAvaliacaoVO().getListaGrupoCampo())); 
+
+		    response.setContentType("application/pdf");
+		    response.setHeader("Content-disposition", "filename=\""+nomeReportPDF+"\""); 
+		    response.setContentLength(bytes.length);
+
+		    servletOutputStream.write(bytes, 0, bytes.length);
+		    servletOutputStream.flush();
+		    servletOutputStream.close();
+		    FacesContext.getCurrentInstance().renderResponse();
+		    FacesContext.getCurrentInstance().responseComplete();
+
+		    /*
+			JasperPrint impressoraJasper = JasperFillManager.fillReport(fileJasper.getAbsolutePath(), paramentros, new FichaAvaliacaoJRDataSource(getFichaAvaliacaoVO().getListaGrupoCampo()));
 			
-			File fileTemp = new File(dataReport);
-			fileTemp.deleteOnExit();
+			File arquivoPDF = new File(fileJasperSub.getAbsolutePath()+nomeReportPDF);
+			JRExporter jrExporter = new JRPdfExporter();
+			jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, impressoraJasper);
+			jrExporter.setParameter(JRExporterParameter.OUTPUT_FILE, arquivoPDF);
+			jrExporter.exportReport();
+			
+			FileInputStream conteudoRelatorio = new FileInputStream(arquivoPDF);
+			streamedContent = new DefaultStreamedContent(conteudoRelatorio, "application/pdf", nomeReportPDF);
+			*/
+			//Primeira versão
+//			String diretorio = System.getProperty ("java.io.tmpdir");
+//			JasperExportManager.exportReportToPdfFile(jasperPrint, diretorio+dataReport);
+//			Runtime.getRuntime().exec("cmd /c start "+diretorio+dataReport);
+//			File fileTemp = new File(dataReport);
+//			fileTemp.deleteOnExit();
 		} catch (JRException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return streamedContent;
 	}
 	
 	private String retornaSituacaoFinal(List<GrupoFichaVO> lista) {
