@@ -208,7 +208,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		entityManager = JpaUtil.getEntityManager();
 		entityManager.getTransaction().begin();
 		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE Relatorio SET fkgrupocampoestagio = ? WHERE idrelatorio = ?");
+		sql.append("UPDATE uniweb.Relatorio SET fkgrupocampoestagio = ? WHERE idrelatorio = ?");
 		try {
 			Query query = entityManager.createNativeQuery(sql.toString())
 					.setParameter(1, relatorio.getGrupoCampoEstagio().getId())

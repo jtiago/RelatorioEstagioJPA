@@ -102,7 +102,7 @@ public class SupervisorDAOImpl implements SupervisorDAO, Serializable {
 		sql.append("(select count(*) from uniweb.RELATORIO rel inner join uniweb.TURMA t on rel.fkturma=t.idturma ");
 		sql.append("inner join uniweb.SEMESTRE se on t.fksemestre=se.idsemestre where rel.status = 0 and fksupervisor = super.idsupervisor and se.idsemestre = :idSemestre) as Aberto, ");
 		sql.append("(select count(*) from uniweb.RELATORIO rel inner join uniweb.TURMA t on rel.fkturma=t.idturma ");
-		sql.append("inner join uniweb.SEMESTRE se on t.fksemestre=se.idsemestre where rel.status = 1 and fksupervisor = super.idsupervisor and se.idsemestre = :idSemestre) as Revisão ");
+		sql.append("inner join uniweb.SEMESTRE se on t.fksemestre=se.idsemestre where rel.status = 1 and fksupervisor = super.idsupervisor and se.idsemestre = :idSemestre) as Revisao ");
 		sql.append("from (select distinct s.idsupervisor, s.cpfsupervisor, s.nomesupervisor, c.nomecampoestagio, c.siglacampoestagio from uniweb.SUPERVISOR s " );
 		sql.append("inner join uniweb.CAMPOESTAGIO c on c.idcampoestagio = s.fkcampoEstagio ");
 		sql.append("inner join uniweb.RELATORIO rel on rel.fksupervisor=s.idsupervisor ");

@@ -25,14 +25,14 @@
 						
 						<p:outputLabel for="turma" value="Turma:"/>
 						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.turmaRelatorio.id}" style="width:170px;">
-				            <f:selectItem itemLabel="Selecione Turma" itemValue="#{null}" />
+				            <f:selectItem itemLabel="Selecione Turma" itemValue="0" />
 							<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.id}" itemLabel="#{tu.nome}"/>
 				        </p:selectOneMenu>				        
 				         
 				        <p:outputLabel for="campo" value="Campo:" />
 						<p:selectOneMenu id="campo" value="#{relatorioAdminBean.facade.relatorio.campoEstagio.id}" 
 							style="width:300px;">  
-	                       <f:selectItem itemLabel="Selecione Campo" itemValue="#{null}" />  
+	                       <f:selectItem itemLabel="Selecione Campo" itemValue="0" />  
 	                       <f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="c" itemValue="#{c.id}" itemLabel="#{c.nome}"/>  
                     	</p:selectOneMenu>
                     	     	

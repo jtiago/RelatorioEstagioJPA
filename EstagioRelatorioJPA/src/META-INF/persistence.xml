@@ -26,13 +26,13 @@
 	<properties>
 		
 		<property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/>
-<!--  	    <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.1.244:1433/relestagio"/> -->
-<!--   	    <property name="javax.persistence.jdbc.password" value="#Logos!" /> -->
+ 	    <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.1.244:1433/relestagio"/>
+  	    <property name="javax.persistence.jdbc.password" value="#Logos!" />
 	    <property name="javax.persistence.jdbc.user" value="sa"/>
 	    <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />
 	    
-		<property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433/RELESTAGIO"/> 
- 	    <property name="javax.persistence.jdbc.password" value="123456" />
+<!-- 		<property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433/RELESTAGIO"/>  -->
+<!--  	    <property name="javax.persistence.jdbc.password" value="123456" /> -->
 	    
 	     <!-- 
 	    <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

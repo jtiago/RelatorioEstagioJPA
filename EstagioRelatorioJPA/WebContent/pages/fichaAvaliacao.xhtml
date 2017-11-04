@@ -27,9 +27,6 @@
 	                   	     	
 	                   	<p:commandButton icon="ui-icon-search" actionListener="#{fichaBean.pesquisarAlunosTurma}" 
 	                   		update=":formPesquisaFicha :tabelaFicha"/>
-	                   	
-	                   	<p:commandButton icon="ui-icon-print" value="Imprimir" update=":formPesquisaFicha :tabelaFicha" 
-	                   				disabled="#{fichaBean.facade.listaAlunoPorTurma.isEmpty()}"/>
 					</h:panelGrid>
 				</p:fieldset>
 			</h:form>
@@ -64,7 +61,7 @@
                     			<f:setPropertyActionListener target="#{fichaBean.facade.alunoDados}" value="#{item}" />
                     	</p:commandButton> -->
                     	
-                    	<h:commandLink id="btnGerarRelatorio" value="Relatório" action="#{fichaBean.gerarRelatorio(item)}" target="_blank" />
+                    	<h:commandLink id="btnGerarRelatorio" value="Imprimir" action="#{fichaBean.gerarRelatorio(item)}" target="_blank" />
 					</p:column>
 					
 				</p:dataTable>

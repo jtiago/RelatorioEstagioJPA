@@ -16,7 +16,7 @@
 			<h:form id="tabelaRelatorio">
 				<p:dataTable id="tabela" var="item" value="#{supervisorBean.facade.listaSupervisoresAnalitico}" emptyMessage="Sem Registro...">
 					<f:facet name="header">
-						Relatório de Supervisores Analítico
+						Relatorio de Supervisores Anal�tico
 					</f:facet>
 					
 					<p:column headerText="CPF">
@@ -54,21 +54,5 @@
 			</h:form>
 		</p:panel>
 		
-		<!-- 
-		<h:form id="formImprimir">
-			<p:confirmDialog message="Deseja Imprimir este relatório ?" header="..:: Imprimir Relatório" widgetVar="imprimirRelatorio">
-				<p:commandButton value="Sim" actionListener="#{relatorioAdminBean.gerarRelatorio}" oncomplete="imprimirRelatorio.hide()" 
-					update=":formMensagem :formImprimir :tabelaRelatorio" />
-				<p:commandButton value="Não" oncomplete="imprimirRelatorio.hide()"/>
-			</p:confirmDialog>
-		</h:form>
-		-->
-		<!-- 
-		<h:form>
-			<p:remoteCommand name="lazyload">  
-		        <f:setPropertyActionListener value="#{false}" target="#{relatorioAdminBean.mensagem}" />  
-		    </p:remoteCommand> 
-		</h:form>
-		-->
 	</ui:define>
 </ui:composition>
