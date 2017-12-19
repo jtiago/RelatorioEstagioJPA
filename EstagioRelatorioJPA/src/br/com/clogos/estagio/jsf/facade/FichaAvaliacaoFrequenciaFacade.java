@@ -74,7 +74,7 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		try {
 			File fileJasper = new File(context.getRealPath("/relatorio/FichaAvaliacaoAluno.jasper"));
 			File fileJasperSub = new File(context.getRealPath("/relatorio/"));
-			File fileLogo = new File(context.getRealPath("/images/logo.gif"));
+			File fileLogo = new File(context.getRealPath("/images/logoV2.jpg"));
 			BufferedImage logo = ImageIO.read(fileLogo);
 			
 			// Atribuição as parametros do relatório
