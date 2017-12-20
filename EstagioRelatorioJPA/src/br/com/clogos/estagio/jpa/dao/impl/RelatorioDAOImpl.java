@@ -369,7 +369,8 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 				grupoFichaVO.setSiglaCampoEstagio(objs[1].toString());
 				grupoFichaVO.setDataInicial(Util.convertStringToDate(objs[2].toString()));
 				grupoFichaVO.setDataFinal(Util.convertStringToDate(objs[3].toString()));
-				grupoFichaVO.setRelEnviado(objs[4] == null ? "NH" : "H");
+				//grupoFichaVO.setRelEnviado(objs[4] == null ? "NH" : "H");
+				grupoFichaVO.setRelEnviado("H");
 				listaGrupoCampo.add(grupoFichaVO);
 				
 			}
