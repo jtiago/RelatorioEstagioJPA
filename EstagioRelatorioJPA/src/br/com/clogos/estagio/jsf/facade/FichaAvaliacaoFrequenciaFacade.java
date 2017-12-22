@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import br.com.clogos.estagio.jpa.controller.AlunoController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.util.Util;
+import br.com.clogos.estagio.vo.CampoEstagioFichaVO;
 import br.com.clogos.estagio.vo.FichaAvaliacaoVO;
 import br.com.clogos.estagio.vo.GrupoFichaVO;
 import net.sf.jasperreports.engine.JRException;
@@ -88,7 +90,7 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			//paramentros.put("SITUACAOFINAL", retornaSituacaoFinal(getFichaAvaliacaoVO().getListaGrupoCampo()));
 			paramentros.put("SITUACAOFINAL", "H");
 			paramentros.put("SUBREPORT_DIR", fileJasperSub.getAbsolutePath());
-			paramentros.put("listaCampoEstagio", new JRBeanCollectionDataSource(getFichaAvaliacaoVO().getListaCampoEstagio()));
+			paramentros.put("listaCampoEstagio", new JRBeanCollectionDataSource(verificaSeERadiologia(fichaAvaliacaoVO)));
 			
 			String nomeReportPDF = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno().replaceAll(" ", "")+".pdf";
 			HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();   
@@ -126,12 +128,23 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		if(modulo.compareTo(ModuloEnum.Modulo_I) == 0) {
 			return "";
 		} else if (modulo.compareTo(ModuloEnum.Modulo_II) == 0) {
-			return "SA�DE P�BLICA, GERIATRIA E NEUROPSIQUIATRIA";
+			return "SAÚDE PÚBLICA, GERIATRIA E NEUROPSIQUIATRIA";
 		} else if (modulo.compareTo(ModuloEnum.Modulo_III) == 0) {
 			return "HOSPITALAR";
 		} else {
 			return "";
 		}
+	}
+	
+	private List<CampoEstagioFichaVO> verificaSeERadiologia(FichaAvaliacaoVO ficha) {
+		if(ficha.getAlunoFichaVO().getNomeCurso().contains("RADIOLOGIA")) {
+			CampoEstagioFichaVO campo = new CampoEstagioFichaVO();
+			campo.setIdCampoEstagio(5L);
+			campo.setNomeCampoEstagio("C&F-X Prestadora de serviços Radiológicos LTDA - ME");
+			ficha.getListaCampoEstagio().add(campo);
+		}
+		
+		return ficha.getListaCampoEstagio();
 	}
 	
 	public List<Aluno> getListaAlunoPorTurma() {

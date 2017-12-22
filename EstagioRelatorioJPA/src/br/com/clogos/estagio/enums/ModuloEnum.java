@@ -1,10 +1,10 @@
 package br.com.clogos.estagio.enums;
 
 public enum ModuloEnum {
-	Modulo_I("I M骴ulo", "FICHA DE RELAT覴IO 脷NICO"), 
-	Modulo_II("II M骴ulo", "FICHA DE RELAT覴IO POR CAMPO"), 
-	Modulo_III("III M骴ulo", "FICHA DE RELAT覴IO POR CAMPO"), 
-	Modulo_II_III("II e III M骴ulo", "FICHA DE RELAT覴IO SEMANAL");
+	Modulo_I("I M贸dulo", "FICHA DE RELAT脫RIO 脷NICO"), 
+	Modulo_II("II M贸dulo", "FICHA DE RELAT脫RIO POR CAMPO"), 
+	Modulo_III("III M贸dulo", "FICHA DE RELAT脫RIO POR CAMPO"), 
+	Modulo_II_III("II e III M贸dulo", "FICHA DE RELAT脫RIO SEMANAL");
 	
 	private String label;
 	private String ficha;

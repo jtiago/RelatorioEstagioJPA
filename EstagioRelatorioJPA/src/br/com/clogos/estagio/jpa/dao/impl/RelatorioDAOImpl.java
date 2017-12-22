@@ -385,7 +385,10 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 				Object[] objs = (Object[]) iCampo.next();
 				campoEstagioFichaVO.setIdCampoEstagio(Long.valueOf(objs[0].toString()));
 				campoEstagioFichaVO.setNomeCampoEstagio(objs[1].toString());
-				listaCampoEstagio.add(campoEstagioFichaVO);
+				
+				if(!verificaDuplicidade(listaCampoEstagio, campoEstagioFichaVO) ) {
+					listaCampoEstagio.add(campoEstagioFichaVO);
+				}
 			}
 			fichaAvaliacaoVO.setListaCampoEstagio(listaCampoEstagio);
 			
@@ -403,5 +406,16 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 			}
 		}
 		return fichaAvaliacaoVO;
+	}
+	
+	private Boolean verificaDuplicidade(List<CampoEstagioFichaVO> lista, CampoEstagioFichaVO vo) {
+		boolean found = false;
+		for(CampoEstagioFichaVO campo : lista) {
+			if(campo.getNomeCampoEstagio().equals(vo.getNomeCampoEstagio())) {
+				found = true;
+			}
+		}
+
+		return found;
 	}
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubFichaAvaliacao" pageWidth="595" pageHeight="200" columnWidth="593" leftMargin="1" rightMargin="1" topMargin="1" bottomMargin="1" uuid="e232c5ba-8f65-499c-a9ad-86651ba210d6">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="179"/>
+	<property name="ireport.x" value="214"/>
 	<property name="ireport.y" value="0"/>
 	<field name="nomeCampoEstagio" class="java.lang.String"/>
 	<background>
@@ -19,13 +19,13 @@
 			<line>
 				<reportElement x="116" y="33" width="287" height="1" uuid="b0beb5c5-7a70-4408-ae7b-c94d37d18f04"/>
 			</line>
-			<staticText>
-				<reportElement x="116" y="34" width="286" height="14" uuid="55da4671-9eff-42ec-86da-463ab5a655d5"/>
+			<textField>
+				<reportElement x="116" y="34" width="286" height="14" uuid="3e024c72-57c0-403c-a32d-6a83ee1701eb"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[Ass. e Carimbo do (a) Supervisor (a)]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{nomeCampoEstagio}.contains( "LTDA" ) ? "Carimbo da Instituição com CNPJ" : "Ass. e Carimbo do (a) Supervisor (a)"]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>

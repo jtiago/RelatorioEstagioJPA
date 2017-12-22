@@ -9,13 +9,13 @@
 	  xmlns:pe="http://primefaces.org/ui/extensions">
 	  
 	<ui:define name="conteudo">
-		<p:panel  header="..:: Liberar Relatório">
+		<p:panel  header="..:: Liberar RelatÃ³rio">
 			<h:form id="formMessage">
 				<p:growl autoUpdate="true" rendered="#{liberarBean.mensagem}"/>
 			</h:form>
 			
 			<h:form id="formNovo">
-				<p:commandButton value="Liberar Relatório" oncomplete="dialogCadLiberar.show()"/>
+				<p:commandButton value="Liberar RelatÃ³rio" oncomplete="dialogCadLiberar.show()"/>
 			</h:form><br/>
 			
 			<h:form id="formTabelaLiberar">
@@ -66,11 +66,11 @@
 					<p:outputLabel for="modulo" value="Módulo:" />
 					 <p:selectOneMenu id="modulo" value="#{liberarBean.facade.liberarRelatorio.modulo}" 
 					 	required="true" style="width:300px;">  
-                        <f:selectItem itemLabel="Selecione Múdulo" itemValue="#{null}" />  
+                        <f:selectItem itemLabel="Selecione MÃºdulo" itemValue="#{null}" />  
                         <f:selectItems value="#{liberarBean.facade.modulo}" var="m" itemValue="#{m}" itemLabel="#{m.label}"/>  
                     </p:selectOneMenu>
 				    
-				    <p:outputLabel for="qtdRelatorio" value="Qtd. Relatório:" />
+				    <p:outputLabel for="qtdRelatorio" value="Qtd. RelatÃ³rio:" />
 				    <p:inputText id="qtdRelatorio" value="#{liberarBean.facade.liberarRelatorio.qtdRelatorio}">
 				    	<pe:keyFilter regEx="/[\d\-]/"/>
 				    </p:inputText>
@@ -84,12 +84,12 @@
 		
 		<h:form id="formFechamento">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Fchamento de Módulo para Relatório - [ * Campo Obrigatório ]" widgetVar="dialogCadFechamento">
+				header="..::: Fchamento de MÃ³dulo para RelatÃ³rio - [ * Campo ObrigatÃ³rio ]" widgetVar="dialogCadFechamento">
 				<h:panelGrid id="grid" columns="2">
 					<h:outputLabel value="Turma:" />
 					<h:outputLabel value="#{liberarBean.facade.liberarRelatorio.turmaLiberarRelatorio.nome}" style="font-weight: bold;" />
 					
-					<h:outputLabel value="Módulo em Aberto:" />
+					<h:outputLabel value="MÃ³dulo em Aberto:" />
 					<h:outputLabel value="#{liberarBean.facade.liberarRelatorio.modulo.label}" style="font-weight: bold;"/>
 				</h:panelGrid>
 				<p:commandButton value="Fechar" icon="ui-icon-circle-close" actionListener="#{liberarBean.fecharModuloLiberado}"
