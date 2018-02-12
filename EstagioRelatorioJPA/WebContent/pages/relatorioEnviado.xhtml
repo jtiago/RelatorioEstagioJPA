@@ -15,7 +15,7 @@
 		<p:panel header="..:: Relatório(s) Enviado(s)">
 			<h:form id="tabelaRelatorio">
 				<p:fieldset>
-					<p:dataTable id="tabela" var="item" value="#{relatorioAlunoBean.facade.listaRelatorioEnviado}" emptyMessage="NÃ£o existe relatÃ³rios Enviado...">
+					<p:dataTable id="tabela" var="item" value="#{relatorioAlunoBean.facade.listaRelatorioEnviado}" emptyMessage="Não existe relatórios Enviado...">
 						<f:facet name="header">
 							
 						</f:facet>
@@ -48,7 +48,7 @@
 							<h:outputLabel value="#{item.grupoCampoEstagio.dataInicial}">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
 							</h:outputLabel>
-							Ã <br/>
+							a <br/>
 							<h:outputLabel value="#{item.grupoCampoEstagio.dataFinal}">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
 							</h:outputLabel>

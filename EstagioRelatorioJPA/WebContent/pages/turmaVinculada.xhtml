@@ -36,9 +36,6 @@
 							oncomplete="preencherRelatorio.show()" update=":formRelatorio" >
 							<f:attribute name="actionTurma" value="#{item}" />
 						</p:commandButton>
-<!-- 							<p:commandLink value="Preencher RelatÃƒÆ’Ã‚Â³rio" actionListener="#{relatorioAlunoBean.preencherRelatorio}"> -->
-<!-- 								<f:attribute name="actionTurma" value="#{item}" /> -->
-<!-- 							</p:commandLink> -->
 					</p:column>
 				</p:dataTable>
 			</h:form>
@@ -46,14 +43,14 @@
 		
 		<h:form id="formRelatorio">
 			<p:dialog resizable="false" draggable="false" modal="true" position="top" closable="true" width="990" height="500" 
-					header="..::: Preencher Relatorio - [ * Campo ObrigatÃƒÂ³rio ]" widgetVar="preencherRelatorio">
+					header="..::: Preencher Relatorio - [ * Campo Obrigatório ]" widgetVar="preencherRelatorio">
 				
-				<p:panel  header="..:: Relatório de Estágio" rendered="#{relatorioAlunoBean.facade.moduloLiberado 
+				<p:panel  header="..:: RelatÃ³rio de EstÃ¡gio" rendered="#{relatorioAlunoBean.facade.moduloLiberado 
 								and !relatorioAlunoBean.facade.relatorioAvaliando
 								and !relatorioAlunoBean.facade.limiteRelatorio}">
 					<h:panelGrid columns="3" width="920">
 						<p:graphicImage url="/images/logo.png" width="120"/>
-						<h:outputLabel value="ESTÁGIO SUPERVISIONADO #{relatorioAlunoBean.facade.liberarRelatorio.modulo.label.toUpperCase()}" 
+						<h:outputLabel value="ESTAGIO SUPERVISIONADO #{relatorioAlunoBean.facade.liberarRelatorio.modulo.label.toUpperCase()}" 
 							style="font-size: 25px; font-weight: bold;"/>
 						<p:graphicImage url="/images/logo.png" width="120"/>
 					</h:panelGrid>
@@ -87,9 +84,9 @@
 						            	itemValue="#{sup.id}"/>
 						        </p:selectOneMenu>
 								
-								<p:outputLabel for="periodo" value="PerÃƒÂ­odo:" />
+								<p:outputLabel for="periodo" value="Período:" />
 								<p:selectOneMenu id="periodo" value="#{relatorioAlunoBean.facade.relatorioAluno.grupoCampoEstagio.id}" required="true" style="width: 300px;">
-						            <f:selectItem itemLabel="Selecione PerÃƒÂ­odo" itemValue="#{null}" />
+						            <f:selectItem itemLabel="Selecione Período" itemValue="#{null}" />
 						            <f:selectItems value="#{relatorioAlunoBean.facade.listaGrupoCampoEstagios}" var="gru" 
 						            	itemLabel="#{gru.grupo.nomeGrupo} - #{gru.dataInicialFormatada} a #{gru.dataFinalFormatada}" 
 						            	itemValue="#{gru.id}"/>
@@ -106,7 +103,7 @@
 								<p align="center">
 									Dentre as patologia escontradas no campo de Estágio escola uma e desenvolva:<br/>
 									Conceito (O que é a doença), Manifestações Clinicas (sinais e sintomas), Fatores desencadeantes (causas da doença),
-									Diagnóstico (exames laboratoriais e exame clinico etc.), Tratamento (reabilitação, drogas etc.) e Cuidados de Enfermagem.
+									Diagnótico (exames laboratoriais e exame clinico etc.), Tratamento (reabilitação, drogas etc.) e Cuidados de Enfermagem.
 								</p>
 							</h:panelGrid>
 							
@@ -114,7 +111,7 @@
 								<p align="center">
 									Escolha o exame que mais gostou e descreva os seguintes dados: patologia, definição clinica, CID, posicionamento, regime
 									aplicado (Kv, mA, tempo), raio central, tamanho de filme, estrutura demonstrada, estado do paciente, local do exame (UTI, 
-									Centro Cirúrgia, Sala de Raio X ou outro), paciente colaborou ou não, colimão e comentários gerais. não registrar o 
+									Centro Cirúgia, Sala de Raio X ou outro), paciente colaborou ou não, colimão e comentários gerais. não registrar o 
 									nome do paciente.
 								</p>
 							</h:panelGrid>
@@ -143,7 +140,7 @@
 				<p:panel header="..:: Relatorio de Estagio" rendered="#{relatorioAlunoBean.facade.relatorioAvaliando}" style="margin:0 auto;">
 					<br/><br/><br/><br/><br/><br/>
 					<h:panelGrid columns="1" style="margin:0 auto;">
-						<h:outputLabel value="RELATÓRIO SENDO AVALIADO!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+						<h:outputLabel value="RELATÁRIO SENDO AVALIADO!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
 					</h:panelGrid>			
 					<br/><br/><br/><br/><br/><br/>
 				</p:panel>
@@ -151,7 +148,7 @@
 				<p:panel header="..:: Relatorio de Estagio" rendered="#{relatorioAlunoBean.facade.limiteRelatorio and !relatorioAlunoBean.facade.relatorioAvaliando}" style="margin:0 auto;">
 					<br/><br/><br/><br/><br/><br/>
 					<h:panelGrid columns="1" style="margin:0 auto;">
-						<h:outputLabel value="TODOS OS RELATÓRIOS DA TURMA #{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.nome}/#{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.semestre.nomeSemestre} JÃƒï¿½ FORAM ENVIANDOS!" 
+						<h:outputLabel value="TODOS OS RELATÓRIOS DA TURMA #{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.nome}/#{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.semestre.nomeSemestre} JÃƒÆ’Ã¯Â¿Â½ FORAM ENVIANDOS!" 
 								style="font-size: 25px; font-weight:bold; text-align:center;"/>
 					</h:panelGrid>			
 					<br/><br/><br/><br/><br/><br/>
@@ -160,8 +157,8 @@
 		</h:form>
 		
 		<h:form id="formDelete">
-			<p:confirmDialog message="Deseja realmente Salvar e Enviar o Relatório, opção escolher sim, não será possível edita-ló sem a liberação da Coordenação ?" 
-				header="..:: Salvar e Enviar Relatório" widgetVar="salvarRelatorio">
+			<p:confirmDialog message="Deseja realmente Salvar e Enviar o Relatório, opção escolher sim, não será possível edita-lá sem a liberação da Coordenação ?" 
+				header="..:: Salvar e Enviar RelatÃ³rio" widgetVar="salvarRelatorio">
 				<p:commandButton value="Sim" actionListener="#{relatorioAlunoBean.save}" update=":formMensagem :formDelete :formRelatorio" />
 				<p:commandButton value="Não" oncomplete="salvarRelatorio.hide()"/>
 			</p:confirmDialog>

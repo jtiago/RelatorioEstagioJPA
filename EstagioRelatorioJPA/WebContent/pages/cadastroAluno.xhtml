@@ -88,7 +88,7 @@
 						<p:outputLabel for="cpf" value="CPF:" />
 						<p:inputMask mask="999.999.999-99" id="cpf" value="#{alunoBean.facade.aluno.cpf}" required="true" style="width:350px;"/>
 						
-						<p:outputLabel for="matricula" value="MatrÃ­cula:" />
+						<p:outputLabel for="matricula" value="Matrícula:" />
 						<p:inputText id="matricula" value="#{alunoBean.facade.aluno.matricula}" required="true" style="width:350px;"/>
 						
 						<p:outputLabel for="senha" value="Senha:" />
@@ -116,7 +116,7 @@
 			
 		<h:form id="formAlterar">
 			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Novo Aluno - [ * Campo ObrigatÃ³rio ]" widgetVar="dialogAltAluno">
+				header="..::: Novo Aluno - [ * Campo Obrigatório ]" widgetVar="dialogAltAluno">
 				<h:panelGrid id="grid" columns="2">
 				
 					<p:outputLabel for="nome" value="Nome:" />
@@ -125,7 +125,7 @@
 					<p:outputLabel for="cpf" value="CPF:" />
 					<p:inputMask mask="999.999.999.99" id="cpf" value="#{alunoBean.facade.alunoAltera.cpf}" required="true"/>
 					
-					<p:outputLabel for="matricula" value="MatrÃ­cula:" />
+					<p:outputLabel for="matricula" value="Matrícula:" />
 					<p:inputText id="matricula" value="#{alunoBean.facade.alunoAltera.matricula}" required="true"/>
 					
 					<p:outputLabel for="sexo" value="Sexo:" />
