@@ -15,3 +15,6 @@ INSERT INTO SEMESTRE VALUES (DEFAULT, "2015.2");
 
 -- Criação de Usuário
 INSERT INTO usuario (cpfusuario,nomeusuario,senhausuario,fkperfil) VALUES ('22222222222', 'Arruda', 'MjI=', 1)
+
+-- Inclusão de nova coluna para Texto Atividade 
+alter table uniweb.RELATORIO add textoAtividade varchar(8000)

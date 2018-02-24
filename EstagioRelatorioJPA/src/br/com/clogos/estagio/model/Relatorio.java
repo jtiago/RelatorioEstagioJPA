@@ -36,6 +36,9 @@ public class Relatorio implements ObjectModel {
 	@Column(nullable=false, columnDefinition="varchar(max)")
 	private String texto;
 	
+	@Column(nullable=true, columnDefinition="varchar(max)")
+	private String textoAtividade;
+	
 	@Enumerated(EnumType.STRING)
 	private ModuloEnum modulo;
 	
@@ -89,6 +92,14 @@ public class Relatorio implements ObjectModel {
 
 	public void setTexto(String texto) {
 		this.texto = texto;
+	}
+
+	public String getTextoAtividade() {
+		return textoAtividade;
+	}
+
+	public void setTextoAtividade(String textoAtividade) {
+		this.textoAtividade = textoAtividade;
 	}
 
 	public ModuloEnum getModulo() {

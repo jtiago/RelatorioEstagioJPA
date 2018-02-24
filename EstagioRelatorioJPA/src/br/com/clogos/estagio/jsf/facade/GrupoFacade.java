@@ -1,6 +1,7 @@
 package br.com.clogos.estagio.jsf.facade;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -62,7 +63,7 @@ public class GrupoFacade implements Serializable {
 		if(grupo != null && listaGrupoCampoEstagio == null && grupo.getNomeGrupo() != null) {
 			listaGrupoCampoEstagio = getGrupoCampoEstagioController().findPorGrupo(grupo);
 		}
-		return listaGrupoCampoEstagio;
+		return listaGrupoCampoEstagio == null ? new LinkedList<GrupoCampoEstagio>() : listaGrupoCampoEstagio;
 	}
 	
 	public void save(List<Aluno> listaalunos) {

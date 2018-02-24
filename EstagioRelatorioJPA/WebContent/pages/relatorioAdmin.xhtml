@@ -18,14 +18,15 @@
 					<h:panelGrid id="grid" columns="7">
 						<p:outputLabel for="status" value="Status:" />
                     	<p:selectOneMenu id="status" value="#{relatorioAdminBean.facade.relatorio.status}"
-							style="width: 190px;">
+							style="width: 160px;" required="true">
 							<f:selectItem itemLabel="Selecione Status" itemValue="#{null}"/>
 							<f:selectItems var="stat" value="#{relatorioAdminBean.facade.status}" itemLabel="#{stat.label}" itemValue="#{stat}" />
 						</p:selectOneMenu>
 						
 						<p:outputLabel for="turma" value="Turma:"/>
-						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.turmaRelatorio.id}" style="width:170px;">
-				            <f:selectItem itemLabel="Selecione Turma" itemValue="0" />
+						<p:selectOneMenu id="turma" value="#{relatorioAdminBean.facade.relatorio.turmaRelatorio.id}" style="width:170px;" 
+							required="true">
+				            <f:selectItem itemLabel="Selecione Turma" itemValue="" />
 							<f:selectItems value="#{turmaBean.facade.listaTurma}" var="tu" itemValue="#{tu.id}" itemLabel="#{tu.nome}"/>
 				        </p:selectOneMenu>				        
 				         
@@ -96,7 +97,7 @@
 		
 		<h:form id="formAvaliacao">
 			<p:focus/>
-			<p:dialog width="900" height="500" header="..::Validar Relatório" widgetVar="dialogValidar" draggable="false" modal="true" 
+			<p:dialog width="900" height="600" header="..::Validar Relatório" widgetVar="dialogValidar" draggable="false" modal="true" 
 				resizable="false" position="top" focus="obs">
 				<p:fieldset>
 					<h:panelGrid id="grid" columns="2">
@@ -134,9 +135,15 @@
 					</h:panelGrid>
 				</p:fieldset>
 				<br/>
-				<p:fieldset>
+				<p:fieldset legend="Relatório">
 					<h:panelGrid columns="1" style="text-align: justify;">
 						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.texto}" escape="false" /><br/>
+					</h:panelGrid>
+				</p:fieldset>
+				<br/>
+				<p:fieldset legend="Atividades práticas">
+					<h:panelGrid columns="1" style="text-align: justify;">
+						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.textoAtividade}" escape="false" /><br/>
 					</h:panelGrid>
 				</p:fieldset>
 				<br/>

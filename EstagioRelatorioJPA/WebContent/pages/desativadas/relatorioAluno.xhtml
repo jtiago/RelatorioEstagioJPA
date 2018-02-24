@@ -14,9 +14,9 @@
 		
 		<h:form id="formRelatorio">
 			<p:dialog resizable="false" draggable="false" modal="true" position="top" closable="true" width="990" height="500" 
-					header="..::: Preencher Relatorio - [ * Campo Obrigatório ]" widgetVar="preencherRelatorio">
+					header="..::: Preencher Relatorio - [ * Campo ObrigatÃ³rio ]" widgetVar="preencherRelatorio">
 				
-				<p:panel  header="..:: RelatÃÂ³rio de Estágio" rendered="#{relatorioAlunoBean.facade.moduloLiberado 
+				<p:panel  header="..:: RelatÃƒÂƒÃ‚Â³rio de EstÃ¡gio" rendered="#{relatorioAlunoBean.facade.moduloLiberado 
 								and !relatorioAlunoBean.facade.relatorioAvaliando
 								and !relatorioAlunoBean.facade.limiteRelatorio}">
 					<h:panelGrid columns="3" width="920">
@@ -42,7 +42,7 @@
 								<p:outputLabel for="campo" value="Campo:"/>
 								<p:selectOneMenu id="campo" value="#{relatorioAlunoBean.facade.relatorioAluno.campoEstagio.id}"
 									required="true" style="width: 585px;" valueChangeListener="#{relatorioAlunoBean.processaGrupoCampo}">
-									<f:selectItem itemLabel="Selecione Campo de Estágio" itemValue="#{null}"/>
+									<f:selectItem itemLabel="Selecione Campo de EstÃ¡gio" itemValue="#{null}"/>
 									<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.nome}"
 										itemValue="#{cam.id}"/>
 									<p:ajax event="valueChange" update=":formRelatorio:grid"/>
@@ -55,9 +55,9 @@
 						            	itemValue="#{sup.id}"/>
 						        </p:selectOneMenu>
 								
-								<p:outputLabel for="periodo" value="Período:" />
+								<p:outputLabel for="periodo" value="PerÃ­odo:" />
 								<p:selectOneMenu id="periodo" value="#{relatorioAlunoBean.facade.relatorioAluno.grupoCampoEstagio.id}" required="true" style="width: 300px;">
-						            <f:selectItem itemLabel="Selecione PerÃÂ­odo" itemValue="#{null}" />
+						            <f:selectItem itemLabel="Selecione PerÃƒÂƒÃ‚Â­odo" itemValue="#{null}" />
 						            <f:selectItems value="#{relatorioAlunoBean.facade.grupo.listaGrupoCampoEstagio}" var="gru" 
 						            	itemLabel="#{gru.grupo.nomeGrupo} - #{gru.dataInicialFormatada} a #{gru.dataFinalFormatada}" 
 						            	itemValue="#{gru.id}"/>
@@ -72,17 +72,17 @@
 							
 							<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.facade.renderedEnfermagem}">
 								<p align="center">
-									Dentre as patologia escontradas no campo de estágio escola uma e desenvolva:<br/>
-									Conceito (O que é a doença), Manifestações Clinicas (sinais e sintomas), Fatores desencadeantes (causas da doença),
-									Diagnóstico (exames laboratoriais e exame clinico etc.), Tratamento (reabilitação, drogas etc.) e Cuidados de Enfermagem.
+									Dentre as patologia escontradas no campo de estÃ¡gio escola uma e desenvolva:<br/>
+									Conceito (O que Ã© a doenÃ§a), ManifestaÃ§Ãµes Clinicas (sinais e sintomas), Fatores desencadeantes (causas da doenÃ§a),
+									DiagnÃ³stico (exames laboratoriais e exame clinico etc.), Tratamento (reabilitaÃ§Ã£o, drogas etc.) e Cuidados de Enfermagem.
 								</p>
 							</h:panelGrid>
 							
 							<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.facade.renderedRadiologia}">
 								<p align="center">
-									Escolha o exame que mais gostou e descreva os seguintes dados: patologia, definiÃÂ§ÃÂ£o clinica, CID, posicionamento, regime
+									Escolha o exame que mais gostou e descreva os seguintes dados: patologia, definiÃƒÂƒÃ‚Â§ÃƒÂƒÃ‚Â£o clinica, CID, posicionamento, regime
 									aplicado (Kv, mA, tempo), raio central, tamanho de filme, estrutura demonstrada, estado do paciente, local do exame (UTI, 
-									Centro Cirúrgia, Sala de Raio X ou outro), paciente colaborou ou não, colimaÃÂ§ÃÂ£o e comentários gerais. Não registrar o 
+									Centro CirÃºrgia, Sala de Raio X ou outro), paciente colaborou ou nÃ£o, colimaÃƒÂƒÃ‚Â§ÃƒÂƒÃ‚Â£o e comentÃ¡rios gerais. NÃ£o registrar o 
 									nome do paciente.
 								</p>
 							</h:panelGrid>
@@ -101,11 +101,11 @@
 						</p:panel>
 				</p:panel>
 				
-				<p:panel header="..:: Relatorio de Estágio" rendered="#{!relatorioAlunoBean.facade.moduloLiberado 
+				<p:panel header="..:: Relatorio de EstÃ¡gio" rendered="#{!relatorioAlunoBean.facade.moduloLiberado 
 							and !relatorioAlunoBean.facade.relatorioAvaliando}" style="margin:0 auto;">
 					<br/><br/><br/><br/><br/><br/>
 					<h:panelGrid columns="1" style="margin:0 auto;">
-						<h:outputLabel value="NÃO EXISTE RELATÓRIO LIBERADO PARA VOCÊ !" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+						<h:outputLabel value="NÃƒÂ’O EXISTE RELATÃ“RIO LIBERADO PARA VOCÃŠÂ !" style="font-size: 25px; font-weight:bold; text-align:center;"/>
 					</h:panelGrid>			
 					<br/><br/><br/><br/><br/><br/>
 				</p:panel>
@@ -113,7 +113,7 @@
 				<p:panel header="..:: Relatorio de Estagio" rendered="#{relatorioAlunoBean.facade.relatorioAvaliando}" style="margin:0 auto;">
 					<br/><br/><br/><br/><br/><br/>
 					<h:panelGrid columns="1" style="margin:0 auto;">
-						<h:outputLabel value="RELAÓRIO SENDO AVALIADO!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
+						<h:outputLabel value="RELAÃ“ÂœRIO SENDO AVALIADO!" style="font-size: 25px; font-weight:bold; text-align:center;"/>
 					</h:panelGrid>			
 					<br/><br/><br/><br/><br/><br/>
 				</p:panel>
@@ -121,7 +121,7 @@
 				<p:panel header="..:: Relatorio de Estagio" rendered="#{relatorioAlunoBean.facade.limiteRelatorio and !relatorioAlunoBean.facade.relatorioAvaliando}" style="margin:0 auto;">
 					<br/><br/><br/><br/><br/><br/>
 					<h:panelGrid columns="1" style="margin:0 auto;">
-						<h:outputLabel value="TODOS OS RELATÓRIOS DA TURMA #{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.nome}/#{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.semestre.nomeSemestre} JÃï¿½ FORAM ENVIANDOS!" 
+						<h:outputLabel value="TODOS OS RELATÃ“RIOS DA TURMA #{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.nome}/#{relatorioAlunoBean.facade.relatorioAluno.turmaRelatorio.semestre.nomeSemestre} JÃƒÂƒÃ¯Â¿Â½ FORAM ENVIANDOS!" 
 								style="font-size: 25px; font-weight:bold; text-align:center;"/>
 					</h:panelGrid>			
 					<br/><br/><br/><br/><br/><br/>
@@ -130,10 +130,10 @@
 		</h:form>
 		
 		<h:form id="formSalvar">
-			<p:confirmDialog message="Deseja realmente Salvar e Enviar o RelatÃÂ³rio, apÃÂ³s escolher sim nÃÂ£o serÃÂ¡ possÃÂ­vel edita-lÃÂ³ sem a liberaÃÂ§ÃÂ£o da CoordenaÃÂ§ÃÂ£o ?" 
-				header="..:: Salvar e Enviar RelatÃÂ³rio" widgetVar="salvarRelatorio">
+			<p:confirmDialog message="Deseja realmente Salvar e Enviar o RelatÃƒÂƒÃ‚Â³rio, apÃƒÂƒÃ‚Â³s escolher sim nÃƒÂƒÃ‚Â£o serÃƒÂƒÃ‚Â¡ possÃƒÂƒÃ‚Â­vel edita-lÃƒÂƒÃ‚Â³ sem a liberaÃƒÂƒÃ‚Â§ÃƒÂƒÃ‚Â£o da CoordenaÃƒÂƒÃ‚Â§ÃƒÂƒÃ‚Â£o ?" 
+				header="..:: Salvar e Enviar RelatÃƒÂƒÃ‚Â³rio" widgetVar="salvarRelatorio">
 				<p:commandButton value="Sim" actionListener="#{relatorioAlunoBean.save}" update=":formMensagem :formSalvar :formRelatorio" />
-				<p:commandButton value="NÃÂ£o" oncomplete="salvarRelatorio.hide()"/>
+				<p:commandButton value="NÃƒÂƒÃ‚Â£o" oncomplete="salvarRelatorio.hide()"/>
 			</p:confirmDialog>
 		</h:form>
 		

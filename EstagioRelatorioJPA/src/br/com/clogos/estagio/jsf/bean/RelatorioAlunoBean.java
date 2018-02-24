@@ -19,6 +19,7 @@ import br.com.clogos.estagio.model.Turma;
 public class RelatorioAlunoBean implements Serializable {
 	private static final long serialVersionUID = 6378902231545732309L;
 	private RelatorioAlunoFacade facade;
+	private boolean mensagem;
 	
 	public RelatorioAlunoFacade getFacade() {
 		return facade == null ? facade = new RelatorioAlunoFacade() : facade;
@@ -26,6 +27,7 @@ public class RelatorioAlunoBean implements Serializable {
 	
 	public void save(ActionEvent event) {
 		getFacade().save();
+		mensagem = true;
 	}
 	
 	public void preencherRelatorio(ActionEvent event) {
@@ -34,13 +36,7 @@ public class RelatorioAlunoBean implements Serializable {
 		HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false); 
 		Aluno aluno = (Aluno) httpSession.getAttribute("usuarioLogado");
 		getFacade().atribuirDadosRelatorio(aluno, turma);
-		
-//		try {
-//			FacesContext.getCurrentInstance().getExternalContext().redirect("relatorioAluno.jsf");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		mensagem = true;
 	}
 	
 	public void limpar(ActionEvent event) {
@@ -57,5 +53,13 @@ public class RelatorioAlunoBean implements Serializable {
 	public void processaGrupoCampo(ValueChangeEvent event) {
 		Long idCampo = Long.valueOf(event.getNewValue().toString());
 		getFacade().buscaGrupoCampoESupervisores(idCampo);
+	}
+	
+	public boolean isMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(boolean mensagem) {
+		this.mensagem = mensagem;
 	}
 }

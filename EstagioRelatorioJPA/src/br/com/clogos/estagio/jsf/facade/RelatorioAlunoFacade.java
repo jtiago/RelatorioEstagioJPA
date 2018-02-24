@@ -61,21 +61,16 @@ public class RelatorioAlunoFacade implements Serializable {
 	}
 	
 	public void save() {
-		//if(!getRelatorioController().existeRelatorioGrupoCampoEstagio(getRelatorioAluno())) {
-			getRelatorioAluno().setStatus(StatusEnum.ABERTO);
-			getRelatorioAluno().setDataCadastro(new Date());
-			getRelatorioAluno().setModulo(getLiberarRelatorio().getModulo());
-			if(getGenericController().save(getRelatorioAluno())) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-						FacesMessage.SEVERITY_INFO, "Relatório salvo e encaminhado para avaliação.", ""));
-			} else {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-						FacesMessage.SEVERITY_ERROR, "Problemas ao salvar relatório, por favor entre em contato com a coordenação Logos", ""));
-			}
-//		} else {
-//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-//					FacesMessage.SEVERITY_WARN, "Já foi enviado um relatório com o mesmo Campo e Período", ""));
-//		}
+		getRelatorioAluno().setStatus(StatusEnum.ABERTO);
+		getRelatorioAluno().setDataCadastro(new Date());
+		getRelatorioAluno().setModulo(getLiberarRelatorio().getModulo());
+		if(getGenericController().save(getRelatorioAluno())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Relatório salvo e encaminhado para avaliação.", ""));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Problemas ao salvar relatório, por favor entre em contato com a coordenação Logos", ""));
+		}
 		limpar();
 	}
 	
@@ -89,9 +84,6 @@ public class RelatorioAlunoFacade implements Serializable {
 		renderedRadiologia = false;
 	}
 	
-	/*public Boolean existeRelatorioPreenchido(Aluno aluno) {
-		return getRelatorioController().existeRelatorioPreenchido(aluno);
-	}*/
 	
 	public void atribuirDadosRelatorio(Aluno aluno, Turma turma) {
 		turma.getSemestre().setId(aluno.getSemestre().getId());

@@ -299,20 +299,6 @@
 			</p:dialog>
 		</h:form>
 		
-		<!-- 	
-		<h:form id="formAlterar">
-			<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-				header="..::: Novo Semestre - [ * Semestre Obrigatório ]" widgetVar="dialogAltSemestre">
-				<h:panelGrid id="grid" columns="2">
-					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText id="nome" value="#{semestreBean.facade.semestreAltera.nomeSemestre}" required="true"/>
-				</h:panelGrid>
-				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{semestreBean.update}"
-					update=":formTabelaSemestre :formAlterar:grid :formMessage" onclick="lazyload()"/>
-				<p:commandButton value="Sair" icon="ui-icon-close" oncomplete="dialogAltSemestre.hide()" onclick="lazyload()"/>
-			</p:dialog>
-		</h:form> -->
-		
 		<h:form>
 			<p:remoteCommand name="lazyload">  
 		        <f:setPropertyActionListener value="#{false}" target="#{grupoBean.mensagem}" /> 
