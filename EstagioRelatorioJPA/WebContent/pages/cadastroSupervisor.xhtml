@@ -23,11 +23,16 @@
 						Supervisores Cadastrados
 					</f:facet>
 					
+					<p:column headerText="Situação" style="text-align:center">
+						<p:graphicImage url="/images/desabilitado.png" width="25px" height="25px" rendered="#{item.codigoSituacao == 0}" title="Desabilitado" />
+						<p:graphicImage url="/images/habilitado.png" width="25px" height="25px" rendered="#{item.codigoSituacao == 1}" title="Habilitado" />
+					</p:column>
+					
 					<p:column headerText="CPF">
 						<h:outputLabel value="#{item.cpf}"/>
 					</p:column>
 					
-					<p:column headerText="Nome">
+					<p:column headerText="Nome" filterBy="#{item.nome}" filterMatchMode="contains">
 						<h:outputLabel value="#{item.nome}"/>
 					</p:column>
 					
@@ -111,6 +116,12 @@
 						<f:selectItem itemLabel="Selecione Campo" itemValue="#{null}"/>
 						<f:selectItems value="#{campoBean.facade.listaCampoEstagio}" var="cam" itemLabel="#{cam.sigla} - #{cam.nome}"
 							itemValue="#{cam.id}"/>
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="situacao" value="Situação:" />
+                   	<p:selectOneMenu id="situacao" value="#{supervisorBean.facade.supervisorAltera.codigoSituacao}" style="width: 500px;" required="true">
+						<f:selectItem itemLabel="Habilitado" itemValue="1"/>
+						<f:selectItem itemLabel="Desabilitado" itemValue="0"/>
 					</p:selectOneMenu>
 				</h:panelGrid>
 				<p:commandButton value="Alterar" icon="ui-icon-pencil" actionListener="#{supervisorBean.update}"
