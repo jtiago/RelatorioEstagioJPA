@@ -51,17 +51,14 @@
 						<h:outputLabel value="#{item.status}" />
 					</p:column>
 					
-					<p:column style="text-align:right; width: 50px;">
+					<p:column style="text-align:right; width: 90px;">
 						<p:commandButton icon="ui-icon-search" oncomplete="dadosFicha.show()" update=":formDadosFicha" >
 							<f:setPropertyActionListener target="#{fichaBean.facade.alunoDados}" value="#{item}" />
 						</p:commandButton>
-					
-						<!-- 
-						<p:commandButton icon="ui-icon-print" disabled="#{item.status != 'cursando'}" oncomplete="imprimirRelatorio.show()" update=":formImprimir">
-                    			<f:setPropertyActionListener target="#{fichaBean.facade.alunoDados}" value="#{item}" />
-                    	</p:commandButton> -->
                     	
-                    	<h:commandLink id="btnGerarRelatorio" value="Imprimir" action="#{fichaBean.gerarRelatorio(item)}" target="_blank" />
+                    	<h:commandLink id="btnGerarRelatorio" action="#{fichaBean.gerarRelatorio(item)}" target="_blank">
+                    		<h:graphicImage value="/images/print.png" width="25" height="25" title="PDF"  />
+                    	</h:commandLink>
 					</p:column>
 					
 				</p:dataTable>
@@ -70,13 +67,13 @@
 		
 		<h:form id="formDadosFicha">
 				<p:dialog resizable="false" draggable="false" modal="true" position="center" closable="false" 
-					header="..::: Dados Ficha de Avaliação" widgetVar="dadosFicha">
+					header="..::: Dados Ficha de Avalia&#231;&#227;o" widgetVar="dadosFicha">
 
 					<h:panelGrid id="grid" columns="2">
 						<p:outputLabel for="aluno" value="Aluno(a):" />
 						<p:outputLabel id="aluno" value="#{fichaBean.facade.fichaAvaliacaoVO.alunoFichaVO.nomeAluno}" style="width:100px;"/>
 						
-						<p:outputLabel for="carga" value="Carga HorÃ¡ria:" />
+						<p:outputLabel for="carga" value="Carga Hor&#225;ria:" />
 						<p:outputLabel id="carga" value="350 Horas" style="width:100px;"/>
 						
 						<p:outputLabel for="turma" value="Turma:" />
@@ -88,7 +85,7 @@
 					
 					<br/>
 					<p:dataTable id="tabelaDadosFicha" var="itemDados" value="#{fichaBean.facade.fichaAvaliacaoVO.listaGrupoCampo}">
-						<p:column headerText="Campo Estáio">
+						<p:column headerText="Campo Est&#225;gio">
 							<h:outputLabel value="#{itemDados.siglaCampoEstagio}"/>
 						</p:column>
 						
@@ -98,7 +95,7 @@
 							</h:outputLabel>
 						</p:column>
 						
-						<p:column headerText="Data Fina" style="text-align: center;">
+						<p:column headerText="Data Final" style="text-align: center;">
 							<h:outputLabel value="#{itemDados.dataFinal}">
 								<f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy" />
 							</h:outputLabel>
@@ -114,15 +111,6 @@
 					<p:commandButton value="Sair" oncomplete="dadosFicha.hide()"/>
 				</p:dialog>
 			</h:form>
-			
-			<h:form id="formImprimir">
-			<p:confirmDialog message="Deseja Imprimir esta Ficha de Avaliação ?" header="..:: Imprimir Ficha" widgetVar="imprimirRelatorio">
-				<p:commandButton value="Sim" actionListener="#{fichaBean.gerarRelatorio}" oncomplete="imprimirRelatorio.hide()" 
-					update=":formMessage :formImprimir :tabelaFicha" />
-				<p:commandButton value="Não" oncomplete="imprimirRelatorio.hide()"/>
-			</p:confirmDialog>
-		</h:form>
-		
 		
 		<h:form>
 			<p:remoteCommand name="lazyload">  

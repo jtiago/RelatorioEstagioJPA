@@ -329,7 +329,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 		sqlGrupoFicha.append("inner join uniweb.GrupoCampoEstagio gc on gc.fkgrupo=g.idgrupo ");
 		sqlGrupoFicha.append("inner join uniweb.CAMPOESTAGIO c on c.idcampoestagio=gc.fkcampoEstagio ");
 		sqlGrupoFicha.append("left join uniweb.RELATORIO rel on rel.fkgrupocampoestagio=gc.id and rel.fkaluno=ga.alunosGrupo_idaluno ");
-		sqlGrupoFicha.append("where s.idsemestre = :idSemestre and alunosGrupo_idaluno = :idAluno order by gc.dataInicial ");
+		sqlGrupoFicha.append("where s.idsemestre = :idSemestre and alunosGrupo_idaluno = :idAluno and t.idturma = :idTurma order by gc.dataInicial ");
 		
 		sqlCampoEstagio.append("select c.idcampoestagio, c.nomecampoestagio from uniweb.GRUPO g ");
 		sqlCampoEstagio.append("inner join uniweb.grupo_aluno ga on ga.grupos_idgrupo=g.idgrupo ");
@@ -359,7 +359,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 			fichaAvaliacaoVO.setAlunoFichaVO(alunoFichaVO);
 			
 			Query queryGrupo = entityManager.createNativeQuery(sqlGrupoFicha.toString())
-					.setParameter("idSemestre", idSemestre).setParameter("idAluno", idAluno);
+					.setParameter("idSemestre", idSemestre).setParameter("idAluno", idAluno).setParameter("idTurma", idTurma);
 			
 			Iterator iGrupo = queryGrupo.getResultList().iterator();
 			while(iGrupo.hasNext()) {
