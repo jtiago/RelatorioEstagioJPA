@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEstagio" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="c54d93ac-b954-40d4-a44e-2250a46a2714">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="410"/>
+	<property name="ireport.y" value="266"/>
 	<parameter name="LOGO" class="java.lang.Object"/>
 	<parameter name="TITULO" class="java.lang.String"/>
 	<parameter name="NOMECURSO" class="java.lang.String"/>
@@ -14,6 +14,7 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="listaCampoEstagio" class="java.lang.Object"/>
 	<parameter name="SUBTITULO" class="java.lang.String"/>
+	<parameter name="CARGAHORARIA" class="java.lang.String"/>
 	<field name="INICIO" class="java.util.Date"/>
 	<field name="TERMINIO" class="java.util.Date"/>
 	<field name="CAMPO" class="java.lang.String"/>
@@ -92,17 +93,17 @@
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="0" y="144" width="300" height="20" uuid="7b5dcf65-9c9c-4cf9-8a05-df3cc4841e26"/>
+				<reportElement x="0" y="144" width="150" height="20" uuid="7b5dcf65-9c9c-4cf9-8a05-df3cc4841e26"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[CARGA HORARIA TOTAL: 305 HORAS]]></text>
+				<text><![CDATA[CARGA HORARIA TOTAL:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="119" y="11" width="320" height="20" uuid="62566135-ffa0-4bf1-90d4-861408f040f9"/>
@@ -202,6 +203,14 @@
 					<font fontName="Arial" size="13" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{SUBTITULO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="144" width="150" height="20" uuid="18a7094f-6add-4f44-b526-16c6c94e4eed"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CARGAHORARIA}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

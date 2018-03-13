@@ -351,6 +351,7 @@ public class RelatorioDAOImpl implements RelatorioDAO, Serializable {
 				alunoFichaVO.setNomeTurma(objs[3].toString());
 				alunoFichaVO.setNomeCurso(objs[4].toString());
 				alunoFichaVO.setModulo(ModuloEnum.getModuloTipo(objs[5].toString()));
+				alunoFichaVO.setCargaHoraria(ModuloEnum.getModuloTipo(objs[5].toString()).getCargaHoraria());
 				alunoFichaVO.setNomeGrupo(objs[6].toString());
 				alunoFichaVO.setSemestre(objs[7].toString());
 				alunoFichaVO.setQtdRelatorio(Integer.valueOf(objs[8].toString()));

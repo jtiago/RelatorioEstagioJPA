@@ -20,6 +20,7 @@ public class AlunoFichaVO implements Serializable {
 	private String semestre;
 	private Integer qtdRelatorio;
 	private Integer qtdRelatorioEnviado;
+	private String cargaHoraria;
 	
 	public AlunoFichaVO() {}
 	
@@ -83,6 +84,14 @@ public class AlunoFichaVO implements Serializable {
 	}
 	public void setQtdRelatorioEnviado(Integer qtdRelatorioEnviado) {
 		this.qtdRelatorioEnviado = qtdRelatorioEnviado;
+	}
+
+	public String getCargaHoraria() {
+		return cargaHoraria;
+	}
+
+	public void setCargaHoraria(String cargaHoraria) {
+		this.cargaHoraria = cargaHoraria;
 	}
 
 	public String getNomeCurso() {

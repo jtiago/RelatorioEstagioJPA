@@ -86,6 +86,7 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			paramentros.put("NOMEALUNO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno());
 			paramentros.put("NOMETURMA", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeTurma());
 			paramentros.put("NOMEGRUPO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeGrupo());
+			paramentros.put("CARGAHORARIA", getFichaAvaliacaoVO().getAlunoFichaVO().getCargaHoraria());
 			//paramentros.put("SITUACAOFINAL", retornaSituacaoFinal(getFichaAvaliacaoVO().getListaGrupoCampo()));
 			paramentros.put("SITUACAOFINAL", "H");
 			paramentros.put("SUBREPORT_DIR", fileJasperSub.getAbsolutePath());

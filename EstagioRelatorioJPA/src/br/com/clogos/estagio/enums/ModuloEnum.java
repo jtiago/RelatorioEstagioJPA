@@ -1,17 +1,19 @@
 package br.com.clogos.estagio.enums;
 
 public enum ModuloEnum {
-	Modulo_I("I Módulo", "FICHA DE RELATÓRIO ÚNICO"), 
-	Modulo_II("II Módulo", "FICHA DE RELATÓRIO POR CAMPO"), 
-	Modulo_III("III Módulo", "FICHA DE RELATÓRIO POR CAMPO"), 
-	Modulo_II_III("II e III Módulo", "FICHA DE RELATÓRIO SEMANAL");
+	Modulo_I("I Módulo", "FICHA DE RELATÓRIO ÚNICO", "105 Horas"), 
+	Modulo_II("II Módulo", "FICHA DE RELATÓRIO POR CAMPO", "230 Horas"), 
+	Modulo_III("III Módulo", "FICHA DE RELATÓRIO POR CAMPO", "305 Horas"), 
+	Modulo_II_III("II e III Módulo", "FICHA DE RELATÓRIO SEMANAL", "230 Horas");
 	
 	private String label;
 	private String ficha;
+	private String cargaHoraria;
 	
-	ModuloEnum(String label, String ficha) {
+	ModuloEnum(String label, String ficha, String cargaHoraria) {
 		this.label=label;
 		this.ficha=ficha;
+		this.cargaHoraria=cargaHoraria;
 	}
 	
 	public String getLabel() {
@@ -20,6 +22,10 @@ public enum ModuloEnum {
 	
 	public String getFicha() {
 		return ficha;
+	}
+	
+	public String getCargaHoraria() {
+		return cargaHoraria;
 	}
 	
 	public static ModuloEnum getModulo(String str) {
