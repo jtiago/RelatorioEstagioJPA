@@ -81,8 +81,8 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			
 			// Atribuição as parametros do relatório
 			paramentros.put("LOGO", logo);
-			paramentros.put("TITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeCurso()+" "+getFichaAvaliacaoVO().getAlunoFichaVO().getModulo().getLabel().toUpperCase());
-			paramentros.put("SUBTITULO", retornaSubTitulo(getFichaAvaliacaoVO().getAlunoFichaVO().getModulo()));
+			paramentros.put("TITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeCurso());
+			paramentros.put("SUBTITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getModulo().getLabel().toUpperCase()+" - "+retornaSubTitulo(getFichaAvaliacaoVO().getAlunoFichaVO().getModulo()));
 			paramentros.put("NOMEALUNO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno());
 			paramentros.put("NOMETURMA", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeTurma());
 			paramentros.put("NOMEGRUPO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeGrupo());

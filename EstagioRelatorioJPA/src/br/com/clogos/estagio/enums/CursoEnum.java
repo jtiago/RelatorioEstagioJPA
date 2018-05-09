@@ -1,8 +1,8 @@
 package br.com.clogos.estagio.enums;
 
 public enum CursoEnum {
-	ENFERMAGME(0, "ENFERMAGEM"),
-	RADIOLOGIA(1, "RADIOLOGIA"),
+	ENFERMAGME(0, "TÉCNICO EM ENFERMAGEM"),
+	RADIOLOGIA(1, "TÉCNICO EM RADIOLOGIA"),
 	ANALISE(3, "ANÁLISES CLÍNICAS");
 	
 	private Integer codigo;

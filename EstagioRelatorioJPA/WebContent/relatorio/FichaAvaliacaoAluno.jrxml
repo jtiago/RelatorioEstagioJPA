@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEstagio" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="c54d93ac-b954-40d4-a44e-2250a46a2714">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="514"/>
+	<property name="ireport.y" value="23"/>
 	<parameter name="LOGO" class="java.lang.Object"/>
 	<parameter name="TITULO" class="java.lang.String"/>
 	<parameter name="NOMECURSO" class="java.lang.String"/>
@@ -25,11 +25,11 @@
 	<title>
 		<band height="184" splitType="Stretch">
 			<image>
-				<reportElement x="455" y="29" width="100" height="50" uuid="5c371ea3-b442-48dd-b4a4-330cdaf6e7d6"/>
+				<reportElement x="467" y="8" width="88" height="50" uuid="5c371ea3-b442-48dd-b4a4-330cdaf6e7d6"/>
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="119" y="31" width="320" height="20" uuid="3bc4f831-e74e-4c01-b0eb-113820f7bd0e"/>
+				<reportElement x="119" y="41" width="320" height="20" uuid="3bc4f831-e74e-4c01-b0eb-113820f7bd0e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="13" isBold="true"/>
 				</textElement>
@@ -89,7 +89,7 @@
 				<textFieldExpression><![CDATA[$P{NOMETURMA}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="0" y="29" width="100" height="50" uuid="c9233033-f0a8-484d-9357-8f95f22be105"/>
+				<reportElement x="0" y="9" width="89" height="50" uuid="c9233033-f0a8-484d-9357-8f95f22be105"/>
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 			<staticText>
@@ -106,7 +106,7 @@
 				<text><![CDATA[CARGA HORARIA TOTAL:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="119" y="11" width="320" height="20" uuid="62566135-ffa0-4bf1-90d4-861408f040f9"/>
+				<reportElement x="119" y="20" width="320" height="20" uuid="62566135-ffa0-4bf1-90d4-861408f040f9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="13" isBold="true"/>
 				</textElement>
@@ -198,7 +198,7 @@
 				<text><![CDATA[H/NH]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="51" width="355" height="20" uuid="d0231ba5-8e4c-40bb-8083-8d06faeda980"/>
+				<reportElement x="1" y="63" width="554" height="20" uuid="d0231ba5-8e4c-40bb-8083-8d06faeda980"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="13" isBold="true"/>
 				</textElement>
