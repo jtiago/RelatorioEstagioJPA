@@ -141,7 +141,7 @@
 					</h:panelGrid>
 				</p:fieldset>
 				<br/>
-				<p:fieldset legend="Atividades práticas">
+				<p:fieldset legend="Atividades práticas" rendered="#{relatorioAdminBean.facade.relatorioValidar.modulo != 'Modulo_I'}">
 					<h:panelGrid columns="1" style="text-align: justify;">
 						<h:outputLabel value="#{relatorioAdminBean.facade.relatorioValidar.textoAtividade}" escape="false" /><br/>
 					</h:panelGrid>
