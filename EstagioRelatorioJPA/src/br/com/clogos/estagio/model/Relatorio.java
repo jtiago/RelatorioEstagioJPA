@@ -33,10 +33,10 @@ public class Relatorio implements ObjectModel {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro;
 	
-	@Column(nullable=false, columnDefinition="varchar(max)")
+	@Column(nullable=false, columnDefinition="TEXT")
 	private String texto;
 	
-	@Column(nullable=true, columnDefinition="varchar(max)")
+	@Column(nullable=true, columnDefinition="TEXT")
 	private String textoAtividade;
 	
 	@Enumerated(EnumType.STRING)

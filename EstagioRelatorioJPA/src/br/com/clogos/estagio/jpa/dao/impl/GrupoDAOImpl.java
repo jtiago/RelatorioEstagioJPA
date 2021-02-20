@@ -1,5 +1,6 @@
 package br.com.clogos.estagio.jpa.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -78,8 +79,8 @@ public class GrupoDAOImpl implements GrupoDAO {
 		
 		try {
 			Query query = entityManager.createNativeQuery(hql.toString())
-					.setParameter("idGrupo", idGrupo)
-					.setParameter("idSemestre", idSemestre);
+					.setParameter("idGrupo", idGrupo != null ? new BigDecimal(idGrupo) : null)
+					.setParameter("idSemestre", idSemestre != null ? new BigDecimal(idSemestre) : null);
 			@SuppressWarnings("rawtypes")
 			Iterator i = query.getResultList().iterator();
 			while(i.hasNext()) {
@@ -105,8 +106,8 @@ public class GrupoDAOImpl implements GrupoDAO {
 				}
 				grupo.getAlunosGrupo().add(aluno);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (PersistenceException e) {
+			throw new PersistenceException(e.getMessage(), e); 
 		} finally {
 			if(entityManager.isOpen()) {
 				entityManager.close();

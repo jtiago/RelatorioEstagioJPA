@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.PersistenceException;
 
 import br.com.clogos.estagio.jpa.controller.GenericController;
 import br.com.clogos.estagio.jpa.controller.GrupoCampoEstagioController;
@@ -46,8 +47,15 @@ public class GrupoFacade implements Serializable {
 	}
 	
 	public List<Aluno> getListaAlunoGrupo() {
-		listaAlunoGrupo = getGrupoController().findGrupoAluno(Util.getIdSemestre(), 
-				getGrupo().getId()).getAlunosGrupo();
+		try {
+			if (this.grupo != null && this.grupo.getId() != null) {
+				listaAlunoGrupo = getGrupoController().findGrupoAluno(Util.getIdSemestre(), 
+						getGrupo().getId()).getAlunosGrupo();
+			}
+		} catch (PersistenceException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Erro ao Buscar Grupos", e.getMessage()));
+		}
 		return listaAlunoGrupo;
 		
 	}

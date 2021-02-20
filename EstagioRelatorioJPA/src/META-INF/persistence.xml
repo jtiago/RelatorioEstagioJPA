@@ -24,15 +24,23 @@
 	<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	
 	<properties>
-		
-		<property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/>
- 	    <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.1.244:1433/relestagio"/>
-  	    <property name="javax.persistence.jdbc.password" value="#Logos!" />
-	    <property name="javax.persistence.jdbc.user" value="sa"/>
-	    <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />
+  	    
+<!--   	    <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/> -->
+<!--  	    <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/xo4gosc6_relestagio"/> -->
+<!--   	    <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/> -->
+
+		<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+ 	    <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/xo4gosc6_relestagio"/>
+  	    <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+  	    
+  	    <property name="javax.persistence.jdbc.user" value="xo4gosc6om"/>
+  	    <property name="javax.persistence.jdbc.password" value="1b6]DkEp0rT"/>
 	    
+<!-- 	    <property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/> -->
 <!-- 		<property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433/RELESTAGIO"/>  -->
-<!--  	    <property name="javax.persistence.jdbc.password" value="123456" /> -->
+<!--   	    <property name="javax.persistence.jdbc.user" value="sa"/> -->
+<!--  	    <property name="javax.persistence.jdbc.password" value="#Tsantos008" /> -->
+<!-- 		<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" /> -->
 		
 		<property name="hibernate.show_sql" value="true" />
 	  	<property name="hibernate.format_sql" value="true" />
