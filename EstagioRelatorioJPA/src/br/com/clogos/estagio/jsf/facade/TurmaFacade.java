@@ -33,14 +33,13 @@ public class TurmaFacade implements Serializable {
 	}
 	
 	public void save() {
-		if(getTurmaController().verificaDuplicidade(getTurma().getNome())) {
+		if(getTurmaController().verificaDuplicidade(getTurma().getNome(), getTurma().getSemestre().getId())) {
 			try {
 				getGenericController().save(getTurma());
 				turma=null; genericController = null; listaTurma = null;
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 						FacesMessage.SEVERITY_INFO, "Turma salvo com suceso.", ""));
 			} catch (PersistenceException e) {
-				e.printStackTrace();
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
 						FacesMessage.SEVERITY_ERROR, "Problemas ao salvar Turma.", ""));
 			}
@@ -85,7 +84,7 @@ public class TurmaFacade implements Serializable {
 	}
 	
 	public Turma obterTurmaPorNome(String nomeTurma) {
-		return getTurmaController().obterTurmaPorNome(nomeTurma);
+		return getTurmaController().obterTurmaPorNome(nomeTurma, Util.getIdSemestre());
 	}
 	
 	public Turma getTurma() {

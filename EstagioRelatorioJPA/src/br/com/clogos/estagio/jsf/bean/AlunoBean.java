@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
+import javax.persistence.PersistenceException;
 
 import org.primefaces.event.CloseEvent;
 import org.primefaces.event.FileUploadEvent;
@@ -26,8 +27,9 @@ import br.com.clogos.estagio.model.Turma;
 @ManagedBean(name="alunoBean")
 @ViewScoped
 public class AlunoBean implements Serializable {
+	private static final String SENHA_PADRAO = "12345678";
 	private static final long serialVersionUID = 1L;
-	private static final String SENHA_PADRA = "12345678";
+	private static final String SENHA_PADRA = SENHA_PADRAO;
 	private AlunoFacade facade;
 	private TurmaFacade facadeTurma;
 	private Perfil perfil;
@@ -144,42 +146,27 @@ public class AlunoBean implements Serializable {
 					}
 				}
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException | PersistenceException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Erro ao Importa o arquivo", e.getMessage()));
 		} finally {
-			scanner.close();
+			if(scanner != null) {
+				scanner.close();
+			}
 		}
     }
 	
-	/*private Turma saveTurma(String[] token) {
-		Turma turma = new Turma();
-		turma.setNome(token[2]);
-		turma.setNomeCurso(token[1]);
-		turma.setTurno(token[3]);
-		getFacadeTurma().setTurma(turma);
-		getFacadeTurma().save();
-		return turma;
-	}*/
-	
 	//Matricula - Nome Curso - Nome Turma - Turno - Nome Aluno - Status do Aluno - CPF - Sexo
-	//curso;turma;turno;nu_matricula;aluno;status;cpfcgc;sexo;
+	// curso;turma;turno;nu_matricula;aluno;status;cpfcgc;sexo;
 	private void saveAluno(String[] token, Turma turma) {
 		Aluno aluno = new Aluno();
 		List<Turma> listaTurma = new ArrayList<Turma>();
 		listaTurma.add(turma);
-//		aluno.setCpf(token[6]);
-//		aluno.setMatricula(token[0]);
-//		aluno.setNome(token[4]);
-//		aluno.setSenha("12345678");
-//		aluno.setSexo(token[7]);
-//		aluno.setStatus(token[5]);
-//		aluno.setPerfil(getPerfil());
-//		aluno.setTurmas(listaTurma);
 		
 		aluno.setCpf(token[6]);
 		aluno.setMatricula(token[3]);
 		aluno.setNome(token[4]);
-		aluno.setSenha("12345678");
+		aluno.setSenha(SENHA_PADRAO);
 		aluno.setSexo(token[7]);
 		aluno.setStatus(token[5]);
 		aluno.setPerfil(getPerfil());

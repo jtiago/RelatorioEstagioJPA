@@ -8,6 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.QueryException;
+import org.hibernate.hql.internal.ast.QuerySyntaxException;
+
 import br.com.clogos.estagio.enums.ModuloEnum;
 import br.com.clogos.estagio.jpa.JpaUtil;
 import br.com.clogos.estagio.jpa.dao.TurmaDAO;
@@ -38,22 +41,22 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 	}
 
 	@Override
-	public Boolean verificaDuplicidade(String nomeTurma) {
+	public Boolean verificaDuplicidade(String nomeTurma, Long idSemestre) {
 		entityManager = JpaUtil.getEntityManager();
-		String hql = "SELECT t FROM Turma t WHERE t.nome = :param";
+		String hql = "SELECT t FROM Turma t WHERE t.nome = :param and t.semestre.id = :idSemestre";
 		try {
 			TypedQuery<Turma> query = entityManager.createQuery(hql, Turma.class)
-					.setParameter("param", nomeTurma);
+					.setParameter("param", nomeTurma)
+					.setParameter("idSemestre", idSemestre);
 			return query.getResultList().size() == 0;
 		} catch (PersistenceException e) {
 			entityManager.getTransaction().rollback();
-			e.printStackTrace();
+			throw new PersistenceException(e);
 		} finally {
 			if(entityManager.isOpen()) {
 				entityManager.close();
 			}
 		}
-		return false;
 	}
 
 	@Override
@@ -95,19 +98,20 @@ public class TurmaDAOImpl implements Serializable, TurmaDAO {
 	}
 	
 	@Override
-	public Turma obterTurmaPorNome(String nomeTurma) {
+	public Turma obterTurmaPorNome(String nomeTurma, Long idSemestre) {
 		entityManager = JpaUtil.getEntityManager();
 		Turma turma = null;
-		String hql = "SELECT t FROM Turma t WHERE t.nome = :nomeTurma";
+		String hql = "SELECT t FROM Turma t WHERE t.nome = :nomeTurma and semestre.id = :idSemestre";
 		try {
 			TypedQuery<Turma> query = entityManager.createQuery(hql, Turma.class)
-					.setParameter("nomeTurma", nomeTurma);
+					.setParameter("nomeTurma", nomeTurma)
+					.setParameter("idSemestre", idSemestre);
 			if(query.getResultList().size() > 0) {
 				turma = query.getSingleResult();
 			}
-		} catch (Exception e) {
+		} catch (PersistenceException | QuerySyntaxException e) {
 			entityManager.getTransaction().rollback();
-			e.printStackTrace();
+			throw new PersistenceException(e);
 		} finally {
 			if(entityManager.isOpen()) {
 				entityManager.close();

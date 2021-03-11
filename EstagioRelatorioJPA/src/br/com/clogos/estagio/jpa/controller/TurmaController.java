@@ -22,8 +22,8 @@ public class TurmaController implements Serializable {
 		return getTurmaDAO().findAll(idSemestre);
 	}
 	
-	public Boolean verificaDuplicidade(String nomeTurma) {
-		return getTurmaDAO().verificaDuplicidade(nomeTurma);
+	public Boolean verificaDuplicidade(String nomeTurma, Long idSemestre) {
+		return getTurmaDAO().verificaDuplicidade(nomeTurma, idSemestre);
 	}
 	
 	public Turma obterCurso(String nomeTurma) {
@@ -34,8 +34,8 @@ public class TurmaController implements Serializable {
 		return getTurmaDAO().obterTurma(id);
 	}
 	
-	public Turma obterTurmaPorNome(String nomeTurma) {
-		return getTurmaDAO().obterTurmaPorNome(nomeTurma);
+	public Turma obterTurmaPorNome(String nomeTurma, Long idSemestre) {
+		return getTurmaDAO().obterTurmaPorNome(nomeTurma, idSemestre);
 	}
 	
 	public List<Turma> obterTurmaPorAluno(Long idSemestre, Long idAluno) {

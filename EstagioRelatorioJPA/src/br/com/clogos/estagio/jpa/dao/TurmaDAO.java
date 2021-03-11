@@ -9,8 +9,8 @@ public interface TurmaDAO {
 	List<Turma> obterTurmaPorAluno(Long idSemestre, Long idAluno);
 	List<Turma> obterTurmaSemVinculoAluno(Long idAluno, Long idSemestre);
 	List<Turma> obterTurmaGrupo(Long idSemestre);
-	Boolean verificaDuplicidade(String nomeTurma);
+	Boolean verificaDuplicidade(String nomeTurma, Long idSemestre);
 	Turma obterCurso(String nomeTurma);
 	Turma obterTurma(Long id);
-	Turma obterTurmaPorNome(String nomeTurma);
+	Turma obterTurmaPorNome(String nomeTurma, Long idSemestre);
 }
