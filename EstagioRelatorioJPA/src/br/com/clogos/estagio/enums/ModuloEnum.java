@@ -4,7 +4,7 @@ public enum ModuloEnum {
 	Modulo_I("I Módulo", "FICHA DE RELATÓRIO ÚNICO", "105 Horas"), 
 	Modulo_II("II Módulo", "FICHA DE RELATÓRIO POR CAMPO", "305 Horas"), 
 	Modulo_III("III Módulo", "FICHA DE RELATÓRIO POR CAMPO", "230 Horas"), 
-	Modulo_II_III("II e III Módulo", "FICHA DE RELATÓRIO SEMANAL", "535 Horas");
+	Modulo_II_III("II e III Módulo", "FICHA DE RELATÓRIO MENSAL", "535 Horas");
 	
 	private String label;
 	private String ficha;

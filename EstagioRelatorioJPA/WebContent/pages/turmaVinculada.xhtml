@@ -94,14 +94,13 @@
 							</h:panelGrid>
 						</p:panel>
 						<br/>
-						<p:panel>
+						<p:panel>						
 							<h:panelGrid columns="1" style="margin:0 auto; font-size: 18px; text-decoration: underline;">
 								<h:outputLabel value="#{relatorioAlunoBean.facade.liberarRelatorio.modulo.ficha}" />
 							</h:panelGrid><br/>
 							
 							<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.facade.renderedEnfermagem}">
 								<p align="center">
-									<!-- DENTRO DE TODOS OS PACIENTES QUE VOCE ASSSITIU DURANTE O ESTÁGIO FAÇA UM ESTUDO DE CASO E A EVOLUÇÃO (ANAMNESE): -->
 									Dentre as patologias encontradas no campo de estágio escola uma e desenvolva:<br/>
 									Conceito (O que é a doença), Manifestações Clinicas (sinais e sintomas), Fatores desencadeantes (causas da doença),
 									Diagnótico (exames laboratoriais e exame clinico etc.), Tratamento (reabilitação, drogas etc.) e Cuidados de Enfermagem.
@@ -110,20 +109,28 @@
 							
 							<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.facade.renderedRadiologia}">
 								<p align="center">
-									Escolha o exame que mais gostou e descreva os seguintes dados: patologia, definição clinica, CID, posicionamento, regime
-									aplicado (Kv, mA, tempo), raio central, tamanho de filme, estrutura demonstrada, estado do paciente, local do exame (UTI, 
-									Centro Cirúgia, Sala de Raio X ou outro), paciente colaborou ou não, colimão e comentários gerais. não registrar o 
-									nome do paciente.
+									Escolha o exame que mais gostou e descreva os seguintes dados: patologia, definição clínica, cid, posicionamento, 
+									regime aplicado (kv, ma, tempo), raio central, tamanho de filme, estrutura demonstrada, estado do paciente, local do exame 
+									(uti, centro cirurgia, sala de raio x ou outro), paciente colaborou ou não, colimão e comentários gerais. 
+									Não registrar o nome do paciente.
 								</p>
 							</h:panelGrid>
+							
 							<h:panelGrid columns="1" style="font-family: arial, helvetica, serif; font-size: 12px;">
 								<p:inputTextarea id="editor" value="#{relatorioAlunoBean.facade.relatorioAluno.texto}" rows="40" cols="95"
 								onkeydown="if (event.keyCode == 13) { return false; }" style="font-size:16px; color:#000000; width: 850px;" required="true"/> 
 							</h:panelGrid><br/>
 							
-							<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.facade.liberarRelatorio.modulo != 'Modulo_I'}">
+							<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.facade.renderedEnfermagem}">
 								<p align="center">
-									DESCREVA AS ATIVIDADES PRÁTICAS REALIZADAS NO CAMPO DE ESTÁGIO:
+									Descreva as atividades práticas realizadas no campo de estágio:
+								</p>
+							</h:panelGrid>
+							
+							<h:panelGrid columns="1" rendered="#{relatorioAlunoBean.facade.renderedRadiologia}">
+								<p align="center">
+									Descrições minuciosas vivenciadas durante o mês aos quais foram adquiridos conhecimentos teóricos e práticos de todas 
+									as áreas no campo de estágio:
 								</p>
 							</h:panelGrid>
 							<h:panelGrid columns="1" style="font-family: arial, helvetica, serif; font-size: 12px;" rendered="#{relatorioAlunoBean.facade.liberarRelatorio.modulo != 'Modulo_I'}">

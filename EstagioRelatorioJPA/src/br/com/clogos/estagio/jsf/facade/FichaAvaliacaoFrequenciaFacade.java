@@ -26,7 +26,6 @@ import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.util.Util;
 import br.com.clogos.estagio.vo.CampoEstagioFichaVO;
 import br.com.clogos.estagio.vo.FichaAvaliacaoVO;
-import br.com.clogos.estagio.vo.GrupoFichaVO;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -87,7 +86,6 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			paramentros.put("NOMETURMA", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeTurma());
 			paramentros.put("NOMEGRUPO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeGrupo());
 			paramentros.put("CARGAHORARIA", getFichaAvaliacaoVO().getAlunoFichaVO().getCargaHoraria());
-			//paramentros.put("SITUACAOFINAL", retornaSituacaoFinal(getFichaAvaliacaoVO().getListaGrupoCampo()));
 			paramentros.put("SITUACAOFINAL", "H");
 			paramentros.put("SUBREPORT_DIR", fileJasperSub.getAbsolutePath());
 			paramentros.put("listaCampoEstagio", new JRBeanCollectionDataSource(verificaSeERadiologia(fichaAvaliacaoVO)));
@@ -107,21 +105,10 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		    FacesContext.getCurrentInstance().renderResponse();
 		    FacesContext.getCurrentInstance().responseComplete();
 
-		} catch (JRException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (JRException | IOException e) {
 			e.printStackTrace();
 		}
 		return streamedContent;
-	}
-	
-	private String retornaSituacaoFinal(List<GrupoFichaVO> lista) {
-		for(GrupoFichaVO g : lista) {
-			if(g.getRelEnviado().contains("NH")) {
-				return "NH";
-			}
-		}
-		return "H";
 	}
 	
 	private String retornaSubTitulo(ModuloEnum modulo) {
