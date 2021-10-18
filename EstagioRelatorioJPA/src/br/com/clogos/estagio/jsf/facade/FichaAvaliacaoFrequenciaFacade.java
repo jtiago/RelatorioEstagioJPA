@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,12 +27,14 @@ import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.util.Util;
 import br.com.clogos.estagio.vo.CampoEstagioFichaVO;
 import br.com.clogos.estagio.vo.FichaAvaliacaoVO;
+import br.com.clogos.estagio.vo.GrupoFichaVO;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 
+	private static final String RADIOLOGIA = "RADIOLOGIA";
 	/**
 	 * 
 	 */
@@ -73,27 +76,28 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		pesquisarDadosFicha();
 		
 		try {
-			File fileJasper = new File(context.getRealPath("/relatorio/FichaAvaliacaoAluno.jasper"));
+			File fileJasper = new File(context.getRealPath(recuperarArquivoJasper(this.fichaAvaliacaoVO)));
 			File fileJasperSub = new File(context.getRealPath("/relatorio/"));
-			File fileLogo = new File(context.getRealPath("/images/logoV2.jpg"));
+			File fileLogo = new File(context.getRealPath("/images/logonova2021.jpeg"));
 			BufferedImage logo = ImageIO.read(fileLogo);
 			
 			// Atribuição as parametros do relatório
 			paramentros.put("LOGO", logo);
 			paramentros.put("TITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeCurso());
-			paramentros.put("SUBTITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getModulo().getLabel().toUpperCase()+" - "+retornaSubTitulo(getFichaAvaliacaoVO().getAlunoFichaVO().getModulo()));
+			paramentros.put("SUBTITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getModulo().getLabel().toUpperCase()+retornaSubTitulo(getFichaAvaliacaoVO().getAlunoFichaVO().getModulo()));
 			paramentros.put("NOMEALUNO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno());
 			paramentros.put("NOMETURMA", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeTurma());
 			paramentros.put("NOMEGRUPO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeGrupo());
 			paramentros.put("CARGAHORARIA", getFichaAvaliacaoVO().getAlunoFichaVO().getCargaHoraria());
 			paramentros.put("SITUACAOFINAL", "H");
 			paramentros.put("SUBREPORT_DIR", fileJasperSub.getAbsolutePath());
-			paramentros.put("listaCampoEstagio", new JRBeanCollectionDataSource(verificaSeERadiologia(fichaAvaliacaoVO)));
+			paramentros.put("listaCampoEstagio", new JRBeanCollectionDataSource(verificaSeERadiologiaAssinaturaRelatorio(fichaAvaliacaoVO)));
 			
 			String nomeReportPDF = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno().replaceAll(" ", "")+".pdf";
 			HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();   
 		    ServletOutputStream servletOutputStream = response.getOutputStream();
-		    byte[] bytes = JasperRunManager.runReportToPdf(fileJasper.getAbsolutePath(), paramentros, new FichaAvaliacaoJRDataSource(getFichaAvaliacaoVO().getListaGrupoCampo())); 
+		    byte[] bytes = JasperRunManager.runReportToPdf(fileJasper.getAbsolutePath(), paramentros, new FichaAvaliacaoJRDataSource(
+		    		verificarListaGrupoCampoEstagioSeRadilogia(fichaAvaliacaoVO))); 
 
 		    response.setContentType("application/pdf");
 		    response.setHeader("Content-disposition", "filename=\""+nomeReportPDF+"\""); 
@@ -115,16 +119,16 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		if(modulo.compareTo(ModuloEnum.Modulo_I) == 0) {
 			return "";
 		} else if (modulo.compareTo(ModuloEnum.Modulo_II) == 0) {
-			return "SAÚDE PÚBLICA, GERIATRIA E NEUROPSIQUIATRIA";
+			return " - SAÚDE PÚBLICA, GERIATRIA E NEUROPSIQUIATRIA";
 		} else if (modulo.compareTo(ModuloEnum.Modulo_III) == 0) {
-			return "HOSPITALAR";
+			return " - HOSPITALAR";
 		} else {
 			return "";
 		}
 	}
 	
-	private List<CampoEstagioFichaVO> verificaSeERadiologia(FichaAvaliacaoVO ficha) {
-		if(ficha.getAlunoFichaVO().getNomeCurso().contains("RADIOLOGIA")) {
+	private List<CampoEstagioFichaVO> verificaSeERadiologiaAssinaturaRelatorio(FichaAvaliacaoVO ficha) {
+		if(ficha.getAlunoFichaVO().getNomeCurso().contains(RADIOLOGIA)) {
 			CampoEstagioFichaVO campo = new CampoEstagioFichaVO();
 			campo.setIdCampoEstagio(5L);
 			campo.setNomeCampoEstagio("C&F-X Prestadora de serviços Radiológicos LTDA - ME");
@@ -132,6 +136,46 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		}
 		
 		return ficha.getListaCampoEstagio();
+	}
+	
+	private String recuperarArquivoJasper(FichaAvaliacaoVO ficha) {
+		if(ficha.getAlunoFichaVO().getNomeCurso().contains(RADIOLOGIA)) {
+			return "/relatorio/FichaAvaliacaoAlunoRadiologia.jasper";
+		} else {
+			return "/relatorio/FichaAvaliacaoAluno.jasper";
+		}
+	}
+	
+	private List<GrupoFichaVO> verificarListaGrupoCampoEstagioSeRadilogia(FichaAvaliacaoVO ficha) {
+		List<GrupoFichaVO> lista = new ArrayList<>();
+		GrupoFichaVO grupo = new GrupoFichaVO();
+		
+		if(ficha.getAlunoFichaVO().getNomeCurso().contains(RADIOLOGIA) && !ficha.getListaGrupoCampo().isEmpty()) {
+			grupo.setSiglaCampoEstagio(ficha.getListaGrupoCampo().get(0).getSiglaCampoEstagio());
+			grupo.setRelEnviado(ficha.getListaGrupoCampo().get(0).getRelEnviado());
+			
+			Date dataInicialMenor = null;
+			for (GrupoFichaVO item : ficha.getListaGrupoCampo()) {
+				if (dataInicialMenor == null || item.getDataInicial().compareTo(dataInicialMenor) < 0) {
+					dataInicialMenor = item.getDataInicial();
+					grupo.setDataInicial(dataInicialMenor);
+				}
+			}
+				
+			Date dataFinalMaior = null;
+			for (GrupoFichaVO item : ficha.getListaGrupoCampo()) {
+				if (dataFinalMaior == null || item.getDataFinal().compareTo(dataFinalMaior) > 0) {
+					dataFinalMaior = item.getDataFinal();
+				}
+				grupo.setDataFinal(dataFinalMaior);
+			}
+			
+			
+			lista.add(grupo);
+			return lista;
+		} else {
+			return ficha.getListaGrupoCampo();
+		}
 	}
 	
 	public List<Aluno> getListaAlunoPorTurma() {
