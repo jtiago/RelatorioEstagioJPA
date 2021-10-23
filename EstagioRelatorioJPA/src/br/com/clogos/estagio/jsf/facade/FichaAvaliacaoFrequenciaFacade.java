@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 
+	private static final String FINAL_DE_SEMANA = " - FINAL DE SEMANA";
 	private static final String RADIOLOGIA = "RADIOLOGIA";
 	/**
 	 * 
@@ -81,15 +83,18 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			File fileLogo = new File(context.getRealPath("/images/logonova2021.jpeg"));
 			BufferedImage logo = ImageIO.read(fileLogo);
 			
+			// Verificar se as data do estágio foi no final de semana para alterar a descrição da sigla do campo
+			// this.verificarDataFinalSemana(this.fichaAvaliacaoVO.getListaGrupoCampo()); // TODO
 			// Atribuição as parametros do relatório
 			paramentros.put("LOGO", logo);
 			paramentros.put("TITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeCurso());
+			// Para a ficha de Radiologia foi retirado por pedido da Tatiane
 			paramentros.put("SUBTITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getModulo().getLabel().toUpperCase()+retornaSubTitulo(getFichaAvaliacaoVO().getAlunoFichaVO().getModulo()));
 			paramentros.put("NOMEALUNO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno());
 			paramentros.put("NOMETURMA", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeTurma());
 			paramentros.put("NOMEGRUPO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeGrupo());
 			paramentros.put("CARGAHORARIA", getFichaAvaliacaoVO().getAlunoFichaVO().getCargaHoraria());
-			paramentros.put("SITUACAOFINAL", "H");
+			paramentros.put("SITUACAOFINAL", "");
 			paramentros.put("SUBREPORT_DIR", fileJasperSub.getAbsolutePath());
 			paramentros.put("listaCampoEstagio", new JRBeanCollectionDataSource(verificaSeERadiologiaAssinaturaRelatorio(fichaAvaliacaoVO)));
 			
@@ -127,6 +132,24 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		}
 	}
 	
+	/**
+	 * Verificar se as datas finais é final de semana para mudar a Sigla no relatório. 
+	 */
+	private void verificarDataFinalSemana(List<GrupoFichaVO> listaCampo) {
+		for (GrupoFichaVO campo : listaCampo) {
+			Calendar calendarInicial = Calendar.getInstance();
+			calendarInicial.setTime(campo.getDataInicial());
+			
+			Calendar calendarFinal = Calendar.getInstance();
+			calendarFinal.setTime(campo.getDataFinal());
+			
+			if ((calendarInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || calendarInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) &&
+					(calendarFinal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || calendarFinal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
+				campo.setSiglaCampoEstagio(campo.getSiglaCampoEstagio()+FINAL_DE_SEMANA);
+			}
+		}
+	}
+	
 	private List<CampoEstagioFichaVO> verificaSeERadiologiaAssinaturaRelatorio(FichaAvaliacaoVO ficha) {
 		if(ficha.getAlunoFichaVO().getNomeCurso().contains(RADIOLOGIA)) {
 			CampoEstagioFichaVO campo = new CampoEstagioFichaVO();
@@ -146,6 +169,12 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		}
 	}
 	
+	/**
+	 * Para Radilogia os campos iguais deve apresentar em um só linha no relatório. 
+	 * As datas inicial e final será capiturado a menor no inicial e maior para final. 
+	 * @param ficha
+	 * @return
+	 */
 	private List<GrupoFichaVO> verificarListaGrupoCampoEstagioSeRadilogia(FichaAvaliacaoVO ficha) {
 		List<GrupoFichaVO> lista = new ArrayList<>();
 		GrupoFichaVO grupo = new GrupoFichaVO();
@@ -169,7 +198,6 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 				}
 				grupo.setDataFinal(dataFinalMaior);
 			}
-			
 			
 			lista.add(grupo);
 			return lista;

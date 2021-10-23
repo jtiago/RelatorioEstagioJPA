@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEstagio" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="c54d93ac-b954-40d4-a44e-2250a46a2714">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="13"/>
-	<property name="ireport.y" value="277"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="LOGO" class="java.lang.Object">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -31,7 +31,7 @@
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="135" y="25" width="285" height="20" uuid="3bc4f831-e74e-4c01-b0eb-113820f7bd0e"/>
+				<reportElement x="135" y="38" width="285" height="20" uuid="3bc4f831-e74e-4c01-b0eb-113820f7bd0e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="13" isBold="true"/>
 				</textElement>
@@ -115,7 +115,7 @@
 				<text><![CDATA[ESTÁGIO SUPERVISIONADO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="135" y="74" width="285" height="20" uuid="eb1afc58-581e-4dad-adce-cf3757d26431"/>
+				<reportElement x="135" y="70" width="285" height="20" uuid="eb1afc58-581e-4dad-adce-cf3757d26431"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="13" isBold="true" isUnderline="true"/>
 				</textElement>
@@ -199,13 +199,6 @@
 				</textElement>
 				<text><![CDATA[H/NH]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="135" y="49" width="285" height="20" uuid="d0231ba5-8e4c-40bb-8083-8d06faeda980"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="13" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{SUBTITULO}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="150" y="120" width="150" height="20" uuid="18a7094f-6add-4f44-b526-16c6c94e4eed"/>
 				<box leftPadding="2"/>
