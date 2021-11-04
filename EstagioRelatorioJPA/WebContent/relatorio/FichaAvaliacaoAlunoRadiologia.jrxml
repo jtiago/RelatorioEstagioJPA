@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEstagio" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="c54d93ac-b954-40d4-a44e-2250a46a2714">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="13"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="132"/>
 	<parameter name="LOGO" class="java.lang.Object">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -51,7 +51,7 @@
 				<text><![CDATA[ALUNO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="120" width="50" height="20" uuid="6bbcb81a-4f3b-4132-9fb0-9ebf3a053013"/>
+				<reportElement x="333" y="120" width="50" height="20" uuid="6bbcb81a-4f3b-4132-9fb0-9ebf3a053013"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -78,7 +78,7 @@
 				<textFieldExpression><![CDATA[$P{NOMEALUNO}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="350" y="120" width="143" height="20" uuid="0cec9927-275e-4aba-84f7-c82fecc61ab0"/>
+				<reportElement x="383" y="120" width="110" height="20" uuid="0cec9927-275e-4aba-84f7-c82fecc61ab0"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -135,7 +135,7 @@
 				<textFieldExpression><![CDATA[$P{NOMEGRUPO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="140" width="160" height="20" uuid="9ad53b96-e81c-4ba3-8a99-fb48e178a41b"/>
+				<reportElement x="0" y="140" width="207" height="20" uuid="9ad53b96-e81c-4ba3-8a99-fb48e178a41b"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -148,7 +148,7 @@
 				<text><![CDATA[CAMPO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="160" y="140" width="70" height="20" uuid="c93f58ee-09b2-44aa-9e72-da97582a3670"/>
+				<reportElement x="207" y="140" width="63" height="20" uuid="c93f58ee-09b2-44aa-9e72-da97582a3670"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -161,7 +161,7 @@
 				<text><![CDATA[INÍCIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="230" y="140" width="70" height="20" uuid="5aa06f46-555c-4a24-b65e-7dd84c5d2a97"/>
+				<reportElement x="270" y="140" width="63" height="20" uuid="5aa06f46-555c-4a24-b65e-7dd84c5d2a97"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -174,7 +174,7 @@
 				<text><![CDATA[TÉRMINO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="140" width="193" height="20" uuid="bf26e610-81a2-4400-9cad-c783bbad4c07"/>
+				<reportElement x="333" y="140" width="160" height="20" uuid="bf26e610-81a2-4400-9cad-c783bbad4c07"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -200,7 +200,7 @@
 				<text><![CDATA[H/NH]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="150" y="120" width="150" height="20" uuid="18a7094f-6add-4f44-b526-16c6c94e4eed"/>
+				<reportElement x="150" y="120" width="183" height="20" uuid="18a7094f-6add-4f44-b526-16c6c94e4eed"/>
 				<box leftPadding="2"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
@@ -208,7 +208,7 @@
 				<textFieldExpression><![CDATA[$P{CARGAHORARIA}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="160" width="160" height="20" uuid="b7d045cc-6380-47b5-ab9e-bf5fcc1de534"/>
+				<reportElement x="0" y="160" width="207" height="20" uuid="b7d045cc-6380-47b5-ab9e-bf5fcc1de534"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -221,7 +221,7 @@
 				<text><![CDATA[LOGOSABER]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="160" y="160" width="70" height="20" uuid="75c63658-6e17-42e0-9553-9e9d229de8a4"/>
+				<reportElement x="207" y="160" width="63" height="20" uuid="75c63658-6e17-42e0-9553-9e9d229de8a4"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -234,7 +234,7 @@
 				<text><![CDATA[12/07/2021]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="230" y="160" width="70" height="20" uuid="cca0912c-c3dc-4f84-85f7-38058ef03ef9"/>
+				<reportElement x="270" y="160" width="63" height="20" uuid="cca0912c-c3dc-4f84-85f7-38058ef03ef9"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -247,7 +247,7 @@
 				<text><![CDATA[30/07/2021]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="160" width="193" height="20" uuid="d2f91eb6-5774-43e1-a5b0-fc2198ef7c1b"/>
+				<reportElement x="333" y="160" width="160" height="20" uuid="d2f91eb6-5774-43e1-a5b0-fc2198ef7c1b"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -277,7 +277,7 @@
 	<detail>
 		<band height="20">
 			<textField>
-				<reportElement x="0" y="0" width="160" height="20" uuid="16cb4339-a77a-42d1-9149-b3e28d1ba884"/>
+				<reportElement x="0" y="0" width="207" height="20" uuid="16cb4339-a77a-42d1-9149-b3e28d1ba884"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -290,7 +290,7 @@
 				<textFieldExpression><![CDATA[$F{CAMPO}.equals("UPA-VAL") ? "UPA–VALPARAISO" : $F{CAMPO}.equals("CCRL") ? "CENTRO CLINICO LOGOS" : $F{CAMPO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="160" y="0" width="70" height="20" uuid="7fa0b4d2-0d0a-4325-a395-1b6b05145b70"/>
+				<reportElement x="207" y="0" width="63" height="20" uuid="7fa0b4d2-0d0a-4325-a395-1b6b05145b70"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -303,7 +303,7 @@
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{INICIO})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="230" y="0" width="70" height="20" uuid="32d18fa4-6eb4-4db7-af3e-fef995b15fe0"/>
+				<reportElement x="270" y="0" width="63" height="20" uuid="32d18fa4-6eb4-4db7-af3e-fef995b15fe0"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -316,7 +316,7 @@
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{TERMINIO})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="300" y="0" width="193" height="20" uuid="1414d043-f5ed-47b3-91f6-b4ecd9b9c37d"/>
+				<reportElement x="333" y="0" width="160" height="20" uuid="1414d043-f5ed-47b3-91f6-b4ecd9b9c37d"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>

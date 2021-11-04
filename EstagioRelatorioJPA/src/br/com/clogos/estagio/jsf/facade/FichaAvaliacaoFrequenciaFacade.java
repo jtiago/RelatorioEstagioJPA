@@ -26,6 +26,7 @@ import br.com.clogos.estagio.jpa.controller.AlunoController;
 import br.com.clogos.estagio.jpa.controller.RelatorioController;
 import br.com.clogos.estagio.model.Aluno;
 import br.com.clogos.estagio.util.Util;
+import br.com.clogos.estagio.vo.AlunoFichaVO;
 import br.com.clogos.estagio.vo.CampoEstagioFichaVO;
 import br.com.clogos.estagio.vo.FichaAvaliacaoVO;
 import br.com.clogos.estagio.vo.GrupoFichaVO;
@@ -37,6 +38,8 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 
 	private static final String FINAL_DE_SEMANA = " - FINAL DE SEMANA";
 	private static final String RADIOLOGIA = "RADIOLOGIA";
+	private static final String ENFERMAGEM = "ENFERMAGEM";
+	
 	/**
 	 * 
 	 */
@@ -83,9 +86,7 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			File fileLogo = new File(context.getRealPath("/images/logonova2021.jpeg"));
 			BufferedImage logo = ImageIO.read(fileLogo);
 			
-			// Verificar se as data do estágio foi no final de semana para alterar a descrição da sigla do campo
-			// this.verificarDataFinalSemana(this.fichaAvaliacaoVO.getListaGrupoCampo()); // TODO
-			// Atribuição as parametros do relatório
+						// Atribuição as parametros do relatório
 			paramentros.put("LOGO", logo);
 			paramentros.put("TITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeCurso());
 			// Para a ficha de Radiologia foi retirado por pedido da Tatiane
@@ -96,6 +97,8 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			paramentros.put("CARGAHORARIA", getFichaAvaliacaoVO().getAlunoFichaVO().getCargaHoraria());
 			paramentros.put("SITUACAOFINAL", "");
 			paramentros.put("SUBREPORT_DIR", fileJasperSub.getAbsolutePath());
+			// Verificar se as data do estágio foi no final de semana para alterar a descrição da sigla do campo
+			this.verificarDataFinalSemana(this.fichaAvaliacaoVO.getListaGrupoCampo(), this.fichaAvaliacaoVO.getAlunoFichaVO());
 			paramentros.put("listaCampoEstagio", new JRBeanCollectionDataSource(verificaSeERadiologiaAssinaturaRelatorio(fichaAvaliacaoVO)));
 			
 			String nomeReportPDF = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+getFichaAvaliacaoVO().getAlunoFichaVO().getNomeAluno().replaceAll(" ", "")+".pdf";
@@ -134,18 +137,22 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 	
 	/**
 	 * Verificar se as datas finais é final de semana para mudar a Sigla no relatório. 
+	 * Definido pela Lucilene de deixar somente para Enfermagem.
+	 * Os dois layout do Jasper já está ajustado para o tamanho correto. 
 	 */
-	private void verificarDataFinalSemana(List<GrupoFichaVO> listaCampo) {
-		for (GrupoFichaVO campo : listaCampo) {
-			Calendar calendarInicial = Calendar.getInstance();
-			calendarInicial.setTime(campo.getDataInicial());
-			
-			Calendar calendarFinal = Calendar.getInstance();
-			calendarFinal.setTime(campo.getDataFinal());
-			
-			if ((calendarInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || calendarInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) &&
-					(calendarFinal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || calendarFinal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
-				campo.setSiglaCampoEstagio(campo.getSiglaCampoEstagio()+FINAL_DE_SEMANA);
+	private void verificarDataFinalSemana(List<GrupoFichaVO> listaCampo, AlunoFichaVO alunoFicha) {
+		if (alunoFicha.getNomeCurso().contains(ENFERMAGEM)) {
+			for (GrupoFichaVO campo : listaCampo) {
+				Calendar calendarInicial = Calendar.getInstance();
+				calendarInicial.setTime(campo.getDataInicial());
+				
+				Calendar calendarFinal = Calendar.getInstance();
+				calendarFinal.setTime(campo.getDataFinal());
+				
+				if ((calendarInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || calendarInicial.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) &&
+						(calendarFinal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || calendarFinal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
+					campo.setSiglaCampoEstagio(campo.getSiglaCampoEstagio()+FINAL_DE_SEMANA);
+				}
 			}
 		}
 	}
@@ -154,7 +161,7 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		if(ficha.getAlunoFichaVO().getNomeCurso().contains(RADIOLOGIA)) {
 			CampoEstagioFichaVO campo = new CampoEstagioFichaVO();
 			campo.setIdCampoEstagio(5L);
-			campo.setNomeCampoEstagio("C&F-X Prestadora de serviços Radiológicos LTDA - ME");
+			campo.setNomeCampoEstagio("RN MANUTENCOES E SERVICOS - ME");
 			ficha.getListaCampoEstagio().add(campo);
 		}
 		
