@@ -36,7 +36,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 
-	private static final String FINAL_DE_SEMANA = " - FINAL DE SEMANA";
+	private static final String FINAL_DE_SEMANA = " - FDS";
 	private static final String RADIOLOGIA = "RADIOLOGIA";
 	private static final String ENFERMAGEM = "ENFERMAGEM";
 	

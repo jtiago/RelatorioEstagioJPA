@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEstagio" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="c54d93ac-b954-40d4-a44e-2250a46a2714">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="192"/>
+	<property name="ireport.y" value="126"/>
 	<parameter name="LOGO" class="java.lang.Object">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -51,7 +51,7 @@
 				<text><![CDATA[ALUNO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="333" y="120" width="50" height="20" uuid="6bbcb81a-4f3b-4132-9fb0-9ebf3a053013"/>
+				<reportElement x="289" y="120" width="51" height="20" uuid="6bbcb81a-4f3b-4132-9fb0-9ebf3a053013"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -78,7 +78,7 @@
 				<textFieldExpression><![CDATA[$P{NOMEALUNO}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="383" y="120" width="110" height="20" uuid="0cec9927-275e-4aba-84f7-c82fecc61ab0"/>
+				<reportElement x="340" y="120" width="153" height="20" uuid="0cec9927-275e-4aba-84f7-c82fecc61ab0"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -135,7 +135,7 @@
 				<textFieldExpression><![CDATA[$P{NOMEGRUPO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="140" width="205" height="20" uuid="9ad53b96-e81c-4ba3-8a99-fb48e178a41b"/>
+				<reportElement x="0" y="140" width="161" height="20" uuid="9ad53b96-e81c-4ba3-8a99-fb48e178a41b"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -148,7 +148,7 @@
 				<text><![CDATA[CAMPO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="205" y="140" width="64" height="20" uuid="c93f58ee-09b2-44aa-9e72-da97582a3670"/>
+				<reportElement x="161" y="140" width="64" height="20" uuid="c93f58ee-09b2-44aa-9e72-da97582a3670"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -161,7 +161,7 @@
 				<text><![CDATA[INÍCIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="269" y="140" width="64" height="20" uuid="5aa06f46-555c-4a24-b65e-7dd84c5d2a97"/>
+				<reportElement x="225" y="140" width="64" height="20" uuid="5aa06f46-555c-4a24-b65e-7dd84c5d2a97"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -174,7 +174,7 @@
 				<text><![CDATA[TÉRMINO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="333" y="140" width="160" height="20" uuid="bf26e610-81a2-4400-9cad-c783bbad4c07"/>
+				<reportElement x="289" y="140" width="204" height="20" uuid="bf26e610-81a2-4400-9cad-c783bbad4c07"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -207,7 +207,7 @@
 				<textFieldExpression><![CDATA[$P{SUBTITULO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="150" y="120" width="183" height="20" uuid="18a7094f-6add-4f44-b526-16c6c94e4eed"/>
+				<reportElement x="150" y="120" width="139" height="20" uuid="18a7094f-6add-4f44-b526-16c6c94e4eed"/>
 				<box leftPadding="2"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
@@ -215,7 +215,7 @@
 				<textFieldExpression><![CDATA[$P{CARGAHORARIA}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="160" width="205" height="20" uuid="b7d045cc-6380-47b5-ab9e-bf5fcc1de534"/>
+				<reportElement x="0" y="160" width="161" height="20" uuid="b7d045cc-6380-47b5-ab9e-bf5fcc1de534"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -228,7 +228,7 @@
 				<text><![CDATA[LOGOSABER]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="180" width="205" height="20" uuid="a79fc087-ed57-4f85-959a-648133056d64"/>
+				<reportElement x="0" y="180" width="161" height="20" uuid="a79fc087-ed57-4f85-959a-648133056d64"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -241,7 +241,7 @@
 				<text><![CDATA[LOGOSAÚDE ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="205" y="160" width="64" height="20" uuid="75c63658-6e17-42e0-9553-9e9d229de8a4"/>
+				<reportElement x="161" y="160" width="64" height="20" uuid="75c63658-6e17-42e0-9553-9e9d229de8a4"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -254,7 +254,7 @@
 				<text><![CDATA[12/07/2021]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="205" y="180" width="64" height="20" uuid="f6b4b108-2d56-4cf2-81e0-899961c40497"/>
+				<reportElement x="161" y="180" width="64" height="20" uuid="f6b4b108-2d56-4cf2-81e0-899961c40497"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -267,7 +267,7 @@
 				<text><![CDATA[02/08/2021]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="269" y="160" width="64" height="20" uuid="cca0912c-c3dc-4f84-85f7-38058ef03ef9"/>
+				<reportElement x="225" y="160" width="64" height="20" uuid="cca0912c-c3dc-4f84-85f7-38058ef03ef9"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -280,7 +280,7 @@
 				<text><![CDATA[30/07/2021]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="269" y="180" width="64" height="20" uuid="0fc4e11e-be7a-434e-be0d-fede20dd4d0b"/>
+				<reportElement x="225" y="180" width="64" height="20" uuid="0fc4e11e-be7a-434e-be0d-fede20dd4d0b"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -293,7 +293,7 @@
 				<text><![CDATA[17/12/2021]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="333" y="160" width="160" height="20" uuid="d2f91eb6-5774-43e1-a5b0-fc2198ef7c1b"/>
+				<reportElement x="289" y="160" width="204" height="20" uuid="d2f91eb6-5774-43e1-a5b0-fc2198ef7c1b"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -306,7 +306,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="333" y="180" width="160" height="20" uuid="2af2e494-46ca-49e4-afac-5d8a7dfb619d"/>
+				<reportElement x="289" y="180" width="204" height="20" uuid="2af2e494-46ca-49e4-afac-5d8a7dfb619d"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -349,7 +349,7 @@
 	<detail>
 		<band height="20">
 			<textField>
-				<reportElement x="0" y="0" width="205" height="20" uuid="16cb4339-a77a-42d1-9149-b3e28d1ba884"/>
+				<reportElement x="0" y="0" width="161" height="20" uuid="16cb4339-a77a-42d1-9149-b3e28d1ba884"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -359,10 +359,10 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{CAMPO}.equals("UPA-VAL") ? "UPA–VALPARAISO" : $F{CAMPO}.equals("CCRL") ? "CENTRO CLINICO LOGOS" : $F{CAMPO}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{CAMPO}.equals("UPA-VAL") ? "UPA-VALPARAISO" : $F{CAMPO}.equals("CCRL") ? "CENTRO CLINICO LOGOS" : $F{CAMPO}.equals("UPA-VAL - FDS") ? "UPA-VALPARAISO - FDS" : $F{CAMPO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="205" y="0" width="64" height="20" uuid="7fa0b4d2-0d0a-4325-a395-1b6b05145b70"/>
+				<reportElement x="161" y="0" width="64" height="20" uuid="7fa0b4d2-0d0a-4325-a395-1b6b05145b70"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -375,7 +375,7 @@
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{INICIO})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="269" y="0" width="64" height="20" uuid="32d18fa4-6eb4-4db7-af3e-fef995b15fe0"/>
+				<reportElement x="225" y="0" width="64" height="20" uuid="32d18fa4-6eb4-4db7-af3e-fef995b15fe0"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -388,7 +388,7 @@
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{TERMINIO})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="333" y="0" width="160" height="20" uuid="1414d043-f5ed-47b3-91f6-b4ecd9b9c37d"/>
+				<reportElement x="289" y="0" width="204" height="20" uuid="1414d043-f5ed-47b3-91f6-b4ecd9b9c37d"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -434,9 +434,9 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 		</band>
 	</lastPageFooter>
 	<summary>
-		<band height="165">
+		<band height="180">
 			<staticText>
-				<reportElement x="0" y="0" width="300" height="20" uuid="d0a4f601-719b-4570-95d8-4ba31ba2e7da"/>
+				<reportElement x="0" y="0" width="289" height="20" uuid="d0a4f601-719b-4570-95d8-4ba31ba2e7da"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -449,7 +449,7 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 				<text><![CDATA[CARGA HORARIA CUMPRIDA: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="0" width="193" height="20" uuid="d9256472-9ef4-4b1c-99d0-7ef091ea5f7b"/>
+				<reportElement x="289" y="0" width="204" height="20" uuid="d9256472-9ef4-4b1c-99d0-7ef091ea5f7b"/>
 				<box leftPadding="2">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -459,7 +459,7 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11"/>
 				</textElement>
-				<text><![CDATA[SITUAÇÃO FINAL DO(A) ALUNO(A) ]]></text>
+				<text><![CDATA[SITUAÇÃO FINAL DO(A) ALUNO(A)]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="493" y="0" width="62" height="20" uuid="80f7f68e-26bf-493f-9fb3-1f245e9c6b85"/>
@@ -483,7 +483,7 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 				<text><![CDATA[LOGOSABER: Procedimentos práticos revisados nos laboratórios de Enfermagem, buscando demonstrar e simular a realidade com o objetivo de aproximar o aluno da prática que irá vivenciar junto à comunidade nos campos de estágio supervisionado.]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="1" y="66" width="554" height="55" uuid="cc7b58e4-290a-4e6e-b944-d7ca6e5bd574"/>
+				<reportElement x="1" y="83" width="554" height="55" uuid="cc7b58e4-290a-4e6e-b944-d7ca6e5bd574"/>
 				<subreportParameter name="listaCampoEstagio">
 					<subreportParameterExpression><![CDATA[$P{listaCampoEstagio}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -491,10 +491,10 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "//SubFichaAvaliacao.jasper"]]></subreportExpression>
 			</subreport>
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="122" y="143" width="287" height="1" uuid="d82256f5-e841-4eea-bdc8-8b4eb08f0c2b"/>
+				<reportElement positionType="FixRelativeToBottom" x="122" y="157" width="287" height="1" uuid="d82256f5-e841-4eea-bdc8-8b4eb08f0c2b"/>
 			</line>
 			<staticText>
-				<reportElement positionType="FixRelativeToBottom" x="122" y="144" width="287" height="20" uuid="264e020a-87c8-4639-8f46-f858389d05ce"/>
+				<reportElement positionType="FixRelativeToBottom" x="122" y="158" width="287" height="20" uuid="264e020a-87c8-4639-8f46-f858389d05ce"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial"/>
 				</textElement>
@@ -507,6 +507,14 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<text><![CDATA[LOGOSAÚDE: Participação durante todos o 2º semestre de 2021 como técnico em Enfermagem apoiando a equipe responsável pelo ponto de vacinação e na imunização da população contra o covid19.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="66" width="554" height="14" uuid="80a0eeba-78eb-48c8-8665-c40141903dd0"/>
+				<box topPadding="1" leftPadding="1"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[*FDS: Final de Semana.]]></text>
 			</staticText>
 		</band>
 	</summary>
