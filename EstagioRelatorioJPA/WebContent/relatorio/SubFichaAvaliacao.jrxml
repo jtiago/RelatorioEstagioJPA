@@ -4,11 +4,12 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="nomeCampoEstagio" class="java.lang.String"/>
+	<field name="idCampoEstagio" class="java.lang.Long"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="59">
+		<band height="58">
 			<textField>
 				<reportElement x="115" y="42" width="287" height="14" uuid="4621b1ac-c0bc-4f9e-9b53-daa5ff5048b5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -24,7 +25,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nomeCampoEstagio}.contains( "LTDA" ) ? "Carimbo da Instituição com CNPJ" : "Ass. e Carimbo do (a) Supervisor (a)"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{idCampoEstagio}.equals(100L) ? "Carimbo da Instituição com CNPJ" : "Ass. e Carimbo do (a) Supervisor (a)"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

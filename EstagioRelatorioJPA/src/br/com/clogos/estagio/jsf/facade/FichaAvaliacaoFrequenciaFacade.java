@@ -77,7 +77,7 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		StreamedContent streamedContent = null;
 		this.alunoDados = aluno;
 		ServletContext context = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-		Map<String, Object> paramentros = new HashMap<String, Object>();
+		Map<String, Object> paramentros = new HashMap<>();
 		pesquisarDadosFicha();
 		
 		try {
@@ -157,20 +157,49 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		}
 	}
 	
+	/*
+	 * No Relatório de Radiologia é incluido assinatura das empresas de serviços correlacionada ao campo de estágio.
+	 * O campo IdCampoEstagio ficou definido no padrão 100 para fazer o ajuste das descxrição de assinatura no Jasper. 
+	 */
 	private List<CampoEstagioFichaVO> verificaSeERadiologiaAssinaturaRelatorio(FichaAvaliacaoVO ficha) {
 		if(ficha.getAlunoFichaVO().getNomeCurso().contains(RADIOLOGIA)) {
-			CampoEstagioFichaVO campo = new CampoEstagioFichaVO();
-			campo.setIdCampoEstagio(5L);
-			campo.setNomeCampoEstagio("RN MANUTENCOES E SERVICOS - ME");
-			ficha.getListaCampoEstagio().add(campo);
+			CampoEstagioFichaVO campo = null;
+			switch (ficha.getListaCampoEstagio().get(0).getIdCampoEstagio().intValue()) {
+			case 20018: 
+				campo = new CampoEstagioFichaVO();
+				campo.setIdCampoEstagio(100L);
+				campo.setNomeCampoEstagio("RADIOTECX IMAGINOLOGIA");
+				ficha.getListaCampoEstagio().add(campo);
+				break;
+			case 20019: 
+				campo = new CampoEstagioFichaVO();
+				campo.setIdCampoEstagio(100L);
+				campo.setNomeCampoEstagio("FOX - SERVIÇOS TÉCNICOS RADIOLÓGICOS LTDA");
+				ficha.getListaCampoEstagio().add(campo);
+				break;
+			case 20020: 
+				campo = new CampoEstagioFichaVO();
+				campo.setIdCampoEstagio(100L);
+				campo.setNomeCampoEstagio("WCLE - DIAGNÓSTICO POR IMAGEM LTDA");
+				ficha.getListaCampoEstagio().add(campo);
+				break;
+			default:
+				campo = new CampoEstagioFichaVO();
+				campo.setIdCampoEstagio(100L);
+				campo.setNomeCampoEstagio("RN MANUTENCOES E SERVIÇOS - ME");
+				ficha.getListaCampoEstagio().add(campo);
+				break;
+			}
 		}
 		
 		return ficha.getListaCampoEstagio();
 	}
 	
 	private String recuperarArquivoJasper(FichaAvaliacaoVO ficha) {
-		if(ficha.getAlunoFichaVO().getNomeCurso().contains(RADIOLOGIA)) {
+		if (ficha.getAlunoFichaVO().getNomeCurso().contains(RADIOLOGIA)) {
 			return "/relatorio/FichaAvaliacaoAlunoRadiologia.jasper";
+		} else if (ficha.getAlunoFichaVO().getModulo().equals(ModuloEnum.Modulo_I)) {
+			return "/relatorio/FichaAvaliacaoAlunoPrimeiroModulo.jasper";
 		} else {
 			return "/relatorio/FichaAvaliacaoAluno.jasper";
 		}
