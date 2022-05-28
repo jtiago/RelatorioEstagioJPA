@@ -86,7 +86,7 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			File fileLogo = new File(context.getRealPath("/images/logonova2021.jpeg"));
 			BufferedImage logo = ImageIO.read(fileLogo);
 			
-						// Atribuição as parametros do relatório
+			// Atribuição as parametros do relatório
 			paramentros.put("LOGO", logo);
 			paramentros.put("TITULO", getFichaAvaliacaoVO().getAlunoFichaVO().getNomeCurso());
 			// Para a ficha de Radiologia foi retirado por pedido da Tatiane

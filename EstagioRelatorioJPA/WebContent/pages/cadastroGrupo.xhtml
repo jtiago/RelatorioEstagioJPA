@@ -49,14 +49,14 @@
 								<h:outputLabel value="#{itemGrupo.nomeGrupo}"/>
 							</p:column>
 					 		
-					 		<p:column style="text-align:right; width: 185px;">
+					 		<p:column style="text-align:right; width: 100px;">
 								<p:commandButton icon="ui-icon-circle-zoomout" title="Visualizar Grupo" oncomplete="dialogView.show()" update=":formView">
 									<f:setPropertyActionListener target="#{grupoBean.facade.grupo}" value="#{itemGrupo}" />
 								</p:commandButton>
 		
-								<p:commandButton icon="ui-icon-pencil" title="Alterar Semestre" oncomplete="" update="">
-									<f:setPropertyActionListener target="#{semestreBean.facade.semestreAltera}" value="#{itemGrupo}" />
-								</p:commandButton>
+								<!-- p:commandButton icon="ui-icon-plus" title="Adicionar Aluno" oncomplete="dialogAddAluno.show()" update=":formAddAluno">
+									<f:setPropertyActionListener target="#{grupoBean.facade.grupoAlunoNovo}" value="#{itemGrupo}" />
+								</p:commandButton-->
 							</p:column>
 					 	</p:dataTable>
 					 </p:rowExpansion>
@@ -196,6 +196,33 @@
 				<p:ajax event="close" resetValues="true" listener="#{grupoBean.limpar}" update="formCadastro" />
 			</p:dialog>
 		</h:form>
+		
+		<!-- h:form id="formAddAluno">
+			<p:dialog resizable="false" draggable="false" modal="true" position="top"  closable="true" 
+				header="..::: Adicionar novo aluno - [ * Campo Obrigatório ]" widgetVar="dialogAddAluno" width="600" height="450">
+				<p:panel>
+					<h:panelGrid id="grid" columns="2">
+						<h:outputLabel value="Turma:" style="font-weight: bold;"/>
+						<h:outputLabel value="#{grupoBean.facade.grupoAlunoNovo.turmaGrupo.nome}" />
+						
+						<h:outputLabel value="Grupo:" style="font-weight: bold;"/>
+						<h:outputLabel value="#{grupoBean.facade.grupoAlunoNovo.nomeGrupo}" />
+						
+						<h:outputLabel value="Turma:" style="font-weight: bold;"/>
+						<h:outputLabel value="#{grupoBean.facade.grupoAlunoNovo.turmaGrupo.nomeCurso}" />
+						
+						<h:outputLabel value="Aluno(a):" for="idAluno" style="font-weight: bold;"/>
+						<p:selectOneMenu id="idAlunos" value="#{alunoBean.idAluno}" panelStyle="width:350px" filter="true" filterMatchMode="contains"
+				                         effect="fade" style="width:350px" valueChangeListener="#{alunoBean.processarAlunoAssociado}">
+				            <f:selectItem itemLabel="Selecione Aluno" itemValue="#{null}" />
+				            <f:selectItems value="#{alunoBean.facade.listaAlunoPorTurma}" var="itemAluno" itemLabel="#{itemAluno.nome}" itemValue="#{itemAluno.id}" />
+				            <p:ajax event="valueChange" update=":formAddAluno:grid"/>
+				        </p:selectOneMenu>
+					</h:panelGrid>
+				</p:panel>
+				
+			</p:dialog>
+		</h:form-->
 		
 		<h:form id="formView">
 			<p:dialog resizable="false" draggable="false" modal="true" position="top" closable="false" 

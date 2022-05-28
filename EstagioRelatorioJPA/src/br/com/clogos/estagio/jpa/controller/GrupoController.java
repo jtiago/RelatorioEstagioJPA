@@ -23,8 +23,8 @@ public class GrupoController implements Serializable {
 		return getDao().findGrupoAluno(idSemestre, idGrupo);
 	}
 	
-	public Grupo findGrupoCPF(Long idSemestre, String cpf, Long idCampo) {
-		return getDao().findGrupoCPF(idSemestre, cpf, idCampo);
+	public Grupo findGrupoCPF(Long idSemestre, String cpf, Long idCampo, Long idTurma) {
+		return getDao().findGrupoCPF(idSemestre, cpf, idCampo, idTurma);
 	}
 	
 	public Grupo findGrupoPorTurmaAluno(Long idTurma, Long idAluno, Long idSemestre) {

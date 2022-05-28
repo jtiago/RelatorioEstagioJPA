@@ -30,6 +30,8 @@ public class GrupoFacade implements Serializable {
 	private GrupoController grupoController;
 	private TurmaController turmaController;
 	private GrupoCampoEstagioController grupoCampoEstagioController;
+	private Grupo grupoAlunoNovo;
+	private List<Aluno> listaAlunosNovos;
 	
 	private GrupoCampoEstagio campo1;
 	private GrupoCampoEstagio campo2;
@@ -58,6 +60,14 @@ public class GrupoFacade implements Serializable {
 		}
 		return listaAlunoGrupo;
 		
+	}
+	
+	public List<Aluno> getListaAlunosNovos() {
+		if (this.grupoAlunoNovo != null) {
+			
+		}
+		
+		return listaAlunosNovos;
 	}
 	
 	public List<Turma> getListaTurmas() {
@@ -154,6 +164,14 @@ public class GrupoFacade implements Serializable {
 	
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
+	}
+	
+	public Grupo getGrupoAlunoNovo() {
+		return grupoAlunoNovo;
+	}
+
+	public void setGrupoAlunoNovo(Grupo grupoAlunoNovo) {
+		this.grupoAlunoNovo = grupoAlunoNovo;
 	}
 
 	public GrupoCampoEstagio getCampo1() {

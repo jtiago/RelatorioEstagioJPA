@@ -117,18 +117,19 @@ public class GrupoDAOImpl implements GrupoDAO {
 	}
 	
 	@Override
-	public Grupo findGrupoCPF(Long idSemestre, String cpf, Long idCampo) {
+	public Grupo findGrupoCPF(Long idSemestre, String cpf, Long idCampo, Long idTurma) {
 		entityManager = JpaUtil.getEntityManager();
 		Grupo grupo = new Grupo();
 		StringBuilder hql = new StringBuilder();
 		hql.append("SELECT g FROM Grupo g JOIN FETCH g.turmaGrupo t JOIN g.alunosGrupo a ");
 		hql.append("JOIN FETCH t.semestre s JOIN FETCH g.listaGrupoCampoEstagio gc JOIN gc.campoEstagio ce ");
-		hql.append("WHERE s.id = :idSemestre AND a.cpf = :cpf AND ce.id = :idCampo");
+		hql.append("WHERE s.id = :idSemestre AND a.cpf = :cpf AND ce.id = :idCampo AND t.id = :idTurma");
 		try {
 		TypedQuery<Grupo> query = entityManager.createQuery(hql.toString(), Grupo.class)
 				.setParameter("idSemestre", idSemestre)
 				.setParameter("cpf", cpf)
-				.setParameter("idCampo", idCampo);
+				.setParameter("idCampo", idCampo)
+				.setParameter("idTurma", idTurma);
 		grupo = query.getSingleResult();
 			
 		} catch (PersistenceException e) {

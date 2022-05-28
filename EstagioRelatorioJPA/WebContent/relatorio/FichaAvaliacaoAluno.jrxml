@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEstagio" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="c54d93ac-b954-40d4-a44e-2250a46a2714">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="126"/>
+	<property name="ireport.y" value="22"/>
 	<parameter name="LOGO" class="java.lang.Object">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -25,15 +25,15 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="200" splitType="Stretch">
-			<image>
-				<reportElement x="420" y="3" width="135" height="91" uuid="5c371ea3-b442-48dd-b4a4-330cdaf6e7d6"/>
+		<band height="180" splitType="Stretch">
+			<image hAlign="Center">
+				<reportElement x="441" y="3" width="135" height="91" uuid="5c371ea3-b442-48dd-b4a4-330cdaf6e7d6"/>
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="135" y="25" width="285" height="20" uuid="3bc4f831-e74e-4c01-b0eb-113820f7bd0e"/>
+				<reportElement x="114" y="21" width="327" height="20" uuid="3bc4f831-e74e-4c01-b0eb-113820f7bd0e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="13" isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{TITULO}]]></textFieldExpression>
 			</textField>
@@ -90,8 +90,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{NOMETURMA}]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="0" y="1" width="135" height="91" uuid="c9233033-f0a8-484d-9357-8f95f22be105"/>
+			<image hAlign="Center">
+				<reportElement x="-21" y="3" width="135" height="91" uuid="c9233033-f0a8-484d-9357-8f95f22be105"/>
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 			<staticText>
@@ -108,14 +108,14 @@
 				<text><![CDATA[CARGA HORARIA TOTAL:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="135" y="3" width="285" height="20" uuid="62566135-ffa0-4bf1-90d4-861408f040f9"/>
+				<reportElement x="114" y="1" width="327" height="20" uuid="62566135-ffa0-4bf1-90d4-861408f040f9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ESTÁGIO SUPERVISIONADO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="135" y="74" width="285" height="20" uuid="eb1afc58-581e-4dad-adce-cf3757d26431"/>
+				<reportElement x="114" y="76" width="327" height="20" uuid="eb1afc58-581e-4dad-adce-cf3757d26431"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="13" isBold="true" isUnderline="true"/>
 				</textElement>
@@ -199,10 +199,10 @@
 				</textElement>
 				<text><![CDATA[H/NH]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="135" y="49" width="285" height="20" uuid="d0231ba5-8e4c-40bb-8083-8d06faeda980"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="114" y="42" width="327" height="34" uuid="d0231ba5-8e4c-40bb-8083-8d06faeda980"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="13" isBold="true"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{SUBTITULO}]]></textFieldExpression>
 			</textField>
@@ -228,19 +228,6 @@
 				<text><![CDATA[LOGOSABER]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="180" width="161" height="20" uuid="a79fc087-ed57-4f85-959a-648133056d64"/>
-				<box leftPadding="2">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<text><![CDATA[LOGOSAÚDE ]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="161" y="160" width="64" height="20" uuid="75c63658-6e17-42e0-9553-9e9d229de8a4"/>
 				<box>
 					<topPen lineWidth="1.0"/>
@@ -251,20 +238,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[12/07/2021]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="161" y="180" width="64" height="20" uuid="f6b4b108-2d56-4cf2-81e0-899961c40497"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<text><![CDATA[02/08/2021]]></text>
+				<text><![CDATA[24/01/2022]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="225" y="160" width="64" height="20" uuid="cca0912c-c3dc-4f84-85f7-38058ef03ef9"/>
@@ -277,36 +251,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[30/07/2021]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="225" y="180" width="64" height="20" uuid="0fc4e11e-be7a-434e-be0d-fede20dd4d0b"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<text><![CDATA[17/12/2021]]></text>
+				<text><![CDATA[04/02/2022]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="289" y="160" width="204" height="20" uuid="d2f91eb6-5774-43e1-a5b0-fc2198ef7c1b"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<text><![CDATA[]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="289" y="180" width="204" height="20" uuid="2af2e494-46ca-49e4-afac-5d8a7dfb619d"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -329,20 +277,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[H]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="493" y="180" width="62" height="20" uuid="f7b67328-45be-4e8a-b89c-56e15cff418d"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[H]]></text>
+				<text><![CDATA[]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -501,20 +436,20 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 				<text><![CDATA[Visto da Autoridade Escolar]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="43" width="555" height="23" uuid="91ec8da0-d547-41ab-afb3-6b3aad674d24"/>
-				<box topPadding="1" leftPadding="1" rightPadding="1"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Arial" size="9"/>
-				</textElement>
-				<text><![CDATA[LOGOSAÚDE: Participação durante todos o 2º semestre de 2021 como técnico em Enfermagem apoiando a equipe responsável pelo ponto de vacinação e na imunização da população contra o covid19.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="66" width="554" height="14" uuid="80a0eeba-78eb-48c8-8665-c40141903dd0"/>
+				<reportElement x="0" y="43" width="554" height="14" uuid="80a0eeba-78eb-48c8-8665-c40141903dd0"/>
 				<box topPadding="1" leftPadding="1"/>
 				<textElement>
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<text><![CDATA[*FDS: Final de Semana.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="57" width="554" height="14" uuid="75dd091e-b6c0-488c-94f2-af50ab14852e"/>
+				<box topPadding="1" leftPadding="1"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Observações: __________________________________________________________________________________________________]]></text>
 			</staticText>
 		</band>
 	</summary>
