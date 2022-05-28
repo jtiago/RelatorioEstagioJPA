@@ -38,7 +38,8 @@ public class RevisaoRelatorioFacade implements Serializable {
 	public Grupo getGrupo() {
 		if(relatorioRevisao != null && relatorioRevisao.getId() != null) {
 			grupo = getGrupoController().findGrupoCPF(getRelatorioRevisao().getTurmaRelatorio().getSemestre().getId()
-					,getRelatorioRevisao().getAluno().getCpf(), getRelatorioRevisao().getCampoEstagio().getId());
+					,getRelatorioRevisao().getAluno().getCpf(), getRelatorioRevisao().getCampoEstagio().getId(), 
+					getRelatorioRevisao().getTurmaRelatorio().getId());
 		}
 		return grupo;
 	}
