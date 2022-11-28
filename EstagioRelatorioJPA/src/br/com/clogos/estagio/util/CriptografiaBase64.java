@@ -13,6 +13,6 @@ public class CriptografiaBase64 {
 	
 	 public static void main(String[] args) {
 		System.out.println(CriptografiaBase64.encrypt("123"));
-		System.out.println(CriptografiaBase64.decrypt("TUB0aDN1NS4="));
+		System.out.println(CriptografiaBase64.decrypt("ODc2NTQzMjE="));
 	}
 }

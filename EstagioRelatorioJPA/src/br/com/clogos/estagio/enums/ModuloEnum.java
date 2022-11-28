@@ -2,8 +2,8 @@ package br.com.clogos.estagio.enums;
 
 public enum ModuloEnum {
 	Modulo_I("I Módulo", "FICHA DE RELATÓRIO ÚNICO", "105 Horas"), 
-	Modulo_II("II Módulo", "FICHA DE RELATÓRIO POR CAMPO", "235 Horas"), 
-	Modulo_III("III Módulo", "FICHA DE RELATÓRIO POR CAMPO", "240 Horas"), 
+	Modulo_II("II Módulo", "FICHA DE RELATÓRIO POR CAMPO", "240 Horas"), 
+	Modulo_III("III Módulo", "FICHA DE RELATÓRIO POR CAMPO", "260 Horas"), 
 	Modulo_II_III("II e III Módulo", "FICHA DE RELATÓRIO MENSAL", "535 Horas");
 	
 	private String label;
