@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEstagio" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="c54d93ac-b954-40d4-a44e-2250a46a2714">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="25"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="11"/>
+	<property name="ireport.y" value="145"/>
 	<parameter name="LOGO" class="java.lang.Object">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -225,7 +225,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[LOGOSABER]]></text>
+				<text><![CDATA[LOGOSAÚDE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="161" y="160" width="64" height="20" uuid="75c63658-6e17-42e0-9553-9e9d229de8a4"/>
@@ -238,7 +238,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[18/07/2022]]></text>
+				<text><![CDATA[31/07/2023]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="225" y="160" width="64" height="20" uuid="cca0912c-c3dc-4f84-85f7-38058ef03ef9"/>
@@ -251,7 +251,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[29/07/2022]]></text>
+				<text><![CDATA[30/11/2023]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="289" y="160" width="204" height="20" uuid="d2f91eb6-5774-43e1-a5b0-fc2198ef7c1b"/>
@@ -410,15 +410,15 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 				<textFieldExpression><![CDATA[$P{SITUACAOFINAL}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="21" width="555" height="22" uuid="75170813-e935-489f-b973-873d313a6094"/>
+				<reportElement x="0" y="21" width="555" height="36" uuid="75170813-e935-489f-b973-873d313a6094"/>
 				<box leftPadding="1" rightPadding="1"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
-				<text><![CDATA[LOGOSABER: Procedimentos práticos revisados nos laboratórios de Enfermagem, buscando demonstrar e simular a realidade com o objetivo de aproximar o aluno da prática que irá vivenciar junto à comunidade nos campos de estágio supervisionado.]]></text>
+				<text><![CDATA[LOGOSAÚDE: Humanizar e despertar no aluno a importância do seu papel social, oferecendo de maneira prática à comunidade da região, informação e formação no âmbito da saúde, mudando realidades e formas de pensar e agir, levando prevenção, promoção, recuperação e reabilitação, para que realmente contribuam no processo saúde-doença.]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="1" y="83" width="554" height="55" uuid="cc7b58e4-290a-4e6e-b944-d7ca6e5bd574"/>
+				<reportElement x="1" y="86" width="554" height="55" uuid="cc7b58e4-290a-4e6e-b944-d7ca6e5bd574"/>
 				<subreportParameter name="listaCampoEstagio">
 					<subreportParameterExpression><![CDATA[$P{listaCampoEstagio}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -436,7 +436,7 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 				<text><![CDATA[Visto da Autoridade Escolar]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="43" width="554" height="14" uuid="80a0eeba-78eb-48c8-8665-c40141903dd0"/>
+				<reportElement x="0" y="57" width="554" height="14" uuid="80a0eeba-78eb-48c8-8665-c40141903dd0"/>
 				<box topPadding="1" leftPadding="1"/>
 				<textElement>
 					<font fontName="Arial" size="9"/>
@@ -444,7 +444,7 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 				<text><![CDATA[*FDS: Final de Semana.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="57" width="554" height="14" uuid="75dd091e-b6c0-488c-94f2-af50ab14852e"/>
+				<reportElement x="1" y="71" width="554" height="14" uuid="75dd091e-b6c0-488c-94f2-af50ab14852e"/>
 				<box topPadding="1" leftPadding="1"/>
 				<textElement>
 					<font fontName="Arial" size="9"/>
