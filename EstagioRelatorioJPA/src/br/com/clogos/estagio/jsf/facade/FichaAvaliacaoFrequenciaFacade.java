@@ -129,7 +129,9 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		} else if (modulo.compareTo(ModuloEnum.Modulo_II) == 0) {
 			return " - SAÚDE PÚBLICA, GERIATRIA E NEUROPSIQUIATRIA";
 		} else if (modulo.compareTo(ModuloEnum.Modulo_III) == 0) {
-			return " - HOSPITALAR";
+			return " - SAÚDE PÚBLICA";
+		} else if (modulo.compareTo(ModuloEnum.Modulo_IV) == 0) {
+			return " - SAÚDE PÚBLICA";
 		} else {
 			return "";
 		}
@@ -200,6 +202,8 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 			return "/relatorio/FichaAvaliacaoAlunoRadiologia.jasper";
 		} else if (ficha.getAlunoFichaVO().getModulo().equals(ModuloEnum.Modulo_I)) {
 			return "/relatorio/FichaAvaliacaoAlunoPrimeiroModulo.jasper";
+		} else if (ficha.getAlunoFichaVO().getModulo().equals(ModuloEnum.Modulo_IV)) { 
+			return "/relatorio/FichaAvaliacaoAlunoQuartoModulo.jasper";
 		} else {
 			return "/relatorio/FichaAvaliacaoAluno.jasper";
 		}

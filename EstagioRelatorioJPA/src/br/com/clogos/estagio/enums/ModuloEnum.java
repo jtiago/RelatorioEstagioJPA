@@ -3,7 +3,8 @@ package br.com.clogos.estagio.enums;
 public enum ModuloEnum {
 	Modulo_I("I Módulo", "FICHA DE RELATÓRIO ÚNICO", "105 Horas"), 
 	Modulo_II("II Módulo", "FICHA DE RELATÓRIO POR CAMPO", "240 Horas"), 
-	Modulo_III("III e IV Módulo", "FICHA DE RELATÓRIO POR CAMPO", "500 Horas"), 
+	Modulo_III("III Módulo", "FICHA DE RELATÓRIO POR CAMPO", "250 Horas"),
+	Modulo_IV("IV Módulo", "FICHA DE RELATÓRIO POR CAMPO", "250 Horas"),
 	Modulo_II_III("II e III Módulo", "FICHA DE RELATÓRIO MENSAL", "535 Horas");
 	
 	private String label;
@@ -37,6 +38,8 @@ public enum ModuloEnum {
 			return Modulo_III;
 		} else if(str.equalsIgnoreCase("II e III Módulo")) {
 			return Modulo_II_III;
+		} else if(str.equalsIgnoreCase("IV Módulo")) {
+			return Modulo_IV;
 		} else {
 			return null;
 		}
@@ -51,6 +54,8 @@ public enum ModuloEnum {
 			return Modulo_III;
 		} else if(str.equalsIgnoreCase("Modulo_II_III")) {
 			return Modulo_II_III;
+		} else if(str.equalsIgnoreCase("Modulo_IV")) {
+			return Modulo_IV;
 		} else {
 			return null;
 		}
