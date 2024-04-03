@@ -131,7 +131,7 @@ public class FichaAvaliacaoFrequenciaFacade implements Serializable {
 		} else if (modulo.compareTo(ModuloEnum.Modulo_III) == 0) {
 			return " - SAÚDE PÚBLICA";
 		} else if (modulo.compareTo(ModuloEnum.Modulo_IV) == 0) {
-			return " - SAÚDE PÚBLICA";
+			return " - HOSPITALAR";
 		} else {
 			return "";
 		}

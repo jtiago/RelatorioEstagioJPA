@@ -238,7 +238,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[31/07/2023]]></text>
+				<text><![CDATA[05/02/2024]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="225" y="160" width="64" height="20" uuid="cca0912c-c3dc-4f84-85f7-38058ef03ef9"/>
@@ -251,7 +251,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[24/11/2023]]></text>
+				<text><![CDATA[31/05/2024]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="289" y="160" width="204" height="20" uuid="d2f91eb6-5774-43e1-a5b0-fc2198ef7c1b"/>
