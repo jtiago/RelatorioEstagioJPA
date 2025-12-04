@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioEstagio" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="c54d93ac-b954-40d4-a44e-2250a46a2714">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="170"/>
+	<property name="ireport.y" value="223"/>
 	<parameter name="LOGO" class="java.lang.Object">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -25,7 +25,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="180" splitType="Stretch">
+		<band height="200" splitType="Stretch">
 			<image>
 				<reportElement x="420" y="3" width="135" height="91" uuid="5c371ea3-b442-48dd-b4a4-330cdaf6e7d6"/>
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
@@ -225,7 +225,20 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[LOGOSAÚDE]]></text>
+				<text><![CDATA[LOGOSABER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="493" y="160" width="62" height="20" uuid="dcfae12e-1144-41b5-9837-bdb6ab3a256f"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="161" y="160" width="64" height="20" uuid="75c63658-6e17-42e0-9553-9e9d229de8a4"/>
@@ -238,7 +251,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[03/02/2025]]></text>
+				<text><![CDATA[21/07/2025]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="225" y="160" width="64" height="20" uuid="cca0912c-c3dc-4f84-85f7-38058ef03ef9"/>
@@ -251,7 +264,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[30/05/2025]]></text>
+				<text><![CDATA[01/08/2025]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="289" y="160" width="204" height="20" uuid="d2f91eb6-5774-43e1-a5b0-fc2198ef7c1b"/>
@@ -267,7 +280,59 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="493" y="160" width="62" height="20" uuid="dcfae12e-1144-41b5-9837-bdb6ab3a256f"/>
+				<reportElement x="0" y="180" width="161" height="20" uuid="24dbf262-3d11-47c0-a50e-06c80fcff003"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[LOGOSAÚDE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="180" width="64" height="20" uuid="6f0581d9-231a-44ba-bb86-747376d97bbe"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[04/08/2025]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="225" y="180" width="64" height="20" uuid="8b615f86-2ea5-4e1d-8f00-3d65d5814021"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[28/11/2025]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="289" y="180" width="204" height="20" uuid="35b09b93-147a-4d55-afe0-19e06ca89540"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="493" y="180" width="62" height="20" uuid="20211cb3-d313-47a8-8b42-c949c23eca62"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -418,7 +483,7 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
-				<text><![CDATA[LOGOSAÚDE: Humanizar e despertar no aluno a importância do seu papel social, oferecendo de maneira prática à comunidade da região, informação e formação no âmbito da saúde, mudando realidades e formas de pensar e agir, levando prevenção, promoção, recuperação e reabilitação, para que realmente contribuam no processo saúde-doença.]]></text>
+				<text><![CDATA[LOGOSABER: Procedimentos práticos revisados nos laboratórios de Enfermagem, buscando demonstrar e simular a realidade com o objetivode aproximaroaluno da prática que irá vivenciarjunto àcomunidade nos camposdeestágio supervisionado.]]></text>
 			</staticText>
 			<subreport>
 				<reportElement x="1" y="159" width="554" height="55" uuid="cc7b58e4-290a-4e6e-b944-d7ca6e5bd574"/>
@@ -437,6 +502,14 @@ RESOLUÇÃO CEE/CEP N. 19, DE 28 DE FEVEREIRO DE 2018.
 					<font fontName="Arial"/>
 				</textElement>
 				<text><![CDATA[Visto da Autoridade Escolar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="43" width="555" height="36" uuid="ec49fd6b-814b-4b3c-8338-a5df8c0c817a"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[LOGOSAÚDE: Humanizar e despertar no aluno a importância do seu papel social, oferecendo de maneira prática à comunidade da região, informação e formação no âmbito da saúde, mudando realidades e formas de pensar e agir, levando prevenção, promoção, recuperação e reabilitação, para que realmente contribuam no processo saúde-doença.]]></text>
 			</staticText>
 		</band>
 	</summary>
